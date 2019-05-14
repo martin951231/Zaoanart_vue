@@ -307,10 +307,10 @@
     import axios from 'axios'
     import HeadPage from "../../components/HeadPage"
     import Foot from "../../components/Foot"
-    // const baseurl = 'http://118.178.89.229/'
-    // const imgurl = 'http://118.178.89.229/resource/test/'
-    const baseurl = 'http://api.demo.com/'
-    const imgurl = 'http://localhost/yii-application/backend/web/test/'
+    const baseurl = 'http://118.178.89.229/'
+    const imgurl = 'http://118.178.89.229/resource/test/'
+    // const baseurl = 'http://api.demo.com/'
+    // const imgurl = 'http://localhost/yii-application/backend/web/test/'
     import '../../../node_modules/cropper/dist/cropper.js'
     import '../../../node_modules/cropper/dist/cropper.css'
     export default {
@@ -485,8 +485,8 @@
                 this.$http.get(baseurl + 'v1/border/get_border').then((response)=>{
                     this.border = response.data
                     for(var i=0;i<response.data.length;i++){
-                        // this.border[i].preview_imgs = 'http://www.zaoanart.com:8000/test/preview/'+this.border[i].preview_img;
-                        this.border[i].preview_imgs = 'http://zaoanyishu.backends.com/test/preview/'+this.border[i].preview_img;
+                        this.border[i].preview_imgs = 'http://www.zaoanart.com:8000/test/preview/'+this.border[i].preview_img;
+                        // this.border[i].preview_imgs = 'http://zaoanyishu.backends.com/test/preview/'+this.border[i].preview_img;
                     }
                     // this.border_status = this.border[0].img_name
                 })
@@ -2373,29 +2373,69 @@
                         //绘制图片
                         ctx.drawImage(img,cut_box.x,cut_box.y,cut_box.width,cut_box.height,(c.width-img_width1/small)/2+direction_val_x/small+direction_val_xs/small,(c.height-img_height1/small)/2+direction_val_y/small+direction_val_ys/small,img_width1/small,img_height1/small)
                         //绘制模拟阴影条(上)
-                        var grd=ctx.createLinearGradient((c.width-img_width1/small)/2-vm.drawing_core_val*30/small+direction_val_xs/small,(c.height-img_height1/small)/2-vm.drawing_core_val*30/small+direction_val_ys/small,(c.width-img_width1/small)/2-vm.drawing_core_val*30/small+direction_val_xs/small,(c.height-img_height1/small)/2-vm.drawing_core_val*30/small+5+direction_val_ys/small);
-                        grd.addColorStop(0,"rgba(150,150,150,0.6)");
-                        grd.addColorStop(1,"rgba(250,250,250,0.3)");
-                        ctx.fillStyle=grd;
-                        ctx.fillRect((c.width-img_width1/small)/2-vm.drawing_core_val*30/small+direction_val_xs/small,(c.height-img_height1/small)/2-vm.drawing_core_val*30/small+direction_val_ys/small,(img_width1+vm.drawing_core_val*30*2)/small,5);
+                        // var grd=ctx.createLinearGradient((c.width-img_width1/small)/2-vm.drawing_core_val*30/small+direction_val_xs/small,(c.height-img_height1/small)/2-vm.drawing_core_val*30/small+direction_val_ys/small,(c.width-img_width1/small)/2-vm.drawing_core_val*30/small+direction_val_xs/small,(c.height-img_height1/small)/2-vm.drawing_core_val*30/small+5+direction_val_ys/small);
+                        // grd.addColorStop(0,"rgba(150,150,150,0.6)");
+                        // grd.addColorStop(1,"rgba(250,250,250,0.3)");
+                        // ctx.fillStyle=grd;
+                        ctx.fillStyle='#808080';
+                        ctx.fillRect((c.width-img_width1/small)/2-vm.drawing_core_val*30/small+direction_val_xs/small-1,(c.height-img_height1/small)/2-vm.drawing_core_val*30/small+direction_val_ys/small-1,(img_width1+vm.drawing_core_val*30*2)/small+2,3);
                         //绘制模拟阴影条(左)
-                        var grd=ctx.createLinearGradient((c.width-img_width1/small)/2-vm.drawing_core_val*30/small+direction_val_xs/small,(c.width-img_width1/small)/2-vm.drawing_core_val*30/small+direction_val_ys/small,(c.width-img_width1/small)/2-vm.drawing_core_val*30/small+5+direction_val_xs/small,(c.width-img_width1/small)/2-vm.drawing_core_val*30/small+direction_val_ys/small);
-                        grd.addColorStop(0,"rgba(150,150,150,0.6)");
-                        grd.addColorStop(1,"rgba(250,250,250,0.3)");
-                        ctx.fillStyle=grd;
-                        ctx.fillRect((c.width-img_width1/small)/2-vm.drawing_core_val*30/small+direction_val_xs/small,(c.height-img_height1/small)/2-vm.drawing_core_val*30/small+direction_val_ys/small,5,img_height1/small+vm.drawing_core_val*30/small*2);
+                        // var grd=ctx.createLinearGradient((c.width-img_width1/small)/2-vm.drawing_core_val*30/small+direction_val_xs/small,(c.width-img_width1/small)/2-vm.drawing_core_val*30/small+direction_val_ys/small,(c.width-img_width1/small)/2-vm.drawing_core_val*30/small+5+direction_val_xs/small,(c.width-img_width1/small)/2-vm.drawing_core_val*30/small+direction_val_ys/small);
+                        // grd.addColorStop(0,"rgba(150,150,150,0.6)");
+                        // grd.addColorStop(1,"rgba(250,250,250,0.3)");
+                        // ctx.fillStyle=grd;
+                        ctx.fillStyle='#808080';
+                        ctx.fillRect((c.width-img_width1/small)/2-vm.drawing_core_val*30/small+direction_val_xs/small-1,(c.height-img_height1/small)/2-vm.drawing_core_val*30/small+direction_val_ys/small-1,3,img_height1/small+vm.drawing_core_val*30/small*2+2);
                         //绘制模拟阴影条(右)
-                        var grd=ctx.createLinearGradient((c.width-img_width1/small)/2+img_width1/small+vm.drawing_core_val*30/small+direction_val_xs/small,(c.width-img_width1/small)/2+img_width1/small+vm.drawing_core_val*30/small+direction_val_ys/small,(c.width-img_width1/small)/2+img_width1/small+vm.drawing_core_val*30/small-3+direction_val_xs/small,(c.width-img_width1/small)/2+img_width1/small+vm.drawing_core_val*30/small+direction_val_ys/small);
-                        grd.addColorStop(0,"rgba(150,150,150,0.6)");
-                        grd.addColorStop(1,"rgba(250,250,250,0.3)");
-                        ctx.fillStyle=grd;
-                        ctx.fillRect((c.width-img_width1/small)/2+img_width1/small-3+vm.drawing_core_val*30/small+direction_val_xs/small,(c.height-img_height1/small)/2-vm.drawing_core_val*30/small+direction_val_ys/small,3,(img_height1+vm.drawing_core_val*30*2)/small);
+                        // var grd=ctx.createLinearGradient((c.width-img_width1/small)/2+img_width1/small+vm.drawing_core_val*30/small+direction_val_xs/small,(c.width-img_width1/small)/2+img_width1/small+vm.drawing_core_val*30/small+direction_val_ys/small,(c.width-img_width1/small)/2+img_width1/small+vm.drawing_core_val*30/small-3+direction_val_xs/small,(c.width-img_width1/small)/2+img_width1/small+vm.drawing_core_val*30/small+direction_val_ys/small);
+                        // grd.addColorStop(0,"rgba(150,150,150,0.6)");
+                        // grd.addColorStop(1,"rgba(250,250,250,0.3)");
+                        // ctx.fillStyle=grd;
+                        // ctx.fillStyle='#ebebeb';
+                        // ctx.fillRect((c.width-img_width1/small)/2+img_width1/small-2+vm.drawing_core_val*30/small+direction_val_xs/small,(c.height-img_height1/small)/2-vm.drawing_core_val*30/small+direction_val_ys/small,2,(img_height1+vm.drawing_core_val*30*2)/small);
                         //绘制模拟阴影条(下)
-                        var grd=ctx.createLinearGradient((c.height-img_height1/small)/2+vm.drawing_core_val*30/small+img_height1/small+direction_val_xs/small,(c.height-img_height1/small)/2+vm.drawing_core_val*30/small+img_height1/small+direction_val_ys/small,(c.height-img_height1/small)/2+vm.drawing_core_val*30/small+img_height1/small+direction_val_xs/small,(c.height-img_height1/small)/2+vm.drawing_core_val*30/small+img_height1/small-3+direction_val_ys/small);
-                        grd.addColorStop(0,"rgba(150,150,150,0.6)");
-                        grd.addColorStop(1,"rgba(250,250,250,0.3)");
-                        ctx.fillStyle=grd;
-                        ctx.fillRect((c.width-img_width1/small)/2-vm.drawing_core_val*30/small+direction_val_xs/small,(c.height-img_height1/small)/2+vm.drawing_core_val*30/small+img_height1/small-3+direction_val_ys/small,(img_width1+vm.drawing_core_val*30*2)/small,3);
+                        // var grd=ctx.createLinearGradient((c.height-img_height1/small)/2+vm.drawing_core_val*30/small+img_height1/small+direction_val_xs/small,(c.height-img_height1/small)/2+vm.drawing_core_val*30/small+img_height1/small+direction_val_ys/small,(c.height-img_height1/small)/2+vm.drawing_core_val*30/small+img_height1/small+direction_val_xs/small,(c.height-img_height1/small)/2+vm.drawing_core_val*30/small+img_height1/small-3+direction_val_ys/small);
+                        // grd.addColorStop(0,"rgba(150,150,150,0.6)");
+                        // grd.addColorStop(1,"rgba(250,250,250,0.3)");
+                        // ctx.fillStyle=grd;
+                        // ctx.fillStyle='#ebebeb';
+                        // ctx.fillRect((c.width-img_width1/small)/2-vm.drawing_core_val*30/small+direction_val_xs/small,(c.height-img_height1/small)/2+vm.drawing_core_val*30/small+img_height1/small-2+direction_val_ys/small,(img_width1+vm.drawing_core_val*30*2)/small,2);
+                        //绘制不规则四边形(下)
+                        //开始一个新的绘制路径
+                        ctx.beginPath();
+                        //设置线条颜色
+                        ctx.strokeStyle ="#ebebeb";
+                        ctx.lineWidth=0.1;
+                        //设置路径起点坐标
+                        ctx.moveTo((c.width-img_width1/small)/2-vm.drawing_core_val*30/small+direction_val_xs/small-1,(c.height-img_height1/small)/2+vm.drawing_core_val*30/small+img_height1/small+direction_val_ys/small+1);
+                        //绘制直线线段到坐标点
+                        ctx.lineTo((c.width-img_width1/small)/2+img_width1/small+vm.drawing_core_val*30/small+direction_val_xs/small+2,(c.height-img_height1/small)/2+vm.drawing_core_val*30/small+img_height1/small+direction_val_ys/small+1);
+                        ctx.lineTo((c.width-img_width1/small)/2+img_width1/small+vm.drawing_core_val*30/small+direction_val_xs/small+2,(c.height-img_height1/small)/2+vm.drawing_core_val*30/small+img_height1/small+direction_val_ys/small-2);
+                        ctx.lineTo((c.width-img_width1/small)/2-vm.drawing_core_val*30/small+direction_val_xs/small+2,(c.height-img_height1/small)/2+vm.drawing_core_val*30/small+img_height1/small+direction_val_ys/small-2);
+                        ctx.fillStyle='#ebebeb';
+                        ctx.fill();
+                        //先关闭绘制路径。
+                        ctx.closePath();
+                        //最后，按照绘制路径画出直线
+                        ctx.stroke();
+                        //绘制不规则四边形(右)
+                        //开始一个新的绘制路径
+                        ctx.beginPath();
+                        //设置线条颜色
+                        ctx.strokeStyle ="#ebebeb";
+                        ctx.lineWidth=0.1;
+                        //设置路径起点坐标
+                        ctx.moveTo((c.width-img_width1/small)/2+img_width1/small+vm.drawing_core_val*30/small+direction_val_xs/small+2,(c.height-img_height1/small)/2-vm.drawing_core_val*30/small+direction_val_ys/small-1);
+                        //绘制直线线段到坐标点(20, 100)
+                        ctx.lineTo((c.width-img_width1/small)/2+img_width1/small+vm.drawing_core_val*30/small+direction_val_xs/small+2,(c.height-img_height1/small)/2+vm.drawing_core_val*30/small+img_height1/small+direction_val_ys/small+1);
+                        ctx.lineTo((c.width-img_width1/small)/2+img_width1/small+vm.drawing_core_val*30/small+direction_val_xs/small-1,(c.height-img_height1/small)/2+vm.drawing_core_val*30/small+img_height1/small+direction_val_ys/small);
+                        ctx.lineTo((c.width-img_width1/small)/2+img_width1/small+vm.drawing_core_val*30/small+direction_val_xs/small-1,(c.height-img_height1/small)/2-vm.drawing_core_val*30/small+direction_val_ys/small+2);
+                        ctx.fillStyle='#ebebeb';
+                        ctx.fill();
+                        //先关闭绘制路径。
+                        ctx.closePath();
+                        //最后，按照绘制路径画出直线
+                        ctx.stroke();
                         //如果宽高有变化则后台生成边框素材,没有变化则直接获取
                         if(vm.last_border == vm.border_status && vm.confirm_width == $("#box_img_width").val() && vm.confirm_height == $("#box_img_height").val()){
                             // $("#bgImg").attr("src",this.img_url);
@@ -2794,32 +2834,72 @@
                         }
                     }
                     ctx.drawImage(img,0,0,img.naturalWidth,img.naturalHeight,(c.width-img_width2)/2+direction_val_x/small+direction_val_xs/small,(c.height-img_height2)/2+direction_val_y/small+direction_val_ys/small,img_width2,img_height2);
-                    //绘制模拟阴影条(上)
-                    var grd=ctx.createLinearGradient((c.width-img_width1/small)/2-vm.drawing_core_val*30/small+direction_val_xs/small,(c.height-img_height1/small)/2-vm.drawing_core_val*30/small+direction_val_ys/small,(c.width-img_width1/small)/2-vm.drawing_core_val*30/small+direction_val_xs/small,(c.height-img_height1/small)/2-vm.drawing_core_val*30/small+5+direction_val_ys/small);
-                    grd.addColorStop(0,"rgba(150,150,150,0.6)");
-                    grd.addColorStop(1,"rgba(250,250,250,0.3)");
-                    ctx.fillStyle=grd;
-                    ctx.fillRect((c.width-img_width1/small)/2-vm.drawing_core_val*30/small+direction_val_xs/small,(c.height-img_height1/small)/2-vm.drawing_core_val*30/small+direction_val_ys/small,(img_width1+vm.drawing_core_val*30*2)/small,5);
-                    //绘制模拟阴影条(左)
-                    var grd=ctx.createLinearGradient((c.width-img_width1/small)/2-vm.drawing_core_val*30/small+direction_val_xs/small,(c.width-img_width1/small)/2-vm.drawing_core_val*30/small+direction_val_ys/small,(c.width-img_width1/small)/2-vm.drawing_core_val*30/small+5+direction_val_xs/small,(c.width-img_width1/small)/2-vm.drawing_core_val*30/small+direction_val_ys/small);
-                    grd.addColorStop(0,"rgba(150,150,150,0.6)");
-                    grd.addColorStop(1,"rgba(250,250,250,0.3)");
-                    ctx.fillStyle=grd;
-                    ctx.fillRect((c.width-img_width1/small)/2-vm.drawing_core_val*30/small+direction_val_xs/small,(c.height-img_height1/small)/2-vm.drawing_core_val*30/small+direction_val_ys/small,5,img_height1/small+vm.drawing_core_val*30/small*2);
-                    //绘制模拟阴影条(右)
-                    var grd=ctx.createLinearGradient((c.width-img_width1/small)/2+img_width1/small+vm.drawing_core_val*30/small+direction_val_xs/small,(c.width-img_width1/small)/2+img_width1/small+vm.drawing_core_val*30/small+direction_val_ys/small,(c.width-img_width1/small)/2+img_width1/small+vm.drawing_core_val*30/small-3+direction_val_xs/small,(c.width-img_width1/small)/2+img_width1/small+vm.drawing_core_val*30/small+direction_val_ys/small);
-                    grd.addColorStop(0,"rgba(150,150,150,0.6)");
-                    grd.addColorStop(1,"rgba(250,250,250,0.3)");
-                    ctx.fillStyle=grd;
-                    ctx.fillRect((c.width-img_width1/small)/2+img_width1/small-3+vm.drawing_core_val*30/small+direction_val_xs/small,(c.height-img_height1/small)/2-vm.drawing_core_val*30/small+direction_val_ys/small,3,(img_height1+vm.drawing_core_val*30*2)/small);
-                    //绘制模拟阴影条(下)
-                    var grd=ctx.createLinearGradient((c.height-img_height1/small)/2+vm.drawing_core_val*30/small+img_height1/small+direction_val_xs/small,(c.height-img_height1/small)/2+vm.drawing_core_val*30/small+img_height1/small+direction_val_ys/small,(c.height-img_height1/small)/2+vm.drawing_core_val*30/small+img_height1/small+direction_val_xs/small,(c.height-img_height1/small)/2+vm.drawing_core_val*30/small+img_height1/small-3+direction_val_xs/small);
-                    grd.addColorStop(0,"rgba(150,150,150,0.6)");
-                    grd.addColorStop(1,"rgba(250,250,250,0.3)");
-                    ctx.fillStyle=grd;
-                    ctx.fillRect((c.width-img_width1/small)/2-vm.drawing_core_val*30/small+direction_val_xs/small,(c.height-img_height1/small)/2+vm.drawing_core_val*30/small+img_height1/small-3+direction_val_ys/small,(img_width1+vm.drawing_core_val*30*2)/small,3);
+
+                    // //绘制模拟阴影条(上)
+                    // // var grd=ctx.createLinearGradient((c.width-img_width1/small)/2-vm.drawing_core_val*30/small+direction_val_xs/small,(c.height-img_height1/small)/2-vm.drawing_core_val*30/small+direction_val_ys/small,(c.width-img_width1/small)/2-vm.drawing_core_val*30/small+direction_val_xs/small,(c.height-img_height1/small)/2-vm.drawing_core_val*30/small+5+direction_val_ys/small);
+                    // // grd.addColorStop(0,"rgba(150,150,150,0.6)");
+                    // // grd.addColorStop(1,"rgba(250,250,250,0.3)");
+                    // // ctx.fillStyle=grd;
+                    ctx.fillStyle='#808080';
+                    ctx.fillRect((c.width-img_width1/small)/2-vm.drawing_core_val*30/small+direction_val_xs/small-1,(c.height-img_height1/small)/2-vm.drawing_core_val*30/small+direction_val_ys/small-1,(img_width1+vm.drawing_core_val*30*2)/small+2,3);
+                    // //绘制模拟阴影条(左)
+                    // // var grd=ctx.createLinearGradient((c.width-img_width1/small)/2-vm.drawing_core_val*30/small+direction_val_xs/small,(c.width-img_width1/small)/2-vm.drawing_core_val*30/small+direction_val_ys/small,(c.width-img_width1/small)/2-vm.drawing_core_val*30/small+5+direction_val_xs/small,(c.width-img_width1/small)/2-vm.drawing_core_val*30/small+direction_val_ys/small);
+                    // // grd.addColorStop(0,"rgba(150,150,150,0.6)");
+                    // // grd.addColorStop(1,"rgba(250,250,250,0.3)");
+                    // // ctx.fillStyle=grd;
+                    ctx.fillStyle='#808080';
+                    ctx.fillRect((c.width-img_width1/small)/2-vm.drawing_core_val*30/small+direction_val_xs/small-1,(c.height-img_height1/small)/2-vm.drawing_core_val*30/small+direction_val_ys/small-1,3,img_height1/small+vm.drawing_core_val*30/small*2+2);
+                    // //绘制模拟阴影条(右)
+                    // // var grd=ctx.createLinearGradient((c.width-img_width1/small)/2+img_width1/small+vm.drawing_core_val*30/small+direction_val_xs/small,(c.width-img_width1/small)/2+img_width1/small+vm.drawing_core_val*30/small+direction_val_ys/small,(c.width-img_width1/small)/2+img_width1/small+vm.drawing_core_val*30/small-3+direction_val_xs/small,(c.width-img_width1/small)/2+img_width1/small+vm.drawing_core_val*30/small+direction_val_ys/small);
+                    // // grd.addColorStop(0,"rgba(150,150,150,0.6)");
+                    // // grd.addColorStop(1,"rgba(250,250,250,0.3)");
+                    // // ctx.fillStyle=grd;
+                    // ctx.fillStyle='#ebebeb';
+                    // ctx.fillRect((c.width-img_width1/small)/2+img_width1/small-2+vm.drawing_core_val*30/small+direction_val_xs/small,(c.height-img_height1/small)/2-vm.drawing_core_val*30/small+direction_val_ys/small,2,(img_height1+vm.drawing_core_val*30*2)/small);
+                    // //绘制模拟阴影条(下)
+                    // // var grd=ctx.createLinearGradient((c.height-img_height1/small)/2+vm.drawing_core_val*30/small+img_height1/small+direction_val_xs/small,(c.height-img_height1/small)/2+vm.drawing_core_val*30/small+img_height1/small+direction_val_ys/small,(c.height-img_height1/small)/2+vm.drawing_core_val*30/small+img_height1/small+direction_val_xs/small,(c.height-img_height1/small)/2+vm.drawing_core_val*30/small+img_height1/small-3+direction_val_xs/small);
+                    // // grd.addColorStop(0,"rgba(150,150,150,0.6)");
+                    // // grd.addColorStop(1,"rgba(250,250,250,0.3)");
+                    // // ctx.fillStyle=grd;
+                    // ctx.fillStyle='#ebebeb';
+                    // ctx.fillRect((c.width-img_width1/small)/2-vm.drawing_core_val*30/small+direction_val_xs/small,(c.height-img_height1/small)/2+vm.drawing_core_val*30/small+img_height1/small-2+direction_val_ys/small,(img_width1+vm.drawing_core_val*30*2)/small,2);
+                    //绘制不规则四边形(下)
+                    //开始一个新的绘制路径
+                    ctx.beginPath();
+                    //设置线条颜色
+                    ctx.strokeStyle ="#ebebeb";
+                    ctx.lineWidth=0.1;
+                    //设置路径起点坐标
+                    ctx.moveTo((c.width-img_width1/small)/2-vm.drawing_core_val*30/small+direction_val_xs/small-1,(c.height-img_height1/small)/2+vm.drawing_core_val*30/small+img_height1/small+direction_val_ys/small+1);
+                    //绘制直线线段到坐标点
+                    ctx.lineTo((c.width-img_width1/small)/2+img_width1/small+vm.drawing_core_val*30/small+direction_val_xs/small+2,(c.height-img_height1/small)/2+vm.drawing_core_val*30/small+img_height1/small+direction_val_ys/small+1);
+                    ctx.lineTo((c.width-img_width1/small)/2+img_width1/small+vm.drawing_core_val*30/small+direction_val_xs/small+2,(c.height-img_height1/small)/2+vm.drawing_core_val*30/small+img_height1/small+direction_val_ys/small-2);
+                    ctx.lineTo((c.width-img_width1/small)/2-vm.drawing_core_val*30/small+direction_val_xs/small+2,(c.height-img_height1/small)/2+vm.drawing_core_val*30/small+img_height1/small+direction_val_ys/small-2);
+                    ctx.fillStyle='#ebebeb';
+                    ctx.fill();
+                    //先关闭绘制路径。
+                    ctx.closePath();
+                    //最后，按照绘制路径画出直线
+                    ctx.stroke();
+                    //绘制不规则四边形(右)
+                    //开始一个新的绘制路径
+                    ctx.beginPath();
+                    //设置线条颜色
+                    ctx.strokeStyle ="#ebebeb";
+                    ctx.lineWidth=0.1;
+                    //设置路径起点坐标
+                    ctx.moveTo((c.width-img_width1/small)/2+img_width1/small+vm.drawing_core_val*30/small+direction_val_xs/small+2,(c.height-img_height1/small)/2-vm.drawing_core_val*30/small+direction_val_ys/small-1);
+                    //绘制直线线段到坐标点(20, 100)
+                    ctx.lineTo((c.width-img_width1/small)/2+img_width1/small+vm.drawing_core_val*30/small+direction_val_xs/small+2,(c.height-img_height1/small)/2+vm.drawing_core_val*30/small+img_height1/small+direction_val_ys/small+1);
+                    ctx.lineTo((c.width-img_width1/small)/2+img_width1/small+vm.drawing_core_val*30/small+direction_val_xs/small-1,(c.height-img_height1/small)/2+vm.drawing_core_val*30/small+img_height1/small+direction_val_ys/small);
+                    ctx.lineTo((c.width-img_width1/small)/2+img_width1/small+vm.drawing_core_val*30/small+direction_val_xs/small-1,(c.height-img_height1/small)/2-vm.drawing_core_val*30/small+direction_val_ys/small+2);
+                    ctx.fillStyle='#ebebeb';
+                    ctx.fill();
+                    //先关闭绘制路径。
+                    ctx.closePath();
+                    //最后，按照绘制路径画出直线
+                    ctx.stroke();
                     //如果宽高有变化则后台生成边框素材,没有变化则直接获取
-                    console.log(vm,this)
                     if(vm.last_border == vm.border_status && vm.confirm_width == $("#box_img_width").val() && vm.confirm_height == $("#box_img_height").val()){
                         // $("#bgImg").attr("src",this.img_url);
                         bgImg.src = vm.img_url
@@ -3626,7 +3706,7 @@
                     var img_height2 = img_width2/bili
                     //填充盒子底板卡纸颜色
                     ctx.fillStyle=color_val;
-                    ctx.fillRect(0,0,box_img_width1,box_img_height1);
+                    ctx.fillRect(0,0,c.width,c.height);
                     //填充画芯留边颜色
                     ctx.fillStyle='#fff';
                     ctx.fillRect((c.width-img_width2)/2-vm.drawing_core_val*30/small+direction_val_xs/small,(c.height-img_height2)/2-vm.drawing_core_val*30/small+direction_val_ys/small,img_width2+vm.drawing_core_val*30/small*2,img_height2+vm.drawing_core_val*30/small*2);
@@ -3634,29 +3714,69 @@
                         //绘制图片
                         ctx.drawImage(img,0,0,img.naturalWidth,img.naturalHeight,(c.width-img_width2)/2+direction_val_x/small+direction_val_xs/small,(c.height-img_height2)/2+direction_val_y/small+direction_val_ys/small,img_width2,img_height2);
                         //绘制模拟阴影条(上)
-                        var grd=ctx.createLinearGradient((c.width-img_width1/small)/2-vm.drawing_core_val*30/small+direction_val_xs/small,(c.height-img_height1/small)/2-vm.drawing_core_val*30/small+direction_val_ys/small,(c.width-img_width1/small)/2-vm.drawing_core_val*30/small+direction_val_xs/small,(c.height-img_height1/small)/2-vm.drawing_core_val*30/small+5+direction_val_ys/small);
-                        grd.addColorStop(0,"rgba(150,150,150,0.6)");
-                        grd.addColorStop(1,"rgba(200,200,200,0.3)");
-                        ctx.fillStyle=grd;
-                        ctx.fillRect((c.width-img_width1/small)/2-vm.drawing_core_val*30/small+direction_val_xs/small,(c.height-img_height1/small)/2-vm.drawing_core_val*30/small+direction_val_ys/small,(img_width1+vm.drawing_core_val*30*2)/small,5);
+                        // var grd=ctx.createLinearGradient((c.width-img_width1/small)/2-vm.drawing_core_val*30/small+direction_val_xs/small,(c.height-img_height1/small)/2-vm.drawing_core_val*30/small+direction_val_ys/small,(c.width-img_width1/small)/2-vm.drawing_core_val*30/small+direction_val_xs/small,(c.height-img_height1/small)/2-vm.drawing_core_val*30/small+5+direction_val_ys/small);
+                        // grd.addColorStop(0,"rgba(150,150,150,0.6)");
+                        // grd.addColorStop(1,"rgba(200,200,200,0.3)");
+                        // ctx.fillStyle=grd;
+                        ctx.fillStyle='#808080';
+                        ctx.fillRect((c.width-img_width1/small)/2-vm.drawing_core_val*30/small+direction_val_xs/small-1,(c.height-img_height1/small)/2-vm.drawing_core_val*30/small+direction_val_ys/small-1,(img_width1+vm.drawing_core_val*30*2)/small+2,2+1);
                         //绘制模拟阴影条(左)
-                        var grd=ctx.createLinearGradient((c.width-img_width1/small)/2-vm.drawing_core_val*30/small+direction_val_xs/small,(c.width-img_width1/small)/2-vm.drawing_core_val*30/small+direction_val_ys/small,(c.width-img_width1/small)/2-vm.drawing_core_val*30/small+5+direction_val_xs/small,(c.width-img_width1/small)/2-vm.drawing_core_val*30/small+direction_val_ys/small);
-                        grd.addColorStop(0,"rgba(150,150,150,0.6)");
-                        grd.addColorStop(1,"rgba(200,200,200,0.3)");
-                        ctx.fillStyle=grd;
-                        ctx.fillRect((c.width-img_width1/small)/2-vm.drawing_core_val*30/small+direction_val_xs/small,(c.height-img_height1/small)/2-vm.drawing_core_val*30/small+direction_val_ys/small,5,img_height1/small+vm.drawing_core_val*30/small*2);
+                        // var grd=ctx.createLinearGradient((c.width-img_width1/small)/2-vm.drawing_core_val*30/small+direction_val_xs/small,(c.width-img_width1/small)/2-vm.drawing_core_val*30/small+direction_val_ys/small,(c.width-img_width1/small)/2-vm.drawing_core_val*30/small+5+direction_val_xs/small,(c.width-img_width1/small)/2-vm.drawing_core_val*30/small+direction_val_ys/small);
+                        // grd.addColorStop(0,"rgba(150,150,150,0.6)");
+                        // grd.addColorStop(1,"rgba(200,200,200,0.3)");
+                        // ctx.fillStyle=grd;
+                        ctx.fillStyle='#808080';
+                        ctx.fillRect((c.width-img_width1/small)/2-vm.drawing_core_val*30/small+direction_val_xs/small-1,(c.height-img_height1/small)/2-vm.drawing_core_val*30/small+direction_val_ys/small-1,2+1,img_height1/small+vm.drawing_core_val*30/small*2+2);
                         //绘制模拟阴影条(右)
-                        var grd=ctx.createLinearGradient((c.width-img_width1/small)/2+img_width1/small+vm.drawing_core_val*30/small+direction_val_xs/small,(c.width-img_width1/small)/2+img_width1/small+vm.drawing_core_val*30/small+direction_val_ys/small,(c.width-img_width1/small)/2+img_width1/small+vm.drawing_core_val*30/small-3+direction_val_xs/small,(c.width-img_width1/small)/2+img_width1/small+vm.drawing_core_val*30/small+direction_val_ys/small);
-                        grd.addColorStop(0,"rgba(150,150,150,0.6)");
-                        grd.addColorStop(1,"rgba(200,200,200,0.3)");
-                        ctx.fillStyle=grd;
-                        ctx.fillRect((c.width-img_width1/small)/2+img_width1/small-3+vm.drawing_core_val*30/small+direction_val_xs/small,(c.height-img_height1/small)/2-vm.drawing_core_val*30/small+direction_val_ys/small,3,(img_height1+vm.drawing_core_val*30*2)/small);
+                        // var grd=ctx.createLinearGradient((c.width-img_width1/small)/2+img_width1/small+vm.drawing_core_val*30/small+direction_val_xs/small,(c.width-img_width1/small)/2+img_width1/small+vm.drawing_core_val*30/small+direction_val_ys/small,(c.width-img_width1/small)/2+img_width1/small+vm.drawing_core_val*30/small-3+direction_val_xs/small,(c.width-img_width1/small)/2+img_width1/small+vm.drawing_core_val*30/small+direction_val_ys/small);
+                        // grd.addColorStop(0,"rgba(150,150,150,0.6)");
+                        // grd.addColorStop(1,"rgba(200,200,200,0.3)");
+                        // ctx.fillStyle=grd;
+                        // ctx.fillStyle='#ebebeb';
+                        // ctx.fillRect((c.width-img_width1/small)/2+img_width1/small+vm.drawing_core_val*30/small+direction_val_xs/small-2,(c.height-img_height1/small)/2-vm.drawing_core_val*30/small+direction_val_ys/small+2,2,(img_height1+vm.drawing_core_val*30*2)/small-2);
                         //绘制模拟阴影条(下)
-                        var grd=ctx.createLinearGradient((c.height-img_height1/small)/2+vm.drawing_core_val*30/small+img_height1/small+direction_val_xs/small,(c.height-img_height1/small)/2+vm.drawing_core_val*30/small+img_height1/small+direction_val_ys/small,(c.height-img_height1/small)/2+vm.drawing_core_val*30/small+img_height1/small+direction_val_xs/small,(c.height-img_height1/small)/2+vm.drawing_core_val*30/small+img_height1/small-3+direction_val_ys/small);
-                        grd.addColorStop(0,"rgba(150,150,150,0.6)");
-                        grd.addColorStop(1,"rgba(200,200,200,0.3)");
-                        ctx.fillStyle=grd;
-                        ctx.fillRect((c.width-img_width1/small)/2-vm.drawing_core_val*30/small+direction_val_xs/small,(c.height-img_height1/small)/2+vm.drawing_core_val*30/small+img_height1/small-3+direction_val_ys/small,(img_width1+vm.drawing_core_val*30*2)/small,3);
+                        // var grd=ctx.createLinearGradient((c.height-img_height1/small)/2+vm.drawing_core_val*30/small+img_height1/small+direction_val_xs/small,(c.height-img_height1/small)/2+vm.drawing_core_val*30/small+img_height1/small+direction_val_ys/small,(c.height-img_height1/small)/2+vm.drawing_core_val*30/small+img_height1/small+direction_val_xs/small,(c.height-img_height1/small)/2+vm.drawing_core_val*30/small+img_height1/small-3+direction_val_ys/small);
+                        // grd.addColorStop(0,"rgba(150,150,150,0.6)");
+                        // grd.addColorStop(1,"rgba(200,200,200,0.3)");
+                        // ctx.fillStyle=grd;
+                        // ctx.fillStyle='#ebebeb';
+                        // ctx.fillRect((c.width-img_width1/small)/2-vm.drawing_core_val*30/small+direction_val_xs/small+2,(c.height-img_height1/small)/2+vm.drawing_core_val*30/small+img_height1/small+direction_val_ys/small-2,(img_width1+vm.drawing_core_val*30*2)/small-2,2);
+                        //绘制不规则四边形(下)
+                        //开始一个新的绘制路径
+                        ctx.beginPath();
+                        //设置线条颜色
+                        ctx.strokeStyle ="#ebebeb";
+                        ctx.lineWidth=0.1;
+                        //设置路径起点坐标
+                        ctx.moveTo((c.width-img_width1/small)/2-vm.drawing_core_val*30/small+direction_val_xs/small-1,(c.height-img_height1/small)/2+vm.drawing_core_val*30/small+img_height1/small+direction_val_ys/small+1);
+                        //绘制直线线段到坐标点
+                        ctx.lineTo((c.width-img_width1/small)/2+img_width1/small+vm.drawing_core_val*30/small+direction_val_xs/small+2,(c.height-img_height1/small)/2+vm.drawing_core_val*30/small+img_height1/small+direction_val_ys/small+1);
+                        ctx.lineTo((c.width-img_width1/small)/2+img_width1/small+vm.drawing_core_val*30/small+direction_val_xs/small+2,(c.height-img_height1/small)/2+vm.drawing_core_val*30/small+img_height1/small+direction_val_ys/small-2);
+                        ctx.lineTo((c.width-img_width1/small)/2-vm.drawing_core_val*30/small+direction_val_xs/small+2,(c.height-img_height1/small)/2+vm.drawing_core_val*30/small+img_height1/small+direction_val_ys/small-2);
+                        ctx.fillStyle='#ebebeb';
+                        ctx.fill();
+                        //先关闭绘制路径。
+                        ctx.closePath();
+                        //最后，按照绘制路径画出直线
+                        ctx.stroke();
+                        //绘制不规则四边形(右)
+                        //开始一个新的绘制路径
+                        ctx.beginPath();
+                        //设置线条颜色
+                        ctx.strokeStyle ="#ebebeb";
+                        ctx.lineWidth=0.1;
+                        //设置路径起点坐标
+                        ctx.moveTo((c.width-img_width1/small)/2+img_width1/small+vm.drawing_core_val*30/small+direction_val_xs/small+2,(c.height-img_height1/small)/2-vm.drawing_core_val*30/small+direction_val_ys/small-1);
+                        //绘制直线线段到坐标点(20, 100)
+                        ctx.lineTo((c.width-img_width1/small)/2+img_width1/small+vm.drawing_core_val*30/small+direction_val_xs/small+2,(c.height-img_height1/small)/2+vm.drawing_core_val*30/small+img_height1/small+direction_val_ys/small+1);
+                        ctx.lineTo((c.width-img_width1/small)/2+img_width1/small+vm.drawing_core_val*30/small+direction_val_xs/small-1,(c.height-img_height1/small)/2+vm.drawing_core_val*30/small+img_height1/small+direction_val_ys/small);
+                        ctx.lineTo((c.width-img_width1/small)/2+img_width1/small+vm.drawing_core_val*30/small+direction_val_xs/small-1,(c.height-img_height1/small)/2-vm.drawing_core_val*30/small+direction_val_ys/small+2);
+                        ctx.fillStyle='#ebebeb';
+                        ctx.fill();
+                        //先关闭绘制路径。
+                        ctx.closePath();
+                        //最后，按照绘制路径画出直线
+                        ctx.stroke();
                         // ctx.drawImage(img,0,0,img.naturalWidth,img.naturalHeight,(c.width-img_width2)/2,(c.height-img_height2)/2,img_width2,img_height2);
                         // $("#bgImg").attr("src",this.img_url);
                         bgImg.src = vm.img_url
@@ -3669,29 +3789,69 @@
                         //绘制图片
                         ctx.drawImage(img,cut_box.x,cut_box.y,cut_box.width,cut_box.height,(c.width-img_width1/small)/2+direction_val_x/small+direction_val_xs/small,(c.height-img_height1/small)/2+direction_val_y/small+direction_val_ys/small,img_width1/small,img_height1/small)
                         //绘制模拟阴影条(上)
-                        var grd=ctx.createLinearGradient((c.width-img_width1/small)/2-vm.drawing_core_val*30/small+direction_val_xs/small,(c.height-img_height1/small)/2-vm.drawing_core_val*30/small+direction_val_ys/small,(c.width-img_width1/small)/2-vm.drawing_core_val*30/small+direction_val_xs/small,(c.height-img_height1/small)/2-vm.drawing_core_val*30/small+5+direction_val_ys/small);
-                        grd.addColorStop(0,"rgba(150,150,150,0.6)");
-                        grd.addColorStop(1,"rgba(200,200,200,0.3)");
-                        ctx.fillStyle=grd;
-                        ctx.fillRect((c.width-img_width1/small)/2-vm.drawing_core_val*30/small+direction_val_xs/small,(c.height-img_height1/small)/2-vm.drawing_core_val*30/small+direction_val_ys/small,(img_width1+vm.drawing_core_val*30*2)/small,5);
+                        // var grd=ctx.createLinearGradient((c.width-img_width1/small)/2-vm.drawing_core_val*30/small+direction_val_xs/small,(c.height-img_height1/small)/2-vm.drawing_core_val*30/small+direction_val_ys/small,(c.width-img_width1/small)/2-vm.drawing_core_val*30/small+direction_val_xs/small,(c.height-img_height1/small)/2-vm.drawing_core_val*30/small+5+direction_val_ys/small);
+                        // grd.addColorStop(0,"rgba(150,150,150,0.6)");
+                        // grd.addColorStop(1,"rgba(200,200,200,0.3)");
+                        // ctx.fillStyle=grd;
+                        ctx.fillStyle='#808080';
+                        ctx.fillRect((c.width-img_width1/small)/2-vm.drawing_core_val*30/small+direction_val_xs/small-1,(c.height-img_height1/small)/2-vm.drawing_core_val*30/small+direction_val_ys/small-1,(img_width1+vm.drawing_core_val*30*2)/small+2,3);
                         //绘制模拟阴影条(左)
-                        var grd=ctx.createLinearGradient((c.width-img_width1/small)/2-vm.drawing_core_val*30/small+direction_val_xs/small,(c.width-img_width1/small)/2-vm.drawing_core_val*30/small+direction_val_ys/small,(c.width-img_width1/small)/2-vm.drawing_core_val*30/small+5+direction_val_xs/small,(c.width-img_width1/small)/2-vm.drawing_core_val*30/small+direction_val_ys/small);
-                        grd.addColorStop(0,"rgba(150,150,150,0.6)");
-                        grd.addColorStop(1,"rgba(200,200,200,0.3)");
-                        ctx.fillStyle=grd;
-                        ctx.fillRect((c.width-img_width1/small)/2-vm.drawing_core_val*30/small+direction_val_xs/small,(c.height-img_height1/small)/2-vm.drawing_core_val*30/small+direction_val_ys/small,5,img_height1/small+vm.drawing_core_val*30/small*2);
+                        // var grd=ctx.createLinearGradient((c.width-img_width1/small)/2-vm.drawing_core_val*30/small+direction_val_xs/small,(c.width-img_width1/small)/2-vm.drawing_core_val*30/small+direction_val_ys/small,(c.width-img_width1/small)/2-vm.drawing_core_val*30/small+5+direction_val_xs/small,(c.width-img_width1/small)/2-vm.drawing_core_val*30/small+direction_val_ys/small);
+                        // grd.addColorStop(0,"rgba(150,150,150,0.6)");
+                        // grd.addColorStop(1,"rgba(200,200,200,0.3)");
+                        // ctx.fillStyle=grd;
+                        ctx.fillStyle='#808080';
+                        ctx.fillRect((c.width-img_width1/small)/2-vm.drawing_core_val*30/small+direction_val_xs/small-1,(c.height-img_height1/small)/2-vm.drawing_core_val*30/small+direction_val_ys/small-1,3,img_height1/small+vm.drawing_core_val*30/small*2+2);
                         //绘制模拟阴影条(右)
-                        var grd=ctx.createLinearGradient((c.width-img_width1/small)/2+img_width1/small+vm.drawing_core_val*30/small+direction_val_xs/small,(c.width-img_width1/small)/2+img_width1/small+vm.drawing_core_val*30/small+direction_val_ys/small,(c.width-img_width1/small)/2+img_width1/small+vm.drawing_core_val*30/small-3+direction_val_xs/small,(c.width-img_width1/small)/2+img_width1/small+vm.drawing_core_val*30/small+direction_val_ys/small);
-                        grd.addColorStop(0,"rgba(150,150,150,0.6)");
-                        grd.addColorStop(1,"rgba(200,200,200,0.3)");
-                        ctx.fillStyle=grd;
-                        ctx.fillRect((c.width-img_width1/small)/2+img_width1/small-3+vm.drawing_core_val*30/small+direction_val_xs/small,(c.height-img_height1/small)/2-vm.drawing_core_val*30/small+direction_val_ys/small,3,(img_height1+vm.drawing_core_val*30*2)/small);
+                        // var grd=ctx.createLinearGradient((c.width-img_width1/small)/2+img_width1/small+vm.drawing_core_val*30/small+direction_val_xs/small,(c.width-img_width1/small)/2+img_width1/small+vm.drawing_core_val*30/small+direction_val_ys/small,(c.width-img_width1/small)/2+img_width1/small+vm.drawing_core_val*30/small-3+direction_val_xs/small,(c.width-img_width1/small)/2+img_width1/small+vm.drawing_core_val*30/small+direction_val_ys/small);
+                        // grd.addColorStop(0,"rgba(150,150,150,0.6)");
+                        // grd.addColorStop(1,"rgba(200,200,200,0.3)");
+                        // ctx.fillStyle=grd;
+                        // ctx.fillStyle='#ebebeb';
+                        // ctx.fillRect((c.width-img_width1/small)/2+img_width1/small-2+vm.drawing_core_val*30/small+direction_val_xs/small,(c.height-img_height1/small)/2-vm.drawing_core_val*30/small+direction_val_ys/small,2,(img_height1+vm.drawing_core_val*30*2)/small);
                         //绘制模拟阴影条(下)
-                        var grd=ctx.createLinearGradient((c.height-img_height1/small)/2+vm.drawing_core_val*30/small+img_height1/small+direction_val_xs/small,(c.height-img_height1/small)/2+vm.drawing_core_val*30/small+img_height1/small+direction_val_ys/small,(c.height-img_height1/small)/2+vm.drawing_core_val*30/small+img_height1/small+direction_val_xs/small,(c.height-img_height1/small)/2+vm.drawing_core_val*30/small+img_height1/small-3+direction_val_ys/small);
-                        grd.addColorStop(0,"rgba(150,150,150,0.6)");
-                        grd.addColorStop(1,"rgba(200,200,200,0.3)");
-                        ctx.fillStyle=grd;
-                        ctx.fillRect((c.width-img_width1/small)/2-vm.drawing_core_val*30/small+direction_val_xs/small,(c.height-img_height1/small)/2+vm.drawing_core_val*30/small+img_height1/small-3+direction_val_ys/small,(img_width1+vm.drawing_core_val*30*2)/small,3);
+                        // var grd=ctx.createLinearGradient((c.height-img_height1/small)/2+vm.drawing_core_val*30/small+img_height1/small+direction_val_xs/small,(c.height-img_height1/small)/2+vm.drawing_core_val*30/small+img_height1/small+direction_val_ys/small,(c.height-img_height1/small)/2+vm.drawing_core_val*30/small+img_height1/small+direction_val_xs/small,(c.height-img_height1/small)/2+vm.drawing_core_val*30/small+img_height1/small-3+direction_val_ys/small);
+                        // grd.addColorStop(0,"rgba(150,150,150,0.6)");
+                        // grd.addColorStop(1,"rgba(200,200,200,0.3)");
+                        // ctx.fillStyle=grd;
+                        // ctx.fillStyle='#ebebeb';
+                        // ctx.fillRect((c.width-img_width1/small)/2-vm.drawing_core_val*30/small+direction_val_xs/small,(c.height-img_height1/small)/2+vm.drawing_core_val*30/small+img_height1/small-2+direction_val_ys/small,(img_width1+vm.drawing_core_val*30*2)/small,2);
+                        //绘制不规则四边形(下)
+                        //开始一个新的绘制路径
+                        ctx.beginPath();
+                        //设置线条颜色
+                        ctx.strokeStyle ="#ebebeb";
+                        ctx.lineWidth=0.1;
+                        //设置路径起点坐标
+                        ctx.moveTo((c.width-img_width1/small)/2-vm.drawing_core_val*30/small+direction_val_xs/small-1,(c.height-img_height1/small)/2+vm.drawing_core_val*30/small+img_height1/small+direction_val_ys/small+1);
+                        //绘制直线线段到坐标点
+                        ctx.lineTo((c.width-img_width1/small)/2+img_width1/small+vm.drawing_core_val*30/small+direction_val_xs/small+2,(c.height-img_height1/small)/2+vm.drawing_core_val*30/small+img_height1/small+direction_val_ys/small+1);
+                        ctx.lineTo((c.width-img_width1/small)/2+img_width1/small+vm.drawing_core_val*30/small+direction_val_xs/small+2,(c.height-img_height1/small)/2+vm.drawing_core_val*30/small+img_height1/small+direction_val_ys/small-2);
+                        ctx.lineTo((c.width-img_width1/small)/2-vm.drawing_core_val*30/small+direction_val_xs/small+2,(c.height-img_height1/small)/2+vm.drawing_core_val*30/small+img_height1/small+direction_val_ys/small-2);
+                        ctx.fillStyle='#ebebeb';
+                        ctx.fill();
+                        //先关闭绘制路径。
+                        ctx.closePath();
+                        //最后，按照绘制路径画出直线
+                        ctx.stroke();
+                        //绘制不规则四边形(右)
+                        //开始一个新的绘制路径
+                        ctx.beginPath();
+                        //设置线条颜色
+                        ctx.strokeStyle ="#ebebeb";
+                        ctx.lineWidth=0.1;
+                        //设置路径起点坐标
+                        ctx.moveTo((c.width-img_width1/small)/2+img_width1/small+vm.drawing_core_val*30/small+direction_val_xs/small+2,(c.height-img_height1/small)/2-vm.drawing_core_val*30/small+direction_val_ys/small-1);
+                        //绘制直线线段到坐标点(20, 100)
+                        ctx.lineTo((c.width-img_width1/small)/2+img_width1/small+vm.drawing_core_val*30/small+direction_val_xs/small+2,(c.height-img_height1/small)/2+vm.drawing_core_val*30/small+img_height1/small+direction_val_ys/small+1);
+                        ctx.lineTo((c.width-img_width1/small)/2+img_width1/small+vm.drawing_core_val*30/small+direction_val_xs/small-1,(c.height-img_height1/small)/2+vm.drawing_core_val*30/small+img_height1/small+direction_val_ys/small);
+                        ctx.lineTo((c.width-img_width1/small)/2+img_width1/small+vm.drawing_core_val*30/small+direction_val_xs/small-1,(c.height-img_height1/small)/2-vm.drawing_core_val*30/small+direction_val_ys/small+2);
+                        ctx.fillStyle='#ebebeb';
+                        ctx.fill();
+                        //先关闭绘制路径。
+                        ctx.closePath();
+                        //最后，按照绘制路径画出直线
+                        ctx.stroke();
                         // $("#bgImg").attr("src",this.img_url);
                         bgImg.src = vm.img_url
                         bgImg.onload = function(){

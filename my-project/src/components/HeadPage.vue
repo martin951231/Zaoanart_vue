@@ -1,7 +1,7 @@
 <template>
     <div style="font-size: 15px;margin-bottom:100px;margin-top: 15px;">
         <div style="float:right;height: 70px;position: absolute;right: 50px;padding-top: 50px;">
-            <input id="search_input" type="text" v-model="input" style="text-align: right;display:none;outline:none;border: 0px;border-bottom: 1px solid #000;width: 100px;">
+            <input id="search_input" type="text" v-model="input" style="text-align: right;display:none;outline:none;border: 0px;border-bottom: 1px solid #ccc;width: 100px;">
             <img src="../assets/images/search.png" alt="" width="20px" @click="test1" style="cursor: pointer;">
             <div v-if="telphone" style="display: inline-block;">
                 <a href="/#/keep" class="login_sign" target="_blank">
@@ -16,23 +16,23 @@
                 <a href="/#/login" class="login_sign" id="show_user_a4">登录</a>
             </div>
             <div v-if="telphone" id="show_user" style="width:150px;background-color:#fff;display:none;position: absolute;z-index: 999;right: 0px;text-align: left;padding: 5px;">
-                <a style="display:block;padding: 10px 0px 10px 0px;" v-if="telphone" class="login_sign" target="_blank" id="show_user_a1">
+                <a style="display:block;padding: 10px 0px 10px 0px;font-weight: bold;" v-if="telphone" class="login_sign" target="_blank" id="show_user_a1">
                     <img src="../assets/images/hi.png" width="20px" id="show_user_img1">
                     {{telphone}}
                 </a>
-                <a style="display:block" v-if="telphone" href="/#/home/shopcar" class="login_sign tohover" target="_blank" id="show_user_a5">
+                <a style="display:block;height: 25px;line-height: 25px;" v-if="telphone" href="/#/home/shopcar" class="login_sign tohover" target="_blank" id="show_user_a5">
                     <img src="../assets/images/car.png" width="20px" id="show_user_img5">
                     购物车
                 </a>
-                <a style="display:block" v-if="telphone" href="/#/home/history" class="login_sign tohover" target="_blank" id="show_user_a6">
+                <a style="display:block;height: 25px;line-height: 25px;" v-if="telphone" href="/#/home/history" class="login_sign tohover" target="_blank" id="show_user_a6">
                     <img src="../assets/images/history.png" width="20px" id="show_user_img6">
                     足迹
                 </a>
-                <a style="display:block" v-if="telphone" href="/#/home" class="login_sign tohover" target="_blank" id="show_user_a7">
+                <a style="display:block;height: 25px;line-height: 25px;" v-if="telphone" href="/#/home" class="login_sign tohover" target="_blank" id="show_user_a7">
                     <img src="../assets/images/set.png" width="20px" id="show_user_img7">
                     设置
                 </a>
-                <a v-if="telphone" class="login_sign tohover" style="cursor: pointer;display:block" @click="login_out" id="show_user_a2">
+                <a style="cursor: pointer;display:block;height: 25px;line-height: 25px;" v-if="telphone" class="login_sign tohover"  @click="login_out" id="show_user_a2">
                     <img src="../assets/images/shutdown.png" width="20px" id="show_user_img2">
                     注销
                 </a>
@@ -40,7 +40,7 @@
             <div v-if="telphone" id="show_keep" style="width:150px;background-color:#fff;display:none;position: absolute;z-index: 999;right: 0px;text-align: left;">
                 <ul>
                     <li class="show_keep_li" style="padding: 10px 0px 10px 20px;min-width:100px;display:block;color:#000;font-weight: bold;">收藏夹</li>
-                    <a id="show_keep_a" v-for="keep in keep" :href="'/#/keep/keepimg?id='+keep.id" target="_blank">
+                    <a id="show_keep_a" style="height: 25px;line-height: 25px;" v-for="keep in keep" :href="'/#/keep/keepimg?id='+keep.id" target="_blank">
                         <li class="show_keep_li" style="padding-left:20px;margin:0px;min-width:100px;display:block;color:#000">{{keep.keep_name}}</li>
                     </a>
                 </ul>
@@ -56,26 +56,28 @@
                     <ul id="cate_select" class="select_ul" data_id="0" @mouseenter="show($event)" @mouseleave="hidden($event)" style="width:140px;">
                         <div style="padding-left: 15px;">
                             <img src="../assets/images/2.jpg" style="width:20px;">
-                            <span >类别</span>
+                            <span id="cate_select_one" style="color:#000">类别</span>
                         </div>
-                        <div class="category_div" data_id="0" @click="category_find($event,0)" style="height: 30px;line-height: 30px;padding-left: 15px;color:#000">全部分类</div>
+                        <div class="category_div" data_id="0" @click="category_find($event,0)" style="height: 30px;line-height: 30px;padding-left: 15px;color:#000">全部类别</div>
                         <li v-for="(category,son_category) in category" style="color:#000">
-                            <span style="height: 30px;line-height: 30px;display:block" :data_id="category.id" @click="cate_find($event,category.id)">&nbsp&nbsp&nbsp&nbsp{{category.name}}</span>
+                            <span style="height: 30px;line-height: 30px;display:block" class="category_div" :id="'category'+category.id" :data_id="category.id" @click="cate_find($event,category.id)">&nbsp&nbsp&nbsp&nbsp{{category.name}}</span>
                             <div style="height: 30px;line-height: 30px;" v-for="(category1,index) in category.info" @click="category_find($event,category1.id)" class="category_div" :id="'category'+category1.id">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp{{category1.category_name}}</div>
                         </li>
                     </ul>
                     <ul id="theme_select" class="select_ul" data_id="0" @mouseenter="show($event)" @mouseleave="hidden($event)" style="width:140px;text-align: left;">
                         <div style="padding-left: 20px;">
                             <img src="../assets/images/3.jpg" alt="" width="20px">
-                            <span >主题</span>
+                            <span id="theme_select_one" style="color:#000">主题</span>
                         </div>
                         <li class="select_li theme_div" @click="theme_find($event,0)">全部主题</li>
                         <li v-for="theme1 in theme1" :id="'themes'+theme1.id" class="select_li theme_div" @click="theme_find($event,theme1.id)">{{theme1.theme_name}}</li>
                     </ul>
                     <ul id="color_select" class="select_ul" data_id="0" @mouseenter="show($event)" @mouseleave="hidden($event)" style="width:100px;color: rgb(247, 247, 247);">
-                        <img src="../assets/images/color.png" alt="" width="20px">
-                        <span id="color_select_one" style="color:#000">颜色</span>
-                        <li @click="color_find($event,0)" style="height:30px;line-height: 30px;background-color: #fff;color: rgb(100, 100, 100;display: block;">全部颜色</li>
+                        <div style="padding-left: 15px;width: 100px;height: 20px;">
+                            <img id="color_select_img" src="../assets/images/color.png" alt="" width="20px">
+                            <span id="color_select_one" style="color:#000">颜色</span>
+                        </div>
+                        <li @click="color_find($event,0)" style="height:30px;line-height: 30px;background-color: #fff;color: rgb(100, 100, 100;display: block;">颜色</li>
                         <li class="color select_li" style="display:block;background-color:rgb(255,0,0);width:100%;margin-left:0px" @click="color_find($event,1)"></li>
                         <li class="color select_li" style="display:block;background-color:rgb(255,150,0);width:100%;margin-left:0px" @click="color_find($event,2)"></li>
                         <li class="color select_li" style="display:block;background-color:rgb(255,255,0);width:100%;margin-left:0px" @click="color_find($event,3)"></li>
@@ -83,9 +85,9 @@
                         <li class="color select_li" style="display:block;background-color:rgb(0,255,255);width:100%;margin-left:0px" @click="color_find($event,5)"></li>
                         <li class="color select_li" style="display:block;background-color:rgb(0,0,255);width:100%;margin-left:0px" @click="color_find($event,6)"></li>
                         <li class="color select_li" style="display:block;background-color:rgb(100,50,150);width:100%;margin-left:0px" @click="color_find($event,7)"></li>
-                        <li class="color select_li" style="display:block;background-color:rgb(255,150,255);width:100%;margin-left:0px" @click="color_find($event,8)"></li>
                         <li class="color select_li" style="display:block;background-color:rgb(255,255,255);width:100%;margin-left:0px" @click="color_find($event,9)"></li>
-                        <li class="color select_li" style="display:block;background-color:rgb(0,0,0);width:100%;margin-left:0px" @click="color_find($event,10)"></li>
+                        <li class="color select_li" style="display:block;background-color:rgb(255,150,255);width:100%;margin-left:0px" @click="color_find($event,8)"></li>
+                        <li class="color select_li color_black" style="display:block;background-color:rgb(0,0,0);width:100%;margin-left:0px" @click="color_find($event,10)"></li>
                         <li class="color select_li" style="display:block;background-color:rgb(120,120,120);width:100%;margin-left:0px" @click="color_find($event,11)"></li>
                     </ul>
                 </div>
@@ -205,12 +207,12 @@
                 this.currentPage = 1
                 $(e.target).parent().parent().attr('data_id',cate_id)
                 $(e.target).parent().parent().css("max-height",'20px')
-                $("#cate_select_one").text($.trim($(e.target).text()))
-                if(cate_id == 0){
-                    $("#cate_select_one").css('color','rgb(100, 100, 100)')
-                }else{
-                    $("#cate_select_one").css('color','rgb(253, 162, 100)')
-                }
+                // $("#cate_select_one").text($.trim($(e.target).text()))
+                // if(cate_id == 0){
+                //     $("#cate_select_one").css('color','rgb(100, 100, 100)')
+                // }else{
+                //     $("#cate_select_one").css('color','rgb(253, 162, 100)')
+                // }
                 $("#cate_select").attr('data_id',cate_id)
                 var theme_id = $("#theme_select").attr('data_id')
                 var color_id = $("#color_select").attr('data_id')
@@ -250,62 +252,74 @@
                     case 0:
                         // $("#color_select_one").css("background-color",'rgba(255, 255, 255, 0.7)');
                         $("#color_select").css("background-color",'rgb(255, 255, 255, 0.7)');
-                        // $("#color_select_one").html('颜色')
+                        $("#color_select_one").html('颜色')
+                        $("#color_select_img").css('display','inline-block')
                         break;
                     case 1:
                         // $("#color_select_one").css("background-color",'rgb(255,0,0)');
                         $("#color_select").css("background-color",'rgb(255,0,0)');
-                        // $("#color_select_one").html('颜色')
+                        $("#color_select_one").html('')
+                        $("#color_select_img").css('display','none')
                         break;
                     case 2:
                         // $("#color_select").css("background-color",'rgb(255,150,0)');
                         $("#color_select").css("background-color",'rgb(255,150,0)');
-                        // $("#color_select_one").html('颜色')
+                        $("#color_select_one").html('')
+                        $("#color_select_img").css('display','none')
                         break;
                     case 3:
                         // $("#color_select_one").css("background-color",'rgb(255,255,0)');
                         $("#color_select").css("background-color",'rgb(255,255,0)');
-                        // $("#color_select_one").html('颜色')
+                        $("#color_select_one").html('')
+                        $("#color_select_img").css('display','none')
                         break;
                     case 4:
                         // $("#color_select_one").css("background-color",'rgb(0,255,0)');
                         $("#color_select").css("background-color",'rgb(0,255,0)');
-                        // $("#color_select_one").html('颜色')
+                        $("#color_select_one").html('')
+                        $("#color_select_img").css('display','none')
                         break;
                     case 5:
                         // $("#color_select_one").css("background-color",'rgb(0,255,255)');
                         $("#color_select").css("background-color",'rgb(0,255,255)');
-                        // $("#color_select_one").html('颜色')
+                        $("#color_select_one").html('')
+                        $("#color_select_img").css('display','none')
                         break;
                     case 6:
                         // $("#color_select_one").css("background-color",'rgb(0,0,255)');
                         $("#color_select").css("background-color",'rgb(0,0,255)');
-                        // $("#color_select_one").html('颜色')
+                        $("#color_select_one").html('')
+                        $("#color_select_img").css('display','none')
                         break;
                     case 7:
                         // $("#color_select_one").css("background-color",'rgb(100,50,150)');
                         $("#color_select").css("background-color",'rgb(100,50,150)');
-                        // $("#color_select_one").html('颜色')
+                        $("#color_select_one").html('')
+                        $("#color_select_img").css('display','none')
                         break;
                     case 8:
                         // $("#color_select_one").css("background-color",'rgb(255,150,255)');
                         $("#color_select").css("background-color",'rgb(255,150,255)');
-                        // $("#color_select_one").html('颜色')
+                        $("#color_select_one").html('')
+                        $("#color_select_img").css('display','none')
                         break;
                     case 9:
                         // $("#color_select_one").css("background-color",'rgb(255,255,255)');
                         $("#color_select").css("background-color",'rgb(255,255,255)');
-                        // $("#color_select_one").html('颜色')
+                        $("#color_select_one").html('')
+                        $("#color_select_img").css('display','none')
                         break;
                     case 10:
                         // $("#color_select_one").css("background-color",'rgb(0,0,0)');
                         $("#color_select").css("background-color",'rgb(0,0,0)');
-                        // $("#color_select_one").html('颜色')
+                        $("#color_select_one").html('')
+                        $("#color_select_img").css('display','none')
                         break;
                     case 11:
                         // $("#color_select_one").css("background-color",'rgb(120,120,120)');
                         $("#color_select").css("background-color",'rgb(120,120,120)');
-                        // $("#color_select_one").html('颜色')
+                        $("#color_select_one").html('')
+                        $("#color_select_img").css('display','none')
                         break;
                 }
                 $("#color_select").attr('data_id',color_id)
@@ -441,7 +455,9 @@
     }
     .nav1:hover,.nav2:hover,.nav3:hover,.nav4:hover{color:#ef401d;}
     .xiala1 li:hover,.xiala2 li:hover,.xiala3 li:hover{cursor: pointer;color:#ef401d;background:#888;text-align:center;margin-left:0px;}
-    .color:hover{box-shadow:inset 0px 0px 5px 2px}
+    /*.color:hover{box-shadow:inset 0px 0px 5px 2px}*/
+    .color:hover{border:#000 solid 2px;}
+    .color_black:hover{border:#fff solid 2px;}
     .login_sign{
         color:black
     }

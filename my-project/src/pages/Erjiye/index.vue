@@ -108,11 +108,11 @@
         watch: {
             '$route' () {
                 this.initData();
-                this.findcategory();
-                this.findtheme();
-                this.color_show();
-                this.category_show();
-                this.theme_show();
+                // this.findcategory();
+                // this.findtheme();
+                // this.color_show();
+                // this.category_show();
+                // this.theme_show();
                 this.currentPage = 1;
                 // this.cate_find(e);
             },
@@ -122,19 +122,19 @@
             'contrast'(){
                 this.currentPage = 1;
                 this.initData();
-                this.findcategory();
-                this.findtheme();
-                this.color_show();
-                this.category_show();
-                this.theme_show();
+                // this.findcategory();
+                // this.findtheme();
+                // this.color_show();
+                // this.category_show();
+                // this.theme_show();
             }
         },
         mounted(){
             this.telphone = this.getCookie('tel');
             this.initData();
-            this.findcategory();
-            this.findcategory1();
-            this.findtheme();
+            // this.findcategory();
+            // this.findcategory1();
+            // this.findtheme();
         },
         methods:{
             initData(){
@@ -162,52 +162,75 @@
                 switch(Number(arr2.color_id))
                 {
                     case 0:
-                        $("#color_select").css("background-color",'rgba(255, 255, 255, 0.7)');
-                        // $("#color_select_one").html('请选择')
+                        $("#color_select").css("background-color",'rgb(255, 255, 255, 0.7)');
+                        $("#color_select_one").html('颜色')
+                        $("#color_select_img").css('display','inline-block')
                         break;
                     case 1:
+                        // $("#color_select_one").css("background-color",'rgb(255,0,0)');
                         $("#color_select").css("background-color",'rgb(255,0,0)');
-                        // $("#color_select_one").html('')
+                        $("#color_select_one").html('')
+                        $("#color_select_img").css('display','none')
                         break;
                     case 2:
+                        // $("#color_select").css("background-color",'rgb(255,150,0)');
                         $("#color_select").css("background-color",'rgb(255,150,0)');
-                        // $("#color_select_one").html('')
+                        $("#color_select_one").html('')
+                        $("#color_select_img").css('display','none')
                         break;
                     case 3:
+                        // $("#color_select_one").css("background-color",'rgb(255,255,0)');
                         $("#color_select").css("background-color",'rgb(255,255,0)');
-                        // $("#color_select_one").html('')
+                        $("#color_select_one").html('')
+                        $("#color_select_img").css('display','none')
                         break;
                     case 4:
+                        // $("#color_select_one").css("background-color",'rgb(0,255,0)');
                         $("#color_select").css("background-color",'rgb(0,255,0)');
-                        // $("#color_select_one").html('')
+                        $("#color_select_one").html('')
+                        $("#color_select_img").css('display','none')
                         break;
                     case 5:
+                        // $("#color_select_one").css("background-color",'rgb(0,255,255)');
                         $("#color_select").css("background-color",'rgb(0,255,255)');
-                        // $("#color_select_one").html('')
+                        $("#color_select_one").html('')
+                        $("#color_select_img").css('display','none')
                         break;
                     case 6:
+                        // $("#color_select_one").css("background-color",'rgb(0,0,255)');
                         $("#color_select").css("background-color",'rgb(0,0,255)');
-                        // $("#color_select_one").html('')
+                        $("#color_select_one").html('')
+                        $("#color_select_img").css('display','none')
                         break;
                     case 7:
+                        // $("#color_select_one").css("background-color",'rgb(100,50,150)');
                         $("#color_select").css("background-color",'rgb(100,50,150)');
-                        // $("#color_select_one").html('')
+                        $("#color_select_one").html('')
+                        $("#color_select_img").css('display','none')
                         break;
                     case 8:
+                        // $("#color_select_one").css("background-color",'rgb(255,150,255)');
                         $("#color_select").css("background-color",'rgb(255,150,255)');
-                        // $("#color_select_one").html('')
+                        $("#color_select_one").html('')
+                        $("#color_select_img").css('display','none')
                         break;
                     case 9:
+                        // $("#color_select_one").css("background-color",'rgb(255,255,255)');
                         $("#color_select").css("background-color",'rgb(255,255,255)');
-                        // $("#color_select_one").html('')
+                        $("#color_select_one").html('')
+                        $("#color_select_img").css('display','none')
                         break;
                     case 10:
+                        // $("#color_select_one").css("background-color",'rgb(0,0,0)');
                         $("#color_select").css("background-color",'rgb(0,0,0)');
-                        // $("#color_select_one").html('')
+                        $("#color_select_one").html('')
+                        $("#color_select_img").css('display','none')
                         break;
                     case 11:
+                        // $("#color_select_one").css("background-color",'rgb(120,120,120)');
                         $("#color_select").css("background-color",'rgb(120,120,120)');
-                        // $("#color_select_one").html('')
+                        $("#color_select_one").html('')
+                        $("#color_select_img").css('display','none')
                         break;
                 }
                 if(param == 'label_id') {
@@ -265,12 +288,12 @@
                         }
                     })
                 }else{
-                    if(arr2.cate_id != 0){
-                        $("#cate_select_one").css('color','rgb(253, 162, 100)')
-                    }
-                    if(arr2.theme_id != 0){
-                        $("#theme_select_one").css('color','rgb(253, 162, 100)')
-                    }
+                    // if(arr2.cate_id != 0){
+                    //     $("#cate_select_one").css('color','rgb(253, 162, 100)')
+                    // }
+                    // if(arr2.theme_id != 0){
+                    //     $("#theme_select_one").css('color','rgb(253, 162, 100)')
+                    // }
                     this.is_prompt = 0
                     this.$http.get(baseurl + 'v1/goods/category_find',{params:{cate_id:arr2.cate_id,theme_id:arr2.theme_id,color_id:arr2.color_id,pageSize:this.pageSize,currentPage:this.currentPage,contrast:this.contrast}}).then(function(response){
                         for(var i = 0; i<response.body.length;i++ ){
@@ -283,6 +306,28 @@
                             this.prompt = '暂时没有图片'
                         }
                         this.dataImageList = response.body
+                        for(var p=0; p<$(".category_div").length;p++){
+                            $(".category_div")[p].style.backgroundColor = ''
+                            $(".category_div")[p].style.color = ''
+                        }
+                        if(arr2.cate_id != 0){
+                            $("#category"+arr2.cate_id).css('background-color','black')
+                            $("#category"+arr2.cate_id).css('color','rgb(253, 162, 100)')
+                            $("#cate_select_one").text($('#category'+arr2.cate_id).text().replace(/\s*/g,""))
+                        }else{
+                            $("#cate_select_one").text('类别')
+                        }
+                        for(var e=0; e<$(".theme_div").length;e++){
+                            $(".theme_div")[e].style.backgroundColor = ''
+                            $(".theme_div")[e].style.color = ''
+                        }
+                        if(arr2.theme_id != 0){
+                            $("#themes"+arr2.theme_id).css('background-color','black')
+                            $("#themes"+arr2.theme_id).css('color','rgb(253, 162, 100)')
+                            $("#theme_select_one").text($('#themes'+arr2.theme_id).text().replace(/\s*/g,""))
+                        }else{
+                            $("#theme_select_one").text('主题')
+                        }
                     })
                 }
                 $(window).scroll(function(){
@@ -388,152 +433,153 @@
             hidden(e){
                 $(e.target).css("max-height",'20px')
             },
-            category_find(e,cate_id){
-                this.currentPage = 1
-                $(e.target).parent().parent().attr('data_id',cate_id)
-                $(e.target).parent().parent().css("max-height",'30px')
-                $("#cate_select_one").text($.trim($(e.target).text()))
-                if(cate_id == 0){
-                    $("#cate_select_one").css('color','rgb(100, 100, 100)')
-                }else{
-                    $("#cate_select_one").css('color','rgb(253, 162, 100)')
-                }
-                $("#cate_select").attr('data_id',cate_id)
-                var theme_id = $("#theme_select").attr('data_id')
-                var color_id = $("#color_select").attr('data_id')
-                this.$router.push({path:"/erjiye?cate_id="+cate_id+"&theme_id="+theme_id+"&color_id="+color_id+"&pageSize="+this.pageSize+"&currentPage="+this.currentPage+""})
-            },
-            theme_find(e,theme_id){
-                this.currentPage = 1
-                $(e.target).parent().attr('data_id',theme_id)
-                $(e.target).parent().css("max-height",'30px')
-                $("#theme_select_one").text($.trim($(e.target).text()))
-                if(theme_id == 0){
-                    $("#theme_select_one").css('color','rgb(100, 100, 100)')
-                }else{
-                    $("#theme_select_one").css('color','rgb(253, 162, 100)')
-                }
-                $("#theme_select").attr('data_id',theme_id)
-                var cate_id = $("#cate_select").attr('data_id')
-                var color_id = $("#color_select").attr('data_id')
-                this.$router.push({path:"/erjiye?cate_id="+cate_id+"&theme_id="+theme_id+"&color_id="+color_id+"&pageSize="+this.pageSize+"&currentPage="+this.currentPage+""})
-            },
-            color_find(e,color_id){
-                this.currentPage = 1
-                $(e.target).parent().attr('data_id',color_id)
-                $(e.target).parent().css("max-height",'30px')
-                switch(color_id)
-                {
-                    case 0:
-                        $("#color_select").css("background-color",'rgba(255, 255, 255, 0.7)');
-                        // $("#color_select_one").html('颜色')
-                        break;
-                    case 1:
-                        $("#color_select").css("background-color",'rgb(255,0,0)');
-                        // $("#color_select_one").html('')
-                        break;
-                    case 2:
-                        $("#color_select").css("background-color",'rgb(255,150,0)');
-                        // $("#color_select_one").html('')
-                        break;
-                    case 3:
-                        $("#color_select").css("background-color",'rgb(255,255,0)');
-                        // $("#color_select_one").html('')
-                        break;
-                    case 4:
-                        $("#color_select").css("background-color",'rgb(0,255,0)');
-                        // $("#color_select_one").html('')
-                        break;
-                    case 5:
-                        $("#color_select").css("background-color",'rgb(0,255,255)');
-                        // $("#color_select_one").html('')
-                        break;
-                    case 6:
-                        $("#color_select").css("background-color",'rgb(0,0,255)');
-                        // $("#color_select_one").html('')
-                        break;
-                    case 7:
-                        $("#color_select").css("background-color",'rgb(100,50,150)');
-                        // $("#color_select_one").html('')
-                        break;
-                    case 8:
-                        $("#color_select").css("background-color",'rgb(255,150,255)');
-                        // $("#color_select_one").html('')
-                        break;
-                    case 9:
-                        $("#color_select").css("background-color",'rgb(255,255,255)');
-                        // $("#color_select_one").html('')
-                        break;
-                    case 10:
-                        $("#color_select").css("background-color",'rgb(0,0,0)');
-                        // $("#color_select_one").html('')
-                        break;
-                    case 11:
-                        $("#color_select").css("background-color",'rgb(120,120,120)');
-                        // $("#color_select_one").html('')
-                        break;
-                }
-                $("#color_select").attr('data_id',color_id)
-                var cate_id = $("#cate_select").attr('data_id')
-                var theme_id = $("#theme_select").attr('data_id')
-                this.$router.push({path:"/erjiye?cate_id="+cate_id+"&theme_id="+theme_id+"&color_id="+color_id+"&pageSize="+this.pageSize+"&currentPage="+this.currentPage+""})
-            },
-            color_show(){
-                var num = parseInt(this.info.color_id)
-                switch(num)
-                {
-                    case 0:
-                        $("#color_select").css("background-color",'rgba(255, 255, 255, 0.7)');
-                        // $("#color_select_one").html('请选择')
-                        break;
-                    case 1:
-                        $("#color_select").css("background-color",'rgb(255,0,0)');
-                        // $("#color_select_one").html('')
-                        break;
-                    case 2:
-                        $("#color_select").css("background-color",'rgb(255,150,0)');
-                        // $("#color_select_one").html('')
-                        break;
-                    case 3:
-                        $("#color_select").css("background-color",'rgb(255,255,0)');
-                        // $("#color_select_one").html('')
-                        break;
-                    case 4:
-                        $("#color_select").css("background-color",'rgb(0,255,0)');
-                        // $("#color_select_one").html('')
-                        break;
-                    case 5:
-                        $("#color_select").css("background-color",'rgb(0,255,255)');
-                        // $("#color_select_one").html('')
-                        break;
-                    case 6:
-                        $("#color_select").css("background-color",'rgb(0,0,255)');
-                        // $("#color_select_one").html('')
-                        break;
-                    case 7:
-                        $("#color_select").css("background-color",'rgb(100,50,150)');
-                        // $("#color_select_one").html('')
-                        break;
-                    case 8:
-                        $("#color_select").css("background-color",'rgb(255,150,255)');
-                        // $("#color_select_one").html('')
-                        break;
-                    case 9:
-                        $("#color_select").css("background-color",'rgb(255,255,255)');
-                        // $("#color_select_one").html('')
-                        break;
-                    case 10:
-                        $("#color_select").css("background-color",'rgb(0,0,0)');
-                        // $("#color_select_one").html('')
-                        break;
-                    case 11:
-                        $("#color_select").css("background-color",'rgb(120,120,120)');
-                        // $("#color_select_one").html('')
-                        break;
-                }
-            },
+            // category_find(e,cate_id){
+            //     this.currentPage = 1
+            //     $(e.target).parent().parent().attr('data_id',cate_id)
+            //     $(e.target).parent().parent().css("max-height",'30px')
+            //     $("#cate_select_one").text($.trim($(e.target).text()))
+            //     if(cate_id == 0){
+            //         $("#cate_select_one").css('color','rgb(100, 100, 100)')
+            //     }else{
+            //         $("#cate_select_one").css('color','rgb(253, 162, 100)')
+            //     }
+            //     $("#cate_select").attr('data_id',cate_id)
+            //     var theme_id = $("#theme_select").attr('data_id')
+            //     var color_id = $("#color_select").attr('data_id')
+            //     this.$router.push({path:"/erjiye?cate_id="+cate_id+"&theme_id="+theme_id+"&color_id="+color_id+"&pageSize="+this.pageSize+"&currentPage="+this.currentPage+""})
+            // },
+            // theme_find(e,theme_id){
+            //     this.currentPage = 1
+            //     $(e.target).parent().attr('data_id',theme_id)
+            //     $(e.target).parent().css("max-height",'30px')
+            //     $("#theme_select_one").text($.trim($(e.target).text()))
+            //     if(theme_id == 0){
+            //         $("#theme_select_one").css('color','rgb(100, 100, 100)')
+            //     }else{
+            //         $("#theme_select_one").css('color','rgb(253, 162, 100)')
+            //     }
+            //     $("#theme_select").attr('data_id',theme_id)
+            //     var cate_id = $("#cate_select").attr('data_id')
+            //     var color_id = $("#color_select").attr('data_id')
+            //     this.$router.push({path:"/erjiye?cate_id="+cate_id+"&theme_id="+theme_id+"&color_id="+color_id+"&pageSize="+this.pageSize+"&currentPage="+this.currentPage+""})
+            // },
+            // color_find(e,color_id){
+            //     this.currentPage = 1
+            //     $(e.target).parent().attr('data_id',color_id)
+            //     $(e.target).parent().css("max-height",'30px')
+            //     switch(color_id)
+            //     {
+            //         case 0:
+            //             $("#color_select").css("background-color",'rgba(255, 255, 255, 0.7)');
+            //             // $("#color_select_one").html('颜色')
+            //             break;
+            //         case 1:
+            //             $("#color_select").css("background-color",'rgb(255,0,0)');
+            //             // $("#color_select_one").html('')
+            //             break;
+            //         case 2:
+            //             $("#color_select").css("background-color",'rgb(255,150,0)');
+            //             // $("#color_select_one").html('')
+            //             break;
+            //         case 3:
+            //             $("#color_select").css("background-color",'rgb(255,255,0)');
+            //             // $("#color_select_one").html('')
+            //             break;
+            //         case 4:
+            //             $("#color_select").css("background-color",'rgb(0,255,0)');
+            //             // $("#color_select_one").html('')
+            //             break;
+            //         case 5:
+            //             $("#color_select").css("background-color",'rgb(0,255,255)');
+            //             // $("#color_select_one").html('')
+            //             break;
+            //         case 6:
+            //             $("#color_select").css("background-color",'rgb(0,0,255)');
+            //             // $("#color_select_one").html('')
+            //             break;
+            //         case 7:
+            //             $("#color_select").css("background-color",'rgb(100,50,150)');
+            //             // $("#color_select_one").html('')
+            //             break;
+            //         case 8:
+            //             $("#color_select").css("background-color",'rgb(255,150,255)');
+            //             // $("#color_select_one").html('')
+            //             break;
+            //         case 9:
+            //             $("#color_select").css("background-color",'rgb(255,255,255)');
+            //             // $("#color_select_one").html('')
+            //             break;
+            //         case 10:
+            //             $("#color_select").css("background-color",'rgb(0,0,0)');
+            //             // $("#color_select_one").html('')
+            //             break;
+            //         case 11:
+            //             $("#color_select").css("background-color",'rgb(120,120,120)');
+            //             // $("#color_select_one").html('')
+            //             break;
+            //     }
+            //     $("#color_select").attr('data_id',color_id)
+            //     var cate_id = $("#cate_select").attr('data_id')
+            //     var theme_id = $("#theme_select").attr('data_id')
+            //     this.$router.push({path:"/erjiye?cate_id="+cate_id+"&theme_id="+theme_id+"&color_id="+color_id+"&pageSize="+this.pageSize+"&currentPage="+this.currentPage+""})
+            // },
+            // color_show(){
+            //     var num = parseInt(this.info.color_id)
+            //     switch(num)
+            //     {
+            //         case 0:
+            //             $("#color_select").css("background-color",'rgba(255, 255, 255, 0.7)');
+            //             // $("#color_select_one").html('请选择')
+            //             break;
+            //         case 1:
+            //             $("#color_select").css("background-color",'rgb(255,0,0)');
+            //             // $("#color_select_one").html('')
+            //             break;
+            //         case 2:
+            //             $("#color_select").css("background-color",'rgb(255,150,0)');
+            //             // $("#color_select_one").html('')
+            //             break;
+            //         case 3:
+            //             $("#color_select").css("background-color",'rgb(255,255,0)');
+            //             // $("#color_select_one").html('')
+            //             break;
+            //         case 4:
+            //             $("#color_select").css("background-color",'rgb(0,255,0)');
+            //             // $("#color_select_one").html('')
+            //             break;
+            //         case 5:
+            //             $("#color_select").css("background-color",'rgb(0,255,255)');
+            //             // $("#color_select_one").html('')
+            //             break;
+            //         case 6:
+            //             $("#color_select").css("background-color",'rgb(0,0,255)');
+            //             // $("#color_select_one").html('')
+            //             break;
+            //         case 7:
+            //             $("#color_select").css("background-color",'rgb(100,50,150)');
+            //             // $("#color_select_one").html('')
+            //             break;
+            //         case 8:
+            //             $("#color_select").css("background-color",'rgb(255,150,255)');
+            //             // $("#color_select_one").html('')
+            //             break;
+            //         case 9:
+            //             $("#color_select").css("background-color",'rgb(255,255,255)');
+            //             // $("#color_select_one").html('')
+            //             break;
+            //         case 10:
+            //             $("#color_select").css("background-color",'rgb(0,0,0)');
+            //             // $("#color_select_one").html('')
+            //             break;
+            //         case 11:
+            //             $("#color_select").css("background-color",'rgb(120,120,120)');
+            //             // $("#color_select_one").html('')
+            //             break;
+            //     }
+            // },
             category_show(){
                 this.$http.get(baseurl + 'v1/category/findcategory1').then((response)=>{
+                    console.log(response.data)
                     this.category2 = response.data
                     for(var v=0;v<this.category2.length;v++){
                         if(this.info.cate_id == 0){
@@ -651,7 +697,7 @@
     .lanmu{
         width:1200px;
         height:30px;
-        line-height:40px;
+        line-height:30px;
         margin: 0 auto;
         font-size:14px;
         color:#333;

@@ -2,7 +2,7 @@
     <div style="height:100%">
         <HeadPage></HeadPage>
         <div class="lanmu">收藏夹</div>
-        <div style="text-align: left;padding-left: 20%;min-height: -webkit-fill-available;" class="clearfix">
+        <div style="padding-left: 20%;min-height: -webkit-fill-available;" class="clearfix">
             <div :id="'keep'+keep[0].id" class="keeps" v-for="keep in keepinfo">
                 <a :href="'/#/keep/keepimg?id='+keep[0].id" target="_blank">
                     <div class="keep gallery1" :id="keep[0].id">
@@ -55,20 +55,21 @@
         }
     }
 </script>
-<style>
+<style scoped>
     html,body{height: 100%;margin:0px;padding:0px;margin: 0 auto}
-    .lanmu{
-        margin-top: 15px;
-        width:100%;
-        height:30px;
-        background:#f2f2f2;
-        line-height:30px;
-        text-align:left;
-        padding-left:20%;
-        margin-bottom:20px;
-        font-size:15px;
-        color:#333;
-    }
+    a{padding:0;margin:0;text-decoration:none}
+    /*.lanmu{*/
+        /*margin-top: 15px;*/
+        /*width:100%;*/
+        /*height:30px;*/
+        /*background:#f2f2f2;*/
+        /*line-height:30px;*/
+        /*text-align:left;*/
+        /*padding-left:20%;*/
+        /*margin-bottom:20px;*/
+        /*font-size:15px;*/
+        /*color:#333;*/
+    /*}*/
     .clearfix:after{
         display: block;
         content:'';

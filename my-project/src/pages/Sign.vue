@@ -1,20 +1,25 @@
 <template>
-    <div class="page-container">
-        <div class="page-container-div">
-            <a href="/"><img src="../assets/images/logo.png" alt="" width="146px"></a>
-            <h1 style="color:rgb(255,255,255)">注册</h1>
-            <input class="input" v-model="username" placeholder="请输入手机号码"><br>
-            <input class="input" type="password" v-model="password" placeholder="请输入密码"><br>
-            <div style="width:300px;display: inline-block;">
-                <input class="input" v-model="code" placeholder="请输入验证码" style="width:69%">
-                <button style="width:29%" @click="sendcode()">获取验证码</button>
+    <div>
+        <div class="back-img">
+            <img  style="" :src="img_info" alt="">
+        </div>
+        <div class="page-container">
+            <div class="page-container-div">
+                <a href="/"><img src="../assets/images/logo.png" alt="" width="146px"></a>
+                <h1 style="color:rgb(255,255,255)">注册</h1>
+                <input class="input" v-model="username" placeholder="请输入手机号码"><br>
+                <input class="input" type="password" v-model="password" placeholder="请输入密码"><br>
+                <div style="width:300px;display: inline-block;">
+                    <input class="input" v-model="code" placeholder="请输入验证码" style="width:69%">
+                    <button style="width:29%" @click="sendcode()">获取验证码</button>
+                </div>
+                <br>
+                <div style="width:300px;display: inline-block;margin-top: 20px;">
+                    <input type="checkbox" id="checkbox" v-model="checked"><span style="color:rgb(255,255,255)">记住密码?</span>
+                </div>
+                <br>
+                <button @click="sign()">注册/登录</button>
             </div>
-            <br>
-            <div style="width:300px;display: inline-block;margin-top: 20px;">
-                <input type="checkbox" id="checkbox" v-model="checked"><span style="color:rgb(255,255,255)">记住密码?</span>
-            </div>
-            <br>
-            <button @click="sign()">注册/登录</button>
         </div>
     </div>
 </template>
@@ -29,9 +34,38 @@
                 password : '',
                 code : '',
                 checked : '',
+                img_info:[]
             }
         },
         mounted(){
+            this.$http.get(baseurl + 'v1/goods/getloginimg').then((response)=>{
+                response.data.img_name = 'http://qiniu.zaoanart.com/'+response.data.img_name
+                // for(var i=0;i<response.data.length;i++){
+                //     response.data[i].login_img = 'http://qiniu.zaoanart.com/'+response.data[i].login_img
+                // }
+                var width = response.data.width
+                var height = response.data.height
+                if(width >= height){
+                    $(".back-img img").css('min-height','100%')
+                }else{
+                    $(".back-img img").css('min-width','100%')
+                }
+                this.img_info = response.data.img_name
+                //淡入淡出特效
+                // this.$nextTick(function(){
+                //     var i=0
+                //     setInterval(function(){
+                //         if($(".back-img img").length > (i+1)){
+                //             $(".back-img img").eq(i).fadeOut(1000).next("img").fadeIn(1000);
+                //             i++;
+                //         }
+                //         else{
+                //             $(".back-img img").eq(i).fadeOut(1000).siblings("img").eq(0).fadeIn(1000);
+                //             i = 0;
+                //         }
+                //     },5000);
+                // });
+            })
         },
         methods:{
             sendcode(){
@@ -64,8 +98,17 @@
 </script>
 <style scoped>
     html,body{height: 100%;margin:0px;padding:0px;margin: 0 auto}
+    .back-img{
+        width:100%;
+        height:100%;
+        position:fixed;
+        background-repeat: no-repeat;
+        background-size:100% 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
     .page-container{
-        background:url(../assets/images/login-img/backgrounds/2.jpg);
         width:100%;
         height:100%;
         position:fixed;

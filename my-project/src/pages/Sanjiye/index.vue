@@ -38,7 +38,7 @@
                             <li>
                                 <div class="select-head">
                                     <span class="select-head-cont" style="min-width:100px;height:20px;" @click="show_select()"></span>
-                                    <div style="width: 65px;float: right;">
+                                    <div style="width: 65px;float: right;color:#ccc">
                                         <span class="select-icon" @click="show_select()">▼</span>
                                         <button class="btn_bc" style="" @click="addto_keep($event,dataImageList.id)">保存</button>
                                     </div>
@@ -58,7 +58,7 @@
                         <!--</div>-->
                     </div>
                     <a style="color:#999;font-size:20px" :href="'/#/Decoration?img='+dataImageList.img2+'&max_width='+dataImageList.max_width+'&max_height='+dataImageList.max_length+'&imgid='+dataImageList.id+''">智能装裱报价 beta1.0
-                        <img src="../../assets/images/right2.png" alt="" width="25px" style="position: absolute;">
+                        <img src="../../assets/images/right2.png" alt="" width="25px" style="position: absolute;z-index: -999;">
                     </a>
                 </div>
             </div>
@@ -121,8 +121,6 @@
                 keep_name:'',
                 pageSize : 50 , //每页显示50条数据
                 currentPage : 1,
-                category:[],
-                theme:[],
                 isMouseDown:false,
                 x1:'',
                 y1:'',
@@ -141,8 +139,8 @@
         },
         mounted(){
             $("#example-5").css("display",'none')
-            this.findcategory();
-            this.findtheme();
+            // this.findcategory();
+            // this.findtheme();
             this.initData()
             var mask_layer_width = window.screen.width
             var mask_layer_height = window.screen.height/1.5
@@ -302,12 +300,12 @@
                 });
             },
             show_hidden(e){
-                $('#select').animate({width:'toggle'})
-                $("#example-5").animate({height:'toggle',width:'toggle','z-index':'999'})
                 if(!this.getCookie('tel')){
                     toastr.warning("请先登录")
                     return false
                 }
+                $('#select').animate({width:'toggle'})
+                $("#example-5").animate({height:'toggle',width:'toggle','z-index':'999'})
                 this.$http.get(baseurl + 'v1/home/select_keep',{params:{tel:this.getCookie('tel')}}).then((response)=>{
                     this.keep_info = response.data
                 })
@@ -338,16 +336,16 @@
                     }
                 })
             },
-            findcategory(){
-                this.$http.get(baseurl + 'v1/category/findcategory').then(function(res){
-                    this.category = res.data
-                })
-            },
-            findtheme(){
-                this.$http.get(baseurl + 'v1/theme/findtheme').then(function(res){
-                    this.theme = res.data
-                })
-            },
+            // findcategory(){
+            //     this.$http.get(baseurl + 'v1/category/findcategory').then(function(res){
+            //         this.category = res.data
+            //     })
+            // },
+            // findtheme(){
+            //     this.$http.get(baseurl + 'v1/theme/findtheme').then(function(res){
+            //         this.theme = res.data
+            //     })
+            // },
             addto_keep(e,img_id){
                 var keep_name = $('.select-head-cont').html()
                 if(!this.getCookie('tel')){
@@ -377,80 +375,80 @@
                 $(e.target).css("position",'')
                 $(e.target).css("max-height",'30px')
             },
-            category_find(e,cate_id){
-                $(e.target).parent().parent().attr('data_id',cate_id)
-                $(e.target).parent().parent().css("max-height",'30px')
-                $("#cate_select_one").text($.trim($(e.target).text()))
-                var theme_id = $("#theme_select").attr('data_id')
-                var color_id = $("#color_select").attr('data_id')
-                window.location.href="/#/erjiye?cate_id="+cate_id+"&theme_id="+theme_id+"&color_id="+color_id+"&pageSize="+this.pageSize+"&currentPage="+this.currentPage+""
-            },
-            theme_find(e,theme_id){
-                $(e.target).parent().attr('data_id',theme_id)
-                $(e.target).parent().css("max-height",'30px')
-                $("#theme_select_one").text($.trim($(e.target).text()))
-                var cate_id = $("#cate_select").attr('data_id')
-                var color_id = $("#color_select").attr('data_id')
-                window.location.href="/#/erjiye?cate_id="+cate_id+"&theme_id="+theme_id+"&color_id="+color_id+"&pageSize="+this.pageSize+"&currentPage="+this.currentPage+""
-            },
-            color_find(e,color_id){
-                $(e.target).parent().attr('data_id',color_id)
-                $(e.target).parent().css("max-height",'30px')
-                switch(color_id)
-                {
-                    case 0:
-                        $("#color_select").css("background-color",'rgba(76, 76, 76, 0.7)');
-                        // $("#color_select_one").html('请选择')
-                        break;
-                    case 1:
-                        $("#color_select").css("background-color",'rgb(255,0,0)');
-                        // $("#color_select_one").html('')
-                        break;
-                    case 2:
-                        $("#color_select").css("background-color",'rgb(255,150,0)');
-                        // $("#color_select_one").html('')
-                        break;
-                    case 3:
-                        $("#color_select").css("background-color",'rgb(255,255,0)');
-                        // $("#color_select_one").html('')
-                        break;
-                    case 4:
-                        $("#color_select").css("background-color",'rgb(0,255,0)');
-                        // $("#color_select_one").html('')
-                        break;
-                    case 5:
-                        $("#color_select").css("background-color",'rgb(0,255,255)');
-                        // $("#color_select_one").html('')
-                        break;
-                    case 6:
-                        $("#color_select").css("background-color",'rgb(0,0,255)');
-                        // $("#color_select_one").html('')
-                        break;
-                    case 7:
-                        $("#color_select").css("background-color",'rgb(100,50,150)');
-                        // $("#color_select_one").html('')
-                        break;
-                    case 8:
-                        $("#color_select").css("background-color",'rgb(255,150,255)');
-                        // $("#color_select_one").html('')
-                        break;
-                    case 9:
-                        $("#color_select").css("background-color",'rgb(255,255,255)');
-                        // $("#color_select_one").html('')
-                        break;
-                    case 10:
-                        $("#color_select").css("background-color",'rgb(0,0,0)');
-                        // $("#color_select_one").html('')
-                        break;
-                    case 11:
-                        $("#color_select").css("background-color",'rgb(120,120,120)');
-                        // $("#color_select_one").html('')
-                        break;
-                }
-                var cate_id = $("#cate_select").attr('data_id')
-                var theme_id = $("#theme_select").attr('data_id')
-                window.location.href="/#/erjiye?cate_id="+cate_id+"&theme_id="+theme_id+"&color_id="+color_id+"&pageSize="+this.pageSize+"&currentPage="+this.currentPage+""
-            },
+            // category_find(e,cate_id){
+            //     $(e.target).parent().parent().attr('data_id',cate_id)
+            //     $(e.target).parent().parent().css("max-height",'30px')
+            //     $("#cate_select_one").text($.trim($(e.target).text()))
+            //     var theme_id = $("#theme_select").attr('data_id')
+            //     var color_id = $("#color_select").attr('data_id')
+            //     window.location.href="/#/erjiye?cate_id="+cate_id+"&theme_id="+theme_id+"&color_id="+color_id+"&pageSize="+this.pageSize+"&currentPage="+this.currentPage+""
+            // },
+            // theme_find(e,theme_id){
+            //     $(e.target).parent().attr('data_id',theme_id)
+            //     $(e.target).parent().css("max-height",'30px')
+            //     $("#theme_select_one").text($.trim($(e.target).text()))
+            //     var cate_id = $("#cate_select").attr('data_id')
+            //     var color_id = $("#color_select").attr('data_id')
+            //     window.location.href="/#/erjiye?cate_id="+cate_id+"&theme_id="+theme_id+"&color_id="+color_id+"&pageSize="+this.pageSize+"&currentPage="+this.currentPage+""
+            // },
+            // color_find(e,color_id){
+            //     $(e.target).parent().attr('data_id',color_id)
+            //     $(e.target).parent().css("max-height",'30px')
+            //     switch(color_id)
+            //     {
+            //         case 0:
+            //             $("#color_select").css("background-color",'rgba(76, 76, 76, 0.7)');
+            //             // $("#color_select_one").html('请选择')
+            //             break;
+            //         case 1:
+            //             $("#color_select").css("background-color",'rgb(255,0,0)');
+            //             // $("#color_select_one").html('')
+            //             break;
+            //         case 2:
+            //             $("#color_select").css("background-color",'rgb(255,150,0)');
+            //             // $("#color_select_one").html('')
+            //             break;
+            //         case 3:
+            //             $("#color_select").css("background-color",'rgb(255,255,0)');
+            //             // $("#color_select_one").html('')
+            //             break;
+            //         case 4:
+            //             $("#color_select").css("background-color",'rgb(0,255,0)');
+            //             // $("#color_select_one").html('')
+            //             break;
+            //         case 5:
+            //             $("#color_select").css("background-color",'rgb(0,255,255)');
+            //             // $("#color_select_one").html('')
+            //             break;
+            //         case 6:
+            //             $("#color_select").css("background-color",'rgb(0,0,255)');
+            //             // $("#color_select_one").html('')
+            //             break;
+            //         case 7:
+            //             $("#color_select").css("background-color",'rgb(100,50,150)');
+            //             // $("#color_select_one").html('')
+            //             break;
+            //         case 8:
+            //             $("#color_select").css("background-color",'rgb(255,150,255)');
+            //             // $("#color_select_one").html('')
+            //             break;
+            //         case 9:
+            //             $("#color_select").css("background-color",'rgb(255,255,255)');
+            //             // $("#color_select_one").html('')
+            //             break;
+            //         case 10:
+            //             $("#color_select").css("background-color",'rgb(0,0,0)');
+            //             // $("#color_select_one").html('')
+            //             break;
+            //         case 11:
+            //             $("#color_select").css("background-color",'rgb(120,120,120)');
+            //             // $("#color_select_one").html('')
+            //             break;
+            //     }
+            //     var cate_id = $("#cate_select").attr('data_id')
+            //     var theme_id = $("#theme_select").attr('data_id')
+            //     window.location.href="/#/erjiye?cate_id="+cate_id+"&theme_id="+theme_id+"&color_id="+color_id+"&pageSize="+this.pageSize+"&currentPage="+this.currentPage+""
+            // },
             big(){
                 var bili = $("#mask_layer_img").width()/$("#mask_layer_img").height()
                 $("#mask_layer_img").css('width',($("#mask_layer_img").width()) * 1.1)
@@ -471,14 +469,14 @@
                 $("#mask_layer_img").unbind('mousemove')
                 this.isMouseDown = false
             },
-            cate_find(e,id){
-                // var data_info = e.target.getAttribute("data_id")
-                $(e.target).parent().parent().attr('data_id',id)
-                var theme_id = $("#theme_select").attr('data_id')
-                var color_id = $("#color_select").attr('data_id')
-                var sm = this
-                this.$router.push({path:"/erjiye?cate_id="+id+"&theme_id="+theme_id+"&color_id="+color_id+"&pageSize="+this.pageSize+"&currentPage="+this.currentPage+""})
-            },
+            // cate_find(e,id){
+            //     // var data_info = e.target.getAttribute("data_id")
+            //     $(e.target).parent().parent().attr('data_id',id)
+            //     var theme_id = $("#theme_select").attr('data_id')
+            //     var color_id = $("#color_select").attr('data_id')
+            //     var sm = this
+            //     this.$router.push({path:"/erjiye?cate_id="+id+"&theme_id="+theme_id+"&color_id="+color_id+"&pageSize="+this.pageSize+"&currentPage="+this.currentPage+""})
+            // },
             op_hover_show(e){
                 $(e.target).css('color','red')
             },
@@ -490,6 +488,7 @@
 </script>
 
 <style scoped>
+    a{padding:0;margin:0;text-decoration:none}
     #app1 {
         font-family: '微软雅黑', Helvetica, Arial, sans-serif;
         -webkit-font-smoothing: antialiased;
@@ -525,7 +524,7 @@
     .zhongjian a{color:#333;}
     .zhongjian a:hover{text-decoration:none;color:#ef401d;}
     .fenlei1{width:1200px;margin-top:20px;}
-    .lanmu{width:100%;height:30px;background:#f2f2f2;line-height:40px;text-align:left;padding-left:30px;margin-bottom:20px;font-size:14px;color:#333;}
+    .lanmu{width:100%;height:30px;line-height:30px;padding-left:30px;margin-bottom:20px;font-size:14px;color:#333;}
     .lanmu a{color:#333;}
     .lanmu a:hover{text-decoration:none;color:#ef401d;}
     .popContainer{
@@ -555,7 +554,7 @@
     .xian1{width:100px;height:15px;float:left;border-bottom:1px solid #888;}
     .xian2{width:100px;height:20px;float:left;border-bottom:1px solid #888;}
     .color:hover{box-shadow:inset 0px 0px 5px 2px}
-    .category_div:hover{color:rgb(255, 129, 0);}
+    /*.category_div:hover{color:rgb(255, 129, 0);}*/
     .select_li{
         width: 150px;
         margin: 0;
@@ -637,7 +636,7 @@
         color:#ef401d;text-decoration:none
     }
     .color:hover{box-shadow:inset 0px 0px 5px 2px}
-    .category_div:hover{color:rgb(255, 129, 0);}
+    /*.category_div:hover{color:rgb(255, 129, 0);}*/
     .theme_div:hover{color:rgb(255, 129, 0);}
     .button{
         cursor: pointer;
@@ -767,6 +766,7 @@
     }
     .select-head-cont{
         float: left;
+        color: rgb(153, 153, 153);
     }
     .select-icon{
         float: left;
@@ -784,10 +784,12 @@
         display:block;
         padding-left:10px;
         cursor: default;
+        color: rgb(153, 153, 153);
+        height: 25px;
+        line-height: 25px;
     }
     .option-item:hover{
-        color:#fff;
-        background: #000;
+        color:#ea8010;
     }
     .click_bg{
         background: #fff;

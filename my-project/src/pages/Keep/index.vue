@@ -154,12 +154,12 @@
 </script>
 <style>
     html,body{height: 100%;margin:0px;padding:0px;margin: 0 auto}
+    a{padding:0;margin:0;text-decoration:none}
     .lanmu{
         margin-top: 30px;
         width:1200px;
         height:30px;
         line-height:30px;
-        text-align:left;
         margin:10px auto;
         font-size:15px;
         color:#333;

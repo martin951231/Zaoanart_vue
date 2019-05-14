@@ -8,7 +8,7 @@
 </template>
 
 <style scoped>
-    div{width:100%;height:40px;background:#f2f2f2;line-height:40px;text-align:left;padding-left:30px;margin-bottom:20px;font-size:14px;color:#333;}
+    div{width:100%;height:40px;line-height:30px;padding-left:30px;margin-bottom:20px;font-size:14px;color:#333;}
     .zhongjian{width:1200px;height:40px;margin:0 auto;background:#f2f2f2;text-align:left;}
     a{color:#333;}
     a:hover{text-decoration:none;color:#ef401d;}

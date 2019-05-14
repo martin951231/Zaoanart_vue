@@ -78,7 +78,6 @@
                 this.dataCategoryList = response.data.category
                 this.dataThemeList = response.data.theme
             })
-
             this.$http.get(baseurl + 'v1/goods/findmayimg',{params:{id: arr2.id}}).then((response)=>{
                 this.mayImageList = response.data
                 for(var q=0;q<response.data.length;q++){
@@ -90,6 +89,7 @@
 </script>
 <style scoped>
     *{padding:0;margin:0;}
+    a{padding:0;margin:0;text-decoration:none}
     .tuijian{display:block;float:right;font-size:15px;text-align:center;color:#999;margin-right:10px;margin-bottom:5px}
     ul li{list-style:none;padding:0;margin:0;}
     li{float:left;display: flex;}

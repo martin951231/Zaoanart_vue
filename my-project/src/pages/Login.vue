@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="back-img">
-            <img  style="position: absolute;left:0px;top:0px;" :src="img_info.image" alt="" width="100%" height="100%">
+            <img  style="" :src="img_info" alt="">
         </div>
         <div class="page-container">
             <a href="/"><img src="../assets/images/logo.png" alt="" width="146px"></a>
@@ -54,11 +54,18 @@
         },
         mounted(){
             this.$http.get(baseurl + 'v1/goods/getloginimg').then((response)=>{
-                response.data.image = 'http://qiniu.zaoanart.com/'+response.data.image
+                response.data.img_name = 'http://qiniu.zaoanart.com/'+response.data.img_name
                 // for(var i=0;i<response.data.length;i++){
                 //     response.data[i].login_img = 'http://qiniu.zaoanart.com/'+response.data[i].login_img
                 // }
-                this.img_info = response.data
+                var width = response.data.width
+                var height = response.data.height
+                if(width >= height){
+                    $(".back-img img").css('min-height','100%')
+                }else{
+                    $(".back-img img").css('min-width','100%')
+                }
+                this.img_info = response.data.img_name
                     //淡入淡出特效
                     // this.$nextTick(function(){
                     //     var i=0
@@ -168,17 +175,14 @@
 <style scoped>
     html body{margin:0px;padding:0px}
     .back-img{
-         width:100%;
-         height:100%;
-         position:fixed;
-         background-repeat: no-repeat;
-         background-size:100% 100%;
-     }
-    .back-img-for{
         width:100%;
         height:100%;
         position:fixed;
         background-repeat: no-repeat;
+        background-size:100% 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
     .page-container{
         width:100%;

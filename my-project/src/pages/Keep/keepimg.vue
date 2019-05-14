@@ -598,6 +598,7 @@
     }
 </script>
 <style scoped>
+    a{padding:0;margin:0;text-decoration:none}
     #keep_show{
         width:0px;
         height:0px;
