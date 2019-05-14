@@ -28,19 +28,19 @@
                     <!--剪切快捷-->
                     <div style="margin-top:10px;padding:30px;margin-top:20px;" id="first_step">
                         <div style="width: 40%;display: inline-block;">
-                            <div style="width: 100px;cursor: pointer;" id="is_cuts" data_id="1" v-model="is_cut" @click="is_cutting($event)">
+                            <div style="width: 120px;padding: 5px;text-align: center;cursor: pointer;" id="is_cuts" data_id="1" v-model="is_cut" @click="is_cutting($event)">
                                 <img src="../../assets/images/freecut.png" alt="" height="40">
                                 <div class="cut_text">自由</div>
                             </div>
                         </div>
                         <div style="width: 40%;display: inline-block;margin-top:20px;">
-                            <div style="width: 100px;cursor: pointer;padding-left: 5px;"  @click="proportiona1_1($event)" >
+                            <div style="width: 120px;padding: 5px;text-align: center;cursor: pointer;" id="is_cuts1" @click="proportiona1_1($event)">
                                 <img style="width:40px;height:40px;display: inline-block;border: 2px solid #000;"></img>
                                 <div class="cut_text">1:1</div>
                             </div>
                         </div>
                         <div style="width: 40%;display: inline-block;margin-top:20px;">
-                            <div style="width: 100px;cursor: pointer;"  @click="proportiona2_3">
+                            <div style="width: 120px;padding: 5px;text-align: center;cursor: pointer;" id="is_cuts2" @click="proportiona2_3">
                                 <div style="width: 40px;display: inline-block;">
                                     <img style="width:26px;height:40px;margin-left: 14px;display: inline-block;border: 2px solid #000;"></img>
                                 </div>
@@ -48,13 +48,13 @@
                             </div>
                         </div>
                         <div style="width: 40%;display: inline-block;margin-top:20px;">
-                            <div style="width: 100px;cursor: pointer;"  @click="proportiona3_2">
+                            <div style="width: 120px;padding: 5px;text-align: center;cursor: pointer;" id="is_cuts3" @click="proportiona3_2">
                                 <img style="width:40px;height:26px;display: inline-block;border: 2px solid #000;"></img>
                                 <div class="cut_text">3:2</div>
                             </div>
                         </div>
                         <div style="width: 40%;display: inline-block;margin-top:20px;">
-                            <div style="width: 100px;cursor: pointer;"  @click="proportiona1_2">
+                            <div style="width: 120px;padding: 5px;text-align: center;cursor: pointer;" id="is_cuts4" @click="proportiona1_2">
                                 <div style="width: 40px;display: inline-block;">
                                     <img style="width:20px;height:40px;margin-left: 20px;display: inline-block;border: 2px solid #000;"></img>
                                 </div>
@@ -62,13 +62,13 @@
                             </div>
                         </div>
                         <div style="width: 40%;display: inline-block;margin-top:20px;">
-                            <div style="width: 100px;cursor: pointer;"  @click="proportiona2_1">
+                            <div style="width: 120px;padding: 5px;text-align: center;cursor: pointer;" id="is_cuts5" @click="proportiona2_1">
                                 <img style="width:40px;height:20px;display: inline-block;border: 2px solid #000;"></img>
                                 <div class="cut_text">2:1</div>
                             </div>
                         </div>
                         <div style="width: 40%;display: inline-block;margin-top:20px;">
-                            <div style="width: 100px;cursor: pointer;"  @click="proportiona1_3">
+                            <div style="width: 120px;padding: 5px;text-align: center;cursor: pointer;" id="is_cuts6" @click="proportiona1_3">
                                 <div style="width: 40px;display: inline-block;">
                                     <img style="width:13px;height:40px;margin-left: 27px;display: inline-block;border: 2px solid #000;"></img>
                                 </div>
@@ -76,7 +76,7 @@
                             </div>
                         </div>
                         <div style="width: 40%;display: inline-block;margin-top:20px;">
-                            <div style="width: 100px;cursor: pointer;"  @click="proportiona3_1">
+                            <div style="width: 120px;padding: 5px;text-align: center;cursor: pointer;" id="is_cuts7" @click="proportiona3_1">
                                 <img style="width:40px;height:13px;display: inline-block;border: 2px solid #000;"></img>
                                 <div class="cut_text">3:1</div>
                             </div>
@@ -585,10 +585,26 @@
             //如果选中裁切则裁切  否则删除
             is_cutting(e){
                 if(this.is_cut == 1){
+                    $('#is_cuts').css('border','double')
+                    $('#is_cuts1').css('border','none')
+                    $('#is_cuts2').css('border','none')
+                    $('#is_cuts3').css('border','none')
+                    $('#is_cuts4').css('border','none')
+                    $('#is_cuts5').css('border','none')
+                    $('#is_cuts6').css('border','none')
+                    $('#is_cuts7').css('border','none')
                     $('#is_cuts').attr('data_id','2')
                     this.is_cut = 2
                     this.proportional()
                 }else{
+                    $('#is_cuts').css('border','none')
+                    $('#is_cuts1').css('border','none')
+                    $('#is_cuts2').css('border','none')
+                    $('#is_cuts3').css('border','none')
+                    $('#is_cuts4').css('border','none')
+                    $('#is_cuts5').css('border','none')
+                    $('#is_cuts6').css('border','none')
+                    $('#is_cuts7').css('border','none')
                     $('#is_cuts').attr('data_id','1')
                     this.is_cut = 1
                     $('#img').cropper('destroy');
@@ -695,7 +711,14 @@
             },
             //裁切1/1
             proportiona1_1(e){
-                $(e.target).css('border','dotted')
+                $('#is_cuts').css('border','none')
+                $('#is_cuts1').css('border','double')
+                $('#is_cuts2').css('border','none')
+                $('#is_cuts3').css('border','none')
+                $('#is_cuts4').css('border','none')
+                $('#is_cuts5').css('border','none')
+                $('#is_cuts6').css('border','none')
+                $('#is_cuts7').css('border','none')
                 $("#img").attr("src",'http://qiniu.zaoanart.com/'+this.img+'?t='+Math.random());
                 $("#img").attr("width",500)
                 $('#img').cropper('destroy')
@@ -748,6 +771,14 @@
             },
             //裁切1/2
             proportiona1_2(){
+                $('#is_cuts').css('border','none')
+                $('#is_cuts1').css('border','none')
+                $('#is_cuts2').css('border','none')
+                $('#is_cuts3').css('border','none')
+                $('#is_cuts4').css('border','double')
+                $('#is_cuts5').css('border','none')
+                $('#is_cuts6').css('border','none')
+                $('#is_cuts7').css('border','none')
                 $("#img").attr("src",'http://qiniu.zaoanart.com/'+this.img+'?t='+Math.random());
                 $("#img").attr("width",500)
                 $('#img').cropper('destroy')
@@ -800,7 +831,14 @@
             },
             //裁切1/3
             proportiona1_3(){
-                $('#is_cuts').attr('data_id','2')
+                $('#is_cuts').css('border','none')
+                $('#is_cuts1').css('border','none')
+                $('#is_cuts2').css('border','none')
+                $('#is_cuts3').css('border','none')
+                $('#is_cuts4').css('border','none')
+                $('#is_cuts5').css('border','none')
+                $('#is_cuts6').css('border','double')
+                $('#is_cuts7').css('border','none')
                 this.is_cut = 2
                 $("#img").attr("src",'http://qiniu.zaoanart.com/'+this.img+'?t='+Math.random());
                 $("#img").attr("width",500)
@@ -850,6 +888,14 @@
             },
             //裁切2/3
             proportiona2_3(){
+                $('#is_cuts').css('border','none')
+                $('#is_cuts1').css('border','none')
+                $('#is_cuts2').css('border','double')
+                $('#is_cuts3').css('border','none')
+                $('#is_cuts4').css('border','none')
+                $('#is_cuts5').css('border','none')
+                $('#is_cuts6').css('border','none')
+                $('#is_cuts7').css('border','none')
                 $('#is_cuts').attr('data_id','2')
                 this.is_cut = 2
                 $("#img").attr("src",'http://qiniu.zaoanart.com/'+this.img+'?t='+Math.random());
@@ -900,6 +946,14 @@
             },
             //裁切2/1
             proportiona2_1(){
+                $('#is_cuts').css('border','none')
+                $('#is_cuts1').css('border','none')
+                $('#is_cuts2').css('border','none')
+                $('#is_cuts3').css('border','none')
+                $('#is_cuts4').css('border','none')
+                $('#is_cuts5').css('border','double')
+                $('#is_cuts6').css('border','none')
+                $('#is_cuts7').css('border','none')
                 $('#is_cuts').attr('data_id','2')
                 this.is_cut = 2
                 $("#img").attr("src",'http://qiniu.zaoanart.com/'+this.img+'?t='+Math.random());
@@ -950,6 +1004,14 @@
             },
             //裁切3/1
             proportiona3_1(){
+                $('#is_cuts').css('border','none')
+                $('#is_cuts1').css('border','none')
+                $('#is_cuts2').css('border','none')
+                $('#is_cuts3').css('border','none')
+                $('#is_cuts4').css('border','none')
+                $('#is_cuts5').css('border','none')
+                $('#is_cuts6').css('border','none')
+                $('#is_cuts7').css('border','double')
                 $('#is_cuts').attr('data_id','2')
                 this.is_cut = 2
                 $("#img").attr("src",'http://qiniu.zaoanart.com/'+this.img+'?t='+Math.random());
@@ -1000,6 +1062,14 @@
             },
             //裁切3/2
             proportiona3_2(){
+                $('#is_cuts').css('border','none')
+                $('#is_cuts1').css('border','none')
+                $('#is_cuts2').css('border','none')
+                $('#is_cuts3').css('border','double')
+                $('#is_cuts4').css('border','none')
+                $('#is_cuts5').css('border','none')
+                $('#is_cuts6').css('border','none')
+                $('#is_cuts7').css('border','none')
                 $('#is_cuts').attr('data_id','2')
                 this.is_cut = 2
                 $("#img").attr("src",'http://qiniu.zaoanart.com/'+this.img+'?t='+Math.random());
