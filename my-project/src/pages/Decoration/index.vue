@@ -2377,14 +2377,14 @@
                         // grd.addColorStop(0,"rgba(150,150,150,0.6)");
                         // grd.addColorStop(1,"rgba(250,250,250,0.3)");
                         // ctx.fillStyle=grd;
-                        ctx.fillStyle='#808080';
+                        ctx.fillStyle='#aaaaaa';
                         ctx.fillRect((c.width-img_width1/small)/2-vm.drawing_core_val*30/small+direction_val_xs/small-1,(c.height-img_height1/small)/2-vm.drawing_core_val*30/small+direction_val_ys/small-1,(img_width1+vm.drawing_core_val*30*2)/small+2,3);
                         //绘制模拟阴影条(左)
                         // var grd=ctx.createLinearGradient((c.width-img_width1/small)/2-vm.drawing_core_val*30/small+direction_val_xs/small,(c.width-img_width1/small)/2-vm.drawing_core_val*30/small+direction_val_ys/small,(c.width-img_width1/small)/2-vm.drawing_core_val*30/small+5+direction_val_xs/small,(c.width-img_width1/small)/2-vm.drawing_core_val*30/small+direction_val_ys/small);
                         // grd.addColorStop(0,"rgba(150,150,150,0.6)");
                         // grd.addColorStop(1,"rgba(250,250,250,0.3)");
                         // ctx.fillStyle=grd;
-                        ctx.fillStyle='#808080';
+                        ctx.fillStyle='#aaaaaa';
                         ctx.fillRect((c.width-img_width1/small)/2-vm.drawing_core_val*30/small+direction_val_xs/small-1,(c.height-img_height1/small)/2-vm.drawing_core_val*30/small+direction_val_ys/small-1,3,img_height1/small+vm.drawing_core_val*30/small*2+2);
                         //绘制模拟阴影条(右)
                         // var grd=ctx.createLinearGradient((c.width-img_width1/small)/2+img_width1/small+vm.drawing_core_val*30/small+direction_val_xs/small,(c.width-img_width1/small)/2+img_width1/small+vm.drawing_core_val*30/small+direction_val_ys/small,(c.width-img_width1/small)/2+img_width1/small+vm.drawing_core_val*30/small-3+direction_val_xs/small,(c.width-img_width1/small)/2+img_width1/small+vm.drawing_core_val*30/small+direction_val_ys/small);
@@ -2840,14 +2840,14 @@
                     // // grd.addColorStop(0,"rgba(150,150,150,0.6)");
                     // // grd.addColorStop(1,"rgba(250,250,250,0.3)");
                     // // ctx.fillStyle=grd;
-                    ctx.fillStyle='#808080';
+                    ctx.fillStyle='#aaaaaa';
                     ctx.fillRect((c.width-img_width1/small)/2-vm.drawing_core_val*30/small+direction_val_xs/small-1,(c.height-img_height1/small)/2-vm.drawing_core_val*30/small+direction_val_ys/small-1,(img_width1+vm.drawing_core_val*30*2)/small+2,3);
                     // //绘制模拟阴影条(左)
                     // // var grd=ctx.createLinearGradient((c.width-img_width1/small)/2-vm.drawing_core_val*30/small+direction_val_xs/small,(c.width-img_width1/small)/2-vm.drawing_core_val*30/small+direction_val_ys/small,(c.width-img_width1/small)/2-vm.drawing_core_val*30/small+5+direction_val_xs/small,(c.width-img_width1/small)/2-vm.drawing_core_val*30/small+direction_val_ys/small);
                     // // grd.addColorStop(0,"rgba(150,150,150,0.6)");
                     // // grd.addColorStop(1,"rgba(250,250,250,0.3)");
                     // // ctx.fillStyle=grd;
-                    ctx.fillStyle='#808080';
+                    ctx.fillStyle='#aaaaaa';
                     ctx.fillRect((c.width-img_width1/small)/2-vm.drawing_core_val*30/small+direction_val_xs/small-1,(c.height-img_height1/small)/2-vm.drawing_core_val*30/small+direction_val_ys/small-1,3,img_height1/small+vm.drawing_core_val*30/small*2+2);
                     // //绘制模拟阴影条(右)
                     // // var grd=ctx.createLinearGradient((c.width-img_width1/small)/2+img_width1/small+vm.drawing_core_val*30/small+direction_val_xs/small,(c.width-img_width1/small)/2+img_width1/small+vm.drawing_core_val*30/small+direction_val_ys/small,(c.width-img_width1/small)/2+img_width1/small+vm.drawing_core_val*30/small-3+direction_val_xs/small,(c.width-img_width1/small)/2+img_width1/small+vm.drawing_core_val*30/small+direction_val_ys/small);
@@ -3718,14 +3718,14 @@
                         // grd.addColorStop(0,"rgba(150,150,150,0.6)");
                         // grd.addColorStop(1,"rgba(200,200,200,0.3)");
                         // ctx.fillStyle=grd;
-                        ctx.fillStyle='#808080';
+                        ctx.fillStyle='#aaaaaa';
                         ctx.fillRect((c.width-img_width1/small)/2-vm.drawing_core_val*30/small+direction_val_xs/small-1,(c.height-img_height1/small)/2-vm.drawing_core_val*30/small+direction_val_ys/small-1,(img_width1+vm.drawing_core_val*30*2)/small+2,2+1);
                         //绘制模拟阴影条(左)
                         // var grd=ctx.createLinearGradient((c.width-img_width1/small)/2-vm.drawing_core_val*30/small+direction_val_xs/small,(c.width-img_width1/small)/2-vm.drawing_core_val*30/small+direction_val_ys/small,(c.width-img_width1/small)/2-vm.drawing_core_val*30/small+5+direction_val_xs/small,(c.width-img_width1/small)/2-vm.drawing_core_val*30/small+direction_val_ys/small);
                         // grd.addColorStop(0,"rgba(150,150,150,0.6)");
                         // grd.addColorStop(1,"rgba(200,200,200,0.3)");
                         // ctx.fillStyle=grd;
-                        ctx.fillStyle='#808080';
+                        ctx.fillStyle='#aaaaaa';
                         ctx.fillRect((c.width-img_width1/small)/2-vm.drawing_core_val*30/small+direction_val_xs/small-1,(c.height-img_height1/small)/2-vm.drawing_core_val*30/small+direction_val_ys/small-1,2+1,img_height1/small+vm.drawing_core_val*30/small*2+2);
                         //绘制模拟阴影条(右)
                         // var grd=ctx.createLinearGradient((c.width-img_width1/small)/2+img_width1/small+vm.drawing_core_val*30/small+direction_val_xs/small,(c.width-img_width1/small)/2+img_width1/small+vm.drawing_core_val*30/small+direction_val_ys/small,(c.width-img_width1/small)/2+img_width1/small+vm.drawing_core_val*30/small-3+direction_val_xs/small,(c.width-img_width1/small)/2+img_width1/small+vm.drawing_core_val*30/small+direction_val_ys/small);
@@ -3793,14 +3793,14 @@
                         // grd.addColorStop(0,"rgba(150,150,150,0.6)");
                         // grd.addColorStop(1,"rgba(200,200,200,0.3)");
                         // ctx.fillStyle=grd;
-                        ctx.fillStyle='#808080';
+                        ctx.fillStyle='#aaaaaa';
                         ctx.fillRect((c.width-img_width1/small)/2-vm.drawing_core_val*30/small+direction_val_xs/small-1,(c.height-img_height1/small)/2-vm.drawing_core_val*30/small+direction_val_ys/small-1,(img_width1+vm.drawing_core_val*30*2)/small+2,3);
                         //绘制模拟阴影条(左)
                         // var grd=ctx.createLinearGradient((c.width-img_width1/small)/2-vm.drawing_core_val*30/small+direction_val_xs/small,(c.width-img_width1/small)/2-vm.drawing_core_val*30/small+direction_val_ys/small,(c.width-img_width1/small)/2-vm.drawing_core_val*30/small+5+direction_val_xs/small,(c.width-img_width1/small)/2-vm.drawing_core_val*30/small+direction_val_ys/small);
                         // grd.addColorStop(0,"rgba(150,150,150,0.6)");
                         // grd.addColorStop(1,"rgba(200,200,200,0.3)");
                         // ctx.fillStyle=grd;
-                        ctx.fillStyle='#808080';
+                        ctx.fillStyle='#aaaaaa';
                         ctx.fillRect((c.width-img_width1/small)/2-vm.drawing_core_val*30/small+direction_val_xs/small-1,(c.height-img_height1/small)/2-vm.drawing_core_val*30/small+direction_val_ys/small-1,3,img_height1/small+vm.drawing_core_val*30/small*2+2);
                         //绘制模拟阴影条(右)
                         // var grd=ctx.createLinearGradient((c.width-img_width1/small)/2+img_width1/small+vm.drawing_core_val*30/small+direction_val_xs/small,(c.width-img_width1/small)/2+img_width1/small+vm.drawing_core_val*30/small+direction_val_ys/small,(c.width-img_width1/small)/2+img_width1/small+vm.drawing_core_val*30/small-3+direction_val_xs/small,(c.width-img_width1/small)/2+img_width1/small+vm.drawing_core_val*30/small+direction_val_ys/small);

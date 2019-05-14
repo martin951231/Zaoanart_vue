@@ -5,19 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4d89f980-e2c9-4b12-b8f0-c85577d3ef5e" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/my-project/config/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/my-project/config/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/my-project/src/components/HeadPage.vue" beforeDir="false" afterPath="$PROJECT_DIR$/my-project/src/components/HeadPage.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/my-project/src/pages/Decoration/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/my-project/src/pages/Decoration/index.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/my-project/src/pages/Erjiye/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/my-project/src/pages/Erjiye/index.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/my-project/src/pages/Keep/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/my-project/src/pages/Keep/index.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/my-project/src/pages/Keep/keepimg.vue" beforeDir="false" afterPath="$PROJECT_DIR$/my-project/src/pages/Keep/keepimg.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/my-project/src/pages/Keep/recommend.vue" beforeDir="false" afterPath="$PROJECT_DIR$/my-project/src/pages/Keep/recommend.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/my-project/src/pages/Login.vue" beforeDir="false" afterPath="$PROJECT_DIR$/my-project/src/pages/Login.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/my-project/src/pages/Sanjiye/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/my-project/src/pages/Sanjiye/index.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/my-project/src/pages/Sanjiye/lanmu.vue" beforeDir="false" afterPath="$PROJECT_DIR$/my-project/src/pages/Sanjiye/lanmu.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/my-project/src/pages/Sanjiye/xszt.vue" beforeDir="false" afterPath="$PROJECT_DIR$/my-project/src/pages/Sanjiye/xszt.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/my-project/src/pages/Sign.vue" beforeDir="false" afterPath="$PROJECT_DIR$/my-project/src/pages/Sign.vue" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -31,8 +19,8 @@
       <file leaf-file-name="index.vue" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/my-project/src/pages/Decoration/index.vue">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="4263">
-              <caret line="2424" column="51" selection-start-line="2424" selection-start-column="51" selection-end-line="2424" selection-end-column="51" />
+            <state relative-caret-position="520">
+              <caret line="2215" column="14" lean-forward="true" selection-start-line="2215" selection-start-column="14" selection-end-line="2215" selection-end-column="14" />
               <folding>
                 <element signature="e#35135#39382#0" />
                 <element signature="e#39439#39803#0" />
@@ -63,6 +51,7 @@
                 <element signature="e#124304#124755#0" />
                 <element signature="e#124836#125402#0" />
                 <element signature="e#125440#125501#0" />
+                <element signature="e#125542#152016#0" />
                 <element signature="e#152054#156116#0" />
                 <element signature="e#156154#167962#0" />
                 <element signature="e#168000#176849#0" />
@@ -71,7 +60,6 @@
                 <element signature="e#190733#192531#0" />
                 <element signature="e#192571#194561#0" />
                 <element signature="e#194614#204180#0" />
-                <element signature="e#204226#220468#0" />
                 <element signature="e#220517#232097#0" />
               </folding>
             </state>
@@ -81,8 +69,8 @@
       <file leaf-file-name="index.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/my-project/config/index.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="546">
-              <caret line="73" column="25" selection-start-line="73" selection-start-column="25" selection-end-line="73" selection-end-column="25" />
+            <state relative-caret-position="338">
+              <caret line="58" column="33" lean-forward="true" selection-start-line="58" selection-start-column="33" selection-end-line="58" selection-end-column="33" />
             </state>
           </provider>
         </entry>
@@ -91,7 +79,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>shopcar_info</find>
       <find>keep_info</find>
       <find>keep_option</find>
       <find>history_img</find>
@@ -121,6 +108,7 @@
       <find>lanmu</find>
       <find>.lanmu{</find>
       <find>productionSourceMap</find>
+      <find>#808080</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -503,15 +491,16 @@
       <workItem from="1557400254339" duration="981000" />
       <workItem from="1557458896165" duration="2678000" />
       <workItem from="1557716372240" duration="20886000" />
-      <workItem from="1557801954857" duration="12455000" />
+      <workItem from="1557801954857" duration="13375000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="1914805000" />
+    <option name="totallyTimeSpent" value="1915725000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1696" height="1026" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.14464286" />
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -522,7 +511,7 @@
       <window_info anchor="bottom" id="Run" order="2" />
       <window_info anchor="bottom" id="Version Control" order="10" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="9" sideWeight="0.49821427" visible="true" weight="0.26483518" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="9" sideWeight="0.49821427" visible="true" weight="0.26703298" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="找到" order="13" />
@@ -914,8 +903,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/my-project/src/pages/Decoration/index.vue">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4263">
-          <caret line="2424" column="51" selection-start-line="2424" selection-start-column="51" selection-end-line="2424" selection-end-column="51" />
+        <state relative-caret-position="520">
+          <caret line="2215" column="14" lean-forward="true" selection-start-line="2215" selection-start-column="14" selection-end-line="2215" selection-end-column="14" />
           <folding>
             <element signature="e#35135#39382#0" />
             <element signature="e#39439#39803#0" />
@@ -946,6 +935,7 @@
             <element signature="e#124304#124755#0" />
             <element signature="e#124836#125402#0" />
             <element signature="e#125440#125501#0" />
+            <element signature="e#125542#152016#0" />
             <element signature="e#152054#156116#0" />
             <element signature="e#156154#167962#0" />
             <element signature="e#168000#176849#0" />
@@ -954,7 +944,6 @@
             <element signature="e#190733#192531#0" />
             <element signature="e#192571#194561#0" />
             <element signature="e#194614#204180#0" />
-            <element signature="e#204226#220468#0" />
             <element signature="e#220517#232097#0" />
           </folding>
         </state>
@@ -962,8 +951,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/my-project/config/index.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="546">
-          <caret line="73" column="25" selection-start-line="73" selection-start-column="25" selection-end-line="73" selection-end-column="25" />
+        <state relative-caret-position="338">
+          <caret line="58" column="33" lean-forward="true" selection-start-line="58" selection-start-column="33" selection-end-line="58" selection-end-column="33" />
         </state>
       </provider>
     </entry>
