@@ -109,7 +109,7 @@
                 </div>
                 <div style="text-align: center;" id="theme_show_div">
                     <a v-for="(theme,index) in theme" :key="index" :href="'/#/erjiye?theme_id='+theme.id+'&cate_id=0&color_id=0'" width="100px">
-                        <ul class="ul_shadow" :id="theme.id" style="font-family:monospace;display: inline-block;width:100px;text-align: center;" @mouseenter="show_theme($event)" @mouseleave="hide_theme($event)">
+                        <ul class="ul_shadow" :id="theme.id" style="padding:0;font-family:monospace;display: inline-block;width:100px;text-align: center;" @mouseenter="show_theme($event)" @mouseleave="hide_theme($event)">
                             {{theme.theme_name}}
                             <li style="position: relative;">
                                 <div :id="'theme'+theme.id" style="box-shadow: #ccc 3px 3px 5px;text-align: center;display:none;position: absolute;">
@@ -172,8 +172,8 @@
             return {
                 category: [],
                 theme: [],
-                cate_img_url : 'http://118.178.89.229/resource/cate-img/',
-                theme_img_url : 'http://118.178.89.229/resource/theme-img/',
+                cate_img_url : 'http://qiniu.zaoanart.com/',
+                theme_img_url : 'http://qiniu.zaoanart.com/',
             }
         },
         methods:{

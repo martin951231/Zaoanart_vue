@@ -40,7 +40,6 @@
                     for(var i=0;i<response.data.length;i++){
                         response.data[i].label_name2 = encodeURI(response.data[i].label_name)
                     }
-                    console.log(response.data)
                     this.label2 = response.data
                 })
             },

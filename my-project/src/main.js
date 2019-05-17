@@ -7,14 +7,18 @@ import iView from 'iview'
 import  VueResource  from 'vue-resource'
 import Axios from 'axios'
 import VueAxios from 'vue-axios'
+import VueLazyLoad from 'vue-lazyload'
 import $ from 'jquery'
+import popper from 'popper'
+import toastr from 'toastr'
+import bootstrap from 'bootstrap'
 import VuePaginate from 'vue-paginate'
-Vue.use(VuePaginate)
 Vue.prototype.$ajax = Axios
 Vue.config.productionTip = false
-Vue.use(iView)
-Vue.use(VueResource)
 Vue.use(VueLazyLoad,{
+// Vue.use(iView)
+// Vue.use(VuePaginate)
+// Vue.use(VueResource)
     // error:'./static/img/error.jpg',
     // loading:'./static/img/timg.gif'
     error:'http://118.178.89.229/resource/images/error.jpg',
@@ -56,7 +60,6 @@ toastr.options = {
     showMethod: "fadeIn",
     hideMethod: "fadeOut"
 };
-import VueLazyLoad from 'vue-lazyload'
 // Vue.use(VueAxios,axios)
 /* eslint-disable no-new */
 new Vue({

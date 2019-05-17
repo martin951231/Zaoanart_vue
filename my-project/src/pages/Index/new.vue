@@ -56,7 +56,6 @@
                     response.data[i].lanmus  = res1
                 }
                 this.img = response.data
-                console.log(response.data)
             })
         }
     }

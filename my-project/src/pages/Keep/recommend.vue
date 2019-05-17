@@ -1,8 +1,8 @@
 <template>
-    <div style="height:100%">
+    <div style="height:100%;text-align: -webkit-center;">
         <HeadPage></HeadPage>
         <div class="lanmu">收藏夹</div>
-        <div style="padding-left: 20%;min-height: -webkit-fill-available;" class="clearfix">
+        <div style="width:1200px;min-height: -webkit-fill-available;" class="clearfix">
             <div :id="'keep'+keep[0].id" class="keeps" v-for="keep in keepinfo">
                 <a :href="'/#/keep/keepimg?id='+keep[0].id" target="_blank">
                     <div class="keep gallery1" :id="keep[0].id">
@@ -40,7 +40,6 @@
         },
         mounted(){
             this.$http.get(baseurl + 'v1/home/findkeepall').then((response)=>{
-                console.log(response.data)
                 this.keepinfo = response.data
             })
         },

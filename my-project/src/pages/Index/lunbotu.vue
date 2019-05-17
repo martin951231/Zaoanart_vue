@@ -21,24 +21,28 @@
     </div>
 </template>
 <script>
+    // const baseurl = 'http://api.demo.com/';
+    const baseurl = 'http://118.178.89.229/';
     export default {
-
         data(){
             return{
                 mark:0,
                 img:[
-                    'http://118.178.89.229/resource/ad/2017-05-22/5922b94b71204.jpg',
-                    'http://118.178.89.229/resource/ad/2017-05-22/5922b97ef1ddc.jpg',
-                    'http://118.178.89.229/resource/ad/2017-05-22/5922b973b8329.jpg',
-                    'http://118.178.89.229/resource/ad/2017-05-22/5922bbfbed433.jpg'
-                ],
-                list:[
-                    {src:'../../assets/images/149283441171072998.jpg'},
-                    {src:'../../assets/images/149283441171072998.jpg'},
-                    {src:'../../assets/images/149283441171072998.jpg'}
+                    // 'http://118.178.89.229/resource/ad/2017-05-22/5922b94b71204.jpg',
+                    // 'http://118.178.89.229/resource/ad/2017-05-22/5922b97ef1ddc.jpg',
+                    // 'http://118.178.89.229/resource/ad/2017-05-22/5922b973b8329.jpg',
+                    // 'http://118.178.89.229/resource/ad/2017-05-22/5922bbfbed433.jpg'
                 ],
                 time:null,
             }
+        },
+        mounted(){
+            this.$http.get(baseurl + 'v1/home/findlunbotu').then((response)=>{
+                for(var i=0;i<response.data.length;i++){
+                    response.data[i] = 'http://qiniu.zaoanart.com/'+response.data[i]
+                }
+                this.img = response.data
+            })
         },
         methods:{
             change(i){

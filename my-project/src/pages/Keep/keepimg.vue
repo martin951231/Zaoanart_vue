@@ -239,7 +239,6 @@
                 })
             },
             handleScroll(e){
-                console.log(e)
             },
             keep_show(e){
                 $(".logo_a").animate({'margin-left':'30%'})

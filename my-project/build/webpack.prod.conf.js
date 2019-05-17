@@ -111,6 +111,11 @@ const webpackConfig = merge(baseWebpackConfig, {
       children: true,
       minChunks: 3
     }),
+      // new webpack.optimize.UglifyJsPlugin({
+      //     compress:{
+      //         warnings:false
+      //     }
+      // }),
 
     // copy custom static assets
     new CopyWebpackPlugin([
@@ -125,7 +130,6 @@ const webpackConfig = merge(baseWebpackConfig, {
 
 if (config.build.productionGzip) {
   const CompressionWebpackPlugin = require('compression-webpack-plugin')
-
   webpackConfig.plugins.push(
     new CompressionWebpackPlugin({
       asset: '[path].gz[query]',

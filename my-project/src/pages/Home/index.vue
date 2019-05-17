@@ -222,7 +222,6 @@
                     }
                     this.$http.get(baseurl + 'v1/code/codetel',{params:{telephone: this.telphone_model}}).then((response)=>{
                         if(response.data == 1){
-                            console.log('手机号码正确');
                             this.$http.get(baseurl + 'v1/code/sendcode',{params:{username: this.telphone_model}}).then((response)=>{
 
                             })

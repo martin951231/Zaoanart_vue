@@ -304,7 +304,7 @@
     </div>
 </template>
 <script>
-    import axios from 'axios'
+    // import axios from 'axios'
     import HeadPage from "../../components/HeadPage"
     import Foot from "../../components/Foot"
     const baseurl = 'http://118.178.89.229/'
@@ -313,6 +313,7 @@
     // const imgurl = 'http://localhost/yii-application/backend/web/test/'
     import '../../../node_modules/cropper/dist/cropper.js'
     import '../../../node_modules/cropper/dist/cropper.css'
+
     export default {
         name: 'Decoration',
         data(){

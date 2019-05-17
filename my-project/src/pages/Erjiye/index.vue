@@ -579,7 +579,6 @@
             // },
             category_show(){
                 this.$http.get(baseurl + 'v1/category/findcategory1').then((response)=>{
-                    console.log(response.data)
                     this.category2 = response.data
                     for(var v=0;v<this.category2.length;v++){
                         if(this.info.cate_id == 0){
