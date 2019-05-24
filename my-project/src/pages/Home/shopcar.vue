@@ -68,8 +68,8 @@
     import HeadPage from "../../components/HeadPage";
     import Foot from "../../components/Foot";
     import axios from 'axios';
-    const baseurl = 'http://118.178.89.229/';
-    const excelurl = 'http://www.zaoanart.com/resource/excel/'
+    const baseurl = 'https://api.zaoanart.com/';
+    const excelurl = 'https://www.zaoanart.com/resource/excel/'
     // const excelurl = 'http://zaoanyishu.backends.com/excel/'
     export default {
         name: 'shopcar',

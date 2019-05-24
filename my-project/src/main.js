@@ -21,8 +21,8 @@ Vue.use(VueLazyLoad,{
 // Vue.use(VueResource)
     // error:'./static/img/error.jpg',
     // loading:'./static/img/timg.gif'
-    error:'http://118.178.89.229/resource/images/error.jpg',
-    loading:'http://118.178.89.229/resource/images/timg.gif'
+    error:'https://api.zaoanart.com/resource/images/error.jpg',
+    loading:'https://api.zaoanart.com/resource/images/timg.gif'
 })
 //设置cookie
 Vue.prototype.setCookie = function(c_name,value,expiredays) {

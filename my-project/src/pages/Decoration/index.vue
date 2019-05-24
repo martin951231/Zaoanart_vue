@@ -307,8 +307,8 @@
     // import axios from 'axios'
     import HeadPage from "../../components/HeadPage"
     import Foot from "../../components/Foot"
-    const baseurl = 'http://118.178.89.229/'
-    const imgurl = 'http://118.178.89.229/resource/test/'
+    const baseurl = 'https://api.zaoanart.com/'
+    const imgurl = 'https://api.zaoanart.com/resource/test/'
     // const baseurl = 'http://api.demo.com/'
     // const imgurl = 'http://localhost/yii-application/backend/web/test/'
     import '../../../node_modules/cropper/dist/cropper.js'

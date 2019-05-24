@@ -25,7 +25,7 @@
 </template>
 <script>
     import axios from 'axios'
-    const baseurl = 'http://118.178.89.229/';
+    const baseurl = 'https://api.zaoanart.com/';
     export default {
         name: 'Sign',
         data(){

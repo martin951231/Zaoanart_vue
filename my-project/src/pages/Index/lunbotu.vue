@@ -22,7 +22,7 @@
 </template>
 <script>
     // const baseurl = 'http://api.demo.com/';
-    const baseurl = 'http://118.178.89.229/';
+    const baseurl = 'https://api.zaoanart.com/';
     export default {
         data(){
             return{

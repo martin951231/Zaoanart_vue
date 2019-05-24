@@ -68,7 +68,7 @@
     import Paginate from 'vuejs-paginate'
     import baguetteBox1 from "../../assets/js/baguetteBox.js";
     import axios from 'axios'
-    const baseurl = 'http://118.178.89.229/';
+    const baseurl = 'https://api.zaoanart.com/';
     import MoPaging from './mo-paging'
     export default {
         name: 'ImageList',

@@ -90,7 +90,7 @@
 </template>
 <script>
     import axios from 'axios'
-    const baseurl = 'http://118.178.89.229/';
+    const baseurl = 'https://api.zaoanart.com/';
     import HeadPage from "../../components/HeadPage";
     import Lanmu from "./lanmu";
     import ImgZoom from './imgZoom';

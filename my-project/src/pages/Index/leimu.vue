@@ -60,7 +60,7 @@
                             <li class="ul_shadow" style="display: inline-block;margin-right: 5px;">
                                 <a :href="'/#/erjiye?cate_id=4&theme_id=0&color_id=0'">
                                     <div style="text-align: center;">
-                                        <img src="http://118.178.89.229/resource/cate-img/zhuangshihua1.jpg" alt="" width="100px" height="100px">
+                                        <img src="https://api.zaoanart.com/resource/cate-img/zhuangshihua1.jpg" alt="" width="100px" height="100px">
                                         <br>
                                         <a>装饰画1</a>
                                     </div>
@@ -69,7 +69,7 @@
                             <li class="ul_shadow" style="display: inline-block;margin-right: 5px;">
                                 <a :href="'/#/erjiye?cate_id=4&theme_id=0&color_id=0'">
                                     <div style="text-align: center;">
-                                        <img src="http://118.178.89.229/resource/cate-img/zhuangshihua2.jpg" alt="" width="100px" height="100px">
+                                        <img src="https://api.zaoanart.com/resource/cate-img/zhuangshihua2.jpg" alt="" width="100px" height="100px">
                                         <br>
                                         <a>装饰画2</a>
                                     </div>
@@ -78,7 +78,7 @@
                             <li class="ul_shadow" style="display: inline-block;margin-right: 5px;">
                                 <a :href="'/#/erjiye?cate_id=4&theme_id=0&color_id=0'">
                                     <div style="text-align: center;">
-                                        <img src="http://118.178.89.229/resource/cate-img/zhuangshihua3.jpg" alt="" width="100px" height="100px">
+                                        <img src="https://api.zaoanart.com/resource/cate-img/zhuangshihua3.jpg" alt="" width="100px" height="100px">
                                         <br>
                                         <a>装饰画3</a>
                                     </div>
@@ -166,7 +166,7 @@
 </template>
 <script>
     import axios from 'axios'
-    const baseurl = 'http://118.178.89.229/';
+    const baseurl = 'https://api.zaoanart.com/';
     export default {
         data () {
             return {

@@ -77,7 +77,7 @@
                             <img id="color_select_img" src="../assets/images/color.png" alt="" width="20px">
                             <span id="color_select_one" style="color:#000">颜色</span>
                         </div>
-                        <li @click="color_find($event,0)" style="height:30px;line-height: 30px;background-color: #fff;color: rgb(100, 100, 100;display: block;">颜色</li>
+                        <li @click="color_find($event,0)" style="height:30px;line-height: 30px;background-color: #fff;color: rgb(100, 100, 100);display: block;">颜色</li>
                         <li class="color select_li" style="display:block;background-color:rgb(255,0,0);width:100%;margin-left:0px" @click="color_find($event,1)"></li>
                         <li class="color select_li" style="display:block;background-color:rgb(255,150,0);width:100%;margin-left:0px" @click="color_find($event,2)"></li>
                         <li class="color select_li" style="display:block;background-color:rgb(255,255,0);width:100%;margin-left:0px" @click="color_find($event,3)"></li>
@@ -100,7 +100,7 @@
 </template>
 <script>
     import axios from 'axios'
-    const baseurl = 'http://118.178.89.229/';
+    const baseurl = 'https://api.zaoanart.com/';
     export default {
         name: 'HeadPage',
         data () {
