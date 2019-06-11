@@ -111,6 +111,7 @@
     import Foot from "../../components/Foot";
     import axios from 'axios';
     const baseurl = 'https://api.zaoanart.com/';
+    // const baseurl = 'http://api.demo.com/';
     export default {
         name: 'Home',
         data(){

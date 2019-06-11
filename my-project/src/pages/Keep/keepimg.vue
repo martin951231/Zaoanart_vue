@@ -133,6 +133,7 @@
         }
     })
     const baseurl = 'https://api.zaoanart.com/'
+    // const baseurl = 'http://api.demo.com/';
     import axios from 'axios'
     export default {
         name: 'Keepimg',

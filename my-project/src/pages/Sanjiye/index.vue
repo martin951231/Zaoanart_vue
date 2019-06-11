@@ -91,6 +91,7 @@
 <script>
     import axios from 'axios'
     const baseurl = 'https://api.zaoanart.com/';
+    // const baseurl = 'http://api.demo.com/';
     import HeadPage from "../../components/HeadPage";
     import Lanmu from "./lanmu";
     import ImgZoom from './imgZoom';
@@ -230,22 +231,23 @@
                 })
             },
             show2(){
-                var shuiyin = new Image()
-                shuiyin.setAttribute('crossOrigin','Anonymous')
-                shuiyin.src = 'http://www.zaoanart.com:8000/images/zaoanart_logo_shuiyin.png'
                 var addtoimg = new Image()
                 addtoimg.setAttribute('crossOrigin','Anonymous')
                 addtoimg.src = this.dataImageList.img
                 var c=document.getElementById("myCanvas")
                 var ctx=c.getContext("2d")
                 addtoimg.onload = function() {
-                    c.width = addtoimg.naturalWidth
-                    c.height = addtoimg.naturalHeight
-                    ctx.drawImage(addtoimg,0,0,addtoimg.naturalWidth,addtoimg.naturalHeight)
-                    ctx.drawImage(shuiyin,0,0,shuiyin.naturalWidth,shuiyin.naturalHeight,(addtoimg.naturalWidth-shuiyin.naturalWidth)/2,(addtoimg.naturalHeight-shuiyin.naturalHeight)/2,shuiyin.naturalWidth,shuiyin.naturalHeight)
-                    $("#mask_layer_img").attr('src',c.toDataURL('image/jpeg'))
+                    var shuiyin = new Image()
+                    shuiyin.setAttribute('crossOrigin','Anonymous')
+                    shuiyin.src = 'http://www.zaoanart.com:8000/images/zaoanart_logo_shuiyin.png'
+                    shuiyin.onload = function(){
+                        c.width = addtoimg.naturalWidth
+                        c.height = addtoimg.naturalHeight
+                        ctx.drawImage(addtoimg,0,0,addtoimg.naturalWidth,addtoimg.naturalHeight)
+                        ctx.drawImage(shuiyin,0,0,shuiyin.naturalWidth,shuiyin.naturalHeight,(addtoimg.naturalWidth-shuiyin.naturalWidth)/2,(addtoimg.naturalHeight-shuiyin.naturalHeight)/2,shuiyin.naturalWidth,shuiyin.naturalHeight)
+                        $("#mask_layer_img").attr('src',c.toDataURL('image/jpeg'))
+                    }
                 }
-
                 $(".popContainer").animate({height:'show',width:'show','z-index':'999'})
                 $(".popContainer").css('display','flex')
                 $(".popContainer").css('justify-content','center')
@@ -336,16 +338,6 @@
                     }
                 })
             },
-            // findcategory(){
-            //     this.$http.get(baseurl + 'v1/category/findcategory').then(function(res){
-            //         this.category = res.data
-            //     })
-            // },
-            // findtheme(){
-            //     this.$http.get(baseurl + 'v1/theme/findtheme').then(function(res){
-            //         this.theme = res.data
-            //     })
-            // },
             addto_keep(e,img_id){
                 var keep_name = $('.select-head-cont').html()
                 if(!this.getCookie('tel')){
@@ -375,80 +367,7 @@
                 $(e.target).css("position",'')
                 $(e.target).css("max-height",'30px')
             },
-            // category_find(e,cate_id){
-            //     $(e.target).parent().parent().attr('data_id',cate_id)
-            //     $(e.target).parent().parent().css("max-height",'30px')
-            //     $("#cate_select_one").text($.trim($(e.target).text()))
-            //     var theme_id = $("#theme_select").attr('data_id')
-            //     var color_id = $("#color_select").attr('data_id')
-            //     window.location.href="/#/erjiye?cate_id="+cate_id+"&theme_id="+theme_id+"&color_id="+color_id+"&pageSize="+this.pageSize+"&currentPage="+this.currentPage+""
-            // },
-            // theme_find(e,theme_id){
-            //     $(e.target).parent().attr('data_id',theme_id)
-            //     $(e.target).parent().css("max-height",'30px')
-            //     $("#theme_select_one").text($.trim($(e.target).text()))
-            //     var cate_id = $("#cate_select").attr('data_id')
-            //     var color_id = $("#color_select").attr('data_id')
-            //     window.location.href="/#/erjiye?cate_id="+cate_id+"&theme_id="+theme_id+"&color_id="+color_id+"&pageSize="+this.pageSize+"&currentPage="+this.currentPage+""
-            // },
-            // color_find(e,color_id){
-            //     $(e.target).parent().attr('data_id',color_id)
-            //     $(e.target).parent().css("max-height",'30px')
-            //     switch(color_id)
-            //     {
-            //         case 0:
-            //             $("#color_select").css("background-color",'rgba(76, 76, 76, 0.7)');
-            //             // $("#color_select_one").html('请选择')
-            //             break;
-            //         case 1:
-            //             $("#color_select").css("background-color",'rgb(255,0,0)');
-            //             // $("#color_select_one").html('')
-            //             break;
-            //         case 2:
-            //             $("#color_select").css("background-color",'rgb(255,150,0)');
-            //             // $("#color_select_one").html('')
-            //             break;
-            //         case 3:
-            //             $("#color_select").css("background-color",'rgb(255,255,0)');
-            //             // $("#color_select_one").html('')
-            //             break;
-            //         case 4:
-            //             $("#color_select").css("background-color",'rgb(0,255,0)');
-            //             // $("#color_select_one").html('')
-            //             break;
-            //         case 5:
-            //             $("#color_select").css("background-color",'rgb(0,255,255)');
-            //             // $("#color_select_one").html('')
-            //             break;
-            //         case 6:
-            //             $("#color_select").css("background-color",'rgb(0,0,255)');
-            //             // $("#color_select_one").html('')
-            //             break;
-            //         case 7:
-            //             $("#color_select").css("background-color",'rgb(100,50,150)');
-            //             // $("#color_select_one").html('')
-            //             break;
-            //         case 8:
-            //             $("#color_select").css("background-color",'rgb(255,150,255)');
-            //             // $("#color_select_one").html('')
-            //             break;
-            //         case 9:
-            //             $("#color_select").css("background-color",'rgb(255,255,255)');
-            //             // $("#color_select_one").html('')
-            //             break;
-            //         case 10:
-            //             $("#color_select").css("background-color",'rgb(0,0,0)');
-            //             // $("#color_select_one").html('')
-            //             break;
-            //         case 11:
-            //             $("#color_select").css("background-color",'rgb(120,120,120)');
-            //             // $("#color_select_one").html('')
-            //             break;
-            //     }
-            //     var cate_id = $("#cate_select").attr('data_id')
-            //     var theme_id = $("#theme_select").attr('data_id')
-            //     window.location.href="/#/erjiye?cate_id="+cate_id+"&theme_id="+theme_id+"&color_id="+color_id+"&pageSize="+this.pageSize+"&currentPage="+this.currentPage+""
-            // },
+
             big(){
                 var bili = $("#mask_layer_img").width()/$("#mask_layer_img").height()
                 $("#mask_layer_img").css('width',($("#mask_layer_img").width()) * 1.1)
@@ -469,14 +388,6 @@
                 $("#mask_layer_img").unbind('mousemove')
                 this.isMouseDown = false
             },
-            // cate_find(e,id){
-            //     // var data_info = e.target.getAttribute("data_id")
-            //     $(e.target).parent().parent().attr('data_id',id)
-            //     var theme_id = $("#theme_select").attr('data_id')
-            //     var color_id = $("#color_select").attr('data_id')
-            //     var sm = this
-            //     this.$router.push({path:"/erjiye?cate_id="+id+"&theme_id="+theme_id+"&color_id="+color_id+"&pageSize="+this.pageSize+"&currentPage="+this.currentPage+""})
-            // },
             op_hover_show(e){
                 $(e.target).css('color','red')
             },

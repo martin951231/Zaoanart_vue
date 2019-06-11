@@ -31,6 +31,7 @@
 <script>
     import axios from 'axios'
     const baseurl = 'https://api.zaoanart.com/';
+    // const baseurl = 'http://api.demo.com/';
     export default {
         data() {
             return{
@@ -55,7 +56,7 @@
             this.$http.get(baseurl + 'v1/goods/findgoods_catagory',{params:{id: arr2.id}}).then((response)=>{
                 if(response.data){
                     for(var i = 0; i<response.data.category.length;i++ ){
-                        response.data.category[i].image  = 'http://qiniu.zaoanart.com/'+response.data.category[i].image+'?imageView2/1/w/216/h/200'
+                        response.data.category[i].image  = 'http://qiniu.zaoanart.com/'+response.data.category[i].image+'?imageView2/1/w/500/h/500'
                         var res = []
                         var param = '类别'
                         for ( var v=0; v<param.length; v++ ) {
@@ -72,7 +73,7 @@
                     this.dataCategoryList.lanmu = '类别'
                     this.dataCategoryList.lanmus = response.data.category[0].category_name
                     for(var i = 0; i<response.data.theme.length;i++ ){
-                        response.data.theme[i].image  = 'http://qiniu.zaoanart.com/'+response.data.theme[i].image+'?imageView2/1/w/216/h/200'
+                        response.data.theme[i].image  = 'http://qiniu.zaoanart.com/'+response.data.theme[i].image+'?imageView2/1/w/500/h/500'
                     }
                 }
                 this.dataCategoryList = response.data.category
@@ -81,7 +82,7 @@
             this.$http.get(baseurl + 'v1/goods/findmayimg',{params:{id: arr2.id}}).then((response)=>{
                 this.mayImageList = response.data
                 for(var q=0;q<response.data.length;q++){
-                    this.mayImageList[q].image = 'http://qiniu.zaoanart.com/'+this.mayImageList[q].image+'?imageView2/1/w/216/h/200'
+                    this.mayImageList[q].image = 'http://qiniu.zaoanart.com/'+this.mayImageList[q].image+'?imageView2/1/w/500/h/500'
                 }
             })
         }
@@ -98,7 +99,7 @@
         .zuop .title{margin:0 auto;text-align:center;margin-bottom:30px;}
         .biaoti{width:1200px;margin:0 auto;}
         .xiangsi,.xiangsi ul{width:100%;padding:0;margin:0 auto;padding-left:0;overflow: hidden;}
-        .xiangsi ul li{margin-bottom:10px;padding-right:10px;justify-content: center;}
+        .xiangsi ul li{width:230px;height:230px;margin:5px;justify-content: center;}
         .xiangsi ul li a{display:inline-block;margin-left:0;justify-content: center;}
         .xszt-1{width:1200px;margin:0 auto;margin-top:-40px;}
         .lanmu{height:100px;}

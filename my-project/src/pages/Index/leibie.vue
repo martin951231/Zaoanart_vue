@@ -26,6 +26,7 @@
 <script>
     import axios from 'axios'
     const baseurl = 'https://api.zaoanart.com/';
+    // const baseurl = 'http://api.demo.com/';
     export default {
         data(){
             return{

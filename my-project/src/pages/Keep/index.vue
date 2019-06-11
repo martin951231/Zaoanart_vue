@@ -49,6 +49,7 @@
     import HeadPage from "../../components/HeadPage"
     import Foot from "../../components/Foot"
     const baseurl = 'https://api.zaoanart.com/'
+    // const baseurl = 'http://api.demo.com/';
     export default {
         name: 'Keep',
         data(){

@@ -69,6 +69,7 @@
     import baguetteBox1 from "../../assets/js/baguetteBox.js";
     import axios from 'axios'
     const baseurl = 'https://api.zaoanart.com/';
+    // const baseurl = 'http://api.demo.com/';
     import MoPaging from './mo-paging'
     export default {
         name: 'ImageList',
@@ -311,6 +312,7 @@
                             $(".category_div")[p].style.color = ''
                         }
                         if(arr2.cate_id != 0){
+                            $("#cate_select").attr('data_id',arr2.cate_id)
                             $("#category"+arr2.cate_id).css('background-color','black')
                             $("#category"+arr2.cate_id).css('color','rgb(253, 162, 100)')
                             $("#cate_select_one").text($('#category'+arr2.cate_id).text().replace(/\s*/g,""))
@@ -322,6 +324,7 @@
                             $(".theme_div")[e].style.color = ''
                         }
                         if(arr2.theme_id != 0){
+                            $("#theme_select").attr('data_id',arr2.theme_id)
                             $("#themes"+arr2.theme_id).css('background-color','black')
                             $("#themes"+arr2.theme_id).css('color','rgb(253, 162, 100)')
                             $("#theme_select_one").text($('#themes'+arr2.theme_id).text().replace(/\s*/g,""))
