@@ -110,8 +110,6 @@
     import HeadPage from "../../components/HeadPage";
     import Foot from "../../components/Foot";
     import axios from 'axios';
-    const baseurl = 'https://api.zaoanart.com/';
-    // const baseurl = 'http://api.demo.com/';
     export default {
         name: 'Home',
         data(){
@@ -151,7 +149,7 @@
         methods:{
             initData(){
                 if(this.login_phone){
-                    this.$http.post(baseurl + 'v1/home/homeinfo',{username:this.login_phone},{emulateJSON: true}).then((response)=>{
+                    this.$http.post(this.GLOBAL.baseurl + 'v1/home/homeinfo',{username:this.login_phone},{emulateJSON: true}).then((response)=>{
                         this.user_info = response.data
                     })
                 }else{
@@ -163,7 +161,7 @@
                 if(!this.username){
                     toastr.warning("请输入用户名")
                 }else{
-                    this.$http.post(baseurl + 'v1/home/up_username',{tel:this.login_phone,username:this.username},{emulateJSON: true}).then((response)=>{
+                    this.$http.post(this.GLOBAL.baseurl + 'v1/home/up_username',{tel:this.login_phone,username:this.username},{emulateJSON: true}).then((response)=>{
                         if(response.data){
                             $("#username_input").attr("placeholder",this.username)
                             toastr.info("修改成功")
@@ -177,7 +175,7 @@
                 if(!this.wechat){
                     toastr.warning("请输入微信号码")
                 }else{
-                    this.$http.post(baseurl + 'v1/home/up_wechat',{tel:this.login_phone,wechat:this.wechat},{emulateJSON: true}).then((response)=>{
+                    this.$http.post(this.GLOBAL.baseurl + 'v1/home/up_wechat',{tel:this.login_phone,wechat:this.wechat},{emulateJSON: true}).then((response)=>{
                         if(response.data){
                             $("#wechat_input").attr("placeholder",this.wechat)
                             toastr.info("修改成功")
@@ -191,7 +189,7 @@
                 if(!this.address){
                     toastr.warning("请输入地址")
                 }else{
-                    this.$http.post(baseurl + 'v1/home/up_address',{tel:this.login_phone,address:this.address},{emulateJSON: true}).then((response)=>{
+                    this.$http.post(this.GLOBAL.baseurl + 'v1/home/up_address',{tel:this.login_phone,address:this.address},{emulateJSON: true}).then((response)=>{
                         if(response.data){
                             $("#address_input").attr("placeholder",this.address)
                             toastr.info("修改成功")
@@ -205,7 +203,7 @@
                 if(!$("#birthday_input").val()){
                     toastr.warning("请选择出生日期")
                 }else{
-                    this.$http.post(baseurl + 'v1/home/up_birthday',{tel:this.login_phone,birthday:$("#birthday_input").val()},{emulateJSON: true}).then((response)=>{
+                    this.$http.post(this.GLOBAL.baseurl + 'v1/home/up_birthday',{tel:this.login_phone,birthday:$("#birthday_input").val()},{emulateJSON: true}).then((response)=>{
                         if(response.data){
                             $("#birthday_input").attr("placeholder",$("#birthday_input").val())
                             toastr.info("修改成功")
@@ -221,9 +219,9 @@
                     if(!reg.test(this.telphone_model)){
                         toastr.warning('请输入正确的手机号码');
                     }
-                    this.$http.get(baseurl + 'v1/code/codetel',{params:{telephone: this.telphone_model}}).then((response)=>{
+                    this.$http.get(this.GLOBAL.baseurl + 'v1/code/codetel',{params:{telephone: this.telphone_model}}).then((response)=>{
                         if(response.data == 1){
-                            this.$http.get(baseurl + 'v1/code/sendcode',{params:{username: this.telphone_model}}).then((response)=>{
+                            this.$http.get(this.GLOBAL.baseurl + 'v1/code/sendcode',{params:{username: this.telphone_model}}).then((response)=>{
 
                             })
                         }else if(response.data == 2){
@@ -236,12 +234,12 @@
             },
             up_newpwd(){
                 if(this.code){
-                    this.$http.get(baseurl + 'v1/code/vercode',{params:{telephone: this.telphone_model,code:this.code}}).then((response)=>{
+                    this.$http.get(this.GLOBAL.baseurl + 'v1/code/vercode',{params:{telephone: this.telphone_model,code:this.code}}).then((response)=>{
                         if(response.data){
                             if(!this.new_pwd){
                                 toastr.warning('请输入新密码')
                             }else{
-                                this.$http.post(baseurl + 'v1/home/up_newpwd',{telephone: this.telphone_model,newpwd:this.new_pwd},{emulateJSON: true}).then((response)=>{
+                                this.$http.post(this.GLOBAL.baseurl + 'v1/home/up_newpwd',{telephone: this.telphone_model,newpwd:this.new_pwd},{emulateJSON: true}).then((response)=>{
                                     if(response.data == 1){
                                         toastr.warning("不能设置同样的密码")
                                     }else if(response.data == 2){

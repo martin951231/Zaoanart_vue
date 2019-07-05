@@ -34,7 +34,7 @@
                     </div>
                     <div style="margin-top:150px;margin-bottom: 50px;height: 40px;line-height: 40px;">
                         <img src="../../assets/images/aixin.png" alt="" @click="show_hidden($event)" height="40px">
-                        <ul id="select" style="width:150px;display:none;margin-top: 20px;">
+                        <ul id="select" style="width:170px;display:none;margin-top: 20px;">
                             <li>
                                 <div class="select-head">
                                     <span class="select-head-cont" style="min-width:100px;height:20px;" @click="show_select()"></span>
@@ -90,8 +90,6 @@
 </template>
 <script>
     import axios from 'axios'
-    const baseurl = 'https://api.zaoanart.com/';
-    // const baseurl = 'http://api.demo.com/';
     import HeadPage from "../../components/HeadPage";
     import Lanmu from "./lanmu";
     import ImgZoom from './imgZoom';
@@ -218,7 +216,7 @@
                     var ta=arr1[i].split('=');
                     arr2[ta[0]]=ta[1];
                 }
-                this.$http.get(baseurl + 'v1/goods/findgoodsall',{params:{id: arr2.id}}).then((response)=>{
+                this.$http.get(this.GLOBAL.baseurl + 'v1/goods/findgoodsall',{params:{id: arr2.id}}).then((response)=>{
                     this.dataImageList = response.data.info
                     for(var i=0;i<response.data.label_list.length;i++){
                         response.data.label_list[i].label_name2 = encodeURI(response.data.label_list[i].label_name)
@@ -262,7 +260,7 @@
             //存历史浏览记录
             set_history(img_id){
                 if(this.getCookie('tel')){
-                    this.$http.get(baseurl + 'v1/home/set_history',{params:{tel: this.getCookie('tel'),img_id:img_id}}).then((response)=>{
+                    this.$http.get(this.GLOBAL.baseurl + 'v1/home/set_history',{params:{tel: this.getCookie('tel'),img_id:img_id}}).then((response)=>{
                     })
                 }
             },
@@ -308,7 +306,7 @@
                 }
                 $('#select').animate({width:'toggle'})
                 $("#example-5").animate({height:'toggle',width:'toggle','z-index':'999'})
-                this.$http.get(baseurl + 'v1/home/select_keep',{params:{tel:this.getCookie('tel')}}).then((response)=>{
+                this.$http.get(this.GLOBAL.baseurl + 'v1/home/select_keep',{params:{tel:this.getCookie('tel')}}).then((response)=>{
                     this.keep_info = response.data
                 })
             },
@@ -329,7 +327,7 @@
                 if(!this.keep_name){
                     toastr.warning("请填写收藏夹名")
                 }
-                this.$http.get(baseurl + 'v1/home/addkeep',{params:{tel: this.getCookie('tel'),keep_name:this.keep_name}}).then((response)=>{
+                this.$http.get(this.GLOBAL.baseurl + 'v1/home/addkeep',{params:{tel: this.getCookie('tel'),keep_name:this.keep_name}}).then((response)=>{
                     if(response.data == 1){
                         toastr.info("该文件夹名已经存在")
                     }else{
@@ -348,7 +346,7 @@
                     toastr.warning("请选择要添加的收藏夹")
                     return false
                 }
-                this.$http.get(baseurl + 'v1/home/addto_keep',{params:{tel:this.getCookie('tel'),keep_name:keep_name,img_id:img_id}}).then((response)=>{
+                this.$http.get(this.GLOBAL.baseurl + 'v1/home/addto_keep',{params:{tel:this.getCookie('tel'),keep_name:keep_name,img_id:img_id}}).then((response)=>{
                     if(response.data == 1){
                         toastr.warning("该图片已经存在此收藏夹")
                         return false
@@ -457,7 +455,7 @@
         height:0;
     }
     ul li{list-style:none;}
-    ul{display: inline-block;}
+    ul{display: inline-block;padding:0px;margin: 0px;}
     li{float:left;margin-left:10px;}
     .select_ul{
         overflow:hidden;
@@ -662,7 +660,7 @@
         padding: 5px;
     }
     #select{
-        background: #fff;
+        background-color: #fff;
         font-size: 18px;
         position: absolute;
         color: #000;
@@ -687,9 +685,10 @@
         margin-left:0px;
     }
     .option{
-        width: 200px;
+        width: 170px;
         color: black;
         display: none;
+        padding-top: 10px;
     }
     .option-item{
         display:block;
@@ -698,6 +697,9 @@
         color: rgb(153, 153, 153);
         height: 25px;
         line-height: 25px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
     }
     .option-item:hover{
         color:#ea8010;

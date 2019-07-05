@@ -7,7 +7,7 @@
                     <div id="img_box" style="display: inline-block;">
                         <img id="img" src="" alt="" style="width: auto;max-width: 500px;max-height: 500px;display:inline-block;">
                     </div>
-                    <canvas id="myCanvas" style="display:none;max-width;500px;max-height:500px"></canvas>
+                    <canvas id="myCanvas" style="display:none;max-width:500px;max-height:500px"></canvas>
                 </div>
                 <!--<img id="bgImg" src="" alt="" style="display:none">-->
                 <!--<img id="dltImg" src="" alt="" style="display:none">-->
@@ -30,13 +30,13 @@
                         <div style="width: 40%;display: inline-block;">
                             <div style="width: 120px;padding: 5px;text-align: center;cursor: pointer;" id="is_cuts" data_id="1" v-model="is_cut" @click="is_cutting($event)">
                                 <img src="../../assets/images/freecut.png" alt="" height="40">
-                                <div class="cut_text">自由</div>
+                                <div class="cut_text" :class="is_select==1?'selected_cut':'select_cut'">自由</div>
                             </div>
                         </div>
                         <div style="width: 40%;display: inline-block;margin-top:20px;">
                             <div style="width: 120px;padding: 5px;text-align: center;cursor: pointer;" id="is_cuts1" @click="proportiona1_1($event)">
                                 <img style="width:40px;height:40px;display: inline-block;border: 2px solid #000;"></img>
-                                <div class="cut_text">1:1</div>
+                                <div class="cut_text" :class="is_select==2?'selected_cut':'select_cut'">1:1</div>
                             </div>
                         </div>
                         <div style="width: 40%;display: inline-block;margin-top:20px;">
@@ -44,13 +44,13 @@
                                 <div style="width: 40px;display: inline-block;">
                                     <img style="width:26px;height:40px;margin-left: 14px;display: inline-block;border: 2px solid #000;"></img>
                                 </div>
-                                <div class="cut_text">2:3</div>
+                                <div class="cut_text" :class="is_select==3?'selected_cut':'select_cut'">2:3</div>
                             </div>
                         </div>
                         <div style="width: 40%;display: inline-block;margin-top:20px;">
                             <div style="width: 120px;padding: 5px;text-align: center;cursor: pointer;" id="is_cuts3" @click="proportiona3_2">
                                 <img style="width:40px;height:26px;display: inline-block;border: 2px solid #000;"></img>
-                                <div class="cut_text">3:2</div>
+                                <div class="cut_text" :class="is_select==4?'selected_cut':'select_cut'">3:2</div>
                             </div>
                         </div>
                         <div style="width: 40%;display: inline-block;margin-top:20px;">
@@ -58,13 +58,13 @@
                                 <div style="width: 40px;display: inline-block;">
                                     <img style="width:20px;height:40px;margin-left: 20px;display: inline-block;border: 2px solid #000;"></img>
                                 </div>
-                                <div class="cut_text">1:2</div>
+                                <div class="cut_text" :class="is_select==5?'selected_cut':'select_cut'">1:2</div>
                             </div>
                         </div>
                         <div style="width: 40%;display: inline-block;margin-top:20px;">
                             <div style="width: 120px;padding: 5px;text-align: center;cursor: pointer;" id="is_cuts5" @click="proportiona2_1">
                                 <img style="width:40px;height:20px;display: inline-block;border: 2px solid #000;"></img>
-                                <div class="cut_text">2:1</div>
+                                <div class="cut_text" :class="is_select==6?'selected_cut':'select_cut'">2:1</div>
                             </div>
                         </div>
                         <div style="width: 40%;display: inline-block;margin-top:20px;">
@@ -72,13 +72,13 @@
                                 <div style="width: 40px;display: inline-block;">
                                     <img style="width:13px;height:40px;margin-left: 27px;display: inline-block;border: 2px solid #000;"></img>
                                 </div>
-                                <div class="cut_text">1:3</div>
+                                <div class="cut_text" :class="is_select==7?'selected_cut':'select_cut'">1:3</div>
                             </div>
                         </div>
                         <div style="width: 40%;display: inline-block;margin-top:20px;">
                             <div style="width: 120px;padding: 5px;text-align: center;cursor: pointer;" id="is_cuts7" @click="proportiona3_1">
                                 <img style="width:40px;height:13px;display: inline-block;border: 2px solid #000;"></img>
-                                <div class="cut_text">3:1</div>
+                                <div class="cut_text" :class="is_select==8?'selected_cut':'select_cut'">3:1</div>
                             </div>
                         </div>
                         <div style="margin-top:5px">
@@ -129,18 +129,19 @@
                             <li class="col-md-2 decoration" @click="select_decoration(5,$event)">单立体</li>
                         </ul>
                         <hr style="border-top: 1px solid #000;">
-                        <div style="height: 40px;line-height: 40px;">
+                        <div id="material_div" style="height: 40px;line-height: 40px;">
                             <div style="vertical-align: middle;display:inline-block;height: 40px;font-size: 15px;">画芯材质</div>
                             <select name="" id="material_select" v-model="material_val" class="btn" style="border:0px;padding:0px;font-size: 15px;color: #2c3e50;height: 40px;background-color:#EBEBEB">
-                                <option v-for="Material in Material" :value="Material">{{Material.name}}</option>
+                                <option v-for="(item,index) in Material" v-if="status != 4 && status != 7" :value="item">{{item.name}} </option>
+                                <option v-else-if="item.id == 1 || item.id == 2" :value="item">{{item.name}}</option>
                             </select>
                             <!--<ul style="display: inline-block;margin-right:10px">-->
                             <!--<li v-for="Material in Material">{{Material.name}}</li>-->
                             <!--</ul>-->
                             <img src="../../assets/images/prompt.png" alt="" height="25" @mouseenter="show_prompt2()" @mouseleave="hid_prompt2()">
-                            <span id="prompt2_text" style="vertical-align: middle;display:none;position: absolute;">无框绷架 套框绷架只能选择宣纸或者油画布</span>
+                            <span id="prompt2_text" style="vertical-align: middle;display:none;">无框绷架 套框绷架只能选择宣纸或者油画布</span>
                         </div>
-                        <hr style="border-top: 1px solid #000;">
+                        <hr id="material_hr" style="border-top: 1px solid #000;">
                         <div id="huaxin" style="padding: 5px;">
                             画芯: 宽<input type="text" id="img_width"  @input="assign_width($event)" oninput="value=value.replace(/[^\d.]/g,'')" style="width: 60px;height: 20px"> *
                             高<input type="text" id="img_height"  @input="assign_height($event)" oninput="value=value.replace(/[^\d.]/g,'')" style="width: 60px;height: 20px">/cm
@@ -307,10 +308,6 @@
     // import axios from 'axios'
     import HeadPage from "../../components/HeadPage"
     import Foot from "../../components/Foot"
-    const baseurl = 'https://api.zaoanart.com/'
-    const imgurl = 'https://api.zaoanart.com/resource/test/'
-    // const baseurl = 'http://api.demo.com/'
-    // const imgurl = 'http://localhost/yii-application/backend/web/test/'
     import '../../../node_modules/cropper/dist/cropper.js'
     import '../../../node_modules/cropper/dist/cropper.css'
 
@@ -329,6 +326,8 @@
                 max_info:[],
                 default_width:'',
                 default_height:'',
+                //卡纸默认留边
+                default_margin:7,
                 confirm_width:'',
                 confirm_height:'',
                 border:'',
@@ -342,6 +341,7 @@
                 status:'6',
                 //是否裁切
                 is_cut:'1',
+                is_select:0,
                 //图片地址
                 img_url:'',
                 box_width:0,
@@ -388,7 +388,7 @@
                 end_info:[],
                 //最后框信息
                 border_end_info:[],
-                image_url:'',
+                image_url:''
             }
         },
         components: {
@@ -415,9 +415,17 @@
                     }else if(this.status == '2'){
                         $("#img_width").val((Number(this.max_info.max_width)*Number(arr['cut_width'])).toFixed(1))
                         $("#img_height").val(($("#img_width").val()/arr['bili']) .toFixed(1))
+                        if(this.default_margin != 0){
+                            $("#box_img_width").val((Number($("#img_width").val()) + this.face_width*2 + this.default_margin*2).toFixed(1))
+                            $("#box_img_height").val((Number($("#img_height").val()) + this.face_width*2 + this.default_margin*2).toFixed(1))
+                        }
                     }else if(this.status == '3'){
                         $("#img_width").val((Number(this.max_info.max_width)*Number(arr['cut_width'])).toFixed(1))
                         $("#img_height").val(($("#img_width").val()/arr['bili']) .toFixed(1))
+                        if(this.default_margin != 0){
+                            $("#box_img_width").val((Number($("#img_width").val()) + this.face_width*2 + this.default_margin*2).toFixed(1))
+                            $("#box_img_height").val((Number($("#img_height").val()) + this.face_width*2 + this.default_margin*2).toFixed(1))
+                        }
                     }else if(this.status == '4'){
                         $("#img_width").val(((Number(arr.cut_width))*this.max_info.max_width).toFixed(1))
                         $("#img_height").val(($("#img_width").val()/arr['bili']) .toFixed(1))
@@ -483,7 +491,7 @@
                 $("#img").attr("src",'http://qiniu.zaoanart.com/'+arr2.img+'?t='+Math.random());
                 $("#img").attr("width",500)
                 //获取画框素材
-                this.$http.get(baseurl + 'v1/border/get_border').then((response)=>{
+                this.$http.get(this.GLOBAL.baseurl + 'v1/border/get_border').then((response)=>{
                     this.border = response.data
                     for(var i=0;i<response.data.length;i++){
                         this.border[i].preview_imgs = 'http://www.zaoanart.com:8000/test/preview/'+this.border[i].preview_img;
@@ -492,12 +500,12 @@
                     // this.border_status = this.border[0].img_name
                 })
                 //获取画框色系
-                this.$http.get(baseurl + 'v1/border/get_series').then((response)=>{
+                this.$http.get(this.GLOBAL.baseurl + 'v1/border/get_series').then((response)=>{
                     this.color_series = response.data
                     this.color_series_val = response.data[0]['id']
                 })
                 //获取画芯材质
-                this.$http.get(baseurl + 'v1/border/get_material').then((response)=>{
+                this.$http.get(this.GLOBAL.baseurl + 'v1/border/get_material').then((response)=>{
                     this.Material = response.data
                 })
             },
@@ -546,7 +554,7 @@
                     this.decoration_status = 9
                 }
                 //获取装裱方式价格跟浮动比例
-                this.$http.get(baseurl + 'v1/border/get_decoration_price',{params:{decoration_status:this.decoration_status}}).then((response)=>{
+                this.$http.get(this.GLOBAL.baseurl + 'v1/border/get_decoration_price',{params:{decoration_status:this.decoration_status}}).then((response)=>{
                     this.decoration_info = response.data
                     //装裱方式价格 = 总面积cm² * 装裱方式价格 元/cm² * 浮动比例
                     this.decoration_price = this.total_area * this.decoration_info.price/10000 * this.decoration_info.float_scale
@@ -586,26 +594,12 @@
             //如果选中裁切则裁切  否则删除
             is_cutting(e){
                 if(this.is_cut == 1){
-                    $('#is_cuts').css('border','double')
-                    $('#is_cuts1').css('border','none')
-                    $('#is_cuts2').css('border','none')
-                    $('#is_cuts3').css('border','none')
-                    $('#is_cuts4').css('border','none')
-                    $('#is_cuts5').css('border','none')
-                    $('#is_cuts6').css('border','none')
-                    $('#is_cuts7').css('border','none')
+                    this.is_select = 1
                     $('#is_cuts').attr('data_id','2')
                     this.is_cut = 2
                     this.proportional()
                 }else{
-                    $('#is_cuts').css('border','none')
-                    $('#is_cuts1').css('border','none')
-                    $('#is_cuts2').css('border','none')
-                    $('#is_cuts3').css('border','none')
-                    $('#is_cuts4').css('border','none')
-                    $('#is_cuts5').css('border','none')
-                    $('#is_cuts6').css('border','none')
-                    $('#is_cuts7').css('border','none')
+                    this.is_select = 0
                     $('#is_cuts').attr('data_id','1')
                     this.is_cut = 1
                     $('#img').cropper('destroy');
@@ -712,14 +706,7 @@
             },
             //裁切1/1
             proportiona1_1(e){
-                $('#is_cuts').css('border','none')
-                $('#is_cuts1').css('border','double')
-                $('#is_cuts2').css('border','none')
-                $('#is_cuts3').css('border','none')
-                $('#is_cuts4').css('border','none')
-                $('#is_cuts5').css('border','none')
-                $('#is_cuts6').css('border','none')
-                $('#is_cuts7').css('border','none')
+                this.is_select = 2
                 $("#img").attr("src",'http://qiniu.zaoanart.com/'+this.img+'?t='+Math.random());
                 $("#img").attr("width",500)
                 $('#img').cropper('destroy')
@@ -772,14 +759,7 @@
             },
             //裁切1/2
             proportiona1_2(){
-                $('#is_cuts').css('border','none')
-                $('#is_cuts1').css('border','none')
-                $('#is_cuts2').css('border','none')
-                $('#is_cuts3').css('border','none')
-                $('#is_cuts4').css('border','double')
-                $('#is_cuts5').css('border','none')
-                $('#is_cuts6').css('border','none')
-                $('#is_cuts7').css('border','none')
+                this.is_select = 5
                 $("#img").attr("src",'http://qiniu.zaoanart.com/'+this.img+'?t='+Math.random());
                 $("#img").attr("width",500)
                 $('#img').cropper('destroy')
@@ -832,14 +812,7 @@
             },
             //裁切1/3
             proportiona1_3(){
-                $('#is_cuts').css('border','none')
-                $('#is_cuts1').css('border','none')
-                $('#is_cuts2').css('border','none')
-                $('#is_cuts3').css('border','none')
-                $('#is_cuts4').css('border','none')
-                $('#is_cuts5').css('border','none')
-                $('#is_cuts6').css('border','double')
-                $('#is_cuts7').css('border','none')
+                this.is_select = 7
                 this.is_cut = 2
                 $("#img").attr("src",'http://qiniu.zaoanart.com/'+this.img+'?t='+Math.random());
                 $("#img").attr("width",500)
@@ -889,14 +862,7 @@
             },
             //裁切2/3
             proportiona2_3(){
-                $('#is_cuts').css('border','none')
-                $('#is_cuts1').css('border','none')
-                $('#is_cuts2').css('border','double')
-                $('#is_cuts3').css('border','none')
-                $('#is_cuts4').css('border','none')
-                $('#is_cuts5').css('border','none')
-                $('#is_cuts6').css('border','none')
-                $('#is_cuts7').css('border','none')
+                this.is_select = 3
                 $('#is_cuts').attr('data_id','2')
                 this.is_cut = 2
                 $("#img").attr("src",'http://qiniu.zaoanart.com/'+this.img+'?t='+Math.random());
@@ -947,14 +913,7 @@
             },
             //裁切2/1
             proportiona2_1(){
-                $('#is_cuts').css('border','none')
-                $('#is_cuts1').css('border','none')
-                $('#is_cuts2').css('border','none')
-                $('#is_cuts3').css('border','none')
-                $('#is_cuts4').css('border','none')
-                $('#is_cuts5').css('border','double')
-                $('#is_cuts6').css('border','none')
-                $('#is_cuts7').css('border','none')
+                this.is_select = 6
                 $('#is_cuts').attr('data_id','2')
                 this.is_cut = 2
                 $("#img").attr("src",'http://qiniu.zaoanart.com/'+this.img+'?t='+Math.random());
@@ -1005,14 +964,7 @@
             },
             //裁切3/1
             proportiona3_1(){
-                $('#is_cuts').css('border','none')
-                $('#is_cuts1').css('border','none')
-                $('#is_cuts2').css('border','none')
-                $('#is_cuts3').css('border','none')
-                $('#is_cuts4').css('border','none')
-                $('#is_cuts5').css('border','none')
-                $('#is_cuts6').css('border','none')
-                $('#is_cuts7').css('border','double')
+                this.is_select = 8
                 $('#is_cuts').attr('data_id','2')
                 this.is_cut = 2
                 $("#img").attr("src",'http://qiniu.zaoanart.com/'+this.img+'?t='+Math.random());
@@ -1063,14 +1015,7 @@
             },
             //裁切3/2
             proportiona3_2(){
-                $('#is_cuts').css('border','none')
-                $('#is_cuts1').css('border','none')
-                $('#is_cuts2').css('border','none')
-                $('#is_cuts3').css('border','double')
-                $('#is_cuts4').css('border','none')
-                $('#is_cuts5').css('border','none')
-                $('#is_cuts6').css('border','none')
-                $('#is_cuts7').css('border','none')
+                this.is_select = 4
                 $('#is_cuts').attr('data_id','2')
                 this.is_cut = 2
                 $("#img").attr("src",'http://qiniu.zaoanart.com/'+this.img+'?t='+Math.random());
@@ -1263,6 +1208,8 @@
                 $('#box_img_height').attr('disabled','disabled')
                 $('#preview2').css('display','none')
                 $('#preview3').css('display','inline-block')
+                $('#material_div').css('display','none')
+                $('#material_hr').css('display','none')
             },
             //选择装裱方式,1满裱,2卡纸,3盒子,4套框绷架,5单立体,6纯画芯,7无框绷架
             select_decoration(id,e){
@@ -1286,8 +1233,9 @@
                         break;
                     case 2:
                         this.status = 2;
-                        $('#select_box').css('display','block');
+                        this.default_margin = 7;
                         $('#color_tag_par').css('display','none');
+                        $('#select_box').css('display','block');
                         $('#color_tag_par2').css('display','inline-block');
                         $('#drawing_cores').css('display','inline-block');
                         $('#drawing_core').css('display','inline-block');
@@ -1401,6 +1349,8 @@
                 $('#box_img_height').val(this.box_height)
                 $('#preview2').css('display','inline-block')
                 $('#preview3').css('display','none')
+                $('#material_div').css('display','inline-block')
+                $('#material_hr').css('display','block')
             },
             //修改尺寸(宽)
             assign_width(e){
@@ -1426,6 +1376,7 @@
                     $("#box_img_height").val((Number($("#img_height").val()) + this.face_width*2).toFixed(1))
                     //卡纸
                 }else if(this.status == 2){
+                    this.default_margin = 0
                     if(this.is_cut == 1){
                         var img = document.getElementById("img")
                         var bili = (img.naturalWidth / img.naturalHeight).toFixed(4)
@@ -1548,6 +1499,7 @@
                     $("#box_img_height").val((Number($("#img_height").val()) + this.face_width*2).toFixed(1))
                     //卡纸
                 }else if(this.status == 2){
+                    this.default_margin = 0
                     if(this.is_cut == 1){
                         var img = document.getElementById("img")
                         var bili = (img.naturalWidth / img.naturalHeight).toFixed(4)
@@ -1678,6 +1630,7 @@
                     $("#img_height").val((Number($("#box_img_height").val()) - this.face_width*2).toFixed(1))
                     //卡纸
                 }else if(this.status == 2){
+                    this.default_margin = 0
                     //没有裁切
                     if(this.is_cut == 1){
                         var img = document.getElementById("img")
@@ -1903,6 +1856,7 @@
                     $("#img_height").val((Number($("#box_img_height").val()) - this.face_width*2).toFixed(1))
                     //卡纸
                 }else if(this.status == 2){
+                    this.default_margin = 0
                     //没有裁切
                     if(this.is_cut == 1){
                         var img = document.getElementById("img")
@@ -2212,6 +2166,11 @@
                 }else if(this.status == 7){
                     $("#box_img_width").val(Number($("#img_width").val()))
                     $("#box_img_height").val(Number($("#img_height").val()))
+                }else if(this.status == 2 || this.status == 3){
+                    if(this.default_margin != 0){
+                        $("#box_img_width").val((Number($("#img_width").val()) + this.face_width*2+this.default_margin*2).toFixed(1))
+                        $("#box_img_height").val((Number($("#img_height").val()) + this.face_width*2+this.default_margin*2).toFixed(1))
+                    }
                 }
                 var el = document.getElementsByClassName('border_confirm');
                 for(var k = el .length - 1; k >= 0; k--) {
@@ -2256,7 +2215,6 @@
                     }
                 }
                 this.generate_price()
-
                 if(this.is_cut ==1){
                     this.decoration()
                 }else{
@@ -2401,7 +2359,7 @@
                     if(vm.status == 1){
                         //绘制图片
                         ctx.drawImage(img,cut_box.x,cut_box.y,cut_box.width,cut_box.height,(c.width-img_width1/small)/2+direction_val_x/small,(c.height-img_height1/small)/2+direction_val_y/small,img_width1/small,img_height1/small)
-                        vm.$http.get(baseurl + 'v1/goods/decoration',{params:{img_name:vm.border_status,box_img_width1:box_img_width1,box_img_height1:box_img_height1,img_width1:img_width1,img_height1:img_height1,face_width:vm.face_width,small_face:small_face,need_width:c.width,need_height:c.height}}).then((response)=>{
+                        vm.$http.get(vm.GLOBAL.baseurl + 'v1/goods/decoration',{params:{img_name:vm.border_status,box_img_width1:box_img_width1,box_img_height1:box_img_height1,img_width1:img_width1,img_height1:img_height1,face_width:vm.face_width,small_face:small_face,need_width:c.width,need_height:c.height}}).then((response)=>{
                             vm.img_url = response.data
                             bgImg.src = vm.img_url
                             // $("#bgImg").attr("src",this.img_url);
@@ -2512,7 +2470,7 @@
                             // $("#bgImg").attr("src",this.img_url);
                             bgImg.src = vm.img_url
                         }else{
-                            vm.$http.get(baseurl + 'v1/goods/decoration',{params:{img_name:vm.border_status,box_img_width1:box_img_width1,box_img_height1:box_img_height1,img_width1:img_width1,img_height1:img_height1,face_width:vm.face_width,small_face:small_face,need_width:c.width,need_height:c.height}}).then((response)=>{
+                            vm.$http.get(vm.GLOBAL.baseurl + 'v1/goods/decoration',{params:{img_name:vm.border_status,box_img_width1:box_img_width1,box_img_height1:box_img_height1,img_width1:img_width1,img_height1:img_height1,face_width:vm.face_width,small_face:small_face,need_width:c.width,need_height:c.height}}).then((response)=>{
                                 vm.img_url = response.data
                                 bgImg.src = vm.img_url
                                 // $("#bgImg").attr("src",this.img_url);
@@ -2567,7 +2525,7 @@
                             bgImg.src = vm.img_url
                             // $("#bgImg").attr("src",this.img_url);
                         }else{
-                            vm.$http.get(baseurl + 'v1/goods/decoration',{params:{img_name:vm.border_status,box_img_width1:box_img_width1,box_img_height1:box_img_height1,img_width1:img_width1,img_height1:img_height1,face_width:vm.face_width,small_face:small_face,need_width:c.width,need_height:c.height}}).then((response)=>{
+                            vm.$http.get(vm.GLOBAL.baseurl + 'v1/goods/decoration',{params:{img_name:vm.border_status,box_img_width1:box_img_width1,box_img_height1:box_img_height1,img_width1:img_width1,img_height1:img_height1,face_width:vm.face_width,small_face:small_face,need_width:c.width,need_height:c.height}}).then((response)=>{
                                 vm.img_url = response.data
                                 bgImg.src = vm.img_url
                                 // $("#bgImg").attr("src",this.img_url);
@@ -2575,8 +2533,8 @@
                         }
                         bgImg.onload = function(){
                             //画阴影
-                            ctx.shadowOffsetX = 5; // 阴影Y轴偏移
-                            ctx.shadowOffsetY = 5; // 阴影X轴偏移
+                            ctx.shadowOffsetX = 2; // 阴影Y轴偏移
+                            ctx.shadowOffsetY = 2; // 阴影X轴偏移
                             ctx.shadowBlur = 5; // 模糊尺寸
                             ctx.shadowColor = 'rgba(0, 0, 0, 0.5)'; // 颜色
                             ctx.drawImage(bgImg,0,0,bgImg.naturalWidth,bgImg.naturalHeight,0,0,c.width,c.height);
@@ -2596,7 +2554,7 @@
                         //绘制画芯
                         ctx.drawImage(img,cut_box.x,cut_box.y,cut_box.width,cut_box.height,(c.width-img_width1/small)/2+Frame_width/small+direction_val_x/small,(c.height-img_height1/small)/2+Frame_width/small+direction_val_y/small,img_width1/small-Frame_width/small*2,img_height1/small-Frame_width/small*2);
                         //生成画框
-                        vm.$http.get(baseurl + 'v1/goods/decoration',{params:{img_name:vm.border_status,box_img_width1:box_img_width1,box_img_height1:box_img_height1,img_width1:img_width1,img_height1:img_height1,face_width:vm.face_width,small_face:small_face,need_width:c.width,need_height:c.height}}).then((response)=>{
+                        vm.$http.get(vm.GLOBAL.baseurl + 'v1/goods/decoration',{params:{img_name:vm.border_status,box_img_width1:box_img_width1,box_img_height1:box_img_height1,img_width1:img_width1,img_height1:img_height1,face_width:vm.face_width,small_face:small_face,need_width:c.width,need_height:c.height}}).then((response)=>{
                             vm.img_url = response.data
                             bgImg.src = vm.img_url
                             // $("#bgImg").attr("src",this.img_url);
@@ -2638,8 +2596,8 @@
                         // ctx.shadowBlur = 5; // 模糊尺寸
                         // ctx.shadowColor = 'rgba(0, 0, 0, 0.5)'; // 颜色
                         //生成单立体图
-                        vm.$http.get(baseurl + 'v1/goods/singlestereo',{params:{box_img_width1:box_img_width1+vm.drawing_core_val*30,box_img_height1:box_img_height1+vm.drawing_core_val*30,img_width1:img_width1,img_height1:img_height1,face_width:stereo_width}}).then((response)=>{
-                            dltImg.src = dltImg.src = imgurl+'singlestereo.jpg?t='+Math.random()
+                        vm.$http.get(vm.GLOBAL.baseurl + 'v1/goods/singlestereo',{params:{box_img_width1:box_img_width1+vm.drawing_core_val*30,box_img_height1:box_img_height1+vm.drawing_core_val*30,img_width1:img_width1,img_height1:img_height1,face_width:stereo_width}}).then((response)=>{
+                            dltImg.src = dltImg.src = this.GLOBAL.imgurl+'singlestereo.jpg?t='+Math.random()
                             // $("#dltImg").attr("src",'http://localhost/yii-application/backend/web/test/singlestereo.jpg?t='+Math.random());
                         })
                         //如果宽高有变化则后台生成边框素材,没有变化则直接获取
@@ -2647,7 +2605,7 @@
                             bgImg.src = vm.img_url
                             // $("#bgImg").attr("src",this.img_url);
                         }else{
-                            vm.$http.get(baseurl + 'v1/goods/decoration',{params:{img_name:vm.border_status,box_img_width1:box_img_width1,box_img_height1:box_img_height1,img_width1:img_width1,img_height1:img_height1,face_width:vm.face_width,small_face:small_face,need_width:c.width,need_height:c.height}}).then((response)=>{
+                            vm.$http.get(vm.GLOBAL.baseurl + 'v1/goods/decoration',{params:{img_name:vm.border_status,box_img_width1:box_img_width1,box_img_height1:box_img_height1,img_width1:img_width1,img_height1:img_height1,face_width:vm.face_width,small_face:small_face,need_width:c.width,need_height:c.height}}).then((response)=>{
                                 vm.img_url = response.data
                                 bgImg.src = vm.img_url
                                 // $("#bgImg").attr("src",this.img_url);
@@ -2765,7 +2723,7 @@
                         }
                     }
                 }
-                this.$http.get(baseurl + 'v1/goods/decoration',{params:{img_name:this.border_status,box_img_width1:box_img_width1,box_img_height1:box_img_height1,img_width1:img_width1,img_height1:img_height1,face_width:this.face_width,small_face:small_face,need_width:c.width,need_height:c.height}}).then((response)=>{
+                this.$http.get(this.GLOBAL.baseurl + 'v1/goods/decoration',{params:{img_name:this.border_status,box_img_width1:box_img_width1,box_img_height1:box_img_height1,img_width1:img_width1,img_height1:img_height1,face_width:this.face_width,small_face:small_face,need_width:c.width,need_height:c.height}}).then((response)=>{
                     this.img_url = response.data
                     bgImg.src = this.img_url
                 })
@@ -2978,7 +2936,7 @@
                             ctx.drawImage(bgImg,0,0,bgImg.naturalWidth,bgImg.naturalHeight,0,0,c.width,c.height);
                         }
                     }else{
-                        vm.$http.get(baseurl + 'v1/goods/decoration',{params:{img_name:vm.border_status,box_img_width1:box_img_width1,box_img_height1:box_img_height1,img_width1:img_width1,img_height1:img_height1,face_width:vm.face_width,small_face:small_face,need_width:c.width,need_height:c.height}}).then((response)=>{
+                        vm.$http.get(vm.GLOBAL.baseurl + 'v1/goods/decoration',{params:{img_name:vm.border_status,box_img_width1:box_img_width1,box_img_height1:box_img_height1,img_width1:img_width1,img_height1:img_height1,face_width:vm.face_width,small_face:small_face,need_width:c.width,need_height:c.height}}).then((response)=>{
                             vm.img_url = response.data
                             // $("#bgImg").attr("src",this.img_url);
                             bgImg.src = vm.img_url
@@ -3137,7 +3095,7 @@
                             ctx.drawImage(bgImg,0,0,bgImg.naturalWidth,bgImg.naturalHeight,0,0,c.width,c.height);
                         }
                     }else{
-                        vm.$http.get(baseurl + 'v1/goods/decoration',{params:{img_name:vm.border_status,box_img_width1:box_img_width1,box_img_height1:box_img_height1,img_width1:img_width1,img_height1:img_height1,face_width:vm.face_width,small_face:small_face,need_width:c.width,need_height:c.height}}).then((response)=>{
+                        vm.$http.get(vm.GLOBAL.baseurl + 'v1/goods/decoration',{params:{img_name:vm.border_status,box_img_width1:box_img_width1,box_img_height1:box_img_height1,img_width1:img_width1,img_height1:img_height1,face_width:vm.face_width,small_face:small_face,need_width:c.width,need_height:c.height}}).then((response)=>{
                             vm.img_url = response.data
                             // $("#bgImg").attr("src",this.img_url);
                             bgImg.src = vm.img_url
@@ -3146,8 +3104,8 @@
                             ctx.drawImage(bgImg,0,0,bgImg.naturalWidth,bgImg.naturalHeight,0,0,c.width,c.height);
                         }
                     }
-                    ctx.shadowOffsetX = 5; // 阴影Y轴偏移
-                    ctx.shadowOffsetY = 5; // 阴影X轴偏移
+                    ctx.shadowOffsetX = 2; // 阴影Y轴偏移
+                    ctx.shadowOffsetY = 2; // 阴影X轴偏移
                     ctx.shadowBlur = 5; // 模糊尺寸
                     ctx.shadowColor = 'rgba(0, 0, 0, 0.5)'; // 颜色
                     //最后生效框宽
@@ -3238,7 +3196,7 @@
                     ctx.fillRect((c.width-img_width1/small)/2+Frame_width/small-vm.drawing_core_val*30/small,(c.height-img_height1/small)/2+Frame_width/small-vm.drawing_core_val*30/small,img_width1/small-Frame_width/small*2+vm.drawing_core_val*30/small*2,img_height1/small-Frame_width/small*2+vm.drawing_core_val*30/small*2);
                     //绘画芯
                     ctx.drawImage(img,0,0,img.naturalWidth,img.naturalHeight,(c.width-img_width1/small)/2+Frame_width/small+direction_val_x/small,(c.height-img_height1/small)/2+Frame_width/small+direction_val_y/small,img_width1/small-Frame_width/small*2+1,img_height1/small-Frame_width/small*2+1);
-                    vm.$http.get(baseurl + 'v1/goods/decoration',{params:{img_name:vm.border_status,box_img_width1:box_img_width1,box_img_height1:box_img_height1,img_width1:img_width1,img_height1:img_height1,face_width:vm.face_width,small_face:small_face,need_width:c.width,need_height:c.height}}).then((response)=>{
+                    vm.$http.get(vm.GLOBAL.baseurl + 'v1/goods/decoration',{params:{img_name:vm.border_status,box_img_width1:box_img_width1,box_img_height1:box_img_height1,img_width1:img_width1,img_height1:img_height1,face_width:vm.face_width,small_face:small_face,need_width:c.width,need_height:c.height}}).then((response)=>{
                         vm.img_url = response.data
                         // $("#bgImg").attr("src",this.img_url);
                         bgImg.src = vm.img_url
@@ -3302,7 +3260,7 @@
                     // ctx.shadowBlur = 5; // 模糊尺寸
                     // ctx.shadowColor = 'rgba(0, 0, 0, 0.5)'; // 颜色
                     //生成单立体图
-                    vm.$http.get(baseurl + 'v1/goods/singlestereo',{params:{box_img_width1:img_width1+stereo_width+vm.drawing_core_val*30,box_img_height1:img_height1+stereo_width+vm.drawing_core_val*30,img_width1:img_width1,img_height1:img_height1,face_width:stereo_width}}).then((response)=>{
+                    vm.$http.get(vm.GLOBAL.baseurl + 'v1/goods/singlestereo',{params:{box_img_width1:img_width1+stereo_width+vm.drawing_core_val*30,box_img_height1:img_height1+stereo_width+vm.drawing_core_val*30,img_width1:img_width1,img_height1:img_height1,face_width:stereo_width}}).then((response)=>{
                     })
                     var direction_val_x = 0
                     var direction_val_y = 0
@@ -3358,14 +3316,14 @@
                     if(vm.last_border == vm.border_status && vm.confirm_width == $("#box_img_width").val() && vm.confirm_height == $("#box_img_height").val()){
                         // $("#bgImg").attr("src",this.img_url);
                         bgImg.src = vm.img_url
-                        dltImg.src = imgurl+'singlestereo.jpg?t='+Math.random()
+                        dltImg.src = this.GLOBAL.imgurl+'singlestereo.jpg?t='+Math.random()
                         // $("#dltImg").attr("src",imgurl+'singlestereo.jpg?t='+Math.random());
                     }else{
-                        vm.$http.get(baseurl + 'v1/goods/decoration',{params:{img_name:vm.border_status,box_img_width1:box_img_width1,box_img_height1:box_img_height1,img_width1:img_width1,img_height1:img_height1,face_width:vm.face_width,small_face:small_face,need_width:c.width,need_height:c.height}}).then((response)=>{
+                        vm.$http.get(vm.GLOBAL.baseurl + 'v1/goods/decoration',{params:{img_name:vm.border_status,box_img_width1:box_img_width1,box_img_height1:box_img_height1,img_width1:img_width1,img_height1:img_height1,face_width:vm.face_width,small_face:small_face,need_width:c.width,need_height:c.height}}).then((response)=>{
                             vm.img_url = response.data
                             // $("#bgImg").attr("src",this.img_url);
                             bgImg.src = vm.img_url
-                            dltImg.src = imgurl+'singlestereo.jpg?t='+Math.random()
+                            dltImg.src = this.GLOBAL.imgurl+'singlestereo.jpg?t='+Math.random()
                             // $("#dltImg").attr("src",imgurl+'singlestereo.jpg?t='+Math.random());
                         })
                     }
@@ -3629,8 +3587,8 @@
                         // $("#bgImg").attr("src",this.img_url);
                         bgImg.src = vm.img_url
                         bgImg.onload = function(){
-                            ctx.shadowOffsetX = 5; // 阴影Y轴偏移
-                            ctx.shadowOffsetY = 5; // 阴影X轴偏移
+                            ctx.shadowOffsetX = 2; // 阴影Y轴偏移
+                            ctx.shadowOffsetY = 2; // 阴影X轴偏移
                             ctx.shadowBlur = 5; // 模糊尺寸
                             ctx.shadowColor = 'rgba(0, 0, 0, 0.5)'; // 颜色
                             ctx.drawImage(bgImg,0,0,bgImg.naturalWidth,bgImg.naturalHeight,0,0,c.width,c.height);
@@ -3645,8 +3603,8 @@
                         // $("#bgImg").attr("src",this.img_url);
                         bgImg.src = vm.img_url
                         bgImg.onload = function(){
-                            ctx.shadowOffsetX = 5; // 阴影Y轴偏移
-                            ctx.shadowOffsetY = 5; // 阴影X轴偏移
+                            ctx.shadowOffsetX = 2; // 阴影Y轴偏移
+                            ctx.shadowOffsetY = 2; // 阴影X轴偏移
                             ctx.shadowBlur = 5; // 模糊尺寸
                             ctx.shadowColor = 'rgba(0, 0, 0, 0.5)'; // 颜色
                             ctx.drawImage(bgImg,0,0,bgImg.naturalWidth,bgImg.naturalHeight,0,0,c.width,c.height);
@@ -4072,16 +4030,16 @@
                             // $("#bgImg").attr("src",this.img_url);
                             bgImg.src = vm.img_url
                             bgImg.onload = function(){
-                                ctx.shadowOffsetX = 5; // 阴影Y轴偏移
-                                ctx.shadowOffsetY = 5; // 阴影X轴偏移
+                                ctx.shadowOffsetX = 2; // 阴影Y轴偏移
+                                ctx.shadowOffsetY = 2; // 阴影X轴偏移
                                 ctx.shadowBlur = 5; // 模糊尺寸
                                 ctx.shadowColor = 'rgba(0, 0, 0, 0.5)'; // 颜色
                                 ctx.drawImage(bgImg,0,0,bgImg.naturalWidth,bgImg.naturalHeight,0,0,c.width,c.height);
                             }
                         }else{
-                            ctx.shadowOffsetX = 0; // 阴影Y轴偏移
-                            ctx.shadowOffsetY = 0; // 阴影X轴偏移
-                            ctx.shadowBlur = 0; // 模糊尺寸
+                            ctx.shadowOffsetX = 2; // 阴影Y轴偏移
+                            ctx.shadowOffsetY = 2; // 阴影X轴偏移
+                            ctx.shadowBlur = 5; // 模糊尺寸
                             ctx.shadowColor = 'rgba(0, 0, 0, 0.5)'; // 颜色
                             //获取被裁切的图片数据
                             var being_cut = $('#img').cropper('getImageData', )
@@ -4110,8 +4068,8 @@
                             // $("#bgImg").attr("src",this.img_url);
                             bgImg.src = vm.img_url
                             bgImg.onload = function(){
-                                ctx.shadowOffsetX = 5; // 阴影Y轴偏移
-                                ctx.shadowOffsetY = 5; // 阴影X轴偏移
+                                ctx.shadowOffsetX = 2; // 阴影Y轴偏移
+                                ctx.shadowOffsetY = 2; // 阴影X轴偏移
                                 ctx.shadowBlur = 5; // 模糊尺寸
                                 ctx.shadowColor = 'rgba(0, 0, 0, 0.5)'; // 颜色
                                 ctx.drawImage(bgImg,0,0,bgImg.naturalWidth,bgImg.naturalHeight,0,0,c.width,c.height);
@@ -4126,6 +4084,10 @@
                             // $("#bgImg").attr("src",this.img_url);
                             bgImg.src = vm.img_url
                             bgImg.onload = function(){
+                                ctx.shadowOffsetX = 2; // 阴影Y轴偏移
+                                ctx.shadowOffsetY = 2; // 阴影X轴偏移
+                                ctx.shadowBlur = 5; // 模糊尺寸
+                                ctx.shadowColor = 'rgba(0, 0, 0, 0.5)'; // 颜色
                                 ctx.drawImage(bgImg,0,0,bgImg.naturalWidth,bgImg.naturalHeight,0,0,c.width,c.height);
                             }
                         }
@@ -4288,7 +4250,7 @@
                 }else{
                     this.end_info.user_tel = this.getCookie('tel')
                     this.end_info.imgid = this.imgid
-                    this.$http.post(baseurl + 'v1/goods/to_shopcar',{end_info: this.end_info},{emulateJSON: true}).then((response)=>{
+                    this.$http.post(this.GLOBAL.baseurl + 'v1/goods/to_shopcar',{end_info: this.end_info},{emulateJSON: true}).then((response)=>{
                         if(response.data == 1){
                             alert('添加成功,请到购物车下单')
                             location.reload()
@@ -4362,13 +4324,21 @@
         border: 1px solid black;
         cursor: sw-resize;
     }
+    .select_cut{
+        background-color: #ebebeb;
+        color:black;
+    }
+    .selected_cut{
+        background-color: #000;
+        color:#fff;
+    }
     #bottom{
         left: 50%;
         bottom: -1%;
         position: absolute;
         background-color: #fff;
         border: 1px solid black;
-        cursor: n-resize;
+        cursor: no-resize;
     }
     #right_bottom{
         right: -1%;

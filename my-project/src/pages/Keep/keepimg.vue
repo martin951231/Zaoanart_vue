@@ -132,8 +132,6 @@
             $('#delete_img_all').css('display','none')
         }
     })
-    const baseurl = 'https://api.zaoanart.com/'
-    // const baseurl = 'http://api.demo.com/';
     import axios from 'axios'
     export default {
         name: 'Keepimg',
@@ -218,7 +216,7 @@
                 for(var k in arr2){
                     var param = k
                 }
-                this.$http.get(baseurl + 'v1/home/findkeepimg',{params:{kid:arr2.id}}).then((response)=>{
+                this.$http.get(this.GLOBAL.baseurl + 'v1/home/findkeepimg',{params:{kid:arr2.id}}).then((response)=>{
                     if(response.data){
                         for(var i = 0; i<response.data.info.length;i++ ){
                             if(response.data.info[i]){
@@ -368,7 +366,7 @@
                     $(e.target).next("#mobile_keep").attr("data_id","0")
                 }
                 if(this.getCookie('tel')){
-                    this.$http.get(baseurl + 'v1/home/select_keep',{params:{tel:this.getCookie('tel')}}).then((response)=>{
+                    this.$http.get(this.GLOBAL.baseurl + 'v1/home/select_keep',{params:{tel:this.getCookie('tel')}}).then((response)=>{
                         this.keep_info = response.data
                     })
                 }
@@ -387,7 +385,7 @@
                     toastr.warning("不能操作同一个收藏夹")
                     return false
                 }else{
-                    this.$http.get(baseurl + 'v1/home/move_img',{params:{tel:this.getCookie('tel'),img_id:keepimg_id,new_keep:this.mobile_keep_select,old_keep:this.keep_name}}).then((response)=>{
+                    this.$http.get(this.GLOBAL.baseurl + 'v1/home/move_img',{params:{tel:this.getCookie('tel'),img_id:keepimg_id,new_keep:this.mobile_keep_select,old_keep:this.keep_name}}).then((response)=>{
                         if(response){
                             for(var i=0; i<this.keepimg.length; i++){
                                 if(this.keepimg[i].id == keepimg_id){
@@ -411,7 +409,7 @@
                     toastr.warning("不能操作同一个收藏夹")
                     return false
                 }else{
-                    this.$http.get(baseurl + 'v1/home/copy_img',{params:{tel:this.getCookie('tel'),img_id:keepimg_id,new_keep:this.mobile_keep_selects,old_keep:this.keep_name}}).then((response)=>{
+                    this.$http.get(this.GLOBAL.baseurl + 'v1/home/copy_img',{params:{tel:this.getCookie('tel'),img_id:keepimg_id,new_keep:this.mobile_keep_selects,old_keep:this.keep_name}}).then((response)=>{
                         if(response.data == 1){
                             toastr.warning("该收藏夹已经存在此张图片")
                         }else if(response.data == 0){
@@ -423,7 +421,7 @@
                 }
             },
             delete_img(keepimg_id){
-                this.$http.get(baseurl + 'v1/home/delete_img',{params:{tel:this.getCookie('tel'),img_id:keepimg_id,keep:this.keep_name}}).then((response)=>{
+                this.$http.get(this.GLOBAL.baseurl + 'v1/home/delete_img',{params:{tel:this.getCookie('tel'),img_id:keepimg_id,keep:this.keep_name}}).then((response)=>{
                     if(response.data){
                         for(var i=0; i<this.keepimg.length; i++){
                             if(this.keepimg[i].id == keepimg_id){
@@ -446,7 +444,7 @@
             //批量移动
             move_img_all_show(e){
                 if(this.getCookie('tel')){
-                    this.$http.get(baseurl + 'v1/home/select_keep',{params:{tel:this.getCookie('tel')}}).then((response)=>{
+                    this.$http.get(this.GLOBAL.baseurl + 'v1/home/select_keep',{params:{tel:this.getCookie('tel')}}).then((response)=>{
                         this.keep_info = response.data
                     })
                 }
@@ -463,7 +461,7 @@
             //批量复制
             copy_img_all_show(e){
                 if(this.getCookie('tel')){
-                    this.$http.get(baseurl + 'v1/home/select_keep',{params:{tel:this.getCookie('tel')}}).then((response)=>{
+                    this.$http.get(this.GLOBAL.baseurl + 'v1/home/select_keep',{params:{tel:this.getCookie('tel')}}).then((response)=>{
                         this.keep_info = response.data
                     })
                 }
@@ -509,7 +507,7 @@
                     toastr.warning("不能操作同一个收藏夹")
                     return false
                 }
-                this.$http.get(baseurl + 'v1/home/move_img_all',{params:{tel:this.getCookie('tel'),img_id:this.checked_one,new_keep:this.mobile_keep_select_all,old_keep:this.keep_name}}).then((response)=>{
+                this.$http.get(this.GLOBAL.baseurl + 'v1/home/move_img_all',{params:{tel:this.getCookie('tel'),img_id:this.checked_one,new_keep:this.mobile_keep_select_all,old_keep:this.keep_name}}).then((response)=>{
                     if(response.data){
                         for(var y=0; y<this.keepimg.length; y++){
                             for(var v = 0; v<this.checked_one.length;v++){
@@ -546,7 +544,7 @@
                     toastr.warning("不能操作同一个收藏夹")
                     return false
                 }
-                this.$http.get(baseurl + 'v1/home/copy_img_all',{params:{tel:this.getCookie('tel'),img_id:this.checked_one,new_keep:this.mobile_keep_selects_all,old_keep:this.keep_name}}).then((response)=>{
+                this.$http.get(this.GLOBAL.baseurl + 'v1/home/copy_img_all',{params:{tel:this.getCookie('tel'),img_id:this.checked_one,new_keep:this.mobile_keep_selects_all,old_keep:this.keep_name}}).then((response)=>{
                     if(response.data){
                         toastr.info("复制成功")
                         $("#copy_img_all").css("display","none")
@@ -568,7 +566,7 @@
                     toastr.warning("请选择要删除的图片")
                     return false
                 }
-                this.$http.get(baseurl + 'v1/home/delete_img_all',{params:{tel:this.getCookie('tel'),img_id:this.checked_one,keep:this.keep_name}}).then((response)=>{
+                this.$http.get(this.GLOBAL.baseurl + 'v1/home/delete_img_all',{params:{tel:this.getCookie('tel'),img_id:this.checked_one,keep:this.keep_name}}).then((response)=>{
                     if(response.data){
                         if(response.data){
                             for(var o=0; o<this.keepimg.length; o++){

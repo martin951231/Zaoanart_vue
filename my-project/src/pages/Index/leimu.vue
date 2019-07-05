@@ -40,6 +40,21 @@
                         </ul>
                     </div>
 
+                    <!--摄影列表-->
+                    <div style="position: absolute;width: 1200px;">
+                        <ul style="display: none;background-color: #fff;" id="sheying" @mouseleave="hide_cate()">
+                            <li class="ul_shadow" style="display: inline-block;margin-right: 5px;" v-for="(category,index) in category" :key="index" v-if="category.id==16">
+                                <a :href="'/#/erjiye?cate_id='+category.id+'&theme_id=0&color_id=0'">
+                                    <div style="text-align: center;">
+                                        <img :src="cate_img_url+category.face_img" alt="" width="100px" height="100px">
+                                        <br>
+                                        <a>{{category.category_name}}</a>
+                                    </div>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+
                     <!--综合绘画-->
                     <div style="position: absolute;width: 1200px;">
                         <ul style="display: none;background-color: #fff;" id="zonghehuihua" @mouseleave="hide_cate()">
@@ -166,8 +181,6 @@
 </template>
 <script>
     import axios from 'axios'
-    const baseurl = 'https://api.zaoanart.com/';
-    // const baseurl = 'http://api.demo.com/';
     export default {
         data () {
             return {
@@ -183,6 +196,7 @@
                 if(cate_id==999){
                     $('#cate_show_div').css('height','20px')
                     $('#qita').css('display','none')
+                    $('#sheying').css('display','none')
                     $('#zhuangshihua').css('display','none')
                     $('#zonghehuihua').css('display','none')
                     $('#guohua').css('display','none')
@@ -192,30 +206,42 @@
                 }
                 if(cate_id==1){
                     $('#guohua').css('display','none')
+                    $('#sheying').css('display','none')
                     $('#zonghehuihua').css('display','none')
                     $('#zhuangshihua').css('display','none')
                     $('#qita').css('display','none')
                     $('#youhua').css('display','inline-block')
                 }if(cate_id==2){
                     $('#guohua').css('display','inline-block')
+                    $('#sheying').css('display','none')
                     $('#youhua').css('display','none')
                     $('#zonghehuihua').css('display','none')
                     $('#zhuangshihua').css('display','none')
                     $('#qita').css('display','none')
                 }if(cate_id==3){
                     $('#zonghehuihua').css('display','inline-block')
+                    $('#sheying').css('display','none')
                     $('#guohua').css('display','none')
                     $('#youhua').css('display','none')
                     $('#zhuangshihua').css('display','none')
                     $('#qita').css('display','none')
                 }if(cate_id==4){
                     $('#zhuangshihua').css('display','inline-block')
+                    $('#sheying').css('display','none')
                     $('#zonghehuihua').css('display','none')
                     $('#guohua').css('display','none')
                     $('#youhua').css('display','none')
                     $('#qita').css('display','none')
                 }if(cate_id==5){
                     $('#qita').css('display','inline-block')
+                    $('#sheying').css('display','none')
+                    $('#zhuangshihua').css('display','none')
+                    $('#zonghehuihua').css('display','none')
+                    $('#guohua').css('display','none')
+                    $('#youhua').css('display','none')
+                }if(cate_id==16){
+                    $('#sheying').css('display','inline-block')
+                    $('#qita').css('display','none')
                     $('#zhuangshihua').css('display','none')
                     $('#zonghehuihua').css('display','none')
                     $('#guohua').css('display','none')
@@ -240,10 +266,10 @@
             }
         },
         mounted(){
-            this.$http.get(baseurl + 'v1/category/findcategory1').then((response)=>{
+            this.$http.get(this.GLOBAL.baseurl + 'v1/category/findcategory1').then((response)=>{
                 this.category = response.data
             }),
-                this.$http.get(baseurl + 'v1/theme/findtheme').then((response)=>{
+                this.$http.get(this.GLOBAL.baseurl + 'v1/theme/findtheme').then((response)=>{
                     this.theme = response.data
                 })
         },

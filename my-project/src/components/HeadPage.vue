@@ -1,8 +1,9 @@
 <template>
     <div style="font-size: 15px;margin-bottom:100px;margin-top: 15px;">
         <div style="float:right;height: 70px;position: absolute;right: 50px;padding-top: 50px;">
-            <input id="search_input" type="text" v-model="input" style="text-align: right;display:none;outline:none;border: 0px;border-bottom: 1px solid #ccc;width: 100px;">
-            <img src="../assets/images/search.png" alt="" width="20px" @click="test1" style="cursor: pointer;">
+            <input id="search_input" type="text" v-model="input" @input ="search_content" style="text-align: right;display:none;outline:none;border: 0px;border-bottom: 1px solid #ccc;width: 100px;">
+            <img id="search" src="../assets/images/search.png" alt="" width="20px" @click="search($event)" style="cursor: pointer;">
+            <img id="search_hide" src="../assets/images/search_hide.png" alt="" width="20px" @click="search_hide($event)" style="cursor: pointer;display:none">
             <div v-if="telphone" style="display: inline-block;">
                 <a href="/#/keep" class="login_sign" target="_blank">
                     <img src="../assets/images/keep.png" width="20px" id="show_keep_img">
@@ -41,7 +42,7 @@
                 <ul>
                     <li class="show_keep_li" style="padding: 10px 0px 10px 20px;min-width:100px;display:block;color:#000;font-weight: bold;">收藏夹</li>
                     <a id="show_keep_a" style="height: 25px;line-height: 25px;" v-for="keep in keep" :href="'/#/keep/keepimg?id='+keep.id" target="_blank">
-                        <li class="show_keep_li" style="padding-left:20px;margin:0px;min-width:100px;display:block;color:#000">{{keep.keep_name}}</li>
+                        <li class="show_keep_li" style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;padding-left:20px;margin:0px;min-width:100px;display:block;color:#000">{{keep.keep_name}}</li>
                     </a>
                 </ul>
             </div>
@@ -73,7 +74,7 @@
                         <li v-for="theme1 in theme1" :id="'themes'+theme1.id" class="select_li theme_div" @click="theme_find($event,theme1.id)">{{theme1.theme_name}}</li>
                     </ul>
                     <ul id="color_select" class="select_ul" data_id="0" @mouseenter="show($event)" @mouseleave="hidden($event)" style="width:100px;color: rgb(247, 247, 247);">
-                        <div style="padding-left: 15px;width: 100px;height: 20px;">
+                        <div id="color_select_div" style="padding-left: 15px;width: 100px;height: 20px;">
                             <img id="color_select_img" src="../assets/images/color.png" alt="" width="20px">
                             <span id="color_select_one" style="color:#000">颜色</span>
                         </div>
@@ -100,8 +101,6 @@
 </template>
 <script>
     import axios from 'axios'
-    const baseurl = 'https://api.zaoanart.com/';
-    // const baseurl = 'http://api.demo.com/';
     export default {
         name: 'HeadPage',
         data () {
@@ -128,11 +127,11 @@
         methods:{
             initData(){
                 //获取分类
-                this.$http.get(baseurl + 'v1/category/findcategory').then(function(res){
+                this.$http.get(this.GLOBAL.baseurl + 'v1/category/findcategory').then(function(res){
                     this.category = res.data
                 })
                 // //获取主题
-                this.$http.get(baseurl + 'v1/theme/findtheme').then(function(res){
+                this.$http.get(this.GLOBAL.baseurl + 'v1/theme/findtheme').then(function(res){
                     this.theme1 = res.data
                     // for(var k=0;k<this.theme1.length;k++){
                     //     $("#theme_select_one").html(this.theme1[k].theme_name)
@@ -140,7 +139,7 @@
                 })
                 //如果登陆则获取收藏夹信息
                 if(this.telphone){
-                    this.$http.get(baseurl + 'v1/home/findkeepname',{params:{tel: this.telphone}}).then((response)=>{
+                    this.$http.get(this.GLOBAL.baseurl + 'v1/home/findkeepname',{params:{tel: this.telphone}}).then((response)=>{
                         this.keep = response.data
                     })
                 }
@@ -161,20 +160,33 @@
                     }
                 }
             },
-            test1: function () {
+            search_content:function(){
+                this.GLOBAL.search = this.input
+            },
+            search: function (e) {
+                $(e.target).css("display",'none')
+                $('#search_hide').css("display",'inline-block')
                 $('#search_input').animate({width:'toggle'})
+                var cate_id = $("#cate_select").attr('data_id')
+                var theme_id = $("#theme_select").attr('data_id')
+                var color_id = $("#color_select").attr('data_id')
                 var vm = this
                 $(document).keydown(function(event){
                     switch(event.keyCode) {
                         case 13:
                             if(vm.input){
                                 var term = encodeURI(vm.input)
-                                vm.$router.push({path:'/erjiye?term='+term});
+                                vm.$router.push({path:"/erjiye?cate_id="+cate_id+"&theme_id="+theme_id+"&color_id="+color_id+"&search="+vm.GLOBAL.search+"&pageSize="+vm.pageSize+"&currentPage="+vm.currentPage+""})
                             }else{
                                 alert('请输入搜索内容')
                             }
                     }
                 });
+            },
+            search_hide(e){
+                $('#search').css("display",'inline-block')
+                $(e.target).css("display",'none')
+                $('#search_input').animate({width:'toggle'})
             },
             //退出
             login_out(){
@@ -215,17 +227,19 @@
                 //     $("#cate_select_one").css('color','rgb(253, 162, 100)')
                 // }
                 $("#cate_select").attr('data_id',cate_id)
+                var term = encodeURI(this.input)
                 var theme_id = $("#theme_select").attr('data_id')
                 var color_id = $("#color_select").attr('data_id')
-                this.$router.push({path:"/erjiye?cate_id="+cate_id+"&theme_id="+theme_id+"&color_id="+color_id+"&pageSize="+this.pageSize+"&currentPage="+this.currentPage+""})
+                this.$router.push({path:"/erjiye?cate_id="+cate_id+"&theme_id="+theme_id+"&color_id="+color_id+"&search="+this.GLOBAL.search+"&pageSize="+this.pageSize+"&currentPage="+this.currentPage+""})
             },
             //1级分类查询
             cate_find(e,id){
                 // var data_info = e.target.getAttribute("data_id")
                 $(e.target).parent().parent().attr('data_id',id)
+                var term = encodeURI(this.input)
                 var theme_id = $("#theme_select").attr('data_id')
                 var color_id = $("#color_select").attr('data_id')
-                this.$router.push({path:"/erjiye?cate_id="+id+"&theme_id="+theme_id+"&color_id="+color_id+"&pageSize="+this.pageSize+"&currentPage="+this.currentPage+""})
+                this.$router.push({path:"/erjiye?cate_id="+id+"&theme_id="+theme_id+"&color_id="+color_id+"&search="+this.GLOBAL.search+"&pageSize="+this.pageSize+"&currentPage="+this.currentPage+""})
             },
             //主题查询
             theme_find(e,theme_id){
@@ -239,9 +253,10 @@
                 //     $("#theme_select_one").css('color','rgb(253, 162, 100)')
                 // }
                 $("#theme_select").attr('data_id',theme_id)
+                var term = encodeURI(this.input)
                 var cate_id = $("#cate_select").attr('data_id')
                 var color_id = $("#color_select").attr('data_id')
-                this.$router.push({path:"/erjiye?cate_id="+cate_id+"&theme_id="+theme_id+"&color_id="+color_id+"&pageSize="+this.pageSize+"&currentPage="+this.currentPage+""})
+                this.$router.push({path:"/erjiye?cate_id="+cate_id+"&theme_id="+theme_id+"&color_id="+color_id+"&search="+this.GLOBAL.search+"&pageSize="+this.pageSize+"&currentPage="+this.currentPage+""})
             },
             //颜色查询
             color_find(e,color_id){
@@ -253,80 +268,93 @@
                     case 0:
                         // $("#color_select_one").css("background-color",'rgba(255, 255, 255, 0.7)');
                         $("#color_select").css("background-color",'rgb(255, 255, 255, 0.7)');
+                        $("#color_select_div").css("border",'none');
                         $("#color_select_one").html('颜色')
                         $("#color_select_img").css('display','inline-block')
                         break;
                     case 1:
                         // $("#color_select_one").css("background-color",'rgb(255,0,0)');
                         $("#color_select").css("background-color",'rgb(255,0,0)');
+                        $("#color_select_div").css("border",'none');
                         $("#color_select_one").html('')
                         $("#color_select_img").css('display','none')
                         break;
                     case 2:
                         // $("#color_select").css("background-color",'rgb(255,150,0)');
                         $("#color_select").css("background-color",'rgb(255,150,0)');
+                        $("#color_select_div").css("border",'none');
                         $("#color_select_one").html('')
                         $("#color_select_img").css('display','none')
                         break;
                     case 3:
                         // $("#color_select_one").css("background-color",'rgb(255,255,0)');
                         $("#color_select").css("background-color",'rgb(255,255,0)');
+                        $("#color_select_div").css("border",'none');
                         $("#color_select_one").html('')
                         $("#color_select_img").css('display','none')
                         break;
                     case 4:
                         // $("#color_select_one").css("background-color",'rgb(0,255,0)');
                         $("#color_select").css("background-color",'rgb(0,255,0)');
+                        $("#color_select_div").css("border",'none');
                         $("#color_select_one").html('')
                         $("#color_select_img").css('display','none')
                         break;
                     case 5:
                         // $("#color_select_one").css("background-color",'rgb(0,255,255)');
                         $("#color_select").css("background-color",'rgb(0,255,255)');
+                        $("#color_select_div").css("border",'none');
                         $("#color_select_one").html('')
                         $("#color_select_img").css('display','none')
                         break;
                     case 6:
                         // $("#color_select_one").css("background-color",'rgb(0,0,255)');
                         $("#color_select").css("background-color",'rgb(0,0,255)');
+                        $("#color_select_div").css("border",'none');
                         $("#color_select_one").html('')
                         $("#color_select_img").css('display','none')
                         break;
                     case 7:
                         // $("#color_select_one").css("background-color",'rgb(100,50,150)');
                         $("#color_select").css("background-color",'rgb(100,50,150)');
+                        $("#color_select_div").css("border",'none');
                         $("#color_select_one").html('')
                         $("#color_select_img").css('display','none')
                         break;
                     case 8:
                         // $("#color_select_one").css("background-color",'rgb(255,150,255)');
                         $("#color_select").css("background-color",'rgb(255,150,255)');
+                        $("#color_select_div").css("border",'none');
                         $("#color_select_one").html('')
                         $("#color_select_img").css('display','none')
                         break;
                     case 9:
                         // $("#color_select_one").css("background-color",'rgb(255,255,255)');
                         $("#color_select").css("background-color",'rgb(255,255,255)');
+                        $("#color_select_div").css("border",'2px solid #000');
                         $("#color_select_one").html('')
                         $("#color_select_img").css('display','none')
                         break;
                     case 10:
                         // $("#color_select_one").css("background-color",'rgb(0,0,0)');
                         $("#color_select").css("background-color",'rgb(0,0,0)');
+                        $("#color_select_div").css("border",'none');
                         $("#color_select_one").html('')
                         $("#color_select_img").css('display','none')
                         break;
                     case 11:
                         // $("#color_select_one").css("background-color",'rgb(120,120,120)');
                         $("#color_select").css("background-color",'rgb(120,120,120)');
+                        $("#color_select_div").css("border",'none');
                         $("#color_select_one").html('')
                         $("#color_select_img").css('display','none')
                         break;
                 }
                 $("#color_select").attr('data_id',color_id)
+                var term = encodeURI(this.input)
                 var cate_id = $("#cate_select").attr('data_id')
                 var theme_id = $("#theme_select").attr('data_id')
-                this.$router.push({path:"/erjiye?cate_id="+cate_id+"&theme_id="+theme_id+"&color_id="+color_id+"&pageSize="+this.pageSize+"&currentPage="+this.currentPage+""})
+                this.$router.push({path:"/erjiye?cate_id="+cate_id+"&theme_id="+theme_id+"&color_id="+color_id+"&search="+this.GLOBAL.search+"&pageSize="+this.pageSize+"&currentPage="+this.currentPage+""})
             },
             //显示退出按钮
             show_user(){

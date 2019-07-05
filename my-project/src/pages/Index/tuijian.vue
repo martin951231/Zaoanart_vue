@@ -32,8 +32,6 @@
 </template>
 <script>
     import axios from 'axios'
-    const baseurl = 'https://api.zaoanart.com/';
-    // const baseurl = 'http://api.demo.com/';
     export default {
         data(){
             return{
@@ -44,7 +42,7 @@
 
         },
         mounted(){
-            this.$http.get(baseurl + 'v1/home/findreckeep').then((response)=>{
+            this.$http.get(this.GLOBAL.baseurl + 'v1/home/findreckeep').then((response)=>{
                 this.keep_info = response.data
             })
         }

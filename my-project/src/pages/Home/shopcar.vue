@@ -68,8 +68,6 @@
     import HeadPage from "../../components/HeadPage";
     import Foot from "../../components/Foot";
     import axios from 'axios';
-    const baseurl = 'https://api.zaoanart.com/';
-    // const baseurl = 'http://api.demo.com/';
     const excelurl = 'https://www.zaoanart.com/resource/excel/'
     // const excelurl = 'http://zaoanyishu.backends.com/excel/'
     export default {
@@ -104,7 +102,7 @@
         methods:{
             initData(){
                 if(this.login_phone){
-                    this.$http.post(baseurl + 'v1/home/homeinfo',{username:this.login_phone},{emulateJSON: true}).then((response)=>{
+                    this.$http.post(this.GLOBAL.baseurl + 'v1/home/homeinfo',{username:this.login_phone},{emulateJSON: true}).then((response)=>{
                         this.user_info = response.data
                     })
                     this.find_car()
@@ -118,19 +116,19 @@
                     toastr.warning("请先登录")
                     return false
                 }
-                this.$http.get(baseurl + 'v1/home/select_keep',{params:{tel:this.login_phone}}).then((response)=>{
+                this.$http.get(this.GLOBAL.baseurl + 'v1/home/select_keep',{params:{tel:this.login_phone}}).then((response)=>{
                     this.keep_info = response.data
                 })
             },
             //查询购物车数据
             find_car(){
-                this.$http.get(baseurl + 'v1/home/find_car',{params:{tel:this.login_phone}}).then((response)=>{
+                this.$http.get(this.GLOBAL.baseurl + 'v1/home/find_car',{params:{tel:this.login_phone}}).then((response)=>{
                     this.shopcar_info = response.data
                 })
             },
             //生成表格
             to_excel(e,data){
-                this.$http.post(baseurl + 'v1/home/to_excel',{data:data},{emulateJSON: true}).then((response)=>{
+                this.$http.post(this.GLOBAL.baseurl + 'v1/home/to_excel',{data:data},{emulateJSON: true}).then((response)=>{
                     if(response.data == 1){
                         alert('订单已生成,请直接下载')
                     }else{

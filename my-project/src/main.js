@@ -11,9 +11,11 @@ import VueLazyLoad from 'vue-lazyload'
 import $ from 'jquery'
 import popper from 'popper'
 import toastr from 'toastr'
+import global from './global'
 import bootstrap from 'bootstrap'
 import VuePaginate from 'vue-paginate'
 Vue.prototype.$ajax = Axios
+Vue.prototype.GLOBAL = global
 Vue.config.productionTip = false
 Vue.use(VueLazyLoad,{
 // Vue.use(iView)
@@ -49,7 +51,7 @@ Vue.prototype.getCookie=function(c_name) {
 toastr.options = {
     closeButton: true,
     debug: false,
-    positionClass: "toast-bottom-center",
+    positionClass: "toast-top-center",
     onclick: null,
     showDuration: "300",
     hideDuration: "1000",

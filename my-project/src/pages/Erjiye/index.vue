@@ -9,9 +9,8 @@
             </div>
         </div>
         <div class="lanmu clearfix">
-            <span v-if="is_prompt !=0" style="height: 30px;line-height: 30px;float: left;"><a href="/#/erjiye?cate_id=0&theme_id=0&color_id=0&pageSize=50&currentPage=1">全部商品</a> > {{prompts}}
-
-            </span>
+            <span style="height: 30px;line-height: 30px;float: left;"><a href="/#/erjiye?cate_id=0&theme_id=0&color_id=0&pageSize=50&currentPage=1">全部商品</a> > {{lanmu}}</span>
+            <!--<span v-if="is_prompt !=0" style="height: 30px;line-height: 30px;float: left;"><a href="/#/erjiye?cate_id=0&theme_id=0&color_id=0&pageSize=50&currentPage=1">全部商品</a> > {{prompts}}</span>-->
             <span style="height: 30px;line-height: 30px;">
                 <a class="contrast_a" @click="contrast_tab($event,-1)" data_id="0">横</a>
                 <a class="contrast_a" @click="contrast_tab($event,1)" data_id="0">竖</a>
@@ -68,8 +67,6 @@
     import Paginate from 'vuejs-paginate'
     import baguetteBox1 from "../../assets/js/baguetteBox.js";
     import axios from 'axios'
-    const baseurl = 'https://api.zaoanart.com/';
-    // const baseurl = 'http://api.demo.com/';
     import MoPaging from './mo-paging'
     export default {
         name: 'ImageList',
@@ -164,72 +161,84 @@
                 {
                     case 0:
                         $("#color_select").css("background-color",'rgb(255, 255, 255, 0.7)');
+                         $("#color_select_div").css("border",'none');
                         $("#color_select_one").html('颜色')
                         $("#color_select_img").css('display','inline-block')
                         break;
                     case 1:
                         // $("#color_select_one").css("background-color",'rgb(255,0,0)');
                         $("#color_select").css("background-color",'rgb(255,0,0)');
+                         $("#color_select_div").css("border",'none');
                         $("#color_select_one").html('')
                         $("#color_select_img").css('display','none')
                         break;
                     case 2:
                         // $("#color_select").css("background-color",'rgb(255,150,0)');
                         $("#color_select").css("background-color",'rgb(255,150,0)');
+                         $("#color_select_div").css("border",'none');
                         $("#color_select_one").html('')
                         $("#color_select_img").css('display','none')
                         break;
                     case 3:
                         // $("#color_select_one").css("background-color",'rgb(255,255,0)');
                         $("#color_select").css("background-color",'rgb(255,255,0)');
+                         $("#color_select_div").css("border",'none');
                         $("#color_select_one").html('')
                         $("#color_select_img").css('display','none')
                         break;
                     case 4:
                         // $("#color_select_one").css("background-color",'rgb(0,255,0)');
                         $("#color_select").css("background-color",'rgb(0,255,0)');
+                         $("#color_select_div").css("border",'none');
                         $("#color_select_one").html('')
                         $("#color_select_img").css('display','none')
                         break;
                     case 5:
                         // $("#color_select_one").css("background-color",'rgb(0,255,255)');
                         $("#color_select").css("background-color",'rgb(0,255,255)');
+                         $("#color_select_div").css("border",'none');
                         $("#color_select_one").html('')
                         $("#color_select_img").css('display','none')
                         break;
                     case 6:
                         // $("#color_select_one").css("background-color",'rgb(0,0,255)');
                         $("#color_select").css("background-color",'rgb(0,0,255)');
+                         $("#color_select_div").css("border",'none');
                         $("#color_select_one").html('')
                         $("#color_select_img").css('display','none')
                         break;
                     case 7:
                         // $("#color_select_one").css("background-color",'rgb(100,50,150)');
                         $("#color_select").css("background-color",'rgb(100,50,150)');
+                         $("#color_select_div").css("border",'none');
                         $("#color_select_one").html('')
                         $("#color_select_img").css('display','none')
                         break;
                     case 8:
                         // $("#color_select_one").css("background-color",'rgb(255,150,255)');
                         $("#color_select").css("background-color",'rgb(255,150,255)');
+                         $("#color_select_div").css("border",'none');
                         $("#color_select_one").html('')
                         $("#color_select_img").css('display','none')
                         break;
                     case 9:
                         // $("#color_select_one").css("background-color",'rgb(255,255,255)');
                         $("#color_select").css("background-color",'rgb(255,255,255)');
+                        $("#color_select_div").css("border",'2px solid #000');
                         $("#color_select_one").html('')
                         $("#color_select_img").css('display','none')
                         break;
                     case 10:
                         // $("#color_select_one").css("background-color",'rgb(0,0,0)');
                         $("#color_select").css("background-color",'rgb(0,0,0)');
+                         $("#color_select_div").css("border",'none');
                         $("#color_select_one").html('')
                         $("#color_select_img").css('display','none')
                         break;
                     case 11:
                         // $("#color_select_one").css("background-color",'rgb(120,120,120)');
                         $("#color_select").css("background-color",'rgb(120,120,120)');
+                         $("#color_select_div").css("border",'none');
                         $("#color_select_one").html('')
                         $("#color_select_img").css('display','none')
                         break;
@@ -240,7 +249,7 @@
                     if (arr2.id) {
                         goods_id = arr2.id
                     }
-                    this.$http.get(baseurl + 'v1/goods/findgoodsd', {
+                    this.$http.get(this.GLOBAL.baseurl + 'v1/goods/findgoodsd', {
                         params: {
                             label_id: arr2.label_id,
                             id: goods_id,
@@ -263,7 +272,7 @@
                     })
                 }else if(param == 'term'){
                     this.is_prompt = 1
-                    this.$http.get(baseurl + 'v1/goods/findgoodsown',{params:{term: decodeURI(arr2.term),pageSize:this.pageSize,currentPage:this.currentPage,contrast:this.contrast}}).then((response)=>{
+                    this.$http.get(this.GLOBAL.baseurl + 'v1/goods/findgoodsown',{params:{term: decodeURI(arr2.term),pageSize:this.pageSize,currentPage:this.currentPage,contrast:this.contrast}}).then((response)=>{
                         if(response.body){
                             for(var i = 0; i<response.body.length;i++ ){
                                 response.body[i].image  = 'http://qiniu.zaoanart.com/'+response.body[i].image+'?imageView2/2/h/500'
@@ -280,7 +289,7 @@
                     })
                 }else if(param == 'label_all'){
                     this.is_prompt = 1
-                    this.$http.get(baseurl + 'v1/goods/findmayimgall',{params:{id: arr2.label_all,pageSize:this.pageSize,currentPage:this.currentPage,contrast:this.contrast}}).then((response)=>{
+                    this.$http.get(this.GLOBAL.baseurl + 'v1/goods/findmayimgall',{params:{id: arr2.label_all,pageSize:this.pageSize,currentPage:this.currentPage,contrast:this.contrast}}).then((response)=>{
                         this.prompts = response.body[0].label_name
                         this.dataImageList = response.body
                         this.count = Number(response.body[0].count)
@@ -295,13 +304,20 @@
                     // if(arr2.theme_id != 0){
                     //     $("#theme_select_one").css('color','rgb(253, 162, 100)')
                     // }
+                    if(arr2.term){
+                        var search = decodeURI(arr2.term)
+                    }else{
+                        var search = null
+                    }
                     this.is_prompt = 0
-                    this.$http.get(baseurl + 'v1/goods/category_find',{params:{cate_id:arr2.cate_id,theme_id:arr2.theme_id,color_id:arr2.color_id,pageSize:this.pageSize,currentPage:this.currentPage,contrast:this.contrast}}).then(function(response){
+                    this.$http.get(this.GLOBAL.baseurl + 'v1/goods/category_find',{params:{cate_id:arr2.cate_id,theme_id:arr2.theme_id,color_id:arr2.color_id,search:this.GLOBAL.search,pageSize:this.pageSize,currentPage:this.currentPage,contrast:this.contrast}}).then(function(response){
+                        console.log(response.body)
                         for(var i = 0; i<response.body.length;i++ ){
                             response.body[i].image  = 'http://qiniu.zaoanart.com/'+response.body[i].image+'?imageView2/2/h/500'
                         }
                         if(response.body){
                             this.count = Number(response.body[0].count)
+                            this.lanmu = response.body[0].end_condition
                         }else{
                             this.count = false
                             this.prompt = '暂时没有图片'
@@ -374,7 +390,7 @@
             },
             keep_show2(){
                 if(this.telphone){
-                    this.$http.get(baseurl + 'v1/home/select_keep',{params:{tel:this.telphone}}).then((response)=>{
+                    this.$http.get(this.GLOBAL.baseurl + 'v1/home/select_keep',{params:{tel:this.telphone}}).then((response)=>{
                         this.keep_info = response.data
                     })
                 }
@@ -392,7 +408,7 @@
                     toastr.warning("请选择要添加的收藏夹")
                     return false
                 }
-                this.$http.get(baseurl + 'v1/home/addto_keep',{params:{tel:this.telphone,keep_name:this.keep_option,img_id:img_id}}).then((response)=>{
+                this.$http.get(this.GLOBAL.baseurl + 'v1/home/addto_keep',{params:{tel:this.telphone,keep_name:this.keep_option,img_id:img_id}}).then((response)=>{
                     if(response.data == 1){
                         toastr.warning("该图片已经存在此收藏夹")
                         return false
@@ -404,7 +420,7 @@
                 })
             },
             findcategory(){
-                this.$http.get(baseurl + 'v1/category/findcategory').then(function(res){
+                this.$http.get(this.GLOBAL.baseurl + 'v1/category/findcategory').then(function(res){
                     this.category = res.data
                 })
             },

@@ -21,8 +21,6 @@
     </div>
 </template>
 <script>
-    // const baseurl = 'http://api.demo.com/';
-    const baseurl = 'https://api.zaoanart.com/';
     export default {
         data(){
             return{
@@ -37,7 +35,7 @@
             }
         },
         mounted(){
-            this.$http.get(baseurl + 'v1/home/findlunbotu').then((response)=>{
+            this.$http.get(this.GLOBAL.baseurl + 'v1/home/findlunbotu').then((response)=>{
                 for(var i=0;i<response.data.length;i++){
                     response.data[i] = 'http://qiniu.zaoanart.com/'+response.data[i]
                 }

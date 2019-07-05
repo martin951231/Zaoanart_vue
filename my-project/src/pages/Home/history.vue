@@ -34,8 +34,6 @@
     import HeadPage from "../../components/HeadPage";
     import Foot from "../../components/Foot";
     import axios from 'axios';
-    const baseurl = 'https://api.zaoanart.com/';
-    // const baseurl = 'http://api.demo.com/';
     export default {
         name: 'History',
         data(){
@@ -73,7 +71,7 @@
         methods:{
             initData(){
                 if(this.login_phone){
-                    this.$http.post(baseurl + 'v1/home/homeinfo',{username:this.login_phone},{emulateJSON: true}).then((response)=>{
+                    this.$http.post(this.GLOBAL.baseurl + 'v1/home/homeinfo',{username:this.login_phone},{emulateJSON: true}).then((response)=>{
                         this.user_info = response.data
                     })
                     this.show_history()
@@ -95,7 +93,7 @@
                 }
             },
             show_history(){
-                this.$http.get(baseurl + 'v1/home/get_history',{params:{tel:this.login_phone}}).then((response)=>{
+                this.$http.get(this.GLOBAL.baseurl + 'v1/home/get_history',{params:{tel:this.login_phone}}).then((response)=>{
                     this.history_info = response.data
                 })
             },
@@ -112,7 +110,7 @@
                     toastr.warning("请先登录")
                     return false
                 }
-                this.$http.get(baseurl + 'v1/home/select_keep',{params:{tel:this.login_phone}}).then((response)=>{
+                this.$http.get(this.GLOBAL.baseurl + 'v1/home/select_keep',{params:{tel:this.login_phone}}).then((response)=>{
                     this.keep_info = response.data
                 })
             },
@@ -124,7 +122,7 @@
                 if(!this.keep_name){
                     toastr.warning("请填写收藏夹名")
                 }
-                this.$http.get(baseurl + 'v1/home/addkeep',{params:{tel: this.login_phone,keep_name:this.keep_name}}).then((response)=>{
+                this.$http.get(this.GLOBAL.baseurl + 'v1/home/addkeep',{params:{tel: this.login_phone,keep_name:this.keep_name}}).then((response)=>{
                     if(response.data == 1){
                         toastr.info("该文件夹名已经存在")
                     }else{
@@ -146,7 +144,7 @@
                     toastr.warning("请选择要添加的收藏夹")
                     return false
                 }
-                this.$http.get(baseurl + 'v1/home/addto_keep',{params:{tel:this.login_phone,keep_name:this.keep_option,img_id:img_id}}).then((response)=>{
+                this.$http.get(this.GLOBAL.baseurl + 'v1/home/addto_keep',{params:{tel:this.login_phone,keep_name:this.keep_option,img_id:img_id}}).then((response)=>{
                     if(response.data == 1){
                         toastr.warning("该图片已经存在此收藏夹")
                         return false

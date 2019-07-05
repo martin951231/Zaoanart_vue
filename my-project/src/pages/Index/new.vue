@@ -28,8 +28,6 @@
 </template>
 <script>
     import axios from 'axios'
-    const baseurl = 'https://api.zaoanart.com/';
-    // const baseurl = 'http://api.demo.com/';
     export default {
         data(){
             return{
@@ -40,7 +38,7 @@
 
         },
         mounted(){
-            this.$http.get(baseurl + 'v1/goods/findimage').then((response)=>{
+            this.$http.get(this.GLOBAL.baseurl + 'v1/goods/findimage').then((response)=>{
                 for(var i = 0; i<response.data.length;i++ ){
                     response.data[i].image  = 'http://qiniu.zaoanart.com/'+response.data[i].image+'?imageView2/1/w/300/h/330'
                     var res = []

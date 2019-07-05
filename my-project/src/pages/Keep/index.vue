@@ -48,8 +48,6 @@
     import axios from 'axios'
     import HeadPage from "../../components/HeadPage"
     import Foot from "../../components/Foot"
-    const baseurl = 'https://api.zaoanart.com/'
-    // const baseurl = 'http://api.demo.com/';
     export default {
         name: 'Keep',
         data(){
@@ -80,7 +78,7 @@
         },
         methods:{
             initData(){
-                this.$http.get(baseurl + 'v1/home/findkeep',{params:{tel: this.telphone}}).then((response)=>{
+                this.$http.get(this.GLOBAL.baseurl + 'v1/home/findkeep',{params:{tel: this.telphone}}).then((response)=>{
                     this.keepinfo = response.data
                 })
             },
@@ -98,7 +96,7 @@
                 if(!this.keep_name){
                     toastr.warning("请填写收藏夹名")
                 }
-                this.$http.get(baseurl + 'v1/home/addkeep',{params:{tel: this.telphone,keep_name:this.keep_name}}).then((response)=>{
+                this.$http.get(this.GLOBAL.baseurl + 'v1/home/addkeep',{params:{tel: this.telphone,keep_name:this.keep_name}}).then((response)=>{
                     if(response.data == 1){
                         toastr.info("该文件夹名已经存在")
                     }else{
@@ -121,7 +119,7 @@
                 if(!this.add_keep_name){
                     toastr.warning("请填写收藏夹名")
                 }else{
-                    this.$http.get(baseurl + 'v1/home/upkeepname',{params:{tel: this.telphone,keep_name:this.add_keep_name,id:id}}).then((response)=>{
+                    this.$http.get(this.GLOBAL.baseurl + 'v1/home/upkeepname',{params:{tel: this.telphone,keep_name:this.add_keep_name,id:id}}).then((response)=>{
                         if(response.data){
                             toastr.info("修改成功")
                             $(e.target).parent("#example-5").next().next().children().next().html(this.add_keep_name)
@@ -142,7 +140,7 @@
             },
             delete_keep(e){
                 var id = $(e.target).parent(".addkeep_Mask_layers").parent("#Mask_layers").attr("data_id")
-                this.$http.get(baseurl + 'v1/home/delete_keep',{params:{tel: this.telphone,kid:id}}).then((response)=>{
+                this.$http.get(this.GLOBAL.baseurl + 'v1/home/delete_keep',{params:{tel: this.telphone,kid:id}}).then((response)=>{
                     if(response.data){
                         toastr.info("删除成功")
                         $("#keep"+id+"").remove()

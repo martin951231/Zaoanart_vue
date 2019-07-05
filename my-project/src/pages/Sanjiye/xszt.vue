@@ -30,8 +30,6 @@
 </template>
 <script>
     import axios from 'axios'
-    const baseurl = 'https://api.zaoanart.com/';
-    // const baseurl = 'http://api.demo.com/';
     export default {
         data() {
             return{
@@ -53,33 +51,34 @@
                 arr2[ta[0]]=ta[1];
             }
             this.img_id = arr2.id
-            this.$http.get(baseurl + 'v1/goods/findgoods_catagory',{params:{id: arr2.id}}).then((response)=>{
+            this.$http.get(this.GLOBAL.baseurl + 'v1/goods/findgoods_catagory',{params:{id: arr2.id}}).then((response)=>{
                 if(response.data){
                     for(var i = 0; i<response.data.category.length;i++ ){
                         response.data.category[i].image  = 'http://qiniu.zaoanart.com/'+response.data.category[i].image+'?imageView2/1/w/500/h/500'
-                        var res = []
-                        var param = '类别'
-                        for ( var v=0; v<param.length; v++ ) {
-                            res[v] = ( "00" + param.charCodeAt(v).toString(16) ).slice(-4);
-                        }
-                        var res1 = []
-                        var param1 = response.data.category[0].category_name
-                        for ( var v=0; v<param1.length; v++ ) {
-                            res1[v] = ( "00" + param1.charCodeAt(v).toString(16) ).slice(-4);
-                        }
-                        response.data.category[i].lanmu  = res
-                        response.data.category[i].lanmus  = res1
+                        // var res = []
+                        // var param = '类别'
+                        // for ( var v=0; v<param.length; v++ ) {
+                        //     res[v] = ( "00" + param.charCodeAt(v).toString(16) ).slice(-4);
+                        // }
+                        // var res1 = []
+                        // var param1 = response.data.category[0].category_name
+                        // for ( var v=0; v<param1.length; v++ ) {
+                        //     res1[v] = ( "00" + param1.charCodeAt(v).toString(16) ).slice(-4);
+                        // }
+                        // response.data.category[i].lanmu  = res
+                        // response.data.category[i].lanmus  = res1
                     }
-                    this.dataCategoryList.lanmu = '类别'
-                    this.dataCategoryList.lanmus = response.data.category[0].category_name
+                    // this.dataCategoryList.lanmu = '类别'
+                    // this.dataCategoryList.lanmus = response.data.category[0].category_name
                     for(var i = 0; i<response.data.theme.length;i++ ){
                         response.data.theme[i].image  = 'http://qiniu.zaoanart.com/'+response.data.theme[i].image+'?imageView2/1/w/500/h/500'
                     }
                 }
+
                 this.dataCategoryList = response.data.category
                 this.dataThemeList = response.data.theme
             })
-            this.$http.get(baseurl + 'v1/goods/findmayimg',{params:{id: arr2.id}}).then((response)=>{
+            this.$http.get(this.GLOBAL.baseurl + 'v1/goods/findmayimg',{params:{id: arr2.id}}).then((response)=>{
                 this.mayImageList = response.data
                 for(var q=0;q<response.data.length;q++){
                     this.mayImageList[q].image = 'http://qiniu.zaoanart.com/'+this.mayImageList[q].image+'?imageView2/1/w/500/h/500'

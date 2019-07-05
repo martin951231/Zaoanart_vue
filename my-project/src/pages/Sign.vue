@@ -25,8 +25,6 @@
 </template>
 <script>
     import axios from 'axios'
-    const baseurl = 'https://api.zaoanart.com/';
-    // const baseurl = 'http://api.demo.com/';
     export default {
         name: 'Sign',
         data(){
@@ -39,18 +37,18 @@
             }
         },
         mounted(){
-            this.$http.get(baseurl + 'v1/goods/getloginimg').then((response)=>{
+            this.$http.get(this.GLOBAL.baseurl + 'v1/goods/getloginimg').then((response)=>{
                 response.data.img_name = 'http://qiniu.zaoanart.com/'+response.data.img_name
                 // for(var i=0;i<response.data.length;i++){
                 //     response.data[i].login_img = 'http://qiniu.zaoanart.com/'+response.data[i].login_img
                 // }
                 var width = response.data.width
                 var height = response.data.height
-                if(width >= height){
-                    $(".back-img img").css('min-height','100%')
-                }else{
-                    $(".back-img img").css('min-width','100%')
-                }
+                // if(width >= height){
+                //     $(".back-img img").css('min-height','100%')
+                // }else{
+                //     $(".back-img img").css('min-width','100%')
+                // }
                 this.img_info = response.data.img_name
                 //淡入淡出特效
                 // this.$nextTick(function(){
@@ -75,7 +73,7 @@
                     if(!reg.test(this.username)){
                         toastr.warning('请输入正确的手机号码');
                     }
-                    this.$http.get(baseurl + 'v1/code/sendcode',{params:{username: this.username}}).then((response)=>{
+                    this.$http.get(this.GLOBAL.baseurl + 'v1/code/sendcode',{params:{username: this.username}}).then((response)=>{
 
                     })
                 }else{
@@ -83,7 +81,7 @@
                 }
             },
             sign(){
-                this.$http.get(baseurl + 'v1/register/register',{params:{username: this.username,password:this.password,code: this.code,checked: this.checked}}).then((response)=>{
+                this.$http.get(this.GLOBAL.baseurl + 'v1/register/register',{params:{username: this.username,password:this.password,code: this.code,checked: this.checked}}).then((response)=>{
                     if(response.data == 0){
                         //用户创建成功,跳转个人中心
                         window.location.href="/#/home";
@@ -145,9 +143,9 @@
         padding: 0;
         background: #ef4300;
         border: 1px solid #ff730e;
-        -moz-box-shadow: 0 15px 30px 0 rgba(255,255,255,.25) inset, 0 2px 7px 0 rgba(0,0,0,.2);
-        -webkit-box-shadow: 0 15px 30px 0 rgba(255,255,255,.25) inset, 0 2px 7px 0 rgba(0,0,0,.2);
-        box-shadow: 0 15px 30px 0 rgba(255,255,255,.25) inset, 0 2px 7px 0 rgba(0,0,0,.2);
+        /*-moz-box-shadow: 0 15px 30px 0 rgba(255,255,255,.25) inset, 0 2px 7px 0 rgba(0,0,0,.2);*/
+        /*-webkit-box-shadow: 0 15px 30px 0 rgba(255,255,255,.25) inset, 0 2px 7px 0 rgba(0,0,0,.2);*/
+        /*box-shadow: 0 15px 30px 0 rgba(255,255,255,.25) inset, 0 2px 7px 0 rgba(0,0,0,.2);*/
         font-family: 'PT Sans', Helvetica, Arial, sans-serif;
         font-size: 14px;
         font-weight: 700;

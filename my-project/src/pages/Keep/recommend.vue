@@ -22,8 +22,6 @@
     import axios from 'axios'
     import HeadPage from "../../components/HeadPage"
     import Foot from "../../components/Foot"
-    const baseurl = 'https://api.zaoanart.com/'
-    // const baseurl = 'http://api.demo.com/';
     export default {
         name: 'Recommend',
         data(){
@@ -40,7 +38,7 @@
             }
         },
         mounted(){
-            this.$http.get(baseurl + 'v1/home/findkeepall').then((response)=>{
+            this.$http.get(this.GLOBAL.baseurl + 'v1/home/findkeepall').then((response)=>{
                 this.keepinfo = response.data
             })
         },

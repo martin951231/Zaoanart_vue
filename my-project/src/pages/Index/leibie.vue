@@ -25,8 +25,6 @@
 </template>
 <script>
     import axios from 'axios'
-    const baseurl = 'https://api.zaoanart.com/';
-    // const baseurl = 'http://api.demo.com/';
     export default {
         data(){
             return{
@@ -37,7 +35,7 @@
         },
         methods:{
             label_show(){
-                this.$http.get(baseurl + 'v1/label/findlabel2').then((response)=>{
+                this.$http.get(this.GLOBAL.baseurl + 'v1/label/findlabel2').then((response)=>{
                     for(var i=0;i<response.data.length;i++){
                         response.data[i].label_name2 = encodeURI(response.data[i].label_name)
                     }
@@ -53,7 +51,7 @@
             }
         },
         mounted(){
-            this.$http.get(baseurl + 'v1/label/findlabel').then((response)=>{
+            this.$http.get(this.GLOBAL.baseurl + 'v1/label/findlabel').then((response)=>{
                 for(var i=0;i<response.data.length;i++){
                     response.data[i].label_name2 = encodeURI(response.data[i].label_name)
                 }
