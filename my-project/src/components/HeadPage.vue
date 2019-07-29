@@ -110,6 +110,8 @@
                 theme1: [],
                 color: [],
                 keep: [],
+                pageSize:50,
+                currentPage:1,
                 telphone:'',
                 result1: null,
                 s: true,

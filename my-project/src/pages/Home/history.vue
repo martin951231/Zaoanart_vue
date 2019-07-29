@@ -70,6 +70,8 @@
         },
         methods:{
             initData(){
+                this.$http.get(this.GLOBAL.baseurl + 'v1/site/up_pv_count10').then((response)=>{
+                })
                 if(this.login_phone){
                     this.$http.post(this.GLOBAL.baseurl + 'v1/home/homeinfo',{username:this.login_phone},{emulateJSON: true}).then((response)=>{
                         this.user_info = response.data

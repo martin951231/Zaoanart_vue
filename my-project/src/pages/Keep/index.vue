@@ -78,6 +78,8 @@
         },
         methods:{
             initData(){
+                this.$http.get(this.GLOBAL.baseurl + 'v1/site/up_pv_count5').then((response)=>{
+                })
                 this.$http.get(this.GLOBAL.baseurl + 'v1/home/findkeep',{params:{tel: this.telphone}}).then((response)=>{
                     this.keepinfo = response.data
                 })

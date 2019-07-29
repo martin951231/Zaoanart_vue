@@ -1,7 +1,8 @@
 <template>
   <div>
      <div style="height:120px;background:#000;text-align:center;">
-                        <img src="../assets/images/zaoanart_logo_en_big.png" alt="" height="60" style="margin-top:30px"><br/>
+         <img src="../assets/images/zaoanart_logo_en_big.png" alt="" height="60" style="margin-top:30px">
+         <img src="../assets/images/wechat_app.png" alt="" height="100" style="margin-top:10px;position: absolute;right: 20px;">
     </div>
   </div>
 </template>

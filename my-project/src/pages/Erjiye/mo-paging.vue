@@ -12,8 +12,6 @@
         <!-- last -->
         <li :class="['paging-item', 'paging-item--last', {'paging-item--disabled' : index === pages}]" @click="last">尾页</li>
         <li :class="['paging-item']">共{{total}}条</li>
-
-
     </ul>
 </template>
 <script>

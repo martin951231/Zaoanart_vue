@@ -471,6 +471,8 @@
         },
         methods:{
             initData(){
+                this.$http.get(this.GLOBAL.baseurl + 'v1/site/up_pv_count4').then((response)=>{
+                })
                 window.arr = []
                 var url=location.href;
                 var i=url.indexOf('?');
@@ -2166,7 +2168,7 @@
                 }else if(this.status == 7){
                     $("#box_img_width").val(Number($("#img_width").val()))
                     $("#box_img_height").val(Number($("#img_height").val()))
-                }else if(this.status == 2 || this.status == 3){
+                }else if(this.status == 2 || this.status == 3 || this.status == 5){
                     if(this.default_margin != 0){
                         $("#box_img_width").val((Number($("#img_width").val()) + this.face_width*2+this.default_margin*2).toFixed(1))
                         $("#box_img_height").val((Number($("#img_height").val()) + this.face_width*2+this.default_margin*2).toFixed(1))
@@ -2206,6 +2208,9 @@
             },
             //如果有裁切则装裱裁切图  否则装裱其他
             crops(){
+                //记录装裱
+                this.$http.post(this.GLOBAL.baseurl + 'v1/goods/record_decoration',{goods_id:this.imgid},{emulateJSON: true}).then((response)=>{
+                })
                 if(this.status == 6 || this.status == 7){
 
                 }else{
@@ -2596,8 +2601,8 @@
                         // ctx.shadowBlur = 5; // 模糊尺寸
                         // ctx.shadowColor = 'rgba(0, 0, 0, 0.5)'; // 颜色
                         //生成单立体图
-                        vm.$http.get(vm.GLOBAL.baseurl + 'v1/goods/singlestereo',{params:{box_img_width1:box_img_width1+vm.drawing_core_val*30,box_img_height1:box_img_height1+vm.drawing_core_val*30,img_width1:img_width1,img_height1:img_height1,face_width:stereo_width}}).then((response)=>{
-                            dltImg.src = dltImg.src = this.GLOBAL.imgurl+'singlestereo.jpg?t='+Math.random()
+                        vm.$http.get(vm.GLOBAL.baseurl + 'v1/goods/singlestereo',{params:{box_img_width1:box_img_width1+vm.drawing_core_val*30,box_img_height1:box_img_height1+vm.drawing_core_val*30,img_width1:img_width1,img_height1:img_height1,face_width:stereo_width,small_face:small_face,need_width:c.width,need_height:c.height}}).then((response)=>{
+                            dltImg.src = dltImg.src = vm.GLOBAL.imgurl+'singlestereo.jpg?t='+Math.random()
                             // $("#dltImg").attr("src",'http://localhost/yii-application/backend/web/test/singlestereo.jpg?t='+Math.random());
                         })
                         //如果宽高有变化则后台生成边框素材,没有变化则直接获取
@@ -3259,9 +3264,6 @@
                     // ctx.shadowOffsetY = 7; // 阴影X轴偏移
                     // ctx.shadowBlur = 5; // 模糊尺寸
                     // ctx.shadowColor = 'rgba(0, 0, 0, 0.5)'; // 颜色
-                    //生成单立体图
-                    vm.$http.get(vm.GLOBAL.baseurl + 'v1/goods/singlestereo',{params:{box_img_width1:img_width1+stereo_width+vm.drawing_core_val*30,box_img_height1:img_height1+stereo_width+vm.drawing_core_val*30,img_width1:img_width1,img_height1:img_height1,face_width:stereo_width}}).then((response)=>{
-                    })
                     var direction_val_x = 0
                     var direction_val_y = 0
                     if(vm.drawing_core_val != 0){
@@ -3312,19 +3314,22 @@
                             direction_val_xs = num_values
                         }
                     }
+                    //生成单立体图
+                    vm.$http.get(vm.GLOBAL.baseurl + 'v1/goods/singlestereo',{params:{box_img_width1:img_width1+stereo_width+vm.drawing_core_val*30,box_img_height1:img_height1+stereo_width+vm.drawing_core_val*30,img_width1:img_width1,img_height1:img_height1,face_width:stereo_width,small_face:small_face,need_width:c.width,need_height:c.height}}).then((response)=>{
+                    })
                     //如果宽高有变化则后台生成边框素材,没有变化则直接获取
                     if(vm.last_border == vm.border_status && vm.confirm_width == $("#box_img_width").val() && vm.confirm_height == $("#box_img_height").val()){
                         // $("#bgImg").attr("src",this.img_url);
                         bgImg.src = vm.img_url
-                        dltImg.src = this.GLOBAL.imgurl+'singlestereo.jpg?t='+Math.random()
-                        // $("#dltImg").attr("src",imgurl+'singlestereo.jpg?t='+Math.random());
+                        dltImg.src = vm.GLOBAL.imgurl+'singlestereo.jpg?t='+Math.random()
+                        // dltImg.src = 'http://localhost/test/singlestereo.jpg?t='+Math.random()
                     }else{
                         vm.$http.get(vm.GLOBAL.baseurl + 'v1/goods/decoration',{params:{img_name:vm.border_status,box_img_width1:box_img_width1,box_img_height1:box_img_height1,img_width1:img_width1,img_height1:img_height1,face_width:vm.face_width,small_face:small_face,need_width:c.width,need_height:c.height}}).then((response)=>{
                             vm.img_url = response.data
                             // $("#bgImg").attr("src",this.img_url);
                             bgImg.src = vm.img_url
-                            dltImg.src = this.GLOBAL.imgurl+'singlestereo.jpg?t='+Math.random()
-                            // $("#dltImg").attr("src",imgurl+'singlestereo.jpg?t='+Math.random());
+                            dltImg.src = vm.GLOBAL.imgurl+'singlestereo.jpg?t='+Math.random()
+                            // dltImg.src = 'http://localhost/test/singlestereo.jpg?t='+Math.random()
                         })
                     }
                     bgImg.onload = function(){

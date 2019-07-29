@@ -25,8 +25,15 @@
         data(){
             return {}
         },
+        mounted(){
+            this.initData();
+        },
         methods:{
-
+            //记录网站访问
+            initData(){
+                this.$http.get(this.GLOBAL.baseurl + 'v1/site/record_access').then((response)=>{
+                })
+            }
         },
     }
 </script>

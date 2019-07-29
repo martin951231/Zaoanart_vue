@@ -5,7 +5,7 @@
                 <img src="../../assets/images/closes.png" width="25px" alt="" style="float: right;margin: -40px 20px 0px 0px;cursor: pointer;" @click="Mask_layer_hidden()">
                 <div class="fenlei">
                     <div>
-                        <a :href="'/#/erjiye?label_name='+label2.label_name2+'&label_id='+label2.id+''" v-for="label2 in label2">{{label2.label_name}}</a>
+                        <a :href="'/#/erjiye?pageSize=50&currentPage=1&label_name='+label2.label_name2+'&label_id='+label2.id+''" v-for="label2 in label2">{{label2.label_name}}</a>
                     </div>
                 </div>
             </div>
@@ -16,7 +16,7 @@
             </div>
             <div class="fenlei">
                 <div>
-                    <a :href="'/#/erjiye?label_name='+label.label_name2+'&label_id='+label.id+''" v-for="label in label">{{label.label_name}}</a>
+                    <a :href="'/#/erjiye?pageSize=50&currentPage=1&label_name='+label.label_name2+'&label_id='+label.id+''" v-for="label in label">{{label.label_name}}</a>
                 </div>
             </div>
             <img src="../../assets/images/seemore.png" alt="查看更多" width="25px" style="float: right;" @click="Mask_layer_show()">

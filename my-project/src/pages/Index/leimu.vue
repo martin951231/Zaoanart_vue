@@ -8,14 +8,14 @@
                     <div class="xian2"></div>
                 </div>
                 <div style="text-align: center;height: 20px;overflow: hidden;font-family: monospace;" id="cate_show_div">
-                    <a href="" :href="'/#/erjiye?cate_id='+category.id+'&theme_id=0&color_id=0'" v-for="(category,index) in category" :key="index" v-if="category.pid==0">
+                    <a href="" :href="'/#/erjiye?cate_id='+category.id+'&theme_id=0&color_id=0&search=&pageSize=50&currentPage=1'" v-for="(category,index) in category" :key="index" v-if="category.pid==0">
                         <ul style="display: inline-block;width:100px;text-align: center;font-family: monospace;" class="tuijian ul_shadow" :id="category.id" @mouseenter="show_cate($event)">{{category.category_name}}</ul>
                     </a>
                     <!--油画列表-->
                     <div style="position: absolute;width: 1200px;">
                         <ul style="display: none;background-color: #fff;" id="youhua" @mouseleave="hide_cate()">
                             <li class="ul_shadow" style="display: inline-block;margin-right: 5px;" v-for="(category,index) in category" :key="index" v-if="category.pid==1">
-                                <a :href="'/#/erjiye?cate_id='+category.id+'&theme_id=0&color_id=0'">
+                                <a :href="'/#/erjiye?cate_id='+category.id+'&theme_id=0&color_id=0&search=&pageSize=50&currentPage=1'">
                                     <div style="text-align: center;">
                                         <img :src="cate_img_url+category.face_img" alt="" width="100px" height="100px">
                                         <br>
@@ -29,7 +29,7 @@
                     <div style="position: absolute;width: 1200px;">
                         <ul style="display: none;background-color: #fff;" id="guohua" @mouseleave="hide_cate()">
                             <li class="ul_shadow" style="display: inline-block;margin-right: 5px;" v-for="(category,index) in category" :key="index" v-if="category.pid==2">
-                                <a :href="'/#/erjiye?cate_id='+category.id+'&theme_id=0&color_id=0'">
+                                <a :href="'/#/erjiye?cate_id='+category.id+'&theme_id=0&color_id=0&search=&pageSize=50&currentPage=1'">
                                     <div style="text-align: center;">
                                         <img :src="cate_img_url+category.face_img" alt="" width="100px" height="100px">
                                         <br>
@@ -44,7 +44,7 @@
                     <div style="position: absolute;width: 1200px;">
                         <ul style="display: none;background-color: #fff;" id="sheying" @mouseleave="hide_cate()">
                             <li class="ul_shadow" style="display: inline-block;margin-right: 5px;" v-for="(category,index) in category" :key="index" v-if="category.id==16">
-                                <a :href="'/#/erjiye?cate_id='+category.id+'&theme_id=0&color_id=0'">
+                                <a :href="'/#/erjiye?cate_id='+category.id+'&theme_id=0&color_id=0&search=&pageSize=50&currentPage=1'">
                                     <div style="text-align: center;">
                                         <img :src="cate_img_url+category.face_img" alt="" width="100px" height="100px">
                                         <br>
@@ -59,7 +59,7 @@
                     <div style="position: absolute;width: 1200px;">
                         <ul style="display: none;background-color: #fff;" id="zonghehuihua" @mouseleave="hide_cate()">
                             <li class="ul_shadow" style="display: inline-block;margin-right: 5px;" v-for="(category,index) in category" :key="index" v-if="category.pid==3">
-                                <a :href="'/#/erjiye?cate_id='+category.id+'&theme_id=0&color_id=0'">
+                                <a :href="'/#/erjiye?cate_id='+category.id+'&theme_id=0&color_id=0&search=&pageSize=50&currentPage=1'">
                                     <div style="text-align: center;">
                                         <img :src="cate_img_url+category.face_img" alt="" width="100px" height="100px">
                                         <br>
@@ -73,7 +73,7 @@
                     <div style="position: absolute;width: 1200px;">
                         <ul style="display: none;background-color: #fff;" id="zhuangshihua" @mouseleave="hide_cate()">
                             <li class="ul_shadow" style="display: inline-block;margin-right: 5px;">
-                                <a :href="'/#/erjiye?cate_id=4&theme_id=0&color_id=0'">
+                                <a :href="'/#/erjiye?cate_id=4&theme_id=0&color_id=0&search=&pageSize=50&currentPage=1'">
                                     <div style="text-align: center;">
                                         <img src="https://api.zaoanart.com/resource/cate-img/zhuangshihua1.jpg" alt="" width="100px" height="100px">
                                         <br>
@@ -82,7 +82,7 @@
                                 </a>
                             </li>
                             <li class="ul_shadow" style="display: inline-block;margin-right: 5px;">
-                                <a :href="'/#/erjiye?cate_id=4&theme_id=0&color_id=0'">
+                                <a :href="'/#/erjiye?cate_id=4&theme_id=0&color_id=0&search=&pageSize=50&currentPage=1'">
                                     <div style="text-align: center;">
                                         <img src="https://api.zaoanart.com/resource/cate-img/zhuangshihua2.jpg" alt="" width="100px" height="100px">
                                         <br>
@@ -91,7 +91,7 @@
                                 </a>
                             </li>
                             <li class="ul_shadow" style="display: inline-block;margin-right: 5px;">
-                                <a :href="'/#/erjiye?cate_id=4&theme_id=0&color_id=0'">
+                                <a :href="'/#/erjiye?cate_id=4&theme_id=0&color_id=0&search=&pageSize=50&currentPage=1'">
                                     <div style="text-align: center;">
                                         <img src="https://api.zaoanart.com/resource/cate-img/zhuangshihua3.jpg" alt="" width="100px" height="100px">
                                         <br>
@@ -106,7 +106,7 @@
                     <div style="position: absolute;width: 1200px;">
                         <ul id="qita" style="display: none;background-color: #fff;" @mouseleave="hide_cate()">
                             <li class="ul_shadow" style="display: inline-block;margin-right: 5px;" v-for="(category,index) in category" :key="index" v-if="category.pid==5">
-                                <a :href="'/#/erjiye?cate_id='+category.id+'&theme_id=0&color_id=0'">
+                                <a :href="'/#/erjiye?cate_id='+category.id+'&theme_id=0&color_id=0&search=&pageSize=50&currentPage=1'">
                                     <div style="text-align: center;">
                                         <img :src="cate_img_url+category.face_img" alt="" width="100px" height="100px">
                                         <br>
@@ -123,7 +123,7 @@
                     <div class="xian2"></div>
                 </div>
                 <div style="text-align: center;" id="theme_show_div">
-                    <a v-for="(theme,index) in theme" :key="index" :href="'/#/erjiye?theme_id='+theme.id+'&cate_id=0&color_id=0'" width="100px">
+                    <a v-for="(theme,index) in theme" :key="index" :href="'/#/erjiye?theme_id='+theme.id+'&cate_id=0&color_id=0&search=&pageSize=50&currentPage=1'" width="100px">
                         <ul class="ul_shadow" :id="theme.id" style="padding:0;font-family:monospace;display: inline-block;width:100px;text-align: center;" @mouseenter="show_theme($event)" @mouseleave="hide_theme($event)">
                             {{theme.theme_name}}
                             <li style="position: relative;">
@@ -141,35 +141,35 @@
                     <div class="xian2"></div>
                 </div>
                 <tr style="display: block;text-align: center;">
-                    <a class="color_style" :href="'/#/erjiye?color_id=1&cate_id=0&theme_id=0'"><div class="color_td" id="1" style="border-radius: 50%;background-color:rgb(255,0,0);"></div></a>
-                    <a class="color_style" :href="'/#/erjiye?color_id=2&cate_id=0&theme_id=0'">
+                    <a class="color_style" :href="'/#/erjiye?color_id=1&cate_id=0&theme_id=0&search=&pageSize=50&currentPage=1'"><div class="color_td" id="1" style="border-radius: 50%;background-color:rgb(255,0,0);"></div></a>
+                    <a class="color_style" :href="'/#/erjiye?color_id=2&cate_id=0&theme_id=0&search=&pageSize=50&currentPage=1'">
                         <div class="color_td" id="2"  style="border-radius: 50%;background-color:rgb(255,150,0);"></div>
                     </a>
-                    <a class="color_style" :href="'/#/erjiye?color_id=3&cate_id=0&theme_id=0'">
+                    <a class="color_style" :href="'/#/erjiye?color_id=3&cate_id=0&theme_id=0&search=&pageSize=50&currentPage=1'">
                         <div class="color_td" id="3" style="border-radius: 50%;background-color:rgb(255,255,0);"></div>
                     </a>
-                    <a class="color_style" :href="'/#/erjiye?color_id=4&cate_id=0&theme_id=0'">
+                    <a class="color_style" :href="'/#/erjiye?color_id=4&cate_id=0&theme_id=0&search=&pageSize=50&currentPage=1'">
                         <div class="color_td" id="4"  style="border-radius: 50%;background-color:rgb(0,255,0);"></div>
                     </a>
-                    <a class="color_style" :href="'/#/erjiye?color_id=5&cate_id=0&theme_id=0'">
+                    <a class="color_style" :href="'/#/erjiye?color_id=5&cate_id=0&theme_id=0&search=&pageSize=50&currentPage=1'">
                         <div class="color_td" id="5"  style="border-radius: 50%;background-color:rgb(0,255,255);"></div>
                     </a>
-                    <a class="color_style" :href="'/#/erjiye?color_id=6&cate_id=0&theme_id=0'">
+                    <a class="color_style" :href="'/#/erjiye?color_id=6&cate_id=0&theme_id=0&search=&pageSize=50&currentPage=1'">
                         <div class="color_td" id="6"  style="border-radius: 50%;background-color:rgb(0,0,255);"></div>
                     </a>
-                    <a class="color_style" :href="'/#/erjiye?color_id=7&cate_id=0&theme_id=0'">
+                    <a class="color_style" :href="'/#/erjiye?color_id=7&cate_id=0&theme_id=0&search=&pageSize=50&currentPage=1'">
                         <div class="color_td" id="7"  style="border-radius: 50%;background-color:rgb(100,50,150);"></div>
                     </a>
-                    <a class="color_style" :href="'/#/erjiye?color_id=8&cate_id=0&theme_id=0'">
+                    <a class="color_style" :href="'/#/erjiye?color_id=8&cate_id=0&theme_id=0&search=&pageSize=50&currentPage=1'">
                         <div class="color_td" id="8"  style="border-radius: 50%;background-color:rgb(255,150,255);"></div>
                     </a>
-                    <a class="color_style" :href="'/#/erjiye?color_id=9&cate_id=0&theme_id=0'">
+                    <a class="color_style" :href="'/#/erjiye?color_id=9&cate_id=0&theme_id=0&search=&pageSize=50&currentPage=1'">
                         <div class="color_td" id="9"  style="border:solid 1px #ccc;border-radius: 50%;background-color:rgb(255,255,255);"></div>
                     </a>
-                    <a class="color_style" :href="'/#/erjiye?color_id=10&cate_id=0&theme_id=0'">
+                    <a class="color_style" :href="'/#/erjiye?color_id=10&cate_id=0&theme_id=0&search=&pageSize=50&currentPage=1'">
                         <div class="color_td" id="10"  style="border-radius: 50%;background-color:rgb(0,0,0);"></div>
                     </a>
-                    <a class="color_style" :href="'/#/erjiye?color_id=11&cate_id=0&theme_id=0'">
+                    <a class="color_style" :href="'/#/erjiye?color_id=11&cate_id=0&theme_id=0&search=&pageSize=50&currentPage=1'">
                         <div class="color_td" id="11"  style="border-radius: 50%;background-color:rgb(120,120,120);"></div>
                     </a>
                 </tr>

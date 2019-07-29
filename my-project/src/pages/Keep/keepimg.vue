@@ -203,6 +203,8 @@
                 }
             },
             initData(){
+                this.$http.get(this.GLOBAL.baseurl + 'v1/site/up_pv_count6').then((response)=>{
+                })
                 var url=location.href;
                 var i=url.indexOf('?');
                 if(i==0)return;

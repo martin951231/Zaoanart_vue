@@ -69,7 +69,7 @@
                 <span class="tuijian">按类别查看▼</span>
                 <div class="fenlei1">
                     <div>
-                        <router-link id="fenlei_a" :to="'/erjiye?label_name='+dataLabelList.label_name2+'&label_id='+dataLabelList.id+''" v-for="dataLabelList in dataLabelList" target="_blank">{{ dataLabelList.label_name}}</router-link>
+                        <router-link id="fenlei_a" :to="'/erjiye?pageSize=50&currentPage=1&label_name='+dataLabelList.label_name2+'&label_id='+dataLabelList.id+''" v-for="dataLabelList in dataLabelList" target="_blank">{{ dataLabelList.label_name}}</router-link>
                     </div>
                 </div>
             </div>
@@ -206,6 +206,8 @@
         },
         methods:{
             initData(){
+                this.$http.get(this.GLOBAL.baseurl + 'v1/site/up_pv_count3').then((response)=>{
+                })
                 var url=location.href;
                 var i=url.indexOf('?');
                 if(i==-1)return;

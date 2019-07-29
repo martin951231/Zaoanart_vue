@@ -11,11 +11,18 @@
         <div class="lanmu clearfix">
             <span style="height: 30px;line-height: 30px;float: left;"><a href="/#/erjiye?cate_id=0&theme_id=0&color_id=0&pageSize=50&currentPage=1">全部商品</a> > {{lanmu}}</span>
             <!--<span v-if="is_prompt !=0" style="height: 30px;line-height: 30px;float: left;"><a href="/#/erjiye?cate_id=0&theme_id=0&color_id=0&pageSize=50&currentPage=1">全部商品</a> > {{prompts}}</span>-->
-            <span style="height: 30px;line-height: 30px;">
-                <a class="contrast_a" @click="contrast_tab($event,-1)" data_id="0">横</a>
-                <a class="contrast_a" @click="contrast_tab($event,1)" data_id="0">竖</a>
-                <a class="contrast_a" @click="contrast_tab($event,0)" data_id="0">方</a>
-            </span>
+            <div style="height: 30px;line-height: 30px;display: flex;align-items: center;justify-content: center;">
+                <div class="contrast_div" style="display: inline-block;border:2px solid #ccc;padding: 2px;width:36px;height:22px;margin-right:20px">
+                    <div class="contrast_a" @click="contrast_tab($event,-1)" data_id="0" style="width: 28px;height: 14px;background-color: #ccc;"></div>
+                </div>
+                <div class="contrast_div" style="display: inline-block;border:2px solid #ccc;padding: 2px;width:22px;height:36px;margin-right:20px">
+                    <div class="contrast_a" @click="contrast_tab($event,1)" data_id="0" style="width: 14px;height: 28px;background-color: #ccc;"></div>
+                </div>
+                <div class="contrast_div" style="display: inline-block;border:2px solid #ccc;padding: 2px;width:28px;height:28px;margin-right:20px">
+                    <div class="contrast_a" @click="contrast_tab($event,0)" data_id="0" style="width: 20px;height: 20px;background-color: #ccc;"></div>
+                </div>
+
+            </div>
         </div>
         <div v-if="status">
             <div class="list" style="min-height: -webkit-fill-available;">
@@ -36,13 +43,46 @@
                             <img id="img" v-lazy="dataImageList.image" height="200px" alt="...">
                         </div>
                     </section>
-                    <MoPaging
-                            :page-index="currentPage"
-                            :total="count"
-                            :pageid="pageId"
-                            :page-size="pageSize"
-                            @change="pageChange">
-                    </MoPaging>
+                    <!--<MoPaging-->
+                            <!--:page-index="currentPage"-->
+                            <!--:total="count"-->
+                            <!--:pageid="pageId"-->
+                            <!--:page-size="pageSize"-->
+                            <!--@change="pageChange">-->
+                    <!--</MoPaging>-->
+                    <div id="page-break">
+                        <ul>
+                            <li v-if="cur>1">
+                                <a class="page-break-li-a" v-on:click="cur=1,pageClick()">首页</a>
+                            </li>
+                            <li v-if="cur>1">
+                                <img class="tab_page_prev_img" src="../../assets/images/tab_page_left.png" alt="">
+                                <a class=" tab_page_prev" v-on:click="cur--,pageClick()">上 一 页</a>
+                            </li>
+                            <li v-if="cur>1" >
+                                <a style="cursor: default;" class="page-break-li">...</a>
+                            </li>
+                            <li v-for="item in indexs" v-bind:class="{'active':cur==item}">
+                                <a class="page-break-li-a" v-on:click="btnClick(item), pageClick()">{{item}}</a>
+                            </li>
+                            <li v-if="cur!=all">
+                                <a style="cursor: default;" class="page-break-li">...</a>
+                            </li>
+                            <li v-if="cur!=all">
+                                <a class=" tab_page_next" v-on:click="cur++,pageClick()">下 一 页</a>
+                                <img class="tab_page_next_img" src="../../assets/images/tab_page_right.png" alt="">
+                            </li>
+                            <li v-if="cur!=all">
+                                <a class="page-break-li-a" v-on:click="cur=all,pageClick()" >尾页</a>
+                            </li>
+                            <li><a style="cursor: default;">共<i>{{all}}</i>页</a></li>
+                            <li><a style="cursor: default;">共<i>{{count}}</i>条</a></li>
+                            <div class="jumpbox">
+                                <input type="text" oninput ="value=value.replace(/[^\d]/g,'')" v-model="jump_page" class="jumppage" />
+                                <a class="jumpbtn page-break-li-a" v-on:click="pageSkip()">跳转</a>
+                            </div>
+                        </ul>
+                    </div>
                 </template>
                 <template v-else>
                     <span>{{prompt}}</span>
@@ -82,8 +122,12 @@
                 currentPage : 1, //当前页码
                 count : 0, //总记录数
                 pageId:1,//当前最后一张图片id
+                cur: 1,
+                all: 1,
+                skipPage:1,
                 lanmus : '',
                 lanmu : '',
+                jump_page:null,
                 prompt : '',
                 prompts : '',
                 is_prompt : 0,
@@ -111,14 +155,18 @@
                 // this.color_show();
                 // this.category_show();
                 // this.theme_show();
-                this.currentPage = 1;
                 // this.cate_find(e);
+            },
+            'jump_page'(){
+                if(this.jump_page>=this.all){
+                    this.jump_page=this.all
+                }
             },
             'dataImageList'(){
                 // this.initData();
             },
             'contrast'(){
-                this.currentPage = 1;
+                // this.currentPage = 1;
                 this.initData();
                 // this.findcategory();
                 // this.findtheme();
@@ -134,8 +182,34 @@
             // this.findcategory1();
             // this.findtheme();
         },
+        computed: {
+            indexs(){
+                var left = 1;
+                var right = this.all;
+                var arr = [];
+                if(this.all>=5){
+                    if(this.cur>3 && this.cur<this.all-2){
+                        left = this.cur-2;
+                        right = this.cur+2;
+                    }else if(this.cur<=3){
+                        left=1;
+                        right=5;
+                    }else{
+                        left=this.all-5;
+                        right=this.all;
+                    }
+                }
+                while(left<=right){
+                    arr.push(left);
+                    left++;
+                }
+                return arr;
+            }
+        },
         methods:{
             initData(){
+                this.$http.get(this.GLOBAL.baseurl + 'v1/site/up_pv_count2').then((response)=>{
+                })
                 var url=location.href;
                 var i=url.indexOf('?');
                 if(i==0)return;
@@ -150,6 +224,7 @@
                     var param = k
                 }
                 this.info = arr2
+                this.cur = Number(arr2.currentPage)
                 function unicode(str){
                     var res = [];
                     for ( var i=0; i<str.length; i++ ) {
@@ -253,14 +328,16 @@
                         params: {
                             label_id: arr2.label_id,
                             id: goods_id,
-                            pageSize: this.pageSize,
-                            currentPage: this.currentPage,
+                            pageSize: arr2.pageSize,
+                            currentPage: arr2.currentPage,
                             contrast:this.contrast
                         }
                     }).then((response) => {
                         if (response.body) {
                             this.count = Number(response.body[0].count)
+                            this.all = Math.ceil(Number(response.body[0].count)/arr2.pageSize)
                         } else {
+                            this.all = 1
                             this.count = false
                             this.prompt = '暂时没有图片'
                         }
@@ -272,7 +349,7 @@
                     })
                 }else if(param == 'term'){
                     this.is_prompt = 1
-                    this.$http.get(this.GLOBAL.baseurl + 'v1/goods/findgoodsown',{params:{term: decodeURI(arr2.term),pageSize:this.pageSize,currentPage:this.currentPage,contrast:this.contrast}}).then((response)=>{
+                    this.$http.get(this.GLOBAL.baseurl + 'v1/goods/findgoodsown',{params:{term: decodeURI(arr2.term),pageSize:arr2.pageSize,currentPage:arr2.currentPage,contrast:this.contrast}}).then((response)=>{
                         if(response.body){
                             for(var i = 0; i<response.body.length;i++ ){
                                 response.body[i].image  = 'http://qiniu.zaoanart.com/'+response.body[i].image+'?imageView2/2/h/500'
@@ -280,8 +357,10 @@
                         }
                         if(response.body){
                             this.count = Number(response.body[0].count)
+                            this.all = Math.ceil(Number(response.body[0].count)/arr2.pageSize)
                         }else{
                             this.count = false
+                            this.all = 1
                             this.prompt = '暂时没有图片'
                         }
                         this.dataImageList = response.body
@@ -289,10 +368,11 @@
                     })
                 }else if(param == 'label_all'){
                     this.is_prompt = 1
-                    this.$http.get(this.GLOBAL.baseurl + 'v1/goods/findmayimgall',{params:{id: arr2.label_all,pageSize:this.pageSize,currentPage:this.currentPage,contrast:this.contrast}}).then((response)=>{
+                    this.$http.get(this.GLOBAL.baseurl + 'v1/goods/findmayimgall',{params:{id: arr2.label_all,pageSize:arr2.pageSize,currentPage:arr2.currentPage,contrast:this.contrast}}).then((response)=>{
                         this.prompts = response.body[0].label_name
                         this.dataImageList = response.body
                         this.count = Number(response.body[0].count)
+                        this.all = Math.ceil(Number(response.body[0].count)/arr2.pageSize)
                         for(var q=0;q<response.data.length;q++){
                             this.dataImageList[q].image = 'http://qiniu.zaoanart.com/'+this.dataImageList[q].image
                         }
@@ -310,16 +390,17 @@
                         var search = null
                     }
                     this.is_prompt = 0
-                    this.$http.get(this.GLOBAL.baseurl + 'v1/goods/category_find',{params:{cate_id:arr2.cate_id,theme_id:arr2.theme_id,color_id:arr2.color_id,search:this.GLOBAL.search,pageSize:this.pageSize,currentPage:this.currentPage,contrast:this.contrast}}).then(function(response){
-                        console.log(response.body)
+                    this.$http.get(this.GLOBAL.baseurl + 'v1/goods/category_find',{params:{cate_id:arr2.cate_id,theme_id:arr2.theme_id,color_id:arr2.color_id,search:this.GLOBAL.search,pageSize:arr2.pageSize,currentPage:arr2.currentPage,contrast:this.contrast}}).then(function(response){
                         for(var i = 0; i<response.body.length;i++ ){
                             response.body[i].image  = 'http://qiniu.zaoanart.com/'+response.body[i].image+'?imageView2/2/h/500'
                         }
                         if(response.body){
                             this.count = Number(response.body[0].count)
+                            this.all = Math.ceil(Number(response.body[0].count)/arr2.pageSize)
                             this.lanmu = response.body[0].end_condition
                         }else{
                             this.count = false
+                            this.all = 1
                             this.prompt = '暂时没有图片'
                         }
                         this.dataImageList = response.body
@@ -369,6 +450,60 @@
                     $(this).hide(1000);
                 });
                 this.status = true
+            },
+            btnClick(num){
+                if(num!=this.cur){
+                    this.cur=num;
+                }
+            },
+            pageClick(){
+                var url=location.href;
+                var i=url.indexOf('?');
+                if(i==0)return;
+                var querystr=url.substr(i+1);
+                var arr1=querystr.split('&');
+                var arr2=new Object();
+                for(i in arr1){
+                    var ta=arr1[i].split('=');
+                    arr2[ta[0]]=ta[1];
+                }
+                for(var k in arr2){
+                    var param = k
+                }
+                if(!arr2.cate_id){
+                    arr2.cate_id = 0
+                }
+                if(!arr2.theme_id){
+                    arr2.theme_id = 0
+                }
+                if(!arr2.color_id){
+                    arr2.color_id = 0
+                }
+                if(!arr2.search){
+                    arr2.search = 0
+                }
+                this.$router.push({path:"/erjiye?cate_id="+arr2.cate_id+"&theme_id="+arr2.theme_id+"&color_id="+arr2.color_id+"&search="+arr2.search+"&pageSize="+arr2.pageSize+"&currentPage="+this.cur+""})
+                console.log('现在是'+this.cur+'页')
+            },
+            pageSkip(){
+                this.skipPage = Number(document.getElementsByClassName("jumppage")[0].value);
+                var page = this.skipPage
+                this.pageSkips(page)
+            },
+            pageSkips(page){
+                var maxPage = this.all;
+                var skipPage = page
+                if(!skipPage){
+                    alert("请输入跳转页码");
+                    return;
+                }else if(skipPage<1 || skipPage>maxPage){
+                    this.btnClick(maxPage);
+                    this.pageClick();
+                }else{
+                    this.cur=skipPage;
+                    this.btnClick(skipPage);
+                    this.pageClick();
+                }
             },
             pageChange (page) {
                 this.currentPage = page
@@ -677,17 +812,21 @@
                 })
             },
             contrast_tab(e,num){
-                $('.contrast_a').css('color','#000')
-                $(e.target).css('color','#ea8010')
                 var data_id = $(e.target).attr('data_id')
                 if(data_id == 0){
                     $('.contrast_a').attr('data_id',0)
                     $(e.target).attr('data_id',1)
                     this.contrast = num
+                    $('.contrast_a').css('background-color','#ccc')
+                    $('.contrast_div').css('border-color','#ccc')
+                    $(e.target).css('background-color','#000')
+                    $(e.target).parent().css('border-color','#000')
                 }else{
                     $('.contrast_a').attr('data_id',0)
-                    $(e.target).css('color','#000')
+                    // $(e.target).css('background-color','#000')
                     this.contrast = 2
+                    $('.contrast_a').css('background-color','#ccc')
+                    $('.contrast_div').css('border-color','#ccc')
                 }
             }
         },
@@ -700,7 +839,6 @@
     .paging-item{background:#fff;}
     .paging-item-current{background:red;border:1px solid red;text-decoration:none;}
     .paging-item-current a{color:#fff;}
-    .active{border:1px solid red;}
     .ivu-page{display:inline-block;width:300px;}
     .ivu-page,.ivu-page li{list-style:none;}
     .ivu-page li{float:left;margin-right:20px;}
@@ -708,6 +846,81 @@
     .ivu-select-selected-value{display:none;}
     .ivu-page-item a{display:inline-block;width:30px;border:1px solid #eee;}
     .ivu-page li:hover{border:1px solid blue;}
+    /*分页*/
+    #page-break{
+        margin-top: 20px;
+        margin-left: 20px;
+        width: 100%;
+    }
+    #page-break li{list-style: none;}
+    #page-break a{ text-decoration: none;float: left;padding: 6px 12px;color: #646464;cursor: pointer}
+    /*#page-break a:hover{background-color: #eee;}*/
+    #page-break a .banclick{cursor: not-allowed;}
+    #page-break .active a{color: #fff;cursor: default;background-color: #000;}
+    #page-break i{font-style: normal;color: #646464;margin: 0px 4px;font-size: 12px;}
+    #page-break .jumpbox {display:inline-block;}
+    #page-break .jumpbox .jumppage {
+        width: 50px;
+        /* padding-bottom: 0px; */
+        text-align: center;
+        /* display: flex; */
+        /* align-items: flex-end; */
+        float: left;
+        outline: none;
+        border: none;
+        font-size: 15px;
+        color:#646464;
+        padding-top: 5px;
+        height: 28px;
+        border-bottom: 1px solid #646464;
+    }
+    .tab_page_prev{
+        width: 200px;
+        height:50px;
+        background-color: #000;
+        color: #fff !important;
+        font-size: 25px;
+        position: absolute;
+        left: 0px;
+    }
+    .tab_page_prev_img{
+        z-index: 999;
+        padding-top: 10px;
+        width: 30px;
+        background-color: #000;
+        color: #fff !important;
+        font-size: 25px;
+        position: absolute;
+        left: 10px;
+    }
+    .tab_page_next_img{
+        z-index: 999;
+        padding-top: 10px;
+        width: 30px;
+        background-color: #000;
+        color: #fff !important;
+        font-size: 25px;
+        position: absolute;
+        right: 10px;
+    }
+    .tab_page_next{
+        width: 200px;
+        background-color: #000;
+        color: #fff !important;
+        font-size: 25px;
+        position: absolute;
+        right: 0px;
+    }
+    .page-break-li:hover{
+        background-color:#fff;
+    }
+    .page-break-li-a:hover{
+        background-color: #eee;
+    }
+    #page-break .jumpbox .jumpbtn {cursor: pointer;}
+    #page-break .jumpbox .jumpbtn:active {color: #337ab7;}
+
+
     .thumbnail{
         display:block;
         margin-bottom:5px;
@@ -724,7 +937,7 @@
     .lanmu a:hover{text-decoration:none;color:#ef401d;}
     ul li{list-style:none;}
     ul{display: inline-block;}
-    li{float:left;margin-left:10px;}
+    li{float:left;}
     .select_ul{
         overflow:hidden;
     }
@@ -926,6 +1139,7 @@
         background-color: #f0f0f0;
         color: #0275d8;
     }
+
     .paging-item--disabled,
     .paging-item--more{
         background-color: #fff;

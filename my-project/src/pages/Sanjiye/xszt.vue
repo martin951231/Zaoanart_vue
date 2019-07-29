@@ -3,7 +3,7 @@
     <div  class="zuop">
         <div style="background:#fff;padding-top:200px;" class="xszt">
             <div class="xiangsi" style="width:1200px;">
-                <router-link class="tuijian" :to="'erjiye?label_all='+img_id+''" target="_blank">您可能要找▼</router-link>
+                <a class="tuijian" @click="up_pv7()" target="_blank" style="color:#999;cursor: pointer;">您可能要找▼</a>
                 <ul style="margin:0 auto;">
                     <li v-for="mayImageList in mayImageList" style="overflow:hidden;"><a :href="'/#/sanjiye?id='+mayImageList.id+''" target="_blank"><img :src="mayImageList.image" width="100%" style="min-width: 230px;"></a></li>
                 </ul>
@@ -11,7 +11,7 @@
         </div>
         <div style="background:#fff;padding-top:120px;" class="xszt">
             <div class="xiangsi" style="width:1200px;">
-                <router-link class="tuijian" :to="'erjiye?cate_id='+dataCategoryList[0].category+'&theme_id=0&color_id=0'" target="_blank">相似类型▼</router-link>
+                <a class="tuijian" @click="up_pv8()" target="_blank" style="color:#999;cursor: pointer;">相似类型▼</a>
                 <ul style="margin:0 auto;">
                     <li v-for="dataCategoryList in dataCategoryList" style="overflow:hidden;"><a :href="'/#/sanjiye?id='+dataCategoryList.id+''" target="_blank"><img :src="dataCategoryList.image" width="100%" style="min-width: 230px;"></a></li>
                 </ul>
@@ -19,7 +19,7 @@
         </div>
         <div style="background:#fff;padding-top:120px;" class="xszt">
             <div class="xiangsi" style="width:1200px;">
-                <router-link class="tuijian" :to="'erjiye?cate_id=0&theme_id='+dataThemeList[0].theme+'&color_id=0'"  target="_blank">相似主题▼</router-link>
+                <a class="tuijian" @click="up_pv9()" target="_blank" style="color:#999;cursor: pointer;">相似主题▼</a>
                 <ul style="margin:0 auto;">
                     <li v-for="dataThemeList in dataThemeList" style="overflow:hidden;"><a :href="'/#/sanjiye?id='+dataThemeList.id+''" target="_blank"><img :src="dataThemeList.image" width="100%" style="min-width: 230px;"></a></li>
                 </ul>
@@ -84,6 +84,23 @@
                     this.mayImageList[q].image = 'http://qiniu.zaoanart.com/'+this.mayImageList[q].image+'?imageView2/1/w/500/h/500'
                 }
             })
+        },
+        methods:{
+            up_pv7(){
+                this.$http.get(this.GLOBAL.baseurl + 'v1/site/up_pv_count7').then((response)=>{
+                })
+                this.$router.push({path:'erjiye?pageSize=50&currentPage=1&label_all='+this.img_id+''})
+            },
+            up_pv8(){
+                this.$http.get(this.GLOBAL.baseurl + 'v1/site/up_pv_count8').then((response)=>{
+                })
+                this.$router.push({path:'erjiye?pageSize=50&currentPage=1&cate_id='+this.dataCategoryList[0].category+'&theme_id=0&color_id=0'})
+            },
+            up_pv9(){
+                this.$http.get(this.GLOBAL.baseurl + 'v1/site/up_pv_count9').then((response)=>{
+                })
+                this.$router.push({path:'erjiye?pageSize=50&currentPage=1&cate_id=0&theme_id='+this.dataThemeList[0].theme+'&color_id=0'})
+            },
         }
     }
 </script>
