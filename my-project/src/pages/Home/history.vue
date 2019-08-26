@@ -6,7 +6,7 @@
                 <div class="addkeep_Mask_layer">
                     <img src="../../assets/images/closes.png" width="25px" alt="" style="float: right;margin: -40px 20px 0px 0px;cursor: pointer;" @click="Mask_layer_hidden()">
                     <input type="text" class="input" v-model="keep_name" placeholder="请输入收藏夹名">
-                    <button class="button" style="background: rgb(251, 140, 41);" @click="add_keep()">确认</button>
+                    <button class="button" style="background:#000;color:#fff;" @click="add_keep()">确认</button>
                 </div>
             </div>
                 <div id="history_data" v-for="(history_infos,date_arr) in history_info">
@@ -16,9 +16,9 @@
                             <div id="example-5" >
                                 <select class="form-control" v-model="keep_option" style="float: left;width:60%;" @mouseenter="show_hidden($event)" @change="Mask_layer_show()">
                                     <option v-for="keep_info in keep_info">{{keep_info.keep_name}}</option>
-                                    <option value="add" style="color:#ff6700">添加</option>
+                                    <option value="add" style="color:#000">添加</option>
                                 </select>
-                                <button type="button" class="btn btn-warning" style="float: right;width: 40%;" @click="addto_keep($event,img_arr)">收藏</button>
+                                <button type="button" class="btn btn-warning" style="background-color:#000;color:#fff;border:1px solid #000;float: right;width: 40%;" @click="addto_keep($event,img_arr)">收藏</button>
                             </div>
                             <div id="icon" @click="to_sanji(img_arr)" style="position: absolute;height: 0px;width:100%;text-align:left;padding: 0px 0px 0px 5px;background-color: #0000007d;overflow: hidden;">
                             </div>
@@ -208,8 +208,8 @@
         height: 44px;
         margin-top: 25px;
         padding: 0;
-        background: #ff8402d1;
-        border: 1px solid #00a0efbd;
+        background: #000;
+        border: 1px solid #000;
         -moz-box-shadow: 0 15px 30px 0 rgba(255,255,255,.25) inset, 0 2px 7px 0 rgba(0,0,0,.2);
         -webkit-box-shadow: 0 15px 30px 0 rgba(255,255,255,.25) inset, 0 2px 7px 0 rgba(0,0,0,.2);
         box-shadow: 0 15px 30px 0 rgba(255,255,255,.25) inset, 0 2px 7px 0 rgba(0,0,0,.2);

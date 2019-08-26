@@ -8,8 +8,8 @@
                     <li>微  &nbsp&nbsp&nbsp信&nbsp:&nbsp<input id="wechat_input" class="input" type="text" v-model="wechat" :placeholder=user_info.weixin><img src="../../assets/images/update.png" alt="" height="30px" class="update"  data-toggle="modal" data-target="#up_wechat_modal"></li>
                     <li>地  &nbsp&nbsp&nbsp址&nbsp:&nbsp<input id="address_input" class="input" type="text" v-model="address" :placeholder=user_info.position><img src="../../assets/images/update.png" alt="" height="30px" class="update"  data-toggle="modal" data-target="#up_address_modal"></li>
                     <li>生  &nbsp&nbsp&nbsp日&nbsp:&nbsp<input id="birthday_input" class="input laydate-icon" type="text" v-model="birthday" :placeholder=user_info.birthday @focus="calendar()"><img src="../../assets/images/update.png" alt="" height="30px" class="update"  data-toggle="modal" data-target="#up_birthday_modal"></li>
-                    <li>密  &nbsp&nbsp&nbsp码&nbsp:&nbsp<button class="button" data-toggle="modal" data-target="#up_password_modal">修改密码</button></li>
-                    <li>类  &nbsp&nbsp&nbsp型&nbsp:&nbsp<button class="button">修改为企业用户</button></li>
+                    <li>密  &nbsp&nbsp&nbsp码&nbsp:&nbsp<button style="background-color: #000;color:#fff;border: 1px solid #000;" class="button" data-toggle="modal" data-target="#up_password_modal">修改密码</button></li>
+                    <!--<li>类  &nbsp&nbsp&nbsp型&nbsp:&nbsp<button style="background-color: #000;color:#fff;" class="button">修改为企业用户</button></li>-->
                 </ul>
             </div>
         </div>
@@ -24,7 +24,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                        <button type="button" class="btn btn-primary" data-dismiss="modal" @click="up_username">确认修改</button>
+                        <button type="button" style="background-color: #000;color:#fff;border: 1px solid #000;" class="btn btn-primary" data-dismiss="modal" @click="up_username">确认修改</button>
                     </div>
                 </div><!-- /.modal-content -->
             </div><!-- /.modal-dialog -->
@@ -40,7 +40,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                        <button type="button" class="btn btn-primary" data-dismiss="modal" @click="up_wechat">确认修改</button>
+                        <button type="button" style="background-color: #000;color:#fff;border: 1px solid #000;" class="btn btn-primary" data-dismiss="modal" @click="up_wechat">确认修改</button>
                     </div>
                 </div><!-- /.modal-content -->
             </div><!-- /.modal-dialog -->
@@ -56,7 +56,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                        <button type="button" class="btn btn-primary" data-dismiss="modal" @click="up_address">确认修改</button>
+                        <button type="button" style="background-color: #000;color:#fff;border: 1px solid #000;" class="btn btn-primary" data-dismiss="modal" @click="up_address">确认修改</button>
                     </div>
                 </div><!-- /.modal-content -->
             </div><!-- /.modal-dialog -->
@@ -72,7 +72,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                        <button type="button" class="btn btn-primary" data-dismiss="modal" @click="up_birthday">确认修改</button>
+                        <button type="button" style="background-color: #000;color:#fff;border: 1px solid #000;" class="btn btn-primary" data-dismiss="modal" @click="up_birthday">确认修改</button>
                     </div>
                 </div><!-- /.modal-content -->
             </div><!-- /.modal-dialog -->
@@ -90,7 +90,7 @@
                             <li>验证码 :
                                 <div style="width:300px;display: inline-block;">
                                     <input class="input" v-model="code" placeholder="请输入验证码" style="width:69%">
-                                    <button style="width:29%" @click="sendcode()" class="button">获取验证码</button>
+                                    <button style="background-color:#000;color:#fff;width:29%;border: 1px solid #000;" @click="sendcode()" class="button">获取验证码</button>
                                 </div>
                             </li>
                             <li>新密码 : <input type="password" class="input" v-model="new_pwd"></li>
@@ -98,7 +98,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                        <button type="button" class="btn btn-primary" data-dismiss="modal" @click="up_newpwd()">确认修改</button>
+                        <button type="button" style="background-color: #000;color:#fff;border: 1px solid #000;" class="btn btn-primary" data-dismiss="modal" @click="up_newpwd()">确认修改</button>
                     </div>
                 </div><!-- /.modal-content -->
             </div><!-- /.modal-dialog -->

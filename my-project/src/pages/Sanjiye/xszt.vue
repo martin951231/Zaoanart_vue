@@ -94,12 +94,13 @@
             up_pv8(){
                 this.$http.get(this.GLOBAL.baseurl + 'v1/site/up_pv_count8').then((response)=>{
                 })
-                this.$router.push({path:'erjiye?pageSize=50&currentPage=1&cate_id='+this.dataCategoryList[0].category+'&theme_id=0&color_id=0'})
+                console.log(this.dataCategoryList[0].category)
+                this.$router.push({path:'erjiye?pageSize=50&currentPage=1&search=&cate_id='+this.dataCategoryList[0].category+'&theme_id=0&color_id=0'})
             },
             up_pv9(){
                 this.$http.get(this.GLOBAL.baseurl + 'v1/site/up_pv_count9').then((response)=>{
                 })
-                this.$router.push({path:'erjiye?pageSize=50&currentPage=1&cate_id=0&theme_id='+this.dataThemeList[0].theme+'&color_id=0'})
+                this.$router.push({path:'erjiye?pageSize=50&currentPage=1&search=&cate_id=0&theme_id='+this.dataThemeList[0].theme+'&color_id=0'})
             },
         }
     }

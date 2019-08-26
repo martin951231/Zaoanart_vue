@@ -6,84 +6,86 @@
                 <img src="../../assets/images/closes.png" width="25px" alt="" style="float: right;margin: -40px 20px 0px 0px;cursor: pointer;" @click="Mask_layer_hidden()">
                 <input type="text" class="input" v-model="keep_name" placeholder="请输入收藏夹名">
                 <br>
-                <button class="button" style="background: #ea8010;" @click="add_keep()">确认</button>
+                <button class="button" style="background: #000;" @click="add_keep()">确认</button>
             </div>
         </div>
-        <div id="app1" class="clearfix" style="width:1200px;margin: 0 auto;position: relative;">
-            <div class="img-con" style="width:60%;float:left;border:none;margin-right: 5%;height: 550px;display: flex;justify-content: center;align-items: center;">
-                <img :src="dataImageList.img" style="max-height:550px;max-width:100%" @click="show2()">
-            </div>
-            <div class="img-info" style="width:20%;float:left;">
-                <div style="text-align:left;color:#999;" >
-                    <h4 v-if="dataImageList.is_face == 1">{{dataImageList.name}}</h4>
-                    <div style="margin-top:15px">
-                        <span style="display:block">IMAGE ID</span>
-                        <span>{{dataImageList.id}}</span>
-                    </div>
-                    <div style="margin-top:15px">
-                        <span style="display:block">CATEGORY</span>
-                        <span>{{dataImageList.category_name}}</span>
-                    </div>
-                    <div style="margin-top:15px">
-                        <span style="display:block">SUBJECTS</span>
-                        <span>{{dataImageList.theme_name}}</span>
-                    </div>
-                    <div style="margin-top:15px">
-                        <span style="display:block">MAX SIZE</span>
-                        <span>{{dataImageList.max_width}}*{{dataImageList.max_length}}cm</span>
-                    </div>
-                    <div style="margin-top:150px;margin-bottom: 50px;height: 40px;line-height: 40px;">
-                        <img src="../../assets/images/aixin.png" alt="" @click="show_hidden($event)" height="40px">
-                        <ul id="select" style="width:170px;display:none;margin-top: 20px;">
-                            <li>
-                                <div class="select-head">
-                                    <span class="select-head-cont" style="min-width:100px;height:20px;" @click="show_select()"></span>
-                                    <div style="width: 65px;float: right;color:#ccc">
-                                        <span class="select-icon" @click="show_select()">▼</span>
-                                        <button class="btn_bc" style="" @click="addto_keep($event,dataImageList.id)">保存</button>
+        <div style="min-height: -webkit-fill-available;">
+            <div id="app1" class="clearfix" style="width:1200px;margin: 0 auto;position: relative;">
+                <div class="img-con" style="width:60%;float:left;border:none;margin-right: 5%;height: 550px;display: flex;justify-content: center;align-items: center;">
+                    <img :src="dataImageList.img" style="max-height:550px;max-width:100%" @click="show2()">
+                </div>
+                <div class="img-info" style="width:20%;float:left;">
+                    <div style="text-align:left;color:#999;" >
+                        <h4 v-if="dataImageList.is_face == 1">{{dataImageList.name}}</h4>
+                        <div style="margin-top:15px">
+                            <span style="display:block">IMAGE ID</span>
+                            <span>{{dataImageList.id}}</span>
+                        </div>
+                        <div style="margin-top:15px">
+                            <span style="display:block">CATEGORY</span>
+                            <span>{{dataImageList.category_name}}</span>
+                        </div>
+                        <div style="margin-top:15px">
+                            <span style="display:block">SUBJECTS</span>
+                            <span>{{dataImageList.theme_name}}</span>
+                        </div>
+                        <div style="margin-top:15px">
+                            <span style="display:block">MAX SIZE</span>
+                            <span>{{dataImageList.max_width}}*{{dataImageList.max_length}}cm</span>
+                        </div>
+                        <div style="margin-top:150px;margin-bottom: 50px;height: 40px;line-height: 40px;">
+                            <img src="../../assets/images/aixin.png" alt="" @click="show_hidden($event)" height="40px">
+                            <ul id="select" style="width:170px;display:none;margin-top: 20px;">
+                                <li>
+                                    <div class="select-head">
+                                        <span class="select-head-cont" style="min-width:100px;height:20px;" @click="show_select()"></span>
+                                        <div style="width: 65px;float: right;color:#000">
+                                            <span class="select-icon" @click="show_select()">▼</span>
+                                            <button class="btn_bc" style="" @click="addto_keep($event,dataImageList.id)">保存</button>
+                                        </div>
                                     </div>
-                                </div>
-                                <ul class="option">
-                                    <li class="option-item" v-for="keep_info in keep_info">{{keep_info.keep_name}}</li>
-                                    <li class="option-item" style="color:#ea8010" @click="Mask_layer_show">添加</li>
-                                </ul>
-                            </li>
-                        </ul>
-                        <!--<div id="example-5">-->
-                        <!--<select class="form-control default_select" v-model="keep_option" @change="Mask_layer_show()" style="float: left;width:60%;border-radius: 5px 0px 0px 5px;outline:none;">-->
-                        <!--<option v-for="keep_info in keep_info" @mouseenter="op_hover_show($event)" @mouseleave="op_hover_hide($event)" class="">{{keep_info.keep_name}}</option>-->
-                        <!--<option value="add" style="color:#ea8010;" @mouseenter="op_hover_show($event)" @mouseleave="op_hover_hide($event)" class="default_option">添加</option>-->
-                        <!--</select>-->
-                        <!--<button type="button" class="btn" style="background-color:#ea8010; float: right;width: 40%;border-radius: 0px 5px 5px 0px;" @click="addto_keep($event,dataImageList.id)">保存</button>-->
-                        <!--</div>-->
-                    </div>
-                    <a style="color:#999;font-size:20px" :href="'/#/Decoration?img='+dataImageList.img2+'&max_width='+dataImageList.max_width+'&max_height='+dataImageList.max_length+'&imgid='+dataImageList.id+''">智能装裱报价 beta1.0
-                        <img src="../../assets/images/right2.png" alt="" width="25px" style="position: absolute;z-index: -999;">
-                    </a>
-                </div>
-            </div>
-        </div>
-        <Xszt></Xszt>
-        <div style="background:#f8f8f8;padding-top:10px;" class="see">
-            <div style="width:1200px;height:340px;margin:0 auto;margin-top:20px;">
-                <span class="tuijian">按类别查看▼</span>
-                <div class="fenlei1">
-                    <div>
-                        <router-link id="fenlei_a" :to="'/erjiye?pageSize=50&currentPage=1&label_name='+dataLabelList.label_name2+'&label_id='+dataLabelList.id+''" v-for="dataLabelList in dataLabelList" target="_blank">{{ dataLabelList.label_name}}</router-link>
+                                    <ul class="option">
+                                        <li class="option-item" v-for="keep_info in keep_info">{{keep_info.keep_name}}</li>
+                                        <li class="option-item" style="color:#000" @click="Mask_layer_show">添加</li>
+                                    </ul>
+                                </li>
+                            </ul>
+                            <!--<div id="example-5">-->
+                            <!--<select class="form-control default_select" v-model="keep_option" @change="Mask_layer_show()" style="float: left;width:60%;border-radius: 5px 0px 0px 5px;outline:none;">-->
+                            <!--<option v-for="keep_info in keep_info" @mouseenter="op_hover_show($event)" @mouseleave="op_hover_hide($event)" class="">{{keep_info.keep_name}}</option>-->
+                            <!--<option value="add" style="color:#ea8010;" @mouseenter="op_hover_show($event)" @mouseleave="op_hover_hide($event)" class="default_option">添加</option>-->
+                            <!--</select>-->
+                            <!--<button type="button" class="btn" style="background-color:#ea8010; float: right;width: 40%;border-radius: 0px 5px 5px 0px;" @click="addto_keep($event,dataImageList.id)">保存</button>-->
+                            <!--</div>-->
+                        </div>
+                        <a style="color:#999;font-size:20px" :href="'/#/Decoration?img='+dataImageList.img2+'&max_width='+dataImageList.max_width+'&max_height='+dataImageList.max_length+'&imgid='+dataImageList.id+''">智能装裱报价 beta1.0
+                            <img src="../../assets/images/right2.png" alt="" width="25px" style="position: absolute;z-index: -999;">
+                        </a>
                     </div>
                 </div>
             </div>
-        </div>
-        <!--<Spxq></Spxq>-->
-        <div class='popContainer' style="margin:auto;text-align: center;">
-            <div style="position: absolute;right: 30px;top: 30px;z-index: 999;">
-                <img @click="shut()" style="position: relative;display: block;" src="../../assets/images/shut.png" width="50"></img>
-                <img @click="big()" style="position: relative;display: block;margin-top:10px" src="../../assets/images/big.png" width="50"></img>
-                <img @click="small()" style="position: relative;display: block;margin-top:10px" src="../../assets/images/small.png" width="50"></img>
-                <img @click="reduction()" style="position: relative;display: block;margin-top:10px" src="../../assets/images/reduction.png" width="50"></img>
+            <Xszt></Xszt>
+            <div style="background:#f8f8f8;padding-top:10px;" class="see">
+                <div style="width:1200px;height:340px;margin:0 auto;margin-top:20px;">
+                    <span class="tuijian">按类别查看▼</span>
+                    <div class="fenlei1">
+                        <div>
+                            <router-link id="fenlei_a" :to="'/erjiye?pageSize=50&currentPage=1&label_name='+dataLabelList.label_name2+'&label_id='+dataLabelList.id+''" v-for="dataLabelList in dataLabelList" target="_blank">{{ dataLabelList.label_name}}</router-link>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <img id="mask_layer_img" title="右键点击图片关闭预览" style="display: inline-block;"></img>
-            <canvas id="myCanvas" style="display:none;"></canvas>
+            <!--<Spxq></Spxq>-->
+            <div class='popContainer' style="margin:auto;text-align: center;">
+                <div style="position: absolute;right: 30px;top: 30px;z-index: 999;">
+                    <img @click="shut()" style="position: relative;display: block;" src="../../assets/images/shut.png" width="50"></img>
+                    <img @click="big()" style="position: relative;display: block;margin-top:10px" src="../../assets/images/big.png" width="50"></img>
+                    <img @click="small()" style="position: relative;display: block;margin-top:10px" src="../../assets/images/small.png" width="50"></img>
+                    <img @click="reduction()" style="position: relative;display: block;margin-top:10px" src="../../assets/images/reduction.png" width="50"></img>
+                </div>
+                <img id="mask_layer_img" title="右键点击图片关闭预览" style="display: inline-block;"></img>
+                <canvas id="myCanvas" style="display:none;"></canvas>
+            </div>
         </div>
         <Foot style="margin-bottom:15px;"></Foot>
     </div>
@@ -656,7 +658,8 @@
     .btn_bc{
         float:right;
         height:20px;
-        background-color:#ea8010;
+        color:#fff;
+        background-color:#000;
         border: 0;
         line-height: 10px;
         padding: 5px;

@@ -4,16 +4,14 @@
         <div class="lanmu clearfix">
             <div style="display: inline-block;float: left;">
                 <h1 style="text-align: left;">{{user_name.username}}</h1>
-                <a style="color:#000" :href="'/#/keep/attentionkeep?id='+user_name.uid">
-                    <div style="display:inline-block;text-align: left;">
-                        <div style="font-size: 30px;">{{user_name.my_attention}}</div>
-                        <p style="display:inline-block;font-size: 13px;">我关注的收藏夹</p>
-                    </div>
-                </a>
-                <a style="color:#000" :href="'/#/keep/attentionuser?id='+user_name.uid">
-                    <div style="display:inline-block;text-align: left;">
+                <div style="display:inline-block;text-align: left;">
+                    <div style="font-size: 30px;">{{user_name.my_attention}}</div>
+                    <p style="display:inline-block;font-size: 13px;">TA关注的收藏夹</p>
+                </div>
+                <a :href="'/#/keep/userattentionuser?id='+user_name.uid">
+                    <div style="display:inline-block;text-align: left;color:#000">
                         <div style="font-size: 30px;">{{user_name.attention_user_num}}</div>
-                        <p style="display:inline-block;font-size: 13px;">我关注的人</p>
+                        <p style="display:inline-block;font-size: 13px;">TA关注的人</p>
                     </div>
                 </a>
             </div>
@@ -23,23 +21,12 @@
                 </div>
             </div>
         </div>
+        <div style="text-align: left;width:1200px;margin: 10px auto;font-size: 25px;">TA关注的收藏夹</div>
         <div style="text-align: left;width:1200px;margin: 0px auto;min-height: -webkit-fill-available;" class="clearfix">
-            <div class="add_keeps" @click="Mask_layer_show()">
-                <div class="keep" style="background-color:#77696917;text-align: center;line-height: 200px;"><img src="../../assets/images/add.png" alt="" width="70px"></div>
-                <span>添加文件夹</span>
-            </div>
-            <div :id="'keep'+keep[0].id" class="keeps" v-for="keep in keepinfo" @mouseenter="shows($event)" @mouseleave="hiddens($event)">
+            <div :id="'keep'+keep[0].id" class="keeps" v-for="keep in keepinfo">
                 <template v-if="(keep[0].img_ratio == 1)">
                     <div>
-                        <div id="example-5" style="margin-top:30px">
-                            <input class="input2" type="text" v-model="add_keep_name">
-                            <button class="button2" @click="up_keep_name($event)">修改</button>
-                        </div>
-                        <div id="keep_edit">
-                            <img src="../../assets/images/delete.png" alt="" width="30px" style="cursor: pointer;" @click="del_keep_show($event)">
-                            <img src="../../assets/images/edit.png" alt="" width="30px" style="cursor: pointer;" @click="show_hidden($event)">
-                        </div>
-                        <a :href="'/#/keep/keepimg?id='+keep[0].id" target="_blank">
+                        <a :href="'/#/keep/keepimg?id='+keep[0].keep_id" target="_blank">
                             <div class="keep gallery1" :id="keep[0].id">
                                 <div id="gallery_id">
                                     <img v-if="(keep[0])" :src="keep[0].image+'?imageView2/1/w/500/h/500'" style="margin: 2px;float: left;width:96px;height:96px;">
@@ -48,20 +35,17 @@
                                     <img v-if="(keep[3])" :src="keep[3].image+'?imageView2/1/w/500/h/500'" style="margin: 2px;float: left;width:96px;height:96px;">
                                 </div>
                             </div>
-                            <span class="keeps_name" style="color:black">{{keep[0].keep_name}}</span>
                         </a>
+                        <span class="keeps_name">{{keep[0].keep_name}}</span>
+                            <div style="color: #ccc;display: flex;align-items: center;">
+                                {{keep[0].attention_num}}个收藏
+                                <div v-if="(keep[0].is_attention==2)" class="attention_btn" @click="del_attention(keep[0].keep_id)" >已关注</div>
+                                <div v-if="(keep[0].is_attention==1)" @click="add_attention(keep[0].keep_id)" style="cursor: pointer;color:#000;border:1px solid #000;margin:2px 10px;float:right;font-size: 13px;padding: 2px 10px;background-color: #fff;">+关注</div>
+                            </div>
                     </div>
                 </template>
                 <template v-if="(keep[0].img_ratio == 2)">
-                    <div id="example-5" style="margin-top:30px">
-                        <input class="input2" type="text" v-model="add_keep_name">
-                        <button class="button2" @click="up_keep_name($event)">修改</button>
-                    </div>
-                    <div id="keep_edit">
-                        <img src="../../assets/images/delete.png" alt="" width="30px" style="cursor: pointer;" @click="del_keep_show($event)">
-                        <img src="../../assets/images/edit.png" alt="" width="30px" style="cursor: pointer;" @click="show_hidden($event)">
-                    </div>
-                    <a :href="'/#/keep/keepimg?id='+keep[0].id" target="_blank">
+                    <a :href="'/#/keep/keepimg?id='+keep[0].keep_id" target="_blank" style="'text-decoration:none;">
                         <div class="keep gallery1" :id="keep[0].id">
                             <div id="gallery_id">
                                 <img v-if="(keep[0])" :src="keep[0].image+'?imageView2/1/w/400/h/250'" style="margin: 2px;float: left;width:200px;height:130px;">
@@ -70,19 +54,16 @@
                                 <img v-if="(keep[3])" :src="keep[3].image+'?imageView2/1/w/500/h/500'" style="margin: 2px;float: left;width:63px;height:65px;">
                             </div>
                         </div>
-                        <span class="keeps_name" style="color:black">{{keep[0].keep_name}}</span>
                     </a>
+                    <span class="keeps_name">{{keep[0].keep_name}}</span>
+                        <div style="color: #ccc;display: flex;align-items: center;">
+                            {{keep[0].attention_num}}个收藏
+                            <div v-if="(keep[0].is_attention==2)" class="attention_btn" @click="del_attention(keep[0].keep_id)">已关注</div>
+                            <div v-if="(keep[0].is_attention==1)" @click="add_attention(keep[0].keep_id)" style="cursor: pointer;color:#000;border:1px solid #000;margin:2px 10px;float:right;font-size: 13px;padding: 2px 10px;background-color: #fff;">+关注</div>
+                        </div>
                 </template>
                 <template v-if="(keep[0].img_ratio == 3)">
-                    <div id="example-5" style="margin-top:30px">
-                        <input class="input2" type="text" v-model="add_keep_name">
-                        <button class="button2" @click="up_keep_name($event)">修改</button>
-                    </div>
-                    <div id="keep_edit">
-                        <img src="../../assets/images/delete.png" alt="" width="30px" style="cursor: pointer;" @click="del_keep_show($event)">
-                        <img src="../../assets/images/edit.png" alt="" width="30px" style="cursor: pointer;" @click="show_hidden($event)">
-                    </div>
-                    <a :href="'/#/keep/keepimg?id='+keep[0].id" target="_blank">
+                    <a :href="'/#/keep/keepimg?id='+keep[0].keep_id" target="_blank">
                         <div class="keep gallery1" :id="keep[0].id">
                             <div id="gallery_id">
                                 <img v-if="(keep[0])" :src="keep[0].image+'?imageView2/1/w/500/h/500'" style="margin: 2px;float: left;width:121px;height:100px;">
@@ -91,23 +72,14 @@
                                 <img v-if="(keep[3])" :src="keep[3].image+'?imageView2/1/w/500/h/500'" style="margin: 2px;float: left;width:121px;height:100px;">
                             </div>
                         </div>
-                        <span class="keeps_name" style="color:black">{{keep[0].keep_name}}</span>
                     </a>
+                    <span class="keeps_name">{{keep[0].keep_name}}</span>
+                        <div style="color: #ccc;display: flex;align-items: center;">
+                            {{keep[0].attention_num}}个收藏
+                            <div v-if="(keep[0].is_attention==2)" class="attention_btn" @click="del_attention(keep[0].keep_id)" >已关注</div>
+                            <div v-if="(keep[0].is_attention==1)" @click="add_attention(keep[0].keep_id)" style="cursor: pointer;color:#000;border:1px solid #000;margin:2px 10px;float:right;font-size: 13px;padding: 2px 10px;background-color: #fff;">+关注</div>
+                        </div>
                 </template>
-            </div>
-        </div>
-        <div id="Mask_layers">
-            <div class="addkeep_Mask_layers">
-                <img src="../../assets/images/closes.png" width="25px" alt="" style="float: right;margin: -40px 20px 0px 0px;cursor: pointer;" @click="Mask_layers_hidden()">
-                <span style="display: block;margin-bottom: 50px;">删除此文件夹将会删除文件夹里的所有图片,<br>您确定要删除吗?</span>
-                <button class="button" style="background: #000;" @click="delete_keep($event)">确认</button>
-            </div>
-        </div>
-        <div id="Mask_layer">
-            <div class="addkeep_Mask_layer">
-                <img src="../../assets/images/closes.png" width="25px" alt="" style="float: right;margin: -40px 20px 0px 0px;cursor: pointer;" @click="Mask_layer_hidden()">
-                <input type="text" class="input" v-model="keep_name" placeholder="请输入收藏夹名">
-                <button class="button" @click="add_keep()">确认</button>
             </div>
         </div>
         <Foot style="margin-top:30px;clear: both;"></Foot>
@@ -119,7 +91,7 @@
     import HeadPage from "../../components/HeadPage"
     import Foot from "../../components/Foot"
     export default {
-        name: 'Keep',
+        name: 'Userattentionkeep',
         data(){
             return{
                 telphone:'',
@@ -127,7 +99,8 @@
                 user_name:[],
                 keepimg:[],
                 keep_name:'',
-                add_keep_name:''
+                add_keep_name:'',
+                info:''
             }
         },
         components: {
@@ -149,80 +122,60 @@
         },
         methods:{
             initData(){
-                this.$http.get(this.GLOBAL.baseurl + 'v1/site/up_pv_count5').then((response)=>{
-                })
-                this.$http.get(this.GLOBAL.baseurl + 'v1/home/getusername',{params:{tel: this.telphone}}).then((response)=>{
-                    this.user_name = response.data
-                    console.log(response.data)
-                })
-                this.$http.get(this.GLOBAL.baseurl + 'v1/home/findkeep',{params:{tel: this.telphone}}).then((response)=>{
-                    this.keepinfo = response.data
-                    console.log(response.data)
-                })
-            },
-            //点击查看收藏夹
-            sele_keep(event){
-                this.$router.push({name: 'keepimg',params:{id:event.currentTarget.id}});
-            },
-            Mask_layer_show(){
-                $("#Mask_layer").css('display','block')
-            },
-            Mask_layer_hidden(){
-                $("#Mask_layer").css('display','none')
-            },
-            add_keep(){
-                if(!this.keep_name){
-                    toastr.warning("请填写收藏夹名")
+                var url=location.href;
+                var i=url.indexOf('?');
+                if(i==0)return;
+                var querystr=url.substr(i+1);
+                var arr1=querystr.split('&');
+                var arr2=new Object();
+                for(i in arr1){
+                    var ta=arr1[i].split('=');
+                    arr2[ta[0]]=ta[1];
                 }
-                this.$http.get(this.GLOBAL.baseurl + 'v1/home/addkeep',{params:{tel: this.telphone,keep_name:this.keep_name}}).then((response)=>{
-                    if(response.data == 1){
-                        toastr.info("该文件夹名已经存在")
-                    }else{
-                        toastr.info("添加成功")
-                        location.reload()
-                    }
-                })
-            },
-            shows(e){
-                $(e.target).children("#keep_edit").css({height:'30px','z-index':999})
-            },
-            hiddens(e){
-                $(e.target).children("#keep_edit").css({height:'0px'})
-            },
-            show_hidden(e){
-                $(e.target).parent("#keep_edit").prev("#example-5").animate({height:'toggle',width:'toggle','z-index':'999'})
-            },
-            up_keep_name(e){
-                var id = $(e.target).parent("#example-5").next().next().children().attr("id")
-                if(!this.add_keep_name){
-                    toastr.warning("请填写收藏夹名")
-                }else{
-                    this.$http.get(this.GLOBAL.baseurl + 'v1/home/upkeepname',{params:{tel: this.telphone,keep_name:this.add_keep_name,id:id}}).then((response)=>{
-                        if(response.data){
-                            toastr.info("修改成功")
-                            $(e.target).parent("#example-5").next().next().children().next().html(this.add_keep_name)
-                            $(e.target).parent("#example-5").animate({height:'hide',width:'hide'})
-                        }else{
-                            toastr.warning("修改失败")
-                        }
+                for(var k in arr2){
+                    var param = k
+                }
+                this.info = arr2
+                if(arr2){
+                    this.$http.get(this.GLOBAL.baseurl + 'v1/home/getusername1',{params:{uid: arr2['id']}}).then((response)=>{
+                        this.user_name = response.data
+                        console.log(response.data)
+                    })
+                    this.$http.get(this.GLOBAL.baseurl + 'v1/home/userattenkeep',{params:{tel: this.telphone,uid: arr2['id']}}).then((response)=>{
+                        this.keepinfo = response.data
+                        console.log(response.data)
                     })
                 }
             },
-            del_keep_show(e){
-                var id = $(e.target).parent("#keep_edit").next().children().attr("id")
-                $("#Mask_layers").css('display','block')
-                $("#Mask_layers").attr('data_id',id)
+            //取消关注收藏夹
+            del_attention(keep_id){
+                var vm = this
+                vm.$http.get(vm.GLOBAL.baseurl + 'v1/home/del_attention_keep',{params:{keep_id:keep_id,tel: vm.telphone}}).then((response)=>{
+                    if(response.data == 1){
+                        toastr.info("取消关注成功")
+                        vm.$http.get(vm.GLOBAL.baseurl + 'v1/home/userattenkeep',{params:{tel: vm.telphone,uid: vm.info.id}}).then((response)=>{
+                            vm.keepinfo = response.data
+                        })
+                    }else if(response.data == 2){
+                        toastr.warning("取消关注失败")
+                    }else if(response.data == 3){
+                        toastr.warning("该收藏夹没有关注")
+                    }
+                })
             },
-            Mask_layers_hidden(){
-                $("#Mask_layers").css('display','none')
-            },
-            delete_keep(e){
-                var id = $(e.target).parent(".addkeep_Mask_layers").parent("#Mask_layers").attr("data_id")
-                this.$http.get(this.GLOBAL.baseurl + 'v1/home/delete_keep',{params:{tel: this.telphone,kid:id}}).then((response)=>{
-                    if(response.data){
-                        toastr.info("删除成功")
-                        $("#keep"+id+"").remove()
-                        $("#Mask_layers").css('display','none')
+            //关注收藏夹
+            add_attention(keep_id){
+                var vm = this
+                vm.$http.get(vm.GLOBAL.baseurl + 'v1/home/add_attention_keep',{params:{keep_id:keep_id,tel: vm.telphone}}).then((response)=>{
+                    if(response.data == 1){
+                        toastr.info("关注成功")
+                        vm.$http.get(vm.GLOBAL.baseurl + 'v1/home/userattenkeep',{params:{tel:vm.telphone,uid: vm.info.id}}).then((response)=>{
+                            vm.keepinfo = response.data
+                        })
+                    }else if(response.data == 2){
+                        toastr.warning("关注失败")
+                    }else if(response.data == 3){
+                        toastr.warning("该收藏夹已经关注了")
                     }
                 })
             }
@@ -232,6 +185,11 @@
 <style>
     html,body{height: 100%;margin:0px;padding:0px;margin: 0 auto}
     a{padding:0;margin:0;text-decoration:none}
+    a:hover {
+        color: #000;
+        text-decoration: none;
+    }
+    span{text-decoration:none}
     .lanmu{
         width:700px;
         margin:10px auto;
@@ -253,6 +211,25 @@
         margin-right:20px;
         float: left;
         overflow:hidden;
+    }
+    .attention_btn{
+        cursor: pointer;
+        color:#fff;
+        border:1px solid #000;
+        margin:2px 10px;
+        float:right;
+        font-size: 13px;
+        padding: 2px 10px;
+        background-color: #000;
+    }
+    .keeps_name{
+        color: black;
+        font-size: 20px;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        width: 100%;
+        display: inline-block;
+        overflow: hidden;
     }
     .add_keeps{
         display: inline-block;

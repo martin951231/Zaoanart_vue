@@ -2,6 +2,10 @@
     <div style="font-size: 15px;margin-bottom:100px;margin-top: 15px;">
         <div style="float:right;height: 70px;position: absolute;right: 50px;padding-top: 50px;">
             <input id="search_input" type="text" v-model="input" @input ="search_content" style="text-align: right;display:none;outline:none;border: 0px;border-bottom: 1px solid #ccc;width: 100px;">
+            <!--<form id="upfile" action="http://api.demo.com/v1/weixin/search_like" method="post" enctype="multipart/form-data" >-->
+                <!--<input id="img_file" type="file" class="file" name="file" accept="image/png,image/gif,image/jpeg">-->
+                <!--<input type="submit" @click="uploadfile()">提交</input>-->
+            <!--</form>-->
             <img id="search" src="../assets/images/search.png" alt="" width="20px" @click="search($event)" style="cursor: pointer;">
             <img id="search_hide" src="../assets/images/search_hide.png" alt="" width="20px" @click="search_hide($event)" style="cursor: pointer;display:none">
             <div v-if="telphone" style="display: inline-block;">
@@ -49,9 +53,9 @@
         </div>
         <div class="container">
             <!--导航栏-->
-            <div style="display: flex;height: 70px;justify-content: center;">
+            <div style="display: flex;height: 70px;justify-content: center;align-items: center;">
                 <div style="position: absolute;left: 0;">
-                    <a href=""><img src="../assets/images/logo.png" alt="" height="80px"></a>
+                    <a href=""><img src="http://qiniu.zaoanart.com/zaoanart_logo_middle_1057px.gif" alt="" height="60px"></a>
                 </div>
                 <div style="height: 70px;padding-top: 50px;">
                     <ul id="cate_select" class="select_ul" data_id="0" @mouseenter="show($event)" @mouseleave="hidden($event)" style="width:140px;">
@@ -114,6 +118,7 @@
                 currentPage:1,
                 telphone:'',
                 result1: null,
+                input_file:[],
                 s: true,
                 h: true,
                 o: true,
@@ -127,6 +132,10 @@
             this.initData();
         },
         methods:{
+            uploadfile(){
+                var objFile = document.getElementById("img_file");
+                console.log(objFile)
+            },
             initData(){
                 //获取分类
                 this.$http.get(this.GLOBAL.baseurl + 'v1/category/findcategory').then(function(res){

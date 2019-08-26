@@ -63,6 +63,31 @@ export default new VueRouter({
             component:resolve => require(['../pages/keep'], resolve),
         },
         {
+            path: '/keep/userkeep',
+            name:'Userkeep',
+            component:resolve => require(['../pages/keep/userkeep'], resolve),
+        },
+        {
+            path: '/keep/attentionkeep',
+            name:'Attentionkeep',
+            component:resolve => require(['../pages/keep/attentionkeep'], resolve),
+        },
+        {
+            path: '/keep/attentionuser',
+            name:'Attentionuser',
+            component:resolve => require(['../pages/keep/attentionuser'], resolve),
+        },
+        {
+            path: '/keep/userattentionkeep',
+            name:'Userattentionkeep',
+            component:resolve => require(['../pages/keep/userattentionkeep'], resolve),
+        },
+        {
+            path: '/keep/userattentionuser',
+            name:'Userattentionuser',
+            component:resolve => require(['../pages/keep/userattentionuser'], resolve),
+        },
+        {
             path: '/keep/keepimg',
             name: 'Keepimg',
             component:resolve => require(['../pages/keep/keepimg'], resolve),

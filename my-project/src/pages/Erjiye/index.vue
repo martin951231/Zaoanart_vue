@@ -5,7 +5,7 @@
             <div class="addkeep_Mask_layer">
                 <img src="../../assets/images/closes.png" width="25px" alt="" style="float: right;margin: -40px 20px 0px 0px;cursor: pointer;" @click="Mask_layer_hidden()">
                 <input type="text" class="input" v-model="keep_name" placeholder="请输入收藏夹名">
-                <button class="button" style="background: rgb(251, 140, 41);" @click="add_keep()">确认</button>
+                <button class="button" style="background:#000;" @click="add_keep()">确认</button>
             </div>
         </div>
         <div class="lanmu clearfix">
@@ -33,9 +33,9 @@
                             <div id="example-5">
                                 <select class="form-control" v-model="keep_option" @mouseenter="keep_show2()" style="float: left;width:60%;border-radius:0px" @click="keep_show()" @change="Mask_layer_show()">
                                     <option v-for="keep_info in keep_info">{{keep_info.keep_name}}</option>
-                                    <option value="add" style="color:#ff6700">添加</option>
+                                    <option value="add" style="color:#000">添加</option>
                                 </select>
-                                <button type="button" class="btn btn-warning" style="float: right;width: 40%;border-radius:0px" @click="addto_keep($event,dataImageList.id)">收藏</button>
+                                <button type="button" class="btn btn-warning" style="background-color:#000;border:1px solid #000;color:#fff;float: right;width: 40%;border-radius:0px" @click="addto_keep($event,dataImageList.id)">收藏</button>
                             </div>
                             <!--收藏夹遮罩层-->
                             <div id="icon" @click="to_sanji(dataImageList.id)"  style="position: absolute;height:0px;width:100%;text-align:left;padding: 0px 0px 0px 5px;background-color: #0000007d;overflow: hidden;">
@@ -232,6 +232,7 @@
                     }
                     return(JSON.stringify(res))
                 }
+                this.GLOBAL.search = decodeURI(arr2.search)
                 switch(Number(arr2.color_id))
                 {
                     case 0:
@@ -982,8 +983,8 @@
         height: 44px;
         margin-top: 25px;
         padding: 0;
-        background: #9e9e9e;
-        border: 1px solid #9e9e9e;
+        background: #000;
+        border: 1px solid #000;
         -moz-box-shadow: 0 15px 30px 0 rgba(255,255,255,.25) inset, 0 2px 7px 0 rgba(0,0,0,.2);
         -webkit-box-shadow: 0 15px 30px 0 rgba(255,255,255,.25) inset, 0 2px 7px 0 rgba(0,0,0,.2);
         box-shadow: 0 15px 30px 0 rgba(255,255,255,.25) inset, 0 2px 7px 0 rgba(0,0,0,.2);
