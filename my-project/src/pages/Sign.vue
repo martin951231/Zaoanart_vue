@@ -1,7 +1,9 @@
 <template>
     <div>
+        <input type="hidden" value="艺术,早安,早安艺术,article,早安art,ZaoanArt,专业软装装饰画方案解决，海量图库供您挑选,更有强大的自助装裱功能,找图,装裱快来早安艺术吧">
+        <h1 style="display: none;position: absolute;">艺术,早安,早安艺术,article,早安art,ZaoanArt,专业软装装饰画方案解决，海量图库供您挑选,更有强大的自助装裱功能,找图,装裱快来早安艺术吧</h1>
         <div class="back-img">
-            <img  style="" :src="img_info" alt="">
+            <img  style="" :src="img_info" alt="艺术,早安,早安艺术,article,早安art,ZaoanArt,专业软装装饰画方案解决，海量图库供您挑选,更有强大的自助装裱功能,找图,装裱快来早安艺术吧">
         </div>
         <div class="page-container">
             <div class="page-container-div">

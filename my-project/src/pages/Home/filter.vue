@@ -1,36 +1,21 @@
 <template>
-    <div id="history" style="min-height: 100%;height: 100%;">
+    <div id="history" style="height: 100%;">
         <input type="hidden" value="艺术,早安,早安艺术,article,早安art,ZaoanArt,专业软装装饰画方案解决，海量图库供您挑选,更有强大的自助装裱功能,找图,装裱快来早安艺术吧">
         <h1 style="display: none;position: absolute;">艺术,早安,早安艺术,article,早安art,ZaoanArt,专业软装装饰画方案解决，海量图库供您挑选,更有强大的自助装裱功能,找图,装裱快来早安艺术吧</h1>
         <HeadPage></HeadPage>
-        <div style="min-height: 100%;">
-            <h3 style="text-align: left;padding-left: 150px">足迹</h3>
-            <div id="history_info" style="padding: 0 100px;">
-                <div id="Mask_layer">
-                    <div class="addkeep_Mask_layer">
-                        <img src="../../assets/images/closes.png" width="25px" alt="" style="float: right;margin: -40px 20px 0px 0px;cursor: pointer;" @click="Mask_layer_hidden()">
-                        <input type="text" class="input" v-model="keep_name" placeholder="请输入收藏夹名">
-                        <button class="button" style="background:#000;color:#fff;" @click="add_keep()">确认</button>
-                    </div>
-                </div>
-                <div id="history_data" v-for="(history_infos,date_arr) in history_info">
+        <h3 style="text-align: left;padding-left: 150px">保存的效果</h3>
+        <div id="history_info" style="min-height: 100%;padding: 0 100px;">
+                <div id="history_data" v-for="(filter_infos,date_arr) in filter_info">
                     <span style="border-bottom: 1px solid #8c8585;display: block;">{{date_arr}}</span>
-                    <div style="display:inline-block;padding: 30px;" >
-                        <div v-for="(history_infos,img_arr) in history_infos" class="history_img" @mouseenter="shows($event)" @mouseleave="hiddens($event)" >
-                            <div id="example-5" >
-                                <select class="form-control" v-model="keep_option" style="float: left;width:60%;" @mouseenter="show_hidden($event)" @change="Mask_layer_show()">
-                                    <option v-for="keep_info in keep_info">{{keep_info.keep_name}}</option>
-                                    <option value="add" style="color:#000">添加</option>
-                                </select>
-                                <button type="button" class="btn btn-warning" style="background-color:#000;color:#fff;border:1px solid #000;float: right;width: 40%;" @click="addto_keep($event,img_arr)">收藏</button>
-                            </div>
-                            <div id="icon" @click="to_sanji(img_arr)" style="position: absolute;height: 0px;width:100%;text-align:left;padding: 0px 0px 0px 5px;background-color: #0000007d;overflow: hidden;">
-                            </div>
-                            <img :src="history_infos" alt="艺术,早安,早安艺术,article,早安art,ZaoanArt,专业软装装饰画方案解决，海量图库供您挑选,更有强大的自助装裱功能,找图,装裱快来早安艺术吧"  style="width:100%;margin: 10px;min-width: 250px;">
+                    <div style="display:inline-block;padding: 30px;" class="filter_div">
+                        <div v-for="(filter_infos,img_arr) in filter_infos" class="history_img" @mouseenter="shows($event)" @mouseleave="hiddens($event)" >
+                            <img src="../../assets/images/del_filter.png" width="35" class="del_filter_img" style="position: absolute;right: 0;display:none" @click="del_filter($event,filter_infos.id)">
+                            <a target="_blank" :href="'/#/Decoration?img='+filter_infos.image+'&max_width='+filter_infos.max_width+'&max_height='+filter_infos.max_height+'&imgid='+filter_infos.imgid+''">
+                                <img :src="filter_infos.filter_img" alt="艺术,早安,早安艺术,article,早安art,ZaoanArt,专业软装装饰画方案解决，海量图库供您挑选,更有强大的自助装裱功能,找图,装裱快来早安艺术吧"  style="width:100%;margin: 10px;min-width: 250px;">
+                            </a>
                         </div>
                     </div>
                 </div>
-            </div>
         </div>
         <LabelLeft></LabelLeft>
         <Foot style="clear: both;"></Foot>
@@ -42,7 +27,7 @@
     import Foot from "../../components/Foot";
     import axios from 'axios';
     export default {
-        name: 'History',
+        name: 'Filter',
         data(){
             return{
                 login_phone:'',
@@ -51,7 +36,7 @@
                 user_info:[],
                 keep_info:[],
                 keep_option:'',
-                history_info:[],
+                filter_info:[],
                 keep_name:'',
             }
         },
@@ -79,8 +64,6 @@
             initData(){
                 document.body.scrollTop = 0
                 document.documentElement.scrollTop = 0
-                this.$http.get(this.GLOBAL.baseurl + 'v1/site/up_pv_count10').then((response)=>{
-                })
                 if(this.login_phone){
                     this.$http.post(this.GLOBAL.baseurl + 'v1/home/homeinfo',{username:this.login_phone},{emulateJSON: true}).then((response)=>{
                         this.user_info = response.data
@@ -91,82 +74,34 @@
                     window.location.href="/#/login";
                 }
             },
-            //显示添加收藏夹
-            Mask_layer_show(){
-                if(!this.login_phone){
-                    toastr.warning("请先登录")
-                    return false
-                }else{
-                    if(this.keep_option == 'add'){
-                        $("#Mask_layer").css('display','block')
-                        this.keep_option = ''
-                    }
-                }
-            },
             show_history(){
-                this.$http.get(this.GLOBAL.baseurl + 'v1/home/get_history',{params:{tel:this.login_phone}}).then((response)=>{
-                    this.history_info = response.data
-                })
-            },
-            shows(e){
-                $(e.target).children("#icon").css({height:'100%'})
-                $(e.target).children("#icon").prev("#example-5").css({height:'50px','display':'block','z-index':'999'})
-            },
-            hiddens(e){
-                $(e.target).children("#icon").css({height:'0px'})
-                $(e.target).children("#icon").prev("#example-5").css({height:'0px','display':'none'})
-            },
-            show_hidden(e){
-                if(!this.login_phone){
-                    toastr.warning("请先登录")
-                    return false
-                }
-                this.$http.get(this.GLOBAL.baseurl + 'v1/home/select_keep',{params:{tel:this.login_phone}}).then((response)=>{
-                    this.keep_info = response.data
-                })
-            },
-            //隐藏添加收藏夹
-            Mask_layer_hidden(){
-                $("#Mask_layer").css('display','none')
-            },
-            add_keep(){
-                if(!this.keep_name){
-                    toastr.warning("请填写收藏夹名")
-                }
-                this.$http.get(this.GLOBAL.baseurl + 'v1/home/addkeep',{params:{tel: this.login_phone,keep_name:this.keep_name}}).then((response)=>{
-                    if(response.data == 1){
-                        toastr.info("该文件夹名已经存在")
-                    }else{
-                        toastr.info("添加成功")
-                        $("#Mask_layer").css('display','none')
-                    }
+                this.$http.get(this.GLOBAL.baseurl + 'v1/home/get_filter',{params:{tel:this.login_phone}}).then((response)=>{
+                    this.filter_info = response.data
                 })
             },
             to_sanji(id){
                 let routeData = this.$router.resolve({path:"/sanjiye?id="+id})
                 window.open(routeData.href, '_blank');
             },
-            addto_keep(e,img_id){
-                if(!this.login_phone){
-                    toastr.warning("请先登录")
-                    return false
-                }
-                if(!this.keep_option){
-                    toastr.warning("请选择要添加的收藏夹")
-                    return false
-                }
-                this.$http.get(this.GLOBAL.baseurl + 'v1/home/addto_keep',{params:{tel:this.login_phone,keep_name:this.keep_option,img_id:img_id}}).then((response)=>{
-                    if(response.data == 1){
-                        toastr.warning("该图片已经存在此收藏夹")
-                        return false
-                    }else if(response.data == 2){
-                        toastr.warning("添加失败")
-                    }else if(response.data == 0){
-                        toastr.info("添加成功")
-                        $(e.target).parent("#example-5").animate({height:'hide',width:'hide'})
-                    }
-                })
+            shows(e){
+                $(e.target).children('.del_filter_img').fadeIn(50)
             },
+            hiddens(e){
+                $(e.target).children('.del_filter_img').fadeOut(50)
+            },
+            del_filter(e,id){
+                if(this.login_phone){
+                    this.$http.post(this.GLOBAL.baseurl + 'v1/home/del_filter_img',{tel:this.login_phone,id:id},{emulateJSON: true}).then((response)=>{
+                        if(response.data){
+                            $(e.target).parent('.history_img').remove()
+                            toastr.info("删除成功")
+                        }
+                    })
+                }else{
+                    alert('请登录')
+                    window.location.href="/#/login";
+                }
+            }
         }
     }
 </script>

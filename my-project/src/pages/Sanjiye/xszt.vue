@@ -1,27 +1,27 @@
 
 <template>
-    <div  class="zuop">
+    <div  class="zuop" style="margin-top: 20px">
         <div style="background:#fff;padding-top:200px;" class="xszt">
-            <div class="xiangsi" style="width:1200px;">
+            <div class="xiangsi" style="width:70%;">
                 <a class="tuijian" @click="up_pv7()" target="_blank" style="color:#999;cursor: pointer;">您可能要找▼</a>
                 <ul style="margin:0 auto;">
-                    <li v-for="mayImageList in mayImageList" style="overflow:hidden;"><a :href="'/#/sanjiye?id='+mayImageList.id+''" target="_blank"><img :src="mayImageList.image" width="100%" style="min-width: 230px;"></a></li>
+                    <li v-for="mayImageList in mayImageList" style="overflow:hidden;"><a :href="'/#/sanjiye?id='+mayImageList.id+''" target="_blank"><img :src="mayImageList.image" width="100%" alt="艺术,早安,早安艺术,article,早安art,ZaoanArt,海量图库供您挑选,更有强大的自助装裱功能,找图,装裱快来早安艺术吧"></a></li>
                 </ul>
             </div>
         </div>
         <div style="background:#fff;padding-top:120px;" class="xszt">
-            <div class="xiangsi" style="width:1200px;">
+            <div class="xiangsi" style="width:70%;">
                 <a class="tuijian" @click="up_pv8()" target="_blank" style="color:#999;cursor: pointer;">相似类型▼</a>
                 <ul style="margin:0 auto;">
-                    <li v-for="dataCategoryList in dataCategoryList" style="overflow:hidden;"><a :href="'/#/sanjiye?id='+dataCategoryList.id+''" target="_blank"><img :src="dataCategoryList.image" width="100%" style="min-width: 230px;"></a></li>
+                    <li v-for="dataCategoryList in dataCategoryList" style="overflow:hidden;"><a :href="'/#/sanjiye?id='+dataCategoryList.id+''" target="_blank"><img :src="dataCategoryList.image" width="100%" alt="艺术,早安,早安艺术,article,早安art,ZaoanArt,海量图库供您挑选,更有强大的自助装裱功能,找图,装裱快来早安艺术吧"></a></li>
                 </ul>
             </div>
         </div>
         <div style="background:#fff;padding-top:120px;" class="xszt">
-            <div class="xiangsi" style="width:1200px;">
+            <div class="xiangsi" style="width:70%;">
                 <a class="tuijian" @click="up_pv9()" target="_blank" style="color:#999;cursor: pointer;">相似主题▼</a>
                 <ul style="margin:0 auto;">
-                    <li v-for="dataThemeList in dataThemeList" style="overflow:hidden;"><a :href="'/#/sanjiye?id='+dataThemeList.id+''" target="_blank"><img :src="dataThemeList.image" width="100%" style="min-width: 230px;"></a></li>
+                    <li v-for="dataThemeList in dataThemeList" style="overflow:hidden;"><a :href="'/#/sanjiye?id='+dataThemeList.id+''" target="_blank"><img :src="dataThemeList.image" width="100%" alt="艺术,早安,早安艺术,article,早安art,ZaoanArt,海量图库供您挑选,更有强大的自助装裱功能,找图,装裱快来早安艺术吧"></a></li>
                 </ul>
             </div>
         </div>
@@ -54,7 +54,7 @@
             this.$http.get(this.GLOBAL.baseurl + 'v1/goods/findgoods_catagory',{params:{id: arr2.id}}).then((response)=>{
                 if(response.data){
                     for(var i = 0; i<response.data.category.length;i++ ){
-                        response.data.category[i].image  = 'http://qiniu.zaoanart.com/'+response.data.category[i].image+'?imageView2/1/w/500/h/500'
+                        response.data.category[i].image  = 'http://qiniu.zaoanart.com/'+response.data.category[i].image+'?imageView2/1/w/600/h/600'
                         // var res = []
                         // var param = '类别'
                         // for ( var v=0; v<param.length; v++ ) {
@@ -71,7 +71,7 @@
                     // this.dataCategoryList.lanmu = '类别'
                     // this.dataCategoryList.lanmus = response.data.category[0].category_name
                     for(var i = 0; i<response.data.theme.length;i++ ){
-                        response.data.theme[i].image  = 'http://qiniu.zaoanart.com/'+response.data.theme[i].image+'?imageView2/1/w/500/h/500'
+                        response.data.theme[i].image  = 'http://qiniu.zaoanart.com/'+response.data.theme[i].image+'?imageView2/1/w/600/h/600'
                     }
                 }
 
@@ -81,7 +81,7 @@
             this.$http.get(this.GLOBAL.baseurl + 'v1/goods/findmayimg',{params:{id: arr2.id}}).then((response)=>{
                 this.mayImageList = response.data
                 for(var q=0;q<response.data.length;q++){
-                    this.mayImageList[q].image = 'http://qiniu.zaoanart.com/'+this.mayImageList[q].image+'?imageView2/1/w/500/h/500'
+                    this.mayImageList[q].image = 'http://qiniu.zaoanart.com/'+this.mayImageList[q].image+'?imageView2/1/w/600/h/600'
                 }
             })
         },
@@ -116,7 +116,7 @@
         .zuop .title{margin:0 auto;text-align:center;margin-bottom:30px;}
         .biaoti{width:1200px;margin:0 auto;}
         .xiangsi,.xiangsi ul{width:100%;padding:0;margin:0 auto;padding-left:0;overflow: hidden;}
-        .xiangsi ul li{width:230px;height:230px;margin:5px;justify-content: center;}
+        .xiangsi ul li{width:19%;height:auto;margin:0.5%;justify-content: center;}
         .xiangsi ul li a{display:inline-block;margin-left:0;justify-content: center;}
         .xszt-1{width:1200px;margin:0 auto;margin-top:-40px;}
         .lanmu{height:100px;}

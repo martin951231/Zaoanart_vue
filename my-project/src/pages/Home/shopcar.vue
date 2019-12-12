@@ -1,5 +1,7 @@
 <template>
-    <div id="shopcar_div">
+    <div id="shopcar_div" style="height:100%">
+        <input type="hidden" value="艺术,早安,早安艺术,article,早安art,ZaoanArt">
+        <h1 style="display: none;position: absolute;">艺术,早安,早安艺术,article,早安art,ZaoanArt</h1>
         <HeadPage></HeadPage>
         <div id="shopcar_info"  style="min-height: -webkit-fill-available;padding: 0 100px;">
             <div id="shopcar" >
@@ -101,6 +103,8 @@
         },
         methods:{
             initData(){
+                document.body.scrollTop = 0
+                document.documentElement.scrollTop = 0
                 this.$http.get(this.GLOBAL.baseurl + 'v1/site/up_pv_count12').then((response)=>{
                 })
                 if(this.login_phone){

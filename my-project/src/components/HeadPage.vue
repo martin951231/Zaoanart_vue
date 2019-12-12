@@ -1,5 +1,5 @@
 <template>
-    <div style="font-size: 15px;margin-bottom:100px;margin-top: 15px;">
+    <div style="font-size: 15px;margin-bottom:50px;margin-top: 15px;">
         <div style="float:right;height: 70px;position: absolute;right: 50px;padding-top: 50px;">
             <input id="search_input" type="text" v-model="input" @input ="search_content" style="text-align: right;display:none;outline:none;border: 0px;border-bottom: 1px solid #ccc;width: 100px;">
             <!--<form id="upfile" action="http://api.demo.com/v1/weixin/search_like" method="post" enctype="multipart/form-data" >-->
@@ -25,13 +25,17 @@
                     <img src="../assets/images/hi.png" width="20px" id="show_user_img1">
                     {{telphone}}
                 </a>
-                <a style="display:block;height: 25px;line-height: 25px;" v-if="telphone" href="/#/home/shopcar" class="login_sign tohover" target="_blank" id="show_user_a5">
-                    <img src="../assets/images/car.png" width="20px" id="show_user_img5">
-                    购物车
-                </a>
+                <!--<a style="display:block;height: 25px;line-height: 25px;" v-if="telphone" href="/#/home/shopcar" class="login_sign tohover" target="_blank" id="show_user_a5">-->
+                    <!--<img src="../assets/images/car.png" width="20px" id="show_user_img5">-->
+                    <!--购物车-->
+                <!--</a>-->
                 <a style="display:block;height: 25px;line-height: 25px;" v-if="telphone" href="/#/home/history" class="login_sign tohover" target="_blank" id="show_user_a6">
                     <img src="../assets/images/history.png" width="20px" id="show_user_img6">
                     足迹
+                </a>
+                <a style="display:block;height: 25px;line-height: 25px;" v-if="telphone" href="/#/home/filter" class="login_sign tohover" target="_blank" id="show_user_a8">
+                    <img src="../assets/images/history.png" width="20px" id="show_user_img8">
+                    保存的效果
                 </a>
                 <a style="display:block;height: 25px;line-height: 25px;" v-if="telphone" href="/#/home" class="login_sign tohover" target="_blank" id="show_user_a7">
                     <img src="../assets/images/set.png" width="20px" id="show_user_img7">
@@ -163,10 +167,10 @@
                     if(id == 'show_keep_img' || id == 'show_keep' || class_ == 'show_keep_li'){
                         $('#show_keep').css('display','block')
                     }
-                    if(id != 'show_user_img' || id != 'show_user' || id != 'show_user_img1' || id != 'show_user_img2' || id != 'show_user_a1' || id != 'show_user_a2' || id != 'show_user_a3' || id != 'show_user_a4' || id != 'show_user_a5' || id != 'show_user_a6' || id != 'show_user_a7' || id != 'show_user2'){
+                    if(id != 'show_user_img' || id != 'show_user' || id != 'show_user_img1' || id != 'show_user_img2' || id != 'show_user_a1' || id != 'show_user_a2' || id != 'show_user_a3' || id != 'show_user_a4' || id != 'show_user_a5' || id != 'show_user_a6' || id != 'show_user_a7' || id != 'show_user_a7' || id != 'show_user2'){
                         $('#show_user').css('display','none')
                     }
-                    if(id == 'show_user_img' || id == 'show_user' || id == 'show_user_img1' || id == 'show_user_img2' || id == 'show_user_a1' || id == 'show_user_a2' || id == 'show_user_a3' || id == 'show_user_a4' || id == 'show_user_a5' || id == 'show_user_a6' || id == 'show_user_a7' || id == 'show_user2'){
+                    if(id == 'show_user_img' || id == 'show_user' || id == 'show_user_img1' || id == 'show_user_img2' || id == 'show_user_a1' || id == 'show_user_a2' || id == 'show_user_a3' || id == 'show_user_a4' || id == 'show_user_a5' || id == 'show_user_a6' || id == 'show_user_a7' || id == 'show_user_a8' || id == 'show_user2'){
                         $('#show_user').css('display','block')
                     }
                 }

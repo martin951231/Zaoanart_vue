@@ -21,7 +21,6 @@ export default new VueRouter({
             name: 'Index',
             component: resolve => require(['../pages/Index'], resolve),
         },
-
         {
             path: '/erjiye',
             name:'Erjiye',
@@ -56,6 +55,11 @@ export default new VueRouter({
             path: '/home/history',
             name: 'History',
             component:resolve => require(['../pages/home/history'], resolve),
+        },
+        {
+            path: '/home/filter',
+            name: 'Filter',
+            component:resolve => require(['../pages/home/filter'], resolve),
         },
         {
             path: '/keep',
@@ -101,6 +105,11 @@ export default new VueRouter({
             path: '/decoration',
             name: 'Decoration',
             component:resolve => require(['../pages/decoration'], resolve),
+        },
+        {
+            path: '/decoration/specialeffects',
+            name: 'Specialeffects',
+            component:resolve => require(['../pages/decoration/specialeffects'], resolve),
         }
     ]
 })

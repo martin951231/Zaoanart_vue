@@ -1,15 +1,19 @@
 <template>
     <div style="height:100%">
+        <input type="hidden" value="艺术,早安,早安艺术,article,早安art,ZaoanArt">
+        <h1 style="display: none;position: absolute;">艺术,早安,早安艺术,article,早安art,ZaoanArt</h1>
         <HeadPage></HeadPage>
         <div class="lanmu clearfix">
-            <div style="display: inline-block;float: left;">
-                <h1 style="text-align: left;">{{user_name.username}}</h1>
-                <a :href="'/#/keep/userattentionkeep?id='+user_name.uid">
-                    <div style="display:inline-block;text-align: left;color:#000">
-                        <div style="font-size: 30px;">{{user_name.my_attention}}</div>
-                        <p style="display:inline-block;font-size: 13px;">TA关注的收藏夹</p>
-                    </div>
-                </a>
+            <div style="text-align: left;display: inline-block;float: left;">
+                <div class="name_span" style="width: 500px;">
+                    <span style="text-align: left;font-size: 40px;">{{user_name.username}}</span>
+                </div>
+                <!--<a :href="'/#/keep/userattentionkeep?id='+user_name.uid">-->
+                    <!--<div style="display:inline-block;text-align: left;color:#000">-->
+                        <!--<div style="font-size: 30px;">{{user_name.my_attention}}</div>-->
+                        <!--<p style="display:inline-block;font-size: 13px;">TA关注的收藏夹</p>-->
+                    <!--</div>-->
+                <!--</a>-->
                 <div style="display:inline-block;text-align: left;">
                     <div style="font-size: 30px;">{{user_name.attention_user_num}}</div>
                     <p style="display:inline-block;font-size: 13px;">TA关注的人</p>
@@ -22,7 +26,7 @@
             </div>
         </div>
         <div style="text-align: left;width:1200px;margin: 10px auto;font-size: 25px;">TA关注的人</div>
-        <div style="text-align: left;width:1200px;margin: 0px auto;min-height: -webkit-fill-available;" class="clearfix">
+        <div v-if="(userinfo)" style="text-align: left;width:1200px;margin: 0px auto;min-height: -webkit-fill-available;" class="clearfix">
             <div class="keeps" v-for="user in userinfo">
                     <div>
                         <a :href="'/#/keep/userkeep?id='+user.uid" target="_blank">
@@ -31,10 +35,10 @@
                             </div>
                         </a>
                         <div style="text-align: center;">
-                                <span class="keeps_name" style="color:black;font-size: 20px;">{{user.username}}</span>
-                                <div style="color: #ccc;font-size: 15px ">
+                                <span class="keeps_name name_span" style="color:black;font-size: 20px;">{{user.username}}</span>
+                                <div style="text-align: left;color: #ccc;font-size: 15px ">
                                     <span>{{user.attention_keep}}个关注的收藏夹</span>
-                                    <span>{{user.attention_user}}个关注的人</span>
+                                    <span>{{user.attention_user}}个关注</span>
                                     <br>
                                     <div v-if="(user.is_attention)" @click="del_attention_user(user.uid)" style="cursor: pointer;color:#fff;border:1px solid #000;margin:2px 10px;float:right;font-size: 13px;padding: 2px 10px;background-color: #000;">已关注</div>
                                     <div v-if="(!user.is_attention)" @click="add_attention_user(user.uid)" style="cursor: pointer;color:#000;border:1px solid #000;margin:2px 10px;float:right;font-size: 13px;padding: 2px 10px;background-color: #fff;">+关注</div>
@@ -43,6 +47,13 @@
                     </div>
             </div>
         </div>
+        <div v-if="(!userinfo)" style="display: flex;flex-direction: column;justify-content: center;align-items: center;width:1200px;margin: 0px auto;height: 100%;">
+            <div style="height: 50%;">
+                <img src="../../assets/images/null.png" alt="" width="200px" height="200px">
+                <h4>暂无关注</h4>
+            </div>
+        </div>
+        <LabelLeft></LabelLeft>
         <Foot style="margin-top:30px;clear: both;"></Foot>
     </div>
 
@@ -50,13 +61,14 @@
 <script>
     import axios from 'axios'
     import HeadPage from "../../components/HeadPage"
+    import LabelLeft from "../../components/LabelLeft"
     import Foot from "../../components/Foot"
     export default {
         name: 'Userattentionuser',
         data(){
             return{
                 telphone:'',
-                userinfo:[],
+                userinfo:null,
                 user_name:[],
                 keepimg:[],
                 keep_name:'',
@@ -65,7 +77,7 @@
             }
         },
         components: {
-            HeadPage,Foot
+            HeadPage,LabelLeft,Foot
         },
         watch: {
             '$route' () {
@@ -83,6 +95,8 @@
         },
         methods:{
             initData(){
+                document.body.scrollTop = 0
+                document.documentElement.scrollTop = 0
                 var url=location.href;
                 var i=url.indexOf('?');
                 if(i==0)return;
@@ -98,13 +112,13 @@
                 }
                 this.info = arr2
                 if(arr2){
-                    this.$http.get(this.GLOBAL.baseurl + 'v1/home/getusername1',{params:{uid: arr2['id']}}).then((response)=>{
+                    this.$http.get(this.GLOBAL.baseurl + 'v1/home/getusername1',{params:{tel:this.telphone,uid: arr2['id']}}).then((response)=>{
                         this.user_name = response.data
-                        console.log(response.data)
                     })
                     this.$http.get(this.GLOBAL.baseurl + 'v1/home/userattentionuser',{params:{tel:this.telphone,uid: arr2['id']}}).then((response)=>{
-                        this.userinfo = response.data
-                        console.log(response.data)
+                        if(response.data.length !=0){
+                            this.userinfo = response.data
+                        }
                     })
                 }
             },
@@ -149,7 +163,15 @@
         color: #000;
         text-decoration: none;
     }
-    span{text-decoration:none}
+    .name_span{
+        width: 80%;
+        display: block;
+        text-decoration:none;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        -o-text-overflow: ellipsis;
+        white-space:nowrap;
+    }
     .lanmu{
         width:700px;
         margin:10px auto;

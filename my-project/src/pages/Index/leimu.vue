@@ -1,18 +1,20 @@
 <template>
     <div>
-        <div class="leimu">
-            <div style="padding-top:30px;">
+        <input type="hidden" value="艺术,早安,早安艺术,article,早安art,ZaoanArt">
+        <h1 style="display: none;position: absolute;">艺术,早安,早安艺术,article,早安art,ZaoanArt</h1>
+        <div class="leimu" style="width: 80%;margin: 0 auto;">
+            <div style="padding-top:30px;width: 100%;">
                 <div class="title">
                     <div class="xian1"></div>
                     <a class="leixing" style="color: black;">分类  Category</a>
                     <div class="xian2"></div>
                 </div>
-                <div style="text-align: center;height: 20px;overflow: hidden;font-family: monospace;" id="cate_show_div">
+                <div style="width: 100%;text-align: center;height: 20px;overflow: hidden;font-family: monospace;" id="cate_show_div">
                     <a href="" :href="'/#/erjiye?cate_id='+category.id+'&theme_id=0&color_id=0&search=&pageSize=50&currentPage=1'" v-for="(category,index) in category" :key="index" v-if="category.pid==0">
                         <ul style="display: inline-block;width:100px;text-align: center;font-family: monospace;" class="tuijian ul_shadow" :id="category.id" @mouseenter="show_cate($event)">{{category.category_name}}</ul>
                     </a>
                     <!--油画列表-->
-                    <div style="position: absolute;width: 1200px;">
+                    <div style="position: absolute;width: 80%;">
                         <ul style="display: none;background-color: #fff;" id="youhua" @mouseleave="hide_cate()">
                             <li class="ul_shadow" style="display: inline-block;margin-right: 5px;" v-for="(category,index) in category" :key="index" v-if="category.pid==1">
                                 <a :href="'/#/erjiye?cate_id='+category.id+'&theme_id=0&color_id=0&search=&pageSize=50&currentPage=1'">
@@ -26,7 +28,7 @@
                         </ul>
                     </div>
                     <!--国画列表-->
-                    <div style="position: absolute;width: 1200px;">
+                    <div style="position: absolute;width:  80%;">
                         <ul style="display: none;background-color: #fff;" id="guohua" @mouseleave="hide_cate()">
                             <li class="ul_shadow" style="display: inline-block;margin-right: 5px;" v-for="(category,index) in category" :key="index" v-if="category.pid==2">
                                 <a :href="'/#/erjiye?cate_id='+category.id+'&theme_id=0&color_id=0&search=&pageSize=50&currentPage=1'">
@@ -41,7 +43,7 @@
                     </div>
 
                     <!--摄影列表-->
-                    <div style="position: absolute;width: 1200px;">
+                    <div style="position: absolute;width:  80%;">
                         <ul style="display: none;background-color: #fff;" id="sheying" @mouseleave="hide_cate()">
                             <li class="ul_shadow" style="display: inline-block;margin-right: 5px;" v-for="(category,index) in category" :key="index" v-if="category.id==16">
                                 <a :href="'/#/erjiye?cate_id='+category.id+'&theme_id=0&color_id=0&search=&pageSize=50&currentPage=1'">
@@ -56,7 +58,7 @@
                     </div>
 
                     <!--综合绘画-->
-                    <div style="position: absolute;width: 1200px;">
+                    <div style="position: absolute;width:  80%;">
                         <ul style="display: none;background-color: #fff;" id="zonghehuihua" @mouseleave="hide_cate()">
                             <li class="ul_shadow" style="display: inline-block;margin-right: 5px;" v-for="(category,index) in category" :key="index" v-if="category.pid==3">
                                 <a :href="'/#/erjiye?cate_id='+category.id+'&theme_id=0&color_id=0&search=&pageSize=50&currentPage=1'">
@@ -70,7 +72,7 @@
                         </ul>
                     </div>
                     <!--装饰画-->
-                    <div style="position: absolute;width: 1200px;">
+                    <div style="position: absolute;width:  80%;">
                         <ul style="display: none;background-color: #fff;" id="zhuangshihua" @mouseleave="hide_cate()">
                             <li class="ul_shadow" style="display: inline-block;margin-right: 5px;">
                                 <a :href="'/#/erjiye?cate_id=4&theme_id=0&color_id=0&search=&pageSize=50&currentPage=1'">
@@ -103,7 +105,7 @@
 
                     </div>
                     <!--其他-->
-                    <div style="position: absolute;width: 1200px;">
+                    <div style="position: absolute;width:  80%;">
                         <ul id="qita" style="display: none;background-color: #fff;" @mouseleave="hide_cate()">
                             <li class="ul_shadow" style="display: inline-block;margin-right: 5px;" v-for="(category,index) in category" :key="index" v-if="category.pid==5">
                                 <a :href="'/#/erjiye?cate_id='+category.id+'&theme_id=0&color_id=0&search=&pageSize=50&currentPage=1'">
@@ -122,7 +124,7 @@
                     <a class="leixing" style="color: black;">主题  Subjects</a>
                     <div class="xian2"></div>
                 </div>
-                <div style="text-align: center;" id="theme_show_div">
+                <div style="text-align: center;display: flex;justify-content: center;    width: 100%;" id="theme_show_div">
                     <a v-for="(theme,index) in theme" :key="index" :href="'/#/erjiye?theme_id='+theme.id+'&cate_id=0&color_id=0&search=&pageSize=50&currentPage=1'" width="100px">
                         <ul class="ul_shadow" :id="theme.id" style="padding:0;font-family:monospace;display: inline-block;width:100px;text-align: center;" @mouseenter="show_theme($event)" @mouseleave="hide_theme($event)">
                             {{theme.theme_name}}
@@ -295,18 +297,7 @@
     .ul_shadow:hover{
         box-shadow: #ccc 3px 3px 5px;
     }
-    @media (min-width:375px) {
-        .leimu{width:320px;margin-left:-1px;text-align: left;}
-    }
-    @media (min-width:414px) {
-        .leimu{width:414px;padding:0 5px;text-align: left;}
-    }
-    @media (min-width:700px) {
-        .leimu{width:700px;margin:0 auto;text-align: left;}
-    }
-    @media (min-width:1200px) {
-        .leimu{width:1200px;margin:0 auto;text-align: left;}
-    }
+
     .color_td{
         width:30px;
         height:30px;

@@ -1,17 +1,18 @@
 <template>
     <div id="keep_body" class="clearfix">
-        <a href="" class="logo_a" style="position: absolute;z-index: 999;width: 10%;"><img src="../../assets/images/logo.png" alt=""  style="width: auto;height: auto;max-height: 100%;max-width: 100%;"></a>
+        <input type="hidden" value="早安艺术,article,早安art,ZaoanArt,专业软装装饰画方案解决，海量图库供您挑选,更有强大的自助装裱功能,找图,装裱快来早安艺术吧">
+        <h1 style="display: none;position: absolute;">早安艺术,article,早安art,ZaoanArt,专业软装装饰画方案解决，海量图库供您挑选,更有强大的自助装裱功能,找图,装裱快来早安艺术吧</h1>
         <div id="keep_show">
             <div>
-                <span style="color:#464646;font-size: 35px;">{{keep_name}}</span>
-                <span style="color:#464646;font-size: 17px;margin-left: 30px;">共{{keepimg_count}}张</span>
+                <span style="color:#ccc;font-size: 35px;">{{keep_name}}</span>
+                <span style="color:#ccc;font-size: 17px;margin-left: 30px;">共{{keepimg_count}}张</span>
             </div>
             <div style="height:30px;" class="clearfix">
                 <div class="edit_keep">
                     <input type="checkbox" v-model="checked_all" @change="checkAll()">
                     <span style="color:#cccccc;font-size:8px;margin-left: -5px;">全选</span>
                 </div>
-                <div class="edit_keep">
+                <div v-if="status && is_login" class="edit_keep">
                     <img src="../../assets/images/mobile.png" alt="" width="15px">
                     <span style="color:#cccccc;font-size:8px;margin-left: -5px;" @click="move_img_all_show($event)" id="move_to_span">移动到...</span>
                     <div id="move_img_all" class="example-5" data_id="0">
@@ -22,7 +23,7 @@
                         <button type="button" class="btn btn-warning" style="float: right;width: 40%;font-size:10px;" @click="move_img_all()">确认</button>
                     </div>
                 </div>
-                <div class="edit_keep">
+                <div v-if="is_login" class="edit_keep">
                     <img src="../../assets/images/copy.png" alt="" width="20px">
                     <span style="color:#cccccc;font-size:8px;margin-left: -5px;" @click="copy_img_all_show($event)" id="copy_to_span">复制到...</span>
                     <div id="copy_img_all" class="example-5"  data_id="0">
@@ -33,7 +34,7 @@
                         <button type="button" class="btn btn-warning" style="font-size:10px;float: right;width: 40%;" @click="copy_img_all()">确认</button>
                     </div>
                 </div>
-                <div class="edit_keep">
+                <div v-if="status && is_login" class="edit_keep">
                     <img src="../../assets/images/delete2.png" alt="" width="20px">
                     <span style="color:#cccccc;font-size:8px;margin-left: -5px;" id="delete_span" @click="delete_img_all_show($event)">删除</span>
                     <div id="delete_img_all" class="example-5"  data_id="0" style="font-size: 10px;
@@ -50,7 +51,7 @@
                         <div class="edit_keep1">
                             <img src="../../assets/images/selected5.png" alt="" width="20px" @click="hide_edit_keep_div1($event)">
                         </div>
-                        <div class="edit_keep1">
+                        <div v-if="status && is_login" class="edit_keep1">
                             <div class="edit_logo">
                                 <img src="../../assets/images/mobile2.png" alt="" width="15px">
                             </div>
@@ -62,7 +63,7 @@
                                 <button class="btn-warning" style="height: 22px;line-height: 20px;font-size: 12px;" @click="move_img(keepimg.id,keep_info.id)">确认</button>
                             </div>
                         </div>
-                        <div class="edit_keep1">
+                        <div v-if="is_login" class="edit_keep1">
                             <div class="edit_logo">
                                 <img src="../../assets/images/copy2.png" alt="" width="20px">
                             </div>
@@ -74,7 +75,7 @@
                                 <button class="btn-warning" style="height: 22px;line-height: 20px;font-size: 12px;" @click="copy_img(keepimg.id,keep_info.id)">确认</button>
                             </div>
                         </div>
-                        <div class="edit_keep1">
+                        <div v-if="status && is_login" class="edit_keep1">
                             <div class="edit_logo">
                                 <img src="../../assets/images/delete3.png" alt="" width="20px">
                             </div>
@@ -98,21 +99,20 @@
         </div>
 
 
-        <div class="right_table right_img clearfix"  @click="keep_show()">
-            <img src="../../assets/images/right.png" alt="" style="width: auto;height: auto;max-height: 100%;max-width: 100%;">
+        <div class="right_table right_img clearfix" style="top: 47%;" @click="keep_show()">
+            <img id="right_btn2" src="../../assets/images/right.png" alt="" style="width: auto;height: auto;max-height: 100%;max-width: 100%;">
         </div>
-        <div class="right_table left_img clearfix" @click="keep_hidden()" style="display:none">
-            <img src="../../assets/images/left.png" alt="" style="width: auto;height: auto;max-height: 100%;max-width: 100%;">
+        <div class="right_table left_img clearfix" style="top: 47%;display:none" @click="keep_hidden()" >
+            <img id="left_btn2" src="../../assets/images/left.png" alt="" style="width: auto;height: auto;max-height: 100%;max-width: 100%;">
         </div>
-
+        <a href="" style="position: absolute;"><img src="../../assets/images/logo.png" alt=""  style="margin-left: 0px;z-index: 999;width: 40%;height: auto;max-height: 100%;max-width: 100%;"></a>
         <div style="width:100%;height:100%;display: flex;align-items: center;justify-content: center;" data_id="0" class="clearfix" id="main_img_div" @keyup.left=switch_img()>
-
             <div id="main_img" style="position: relative;right:0px;text-align: center;">
                 <img class="keep_image" :data_id="keepimg[0].id" @load="upimg()" @click="to_sanji($event)" :src="keepimg[0].image2" alt="点击查看详情" style="max-width:0px" id="0">
             </div>
 
-            <img src="../../assets/images/arrowleft.png" alt="" class="left_btn" width="50px" @click="last_img()" style="position: absolute;left: 0px;border-radius: 50%;background: #cad0d0;">
-            <img src="../../assets/images/arrowright.png" alt="" class="right_btn" width="50px"@click="next_img()" style="position: absolute;right: 0px;border-radius: 50%;background: #cad0d0;">
+            <img src="../../assets/images/arrowleft.png" alt="" class="left_btn" width="50px" @click="last_img()" style="position: absolute;left: 30px;border-radius: 50%;background: #cad0d0;bottom: 30px;">
+            <img src="../../assets/images/arrowright.png" alt="" class="right_btn" width="50px"@click="next_img()" style="position: absolute;right: 30px;border-radius: 50%;background: #cad0d0;bottom: 30px;">
         </div>
     </div>
 </template>
@@ -141,6 +141,8 @@
                 keep_name:'',
                 keep_info:[],
                 keepimg_count:'',
+                status:false,
+                is_login:false,
                 checked_all:false,
                 checked_one:[],
                 mobile_keep_select:'',
@@ -217,6 +219,18 @@
                 }
                 for(var k in arr2){
                     var param = k
+                }
+                console.log(arr2.status)
+                if(arr2.status == 1){
+                    this.status = false
+                }else{
+                    console.log(123)
+                    this.status = true
+                }
+                if(this.getCookie('tel')){
+                    this.is_login = true
+                }else{
+                    this.is_login = false
                 }
                 this.$http.get(this.GLOBAL.baseurl + 'v1/home/findkeepimg',{params:{kid:arr2.id}}).then((response)=>{
                     if(response.data){
@@ -599,12 +613,18 @@
 </script>
 <style scoped>
     a{padding:0;margin:0;text-decoration:none}
+    #right_btn2:hover{
+        filter: brightness(.01);
+    }
+    #left_btn2:hover{
+        filter: brightness(.01);
+    }
     #keep_show{
         width:0px;
         height:0px;
         float: left;
-        overflow: scroll;
-        background-color: #4a4a4a8c;
+        overflow-y: scroll;
+        background-color: rgba(0,0,0,0.75);
         padding-left: 10px;
     }
     #keep_body{

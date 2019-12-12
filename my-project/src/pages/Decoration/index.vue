@@ -1,19 +1,34 @@
 <template>
-    <div class="clearfix">
+    <div class="clearfix" style="height: 100%;">
         <HeadPage></HeadPage>
-        <div style="min-height: -webkit-fill-available;">
-            <div id="decor" style="width:65%;float:left;padding-top:50px">
-                <div style="min-width:500px;min-height:500px">
+        <div class="clearfix" style="min-height: -webkit-fill-available;">
+            <div id="decor" style="width:65%;float:left;">
+                <div id="decoration-bgi" style="display: none;float: left;width: 150px;margin-left: 200px;height: 550px;align-items: center;flex-direction: column;overflow-y: scroll;">
+                    <img src="http://qiniu.zaoanart.com/BGI-1.jpg" alt="" width="150px" data-id="bgi1" data-height="320" data-width="533" style="display: inline-block;margin-bottom:5px" @click="bgi_decoration($event,1)">
+                    <img src="http://qiniu.zaoanart.com/BGI-2.jpg" alt="" width="150px" data-id="bgi2" data-height="360" data-width="524" style="display: inline-block;margin-bottom:5px" @click="bgi_decoration($event,2)">
+                    <img src="http://qiniu.zaoanart.com/BGI-3.jpg" alt="" width="150px" data-id="bgi3" data-height="360" data-width="473" style="display: inline-block;margin-bottom:5px" @click="bgi_decoration($event,3)">
+                    <!--<img src="http://qiniu.zaoanart.com/BGI-4.jpg" alt="" width="150px" data-id="bgi4" data-height="320" data-width="320" style="display: inline-block;margin-bottom:5px" @click="bgi_decoration($event,4)">-->
+                    <img src="http://qiniu.zaoanart.com/BGI-5.jpg" alt="" width="150px" data-id="bgi5" data-height="320" data-width="320" style="display: inline-block;margin-bottom:5px" @click="bgi_decoration($event,5)">
+                    <img src="http://qiniu.zaoanart.com/BGI-6.jpg" alt="" width="150px" data-id="bgi6" data-height="320" data-width="276" style="display: inline-block;margin-bottom:5px" @click="bgi_decoration($event,6)">
+                    <img src="http://qiniu.zaoanart.com/BGI-7.jpg" alt="" width="150px" data-id="bgi7" data-height="340" data-width="333" style="display: inline-block;margin-bottom:5px" @click="bgi_decoration($event,7)">
+                    <img src="http://qiniu.zaoanart.com/BGI-8.jpg" alt="" width="150px" data-id="bgi8" data-height="360" data-width="360" style="display: inline-block;margin-bottom:5px" @click="bgi_decoration($event,8)">
+                    <img src="http://qiniu.zaoanart.com/BGI-9.jpg" alt="" width="150px" data-id="bgi9" data-height="320" data-width="371" style="display: inline-block;margin-bottom:5px" @click="bgi_decoration($event,9)">
+                    <img src="http://qiniu.zaoanart.com/BGI-10.jpg" alt="" width="150px" data-id="bgi10" data-height="320" data-width="320" style="display: inline-block;margin-bottom:5px" @click="bgi_decoration($event,10)">
+                    <img src="http://qiniu.zaoanart.com/BGI-11.jpg" alt="" width="150px" data-id="bgi11" data-height="320" data-width="307" style="display: inline-block;margin-bottom:5px" @click="bgi_decoration($event,11)">
+                </div>
+                <div style="min-width:550px;min-height:550px;display: flex;justify-content: center;align-items: center;">
                     <div id="img_box" style="display: inline-block;">
-                        <img id="img" src="" alt="" style="width: auto;max-width: 500px;max-height: 500px;display:inline-block;">
+                        <img id="img" src="" alt="" style="width: auto;max-width: 550px;max-height: 550px;display:inline-block;">
                     </div>
-                    <canvas id="myCanvas" style="display:none;max-width:500px;max-height:500px"></canvas>
+                    <canvas id="myCanvas" style="display:none;max-width:550px;max-height:550px;"></canvas>
+                    <canvas id="BGI-Canvas" style="display:none;max-width:550px;max-height:550px;display: none;justify-content: center;align-items: center;"></canvas>
                 </div>
                 <!--<img id="bgImg" src="" alt="" style="display:none">-->
                 <!--<img id="dltImg" src="" alt="" style="display:none">-->
                 <div style="display:inline-block;"class="canvas"></div>
             </div>
-            <div id="main_info" data_id="1" style="background-color:#EBEBEB;margin-right:2%;width:32%;float:right;font-size: 15px;text-align: left;">
+
+            <div id="main_info" data_id="1" style="max-width: 600px;background-color:#EBEBEB;margin-right:2%;width:32%;float:right;font-size: 15px;text-align: left;">
                 <!--第一步-->
                 <div id="first_step">
                     <div style="padding-left:20px;background-color:#000;height:40px">
@@ -215,7 +230,8 @@
                         <div id="select_box" style="display:none">
                             <span>选择画框</span>
                             <select name="" id="" v-model="color_series_val" class="btn" style="border:0px;padding:0px;font-size: 15px;color: #2c3e50;height: 40px;background-color:#EBEBEB">
-                                <option v-for="color_series in color_series" :id="color_series.id" :value="color_series.id">{{color_series.series_name}}</option>
+                                <option  v-for="(color_series,index) in color_series" v-if="color_series.id == 6 && status == 4" :id="color_series.id" :value="color_series.id">{{color_series.series_name}}</option>
+                                <option v-else-if="color_series.id == 1 || color_series.id == 2 || color_series.id == 3 || color_series.id == 4 || color_series.id == 5" :value="color_series.id">{{color_series.series_name}}</option>
                             </select>
                             <span style="font-size: 12px;background-color: #fff;color: #797777;">{{border_info}}</span>
                             <div style="height:150px;">
@@ -233,14 +249,14 @@
                                 </div>
                             </div>
                         </div>
-                        <span style="display:block">
-                            画芯价格: <span style="color:red;">{{core_price}}</span>元 <br>
-                            <!--画框价格: <span style="color:red;">{{frame_total_price}}</span>元 <br>-->
-                            <!--留白价格: <span style="color:red;">{{margin_price}}</span>元 <br>-->
-                            <!--装裱方式价格: <span style="color:red;">{{decoration_price}}</span>元 <br>-->
-                            装裱价格: <span style="color:red;">{{total_decoration_price_show}}</span>元 <br>
-                            总价格: <span style="color:red;">{{total_price}}</span>元 <br>
-                        </span>
+                        <!--<span style="display:block">-->
+                            <!--画芯价格: <span style="color:red;">{{core_price}}</span>元 <br>-->
+                            <!--&lt;!&ndash;画框价格: <span style="color:red;">{{frame_total_price}}</span>元 <br>&ndash;&gt;-->
+                            <!--&lt;!&ndash;留白价格: <span style="color:red;">{{margin_price}}</span>元 <br>&ndash;&gt;-->
+                            <!--&lt;!&ndash;装裱方式价格: <span style="color:red;">{{decoration_price}}</span>元 <br>&ndash;&gt;-->
+                            <!--装裱价格: <span style="color:red;">{{total_decoration_price_show}}</span>元 <br>-->
+                            <!--总价格: <span style="color:red;">{{total_price}}</span>元 <br>-->
+                        <!--</span>-->
                         <div style="height: 38px;line-height: 38px;margin-top:10px;">
                             <button @click="crops()" class="btn" id="preview" style="display:inline-block">
                                 <img src="../../assets/images/eye.png" alt="" height="20">
@@ -301,12 +317,14 @@
                 </div><!-- /.modal-dialog -->
             </div><!-- /.modal -->
         </div>
+        <LabelLeft></LabelLeft>
         <Foot style="margin-top:30px;clear: both;"></Foot>
     </div>
 </template>
 <script>
     // import axios from 'axios'
     import HeadPage from "../../components/HeadPage"
+    import LabelLeft from "../../components/LabelLeft"
     import Foot from "../../components/Foot"
     import '../../../node_modules/cropper/dist/cropper.js'
     import '../../../node_modules/cropper/dist/cropper.css'
@@ -344,6 +362,9 @@
                 is_select:0,
                 //图片地址
                 img_url:'',
+                bgi_width:0,
+                bgi_height:0,
+                bgi_src:'',
                 box_width:0,
                 box_height:0,
                 image_width:0,
@@ -392,7 +413,7 @@
             }
         },
         components: {
-            HeadPage,Foot
+            HeadPage,LabelLeft,Foot
         },
         watch: {
             '$route' () {
@@ -491,7 +512,7 @@
                 this.default_height = (Number(arr2.max_height)+206/30*2).toFixed(1)
                 this.image_url = 'http://qiniu.zaoanart.com/'+arr2.img+'?t='+Math.random()
                 $("#img").attr("src",'http://qiniu.zaoanart.com/'+arr2.img+'?t='+Math.random());
-                $("#img").attr("width",500)
+                $("#img").attr("width",550)
                 //获取画框素材
                 this.$http.get(this.GLOBAL.baseurl + 'v1/border/get_border').then((response)=>{
                     this.border = response.data
@@ -593,6 +614,206 @@
                 //留边价格
                 this.margin_price = parseInt(this.margin_price)
             },
+            //装裱好的图片预览
+            bgi_decoration(e,bgi_id){
+                this.bgi_width = Number($(e.target).attr('data-width'))*30
+                this.bgi_height = Number($(e.target).attr('data-height'))*30
+                this.bgi_src = $(e.target).attr('src')
+                this.bgi_decorations(bgi_id)
+            },
+            //装裱好的图片预览
+            bgi_decorations(bgi_id){
+                $("#myCanvas").css('display','none')
+                $("#BGI-Canvas").css('display','flex')
+                toastr.info("装裱中,请稍候")
+                var img = new Image;
+                img.crossOrigin = 'Anonymous'
+                img.src = this.bgi_src
+                var bgImg = new Image;
+                bgImg.crossOrigin = 'Anonymous'
+                // var bili = Number((img.naturalWidth / img.naturalHeight).toFixed(4))
+                //获取填写数据
+                //1为指定宽度2为指定高度
+                var box_img_width1 = $("#box_img_width").val()*30
+                var box_img_height1 = $("#box_img_height").val()*30
+                //背景图片宽高
+                var bgi_width = this.bgi_width
+                var bgi_height = this.bgi_height
+                //创建画布
+                var c=document.getElementById("BGI-Canvas")
+                var canvas=document.getElementById("myCanvas")
+                if(bgi_width/bgi_height > 1){
+                    //设置面宽缩小比例
+                    var small = bgi_width/550
+                    c.width = 550
+                    c.height = bgi_height/small
+                }else if(bgi_width/bgi_height < 1){
+                    //设置面宽缩小比例
+                    var small = bgi_height/550
+                    c.height = 550
+                    c.width = bgi_width/small
+                }else if(bgi_width/bgi_height == 1){
+                    //设置面宽缩小比例
+                    var small = bgi_width/550
+                    c.width = 550
+                    c.height = 550
+                }
+                var data_id = $(e.target).attr('data-id')
+                //获取画布
+                var ctx=c.getContext("2d")
+                img.onload = function(){
+                    ctx.drawImage(img,0,0,img.naturalWidth,img.naturalHeight,0,0,c.width,c.height);
+                    if(bgi_id == 1){
+                        ctx.shadowOffsetX = 0; // 阴影Y轴偏移
+                        ctx.shadowOffsetY = 2; // 阴影X轴偏移
+                        ctx.shadowBlur = 5; // 模糊尺寸
+                        ctx.shadowColor = 'rgba(0, 0, 0, 0.5)'; // 颜色
+                        ctx.drawImage(canvas,0,0,canvas.width,canvas.height,(c.width-box_img_width1/small)/2,c.height-box_img_height1/small-80,box_img_width1/small,box_img_height1/small);
+                    }else if(bgi_id == 2){
+                        ctx.shadowOffsetX = -5; // 阴影Y轴偏移
+                        ctx.shadowOffsetY = 5; // 阴影X轴偏移
+                        ctx.shadowBlur = 5; // 模糊尺寸
+                        ctx.shadowColor = 'rgba(0, 0, 0, 0.5)'; // 颜色
+                        var img2 = new Image;
+                        img2.crossOrigin = 'Anonymous'
+                        img2.src = 'http://qiniu.zaoanart.com/BGI-2-1.png'
+                        img2.onload = function(){
+                            ctx.drawImage(canvas,0,0,canvas.width,canvas.height,(c.width-40-box_img_width1/small)/2,(c.height-100-box_img_height1/small)/2,box_img_width1/small,box_img_height1/small);
+                            ctx.shadowOffsetX = 0; // 阴影Y轴偏移
+                            ctx.shadowOffsetY = 0; // 阴影X轴偏移
+                            ctx.shadowBlur = 0; // 模糊尺寸
+                            ctx.drawImage(img2,0,0,img2.naturalWidth,img2.naturalHeight,0,0,c.width,c.height);
+                        }
+                    }else if(bgi_id == 3){
+                        ctx.shadowOffsetX = -5; // 阴影Y轴偏移
+                        ctx.shadowOffsetY = 5; // 阴影X轴偏移
+                        ctx.shadowBlur = 5; // 模糊尺寸
+                        ctx.shadowColor = 'rgba(0, 0, 0, 0.5)'; // 颜色
+                        if(box_img_height1/small>c.height-220){
+                            ctx.drawImage(canvas,0,0,canvas.width,canvas.height,(c.width-box_img_width1/small)/2,c.height-box_img_height1/small-200,box_img_width1/small,box_img_height1/small);
+                        }else{
+                            ctx.drawImage(canvas,0,0,canvas.width,canvas.height,(c.width-box_img_width1/small)/2,(c.height-200-box_img_height1/small)/2,box_img_width1/small,box_img_height1/small);
+                        }
+                    }else if(bgi_id == 4){
+                        ctx.shadowOffsetX = -5; // 阴影Y轴偏移
+                        ctx.shadowOffsetY = 2; // 阴影X轴偏移
+                        ctx.shadowBlur = 5; // 模糊尺寸
+                        ctx.shadowColor = 'rgba(0, 0, 0, 0.5)'; // 颜色
+                        ctx.drawImage(canvas,0,0,canvas.width,canvas.height,(c.width-box_img_width1/small-100)/2,(c.height-245-box_img_height1/small)/2,box_img_width1/small,box_img_height1/small);
+                    }else if(bgi_id == 5){
+                        ctx.shadowOffsetX = 0; // 阴影Y轴偏移
+                        ctx.shadowOffsetY = 5; // 阴影X轴偏移
+                        ctx.shadowBlur = 5; // 模糊尺寸
+                        ctx.shadowColor = 'rgba(0, 0, 0, 0.5)'; // 颜色
+                        var img5 = new Image;
+                        img5.crossOrigin = 'Anonymous'
+                        img5.src = 'http://qiniu.zaoanart.com/BGI-5-1.png'
+                        img5.onload = function(){
+                            if(box_img_height1/small>c.height-120){
+                                console.log(1,box_img_height1/small,c.height-120)
+                                ctx.drawImage(canvas,0,0,canvas.width,canvas.height,(c.width-box_img_width1/small)/2,c.height-250-box_img_height1/small,box_img_width1/small,box_img_height1/small);
+                            }else{
+                                console.log(2,box_img_height1/small,c.height-120)
+                                ctx.drawImage(canvas,0,0,canvas.width,canvas.height,(c.width-box_img_width1/small)/2,(c.height-250-box_img_height1/small)/2,box_img_width1/small,box_img_height1/small);
+                            }
+                            ctx.shadowOffsetX = 0; // 阴影Y轴偏移
+                            ctx.shadowOffsetY = 0; // 阴影X轴偏移
+                            ctx.shadowBlur = 0; // 模糊尺寸
+                            ctx.drawImage(img5,0,0,img5.naturalWidth,img5.naturalHeight,0,0,c.width,c.height);
+                        }
+                    }else if(bgi_id == 6){
+                        ctx.shadowOffsetX = 0; // 阴影Y轴偏移
+                        ctx.shadowOffsetY = 5; // 阴影X轴偏移
+                        ctx.shadowBlur = 5; // 模糊尺寸
+                        ctx.shadowColor = 'rgba(0, 0, 0, 0.5)'; // 颜色
+                        var img6 = new Image;
+                        img6.crossOrigin = 'Anonymous'
+                        img6.src = 'http://qiniu.zaoanart.com/BGI-6-1.png'
+                        img6.onload = function(){
+                            ctx.drawImage(canvas,0,0,canvas.width,canvas.height,(c.width-box_img_width1/small)/2,(c.height-90-box_img_height1/small)/2,box_img_width1/small,box_img_height1/small);
+                            ctx.shadowOffsetX = 0; // 阴影Y轴偏移
+                            ctx.shadowOffsetY = 0; // 阴影X轴偏移
+                            ctx.shadowBlur = 0; // 模糊尺寸
+                            ctx.drawImage(img6,0,0,img6.naturalWidth,img6.naturalHeight,0,0,c.width,c.height);
+                        }
+                    }else if(bgi_id == 7){
+                        ctx.shadowOffsetX = 0; // 阴影Y轴偏移
+                        ctx.shadowOffsetY = 5; // 阴影X轴偏移
+                        ctx.shadowBlur = 5; // 模糊尺寸
+                        ctx.shadowColor = 'rgba(0, 0, 0, 0.5)'; // 颜色
+                        var img7 = new Image;
+                        img7.crossOrigin = 'Anonymous'
+                        img7.src = 'http://qiniu.zaoanart.com/BGI-7-1.png'
+                        img7.onload = function(){
+                            ctx.drawImage(canvas,0,0,canvas.width,canvas.height,(c.width-box_img_width1/small)/2,(c.height-90-box_img_height1/small)/2,box_img_width1/small,box_img_height1/small);
+                            ctx.shadowOffsetX = 0; // 阴影Y轴偏移
+                            ctx.shadowOffsetY = 0; // 阴影X轴偏移
+                            ctx.shadowBlur = 0; // 模糊尺寸
+                            ctx.drawImage(img7,0,0,img7.naturalWidth,img7.naturalHeight,0,0,c.width,c.height);
+                        }
+                    }else if(bgi_id == 8){
+                        ctx.shadowOffsetX = -2; // 阴影Y轴偏移
+                        ctx.shadowOffsetY = 5; // 阴影X轴偏移
+                        ctx.shadowBlur = 5; // 模糊尺寸
+                        ctx.shadowColor = 'rgba(0, 0, 0, 0.5)'; // 颜色
+                        var img8 = new Image;
+                        img8.crossOrigin = 'Anonymous'
+                        img8.src = 'http://qiniu.zaoanart.com/BGI-8-1.png'
+                        img8.onload = function(){
+                            ctx.drawImage(canvas,0,0,canvas.width,canvas.height,(c.width-box_img_width1/small)/2,(c.height-110-box_img_height1/small)/2,box_img_width1/small,box_img_height1/small);
+                            ctx.shadowOffsetX = 0; // 阴影Y轴偏移
+                            ctx.shadowOffsetY = 0; // 阴影X轴偏移
+                            ctx.shadowBlur = 0; // 模糊尺寸
+                            ctx.drawImage(img8,0,0,img8.naturalWidth,img8.naturalHeight,0,0,c.width,c.height);
+                        }
+                    }else if(bgi_id == 9){
+                        ctx.shadowOffsetX = -2; // 阴影Y轴偏移
+                        ctx.shadowOffsetY = 5; // 阴影X轴偏移
+                        ctx.shadowBlur = 5; // 模糊尺寸
+                        ctx.shadowColor = 'rgba(0, 0, 0, 0.5)'; // 颜色
+                        var img9 = new Image;
+                        img9.crossOrigin = 'Anonymous'
+                        img9.src = 'http://qiniu.zaoanart.com/BGI-9-1.png'
+                        img9.onload = function(){
+                            ctx.drawImage(canvas,0,0,canvas.width,canvas.height,(c.width-box_img_width1/small)/2,(c.height-70-box_img_height1/small)/2,box_img_width1/small,box_img_height1/small);
+                            ctx.shadowOffsetX = 0; // 阴影Y轴偏移
+                            ctx.shadowOffsetY = 0; // 阴影X轴偏移
+                            ctx.shadowBlur = 0; // 模糊尺寸
+                            ctx.drawImage(img9,0,0,img9.naturalWidth,img9.naturalHeight,0,0,c.width,c.height);
+                        }
+                    }else if(bgi_id == 10){
+                        ctx.shadowOffsetX = 5; // 阴影Y轴偏移
+                        ctx.shadowOffsetY = 5; // 阴影X轴偏移
+                        ctx.shadowBlur = 5; // 模糊尺寸
+                        ctx.shadowColor = 'rgba(0, 0, 0, 0.5)'; // 颜色
+                        var img10 = new Image;
+                        img10.crossOrigin = 'Anonymous'
+                        img10.src = 'http://qiniu.zaoanart.com/BGI-10-1.png'
+                        img10.onload = function(){
+                            ctx.drawImage(canvas,0,0,canvas.width,canvas.height,(c.width-box_img_width1/small)/2,(c.height-90-box_img_height1/small)/2,box_img_width1/small,box_img_height1/small);
+                            ctx.shadowOffsetX = 0; // 阴影Y轴偏移
+                            ctx.shadowOffsetY = 0; // 阴影X轴偏移
+                            ctx.shadowBlur = 0; // 模糊尺寸
+                            ctx.drawImage(img10,0,0,img10.naturalWidth,img10.naturalHeight,0,0,c.width,c.height);
+                        }
+                    }else if(bgi_id == 11){
+                        ctx.shadowOffsetX = -5; // 阴影Y轴偏移
+                        ctx.shadowOffsetY = 5; // 阴影X轴偏移
+                        ctx.shadowBlur = 5; // 模糊尺寸
+                        ctx.shadowColor = 'rgba(0, 0, 0, 0.5)'; // 颜色
+                        var img11 = new Image;
+                        img11.crossOrigin = 'Anonymous'
+                        img11.src = 'http://qiniu.zaoanart.com/BGI-11-1.png'
+                        img11.onload = function(){
+                            ctx.drawImage(canvas,0,0,canvas.width,canvas.height,(c.width-box_img_width1/small)/2,(c.height-90-box_img_height1/small)/2,box_img_width1/small,box_img_height1/small);
+                            ctx.shadowOffsetX = 0; // 阴影Y轴偏移
+                            ctx.shadowOffsetY = 0; // 阴影X轴偏移
+                            ctx.shadowBlur = 0; // 模糊尺寸
+                            ctx.drawImage(img11,0,0,img11.naturalWidth,img11.naturalHeight,0,0,c.width,c.height);
+                        }
+                    }
+                }
+            },
             //如果选中裁切则裁切  否则删除
             is_cutting(e){
                 if(this.is_cut == 1){
@@ -610,7 +831,7 @@
             //裁切
             proportional(){
                 $("#img").attr("src",'http://qiniu.zaoanart.com/'+this.img+'?t='+Math.random());
-                $("#img").attr("width",500)
+                $("#img").attr("width",550)
                 $('#img').cropper('destroy')
                 //主图
                 var img=document.getElementById("img")
@@ -659,7 +880,7 @@
             //指定比例裁切
             customize_cut(){
                 $("#img").attr("src",'http://qiniu.zaoanart.com/'+this.img+'?t='+Math.random());
-                $("#img").attr("width",500)
+                $("#img").attr("width",550)
                 $('#img').cropper('destroy')
                 //主图
                 var img=document.getElementById("img")
@@ -710,7 +931,7 @@
             proportiona1_1(e){
                 this.is_select = 2
                 $("#img").attr("src",'http://qiniu.zaoanart.com/'+this.img+'?t='+Math.random());
-                $("#img").attr("width",500)
+                $("#img").attr("width",550)
                 $('#img').cropper('destroy')
                 //主图
                 var img=document.getElementById("img")
@@ -763,7 +984,7 @@
             proportiona1_2(){
                 this.is_select = 5
                 $("#img").attr("src",'http://qiniu.zaoanart.com/'+this.img+'?t='+Math.random());
-                $("#img").attr("width",500)
+                $("#img").attr("width",550)
                 $('#img').cropper('destroy')
                 $('#is_cuts').attr('data_id','2')
                 this.is_cut = 2
@@ -817,7 +1038,7 @@
                 this.is_select = 7
                 this.is_cut = 2
                 $("#img").attr("src",'http://qiniu.zaoanart.com/'+this.img+'?t='+Math.random());
-                $("#img").attr("width",500)
+                $("#img").attr("width",550)
                 $('#img').cropper('destroy')
                 //主图
                 var img=document.getElementById("img")
@@ -868,7 +1089,7 @@
                 $('#is_cuts').attr('data_id','2')
                 this.is_cut = 2
                 $("#img").attr("src",'http://qiniu.zaoanart.com/'+this.img+'?t='+Math.random());
-                $("#img").attr("width",500)
+                $("#img").attr("width",550)
                 $('#img').cropper('destroy')
                 //主图
                 var img=document.getElementById("img")
@@ -919,7 +1140,7 @@
                 $('#is_cuts').attr('data_id','2')
                 this.is_cut = 2
                 $("#img").attr("src",'http://qiniu.zaoanart.com/'+this.img+'?t='+Math.random());
-                $("#img").attr("width",500)
+                $("#img").attr("width",550)
                 $('#img').cropper('destroy')
                 //主图
                 var img=document.getElementById("img")
@@ -970,7 +1191,7 @@
                 $('#is_cuts').attr('data_id','2')
                 this.is_cut = 2
                 $("#img").attr("src",'http://qiniu.zaoanart.com/'+this.img+'?t='+Math.random());
-                $("#img").attr("width",500)
+                $("#img").attr("width",550)
                 $('#img').cropper('destroy')
                 //主图
                 var img=document.getElementById("img")
@@ -1021,7 +1242,7 @@
                 $('#is_cuts').attr('data_id','2')
                 this.is_cut = 2
                 $("#img").attr("src",'http://qiniu.zaoanart.com/'+this.img+'?t='+Math.random());
-                $("#img").attr("width",500)
+                $("#img").attr("width",550)
                 $('#img').cropper('destroy')
                 //主图
                 var img=document.getElementById("img")
@@ -1308,9 +1529,9 @@
                 $('#img').cropper('destroy')
                 $('#first_step').css('display','block')
                 $('#second_step').css('display','none')
-                $('#img').css('max-width','500px')
+                $('#img').css('max-width','550px')
                 $('#detail').css('display','none')
-                $('#img').css('max-height','500px')
+                $('#img').css('max-height','550px')
                 $('#img_box').css('float','')
                 $('#myCanvas').css('display','none')
                 this.is_cut = 1
@@ -2292,24 +2513,31 @@
                     var c=document.getElementById("myCanvas")
                     if(box_img_width1/box_img_height1 > 1){
                         //设置面宽缩小比例
-                        var small = box_img_width1/500
-                        c.width = 500
+                        var small = box_img_width1/550
+                        c.width = 550
                         c.height = box_img_height1/small
                     }else if(box_img_width1/box_img_height1 < 1){
                         //设置面宽缩小比例
-                        var small = box_img_height1/500
-                        c.height = 500
+                        var small = box_img_height1/550
+                        c.height = 550
                         c.width = box_img_width1/small
                     }else if(box_img_width1/box_img_height1 == 1){
                         //设置面宽缩小比例
-                        var small = box_img_width1/500
-                        c.width = 500
-                        c.height = 500
+                        var small = box_img_width1/550
+                        c.width = 550
+                        c.height = 550
                     }
                     //缩小后的面宽
                     var small_face = parseFloat(vm.face_width*30/small);
                     //获取画布
                     var ctx=c.getContext("2d")
+                    //填充盒子底板卡纸颜色
+                    ctx.shadowOffsetX = 5; // 阴影Y轴偏移
+                    ctx.shadowOffsetY = 5; // 阴影X轴偏移
+                    ctx.shadowBlur = 5; // 模糊尺寸
+                    ctx.shadowColor = 'rgba(0, 0, 0, 0.3)'; // 颜色
+                    ctx.fillStyle="#fff";
+                    ctx.fillRect(0,0,c.width-10,c.height-10);
                     var direction_val_x = 0
                     var direction_val_y = 0
                     if(this.drawing_core_val != 0){
@@ -2363,7 +2591,7 @@
                     //满裱
                     if(vm.status == 1){
                         //绘制图片
-                        ctx.drawImage(img,cut_box.x,cut_box.y,cut_box.width,cut_box.height,(c.width-img_width1/small)/2+direction_val_x/small,(c.height-img_height1/small)/2+direction_val_y/small,img_width1/small,img_height1/small)
+                        ctx.drawImage(img,cut_box.x,cut_box.y,cut_box.width,cut_box.height,(c.width-img_width1/small)/2+direction_val_x/small-2,(c.height-img_height1/small)/2+direction_val_y/small-2,img_width1/small-10+4,img_height1/small-10+4)
                         vm.$http.get(vm.GLOBAL.baseurl + 'v1/goods/decoration',{params:{img_name:vm.border_status,box_img_width1:box_img_width1,box_img_height1:box_img_height1,img_width1:img_width1,img_height1:img_height1,face_width:vm.face_width,small_face:small_face,need_width:c.width,need_height:c.height}}).then((response)=>{
                             vm.img_url = response.data
                             bgImg.src = vm.img_url
@@ -2374,7 +2602,7 @@
                             ctx.shadowOffsetY = 3; // 阴影X轴偏移
                             ctx.shadowBlur = 5; // 模糊尺寸
                             ctx.shadowColor = 'rgba(0, 0, 0, 0.5)'; // 颜色
-                            ctx.drawImage(bgImg,0,0,bgImg.naturalWidth,bgImg.naturalHeight,0,0,c.width,c.height);
+                            ctx.drawImage(bgImg,0,0,bgImg.naturalWidth,bgImg.naturalHeight,0,0,c.width-10,c.height-10);
                         }
                         //卡纸
                     }else if(vm.status == 2){
@@ -2400,26 +2628,30 @@
                         }
                         // //填充盒子底板卡纸颜色
                         ctx.fillStyle=color_val;
-                        ctx.fillRect(0,0,box_img_width1,box_img_height1);
+                        ctx.fillRect(0,0,c.width-10,c.height-10);
+                        ctx.shadowOffsetX = 0; // 阴影Y轴偏移
+                        ctx.shadowOffsetY = 0; // 阴影X轴偏移
+                        ctx.shadowBlur = 0; // 模糊尺寸
+                        ctx.shadowColor = 'rgba(0, 0, 0, 0.3)'; // 颜色
                         // //填充画芯留边颜色
                         ctx.fillStyle='#fff';
-                        ctx.fillRect((c.width-img_width1/small)/2-vm.drawing_core_val*30/small+direction_val_xs/small,(c.height-img_height1/small)/2-vm.drawing_core_val*30/small+direction_val_ys/small,img_width1/small+vm.drawing_core_val*30/small*2,img_height1/small+vm.drawing_core_val*30/small*2);
+                        ctx.fillRect((c.width-img_width1/small)/2-vm.drawing_core_val*30/small+direction_val_xs/small,(c.height-img_height1/small)/2-vm.drawing_core_val*30/small+direction_val_ys/small,img_width1/small+vm.drawing_core_val*30/small*2-10,img_height1/small+vm.drawing_core_val*30/small*2-10);
                         //绘制图片
-                        ctx.drawImage(img,cut_box.x,cut_box.y,cut_box.width,cut_box.height,(c.width-img_width1/small)/2+direction_val_x/small+direction_val_xs/small,(c.height-img_height1/small)/2+direction_val_y/small+direction_val_ys/small,img_width1/small,img_height1/small)
+                        ctx.drawImage(img,cut_box.x,cut_box.y,cut_box.width,cut_box.height,(c.width-img_width1/small)/2+direction_val_x/small+direction_val_xs/small,(c.height-img_height1/small)/2+direction_val_y/small+direction_val_ys/small,img_width1/small-10,img_height1/small-10)
                         //绘制模拟阴影条(上)
                         // var grd=ctx.createLinearGradient((c.width-img_width1/small)/2-vm.drawing_core_val*30/small+direction_val_xs/small,(c.height-img_height1/small)/2-vm.drawing_core_val*30/small+direction_val_ys/small,(c.width-img_width1/small)/2-vm.drawing_core_val*30/small+direction_val_xs/small,(c.height-img_height1/small)/2-vm.drawing_core_val*30/small+5+direction_val_ys/small);
                         // grd.addColorStop(0,"rgba(150,150,150,0.6)");
                         // grd.addColorStop(1,"rgba(250,250,250,0.3)");
                         // ctx.fillStyle=grd;
                         ctx.fillStyle='#aaaaaa';
-                        ctx.fillRect((c.width-img_width1/small)/2-vm.drawing_core_val*30/small+direction_val_xs/small-1,(c.height-img_height1/small)/2-vm.drawing_core_val*30/small+direction_val_ys/small-1,(img_width1+vm.drawing_core_val*30*2)/small+2,3);
+                        ctx.fillRect((c.width-img_width1/small)/2-vm.drawing_core_val*30/small+direction_val_xs/small-1,(c.height-img_height1/small)/2-vm.drawing_core_val*30/small+direction_val_ys/small-1,(img_width1+vm.drawing_core_val*30*2)/small+2-10,3);
                         //绘制模拟阴影条(左)
                         // var grd=ctx.createLinearGradient((c.width-img_width1/small)/2-vm.drawing_core_val*30/small+direction_val_xs/small,(c.width-img_width1/small)/2-vm.drawing_core_val*30/small+direction_val_ys/small,(c.width-img_width1/small)/2-vm.drawing_core_val*30/small+5+direction_val_xs/small,(c.width-img_width1/small)/2-vm.drawing_core_val*30/small+direction_val_ys/small);
                         // grd.addColorStop(0,"rgba(150,150,150,0.6)");
                         // grd.addColorStop(1,"rgba(250,250,250,0.3)");
                         // ctx.fillStyle=grd;
                         ctx.fillStyle='#aaaaaa';
-                        ctx.fillRect((c.width-img_width1/small)/2-vm.drawing_core_val*30/small+direction_val_xs/small-1,(c.height-img_height1/small)/2-vm.drawing_core_val*30/small+direction_val_ys/small-1,3,img_height1/small+vm.drawing_core_val*30/small*2+2);
+                        ctx.fillRect((c.width-img_width1/small)/2-vm.drawing_core_val*30/small+direction_val_xs/small-1,(c.height-img_height1/small)/2-vm.drawing_core_val*30/small+direction_val_ys/small-1,3,img_height1/small+vm.drawing_core_val*30/small*2-10+2);
                         //绘制模拟阴影条(右)
                         // var grd=ctx.createLinearGradient((c.width-img_width1/small)/2+img_width1/small+vm.drawing_core_val*30/small+direction_val_xs/small,(c.width-img_width1/small)/2+img_width1/small+vm.drawing_core_val*30/small+direction_val_ys/small,(c.width-img_width1/small)/2+img_width1/small+vm.drawing_core_val*30/small-3+direction_val_xs/small,(c.width-img_width1/small)/2+img_width1/small+vm.drawing_core_val*30/small+direction_val_ys/small);
                         // grd.addColorStop(0,"rgba(150,150,150,0.6)");
@@ -2441,11 +2673,11 @@
                         ctx.strokeStyle ="#ebebeb";
                         ctx.lineWidth=0.1;
                         //设置路径起点坐标
-                        ctx.moveTo((c.width-img_width1/small)/2-vm.drawing_core_val*30/small+direction_val_xs/small-1,(c.height-img_height1/small)/2+vm.drawing_core_val*30/small+img_height1/small+direction_val_ys/small+1);
+                        ctx.moveTo((c.width-img_width1/small)/2-vm.drawing_core_val*30/small+direction_val_xs/small-1,(c.height-img_height1/small)/2+vm.drawing_core_val*30/small+img_height1/small+direction_val_ys/small+1-10);
                         //绘制直线线段到坐标点
-                        ctx.lineTo((c.width-img_width1/small)/2+img_width1/small+vm.drawing_core_val*30/small+direction_val_xs/small+2,(c.height-img_height1/small)/2+vm.drawing_core_val*30/small+img_height1/small+direction_val_ys/small+1);
-                        ctx.lineTo((c.width-img_width1/small)/2+img_width1/small+vm.drawing_core_val*30/small+direction_val_xs/small+2,(c.height-img_height1/small)/2+vm.drawing_core_val*30/small+img_height1/small+direction_val_ys/small-2);
-                        ctx.lineTo((c.width-img_width1/small)/2-vm.drawing_core_val*30/small+direction_val_xs/small+2,(c.height-img_height1/small)/2+vm.drawing_core_val*30/small+img_height1/small+direction_val_ys/small-2);
+                        ctx.lineTo((c.width-img_width1/small)/2+img_width1/small+vm.drawing_core_val*30/small+direction_val_xs/small+2-10,(c.height-img_height1/small)/2+vm.drawing_core_val*30/small+img_height1/small+direction_val_ys/small+1-10);
+                        ctx.lineTo((c.width-img_width1/small)/2+img_width1/small+vm.drawing_core_val*30/small+direction_val_xs/small+2-10,(c.height-img_height1/small)/2+vm.drawing_core_val*30/small+img_height1/small+direction_val_ys/small-2-10);
+                        ctx.lineTo((c.width-img_width1/small)/2-vm.drawing_core_val*30/small+direction_val_xs/small+2,(c.height-img_height1/small)/2+vm.drawing_core_val*30/small+img_height1/small+direction_val_ys/small-2-10);
                         ctx.fillStyle='#ebebeb';
                         ctx.fill();
                         //先关闭绘制路径。
@@ -2459,11 +2691,11 @@
                         ctx.strokeStyle ="#ebebeb";
                         ctx.lineWidth=0.1;
                         //设置路径起点坐标
-                        ctx.moveTo((c.width-img_width1/small)/2+img_width1/small+vm.drawing_core_val*30/small+direction_val_xs/small+2,(c.height-img_height1/small)/2-vm.drawing_core_val*30/small+direction_val_ys/small-1);
+                        ctx.moveTo((c.width-img_width1/small)/2+img_width1/small+vm.drawing_core_val*30/small+direction_val_xs/small+2-10,(c.height-img_height1/small)/2-vm.drawing_core_val*30/small+direction_val_ys/small-1);
                         //绘制直线线段到坐标点(20, 100)
-                        ctx.lineTo((c.width-img_width1/small)/2+img_width1/small+vm.drawing_core_val*30/small+direction_val_xs/small+2,(c.height-img_height1/small)/2+vm.drawing_core_val*30/small+img_height1/small+direction_val_ys/small+1);
-                        ctx.lineTo((c.width-img_width1/small)/2+img_width1/small+vm.drawing_core_val*30/small+direction_val_xs/small-1,(c.height-img_height1/small)/2+vm.drawing_core_val*30/small+img_height1/small+direction_val_ys/small);
-                        ctx.lineTo((c.width-img_width1/small)/2+img_width1/small+vm.drawing_core_val*30/small+direction_val_xs/small-1,(c.height-img_height1/small)/2-vm.drawing_core_val*30/small+direction_val_ys/small+2);
+                        ctx.lineTo((c.width-img_width1/small)/2+img_width1/small+vm.drawing_core_val*30/small+direction_val_xs/small+2-10,(c.height-img_height1/small)/2+vm.drawing_core_val*30/small+img_height1/small+direction_val_ys/small+1-10);
+                        ctx.lineTo((c.width-img_width1/small)/2+img_width1/small+vm.drawing_core_val*30/small+direction_val_xs/small-1-10,(c.height-img_height1/small)/2+vm.drawing_core_val*30/small+img_height1/small+direction_val_ys/small-10);
+                        ctx.lineTo((c.width-img_width1/small)/2+img_width1/small+vm.drawing_core_val*30/small+direction_val_xs/small-1-10,(c.height-img_height1/small)/2-vm.drawing_core_val*30/small+direction_val_ys/small+2);
                         ctx.fillStyle='#ebebeb';
                         ctx.fill();
                         //先关闭绘制路径。
@@ -2482,7 +2714,7 @@
                             })
                         }
                         bgImg.onload = function(){
-                            ctx.drawImage(bgImg,0,0,bgImg.naturalWidth,bgImg.naturalHeight,0,0,c.width,c.height);
+                            ctx.drawImage(bgImg,0,0,bgImg.naturalWidth,bgImg.naturalHeight,0,0,c.width-10,c.height-10);
                         }
                         //盒子
                     }else if(vm.status == 3){
@@ -2507,7 +2739,7 @@
                         }
                         // //填充盒子底板卡纸颜色
                         ctx.fillStyle=color_val;
-                        ctx.fillRect(0,0,box_img_width1,box_img_height1);
+                        ctx.fillRect(0,0,c.width-10,c.height-10);
                         var is_pause = $('#is_pause').attr('data_id')
                         if(is_pause == 2){
                             //画阴影
@@ -2515,16 +2747,21 @@
                             ctx.shadowOffsetY = 5; // 阴影X轴偏移
                             ctx.shadowBlur = 5; // 模糊尺寸
                             ctx.shadowColor = 'rgba(0, 0, 0, 0.5)'; // 颜色
+                        }else{
+                            ctx.shadowOffsetX = 0; // 阴影Y轴偏移
+                            ctx.shadowOffsetY = 0; // 阴影X轴偏移
+                            ctx.shadowBlur = 0; // 模糊尺寸
+                            ctx.shadowColor = 'rgba(0, 0, 0, 0.5)'; // 颜色
                         }
                         // //填充画芯留边颜色
                         ctx.fillStyle='#fff';
-                        ctx.fillRect((c.width-img_width1/small)/2-vm.drawing_core_val*30/small+direction_val_xs/small,(c.height-img_height1/small)/2-vm.drawing_core_val*30/small+direction_val_ys/small,img_width1/small+vm.drawing_core_val*30/small*2,img_height1/small+vm.drawing_core_val*30/small*2);
+                        ctx.fillRect((c.width-img_width1/small)/2-vm.drawing_core_val*30/small+direction_val_xs/small,(c.height-img_height1/small)/2-vm.drawing_core_val*30/small+direction_val_ys/small,img_width1/small+vm.drawing_core_val*30/small*2-10,img_height1/small+vm.drawing_core_val*30/small*2-10);
                         ctx.shadowOffsetX = 0; // 阴影Y轴偏移
                         ctx.shadowOffsetY = 0; // 阴影X轴偏移
                         ctx.shadowBlur = 0; // 模糊尺寸
                         ctx.shadowColor = 'rgba(0, 0, 0, 0.5)'; // 颜色
                         //绘制图片
-                        ctx.drawImage(img,cut_box.x,cut_box.y,cut_box.width,cut_box.height,(c.width-img_width1/small)/2+direction_val_x/small+direction_val_xs/small,(c.height-img_height1/small)/2+direction_val_y/small+direction_val_ys/small,img_width1/small,img_height1/small)
+                        ctx.drawImage(img,cut_box.x,cut_box.y,cut_box.width,cut_box.height,(c.width-img_width1/small)/2+direction_val_x/small+direction_val_xs/small,(c.height-img_height1/small)/2+direction_val_y/small+direction_val_ys/small,img_width1/small-10,img_height1/small-10)
                         //如果宽高有变化则后台生成边框素材,没有变化则直接获取
                         if(vm.last_border == vm.border_status && vm.confirm_width == $("#box_img_width").val() && vm.confirm_height == $("#box_img_height").val()){
                             bgImg.src = vm.img_url
@@ -2542,7 +2779,7 @@
                             ctx.shadowOffsetY = 2; // 阴影X轴偏移
                             ctx.shadowBlur = 5; // 模糊尺寸
                             ctx.shadowColor = 'rgba(0, 0, 0, 0.5)'; // 颜色
-                            ctx.drawImage(bgImg,0,0,bgImg.naturalWidth,bgImg.naturalHeight,0,0,c.width,c.height);
+                            ctx.drawImage(bgImg,0,0,bgImg.naturalWidth,bgImg.naturalHeight,0,0,c.width-10,c.height-10);
                         }
                         //套框绷架
                     }else if(vm.status == 4){
@@ -2552,12 +2789,12 @@
                         var drawing_core_val = $("#drawing_core_input").val()*30
                         //填充盒子底板卡纸颜色
                         ctx.fillStyle='#000';
-                        ctx.fillRect(0,0,box_img_width1,box_img_height1);
+                        ctx.fillRect(0,0,c.width-10,c.height-10);
                         //填充画芯留边颜色
                         ctx.fillStyle='#fff';
-                        ctx.fillRect((c.width-img_width1/small)/2+Frame_width/small-drawing_core_val/small,(c.height-img_height1/small)/2+Frame_width/small-drawing_core_val/small,c.width-vm.face_width*30/small*2-Frame_width/small*2,c.height-vm.face_width*30/small*2-Frame_width/small*2);
+                        ctx.fillRect((c.width-img_width1/small)/2+Frame_width/small-drawing_core_val/small,(c.height-img_height1/small)/2+Frame_width/small-drawing_core_val/small,c.width-vm.face_width*30/small*2-Frame_width/small*2-10,c.height-vm.face_width*30/small*2-Frame_width/small*2-10);
                         //绘制画芯
-                        ctx.drawImage(img,cut_box.x,cut_box.y,cut_box.width,cut_box.height,(c.width-img_width1/small)/2+Frame_width/small+direction_val_x/small,(c.height-img_height1/small)/2+Frame_width/small+direction_val_y/small,img_width1/small-Frame_width/small*2,img_height1/small-Frame_width/small*2);
+                        ctx.drawImage(img,cut_box.x,cut_box.y,cut_box.width,cut_box.height,(c.width-img_width1/small)/2+Frame_width/small+direction_val_x/small,(c.height-img_height1/small)/2+Frame_width/small+direction_val_y/small,img_width1/small-Frame_width/small*2-10,img_height1/small-Frame_width/small*2-10);
                         //生成画框
                         vm.$http.get(vm.GLOBAL.baseurl + 'v1/goods/decoration',{params:{img_name:vm.border_status,box_img_width1:box_img_width1,box_img_height1:box_img_height1,img_width1:img_width1,img_height1:img_height1,face_width:vm.face_width,small_face:small_face,need_width:c.width,need_height:c.height}}).then((response)=>{
                             vm.img_url = response.data
@@ -2566,7 +2803,7 @@
                         })
                         //绘制画框
                         bgImg.onload = function(){
-                            ctx.drawImage(bgImg,0,0,bgImg.naturalWidth,bgImg.naturalHeight,0,0,c.width,c.height);
+                            ctx.drawImage(bgImg,0,0,bgImg.naturalWidth,bgImg.naturalHeight,0,0,c.width-10,c.height-10);
                         }
                         //单立体
                     }else if(vm.status == 5){
@@ -2578,19 +2815,19 @@
                         dltImg.crossOrigin = 'Anonymous'
                         if(box_img_width1/box_img_height1 > 1){
                             //设置面宽缩小比例
-                            var small = box_img_width1/500
-                            c.width = 500+stereo_width/small+30
+                            var small = box_img_width1/550
+                            c.width = 550+stereo_width/small+30
                             c.height = box_img_height1/small+30
                         }else if(box_img_width1/box_img_height1 < 1){
                             //设置面宽缩小比例
-                            var small = box_img_height1/500
-                            c.height = 500+stereo_width/small+30
+                            var small = box_img_height1/550
+                            c.height = 550+stereo_width/small+30
                             c.width = box_img_width1/small+30
                         }else if(box_img_width1/box_img_height1 == 1){
                             //设置面宽缩小比例
-                            var small = box_img_width1/500
-                            c.width = 500+stereo_width/small+30
-                            c.height = 500+stereo_width/small+30
+                            var small = box_img_width1/550
+                            c.width = 550+stereo_width/small+30
+                            c.height = 550+stereo_width/small+30
                         }
                         //缩小后的面宽
                         small_face = parseFloat(vm.face_width*30/small)+15/small;
@@ -2622,7 +2859,7 @@
                             ctx.shadowOffsetY = 3; // 阴影X轴偏移
                             ctx.shadowBlur = 5; // 模糊尺寸
                             ctx.shadowColor = 'rgba(0, 0, 0, 0.5)'; // 颜色
-                            ctx.drawImage(bgImg,0,0,bgImg.naturalWidth,bgImg.naturalHeight,0,0,c.width,c.height);
+                            ctx.drawImage(bgImg,0,0,bgImg.naturalWidth,bgImg.naturalHeight,0,0,c.width-10,c.height-10);
                         }
                         //绘制单立体
                         dltImg.onload = function() {
@@ -2630,16 +2867,16 @@
                             ctx.shadowOffsetY = 3; // 阴影X轴偏移
                             ctx.shadowBlur = 5; // 模糊尺寸
                             ctx.shadowColor = 'rgba(0, 0, 0, 0.5)'; // 颜色
-                            ctx.drawImage(dltImg,0,0,dltImg.naturalWidth,dltImg.naturalHeight,(c.width-img_width2-stereo_width/small)/2-vm.drawing_core_val*30/small+direction_val_xs/small,(c.height-img_height2-stereo_width/small)/2-vm.drawing_core_val*30/small+direction_val_ys/small,img_width2+stereo_width/small+vm.drawing_core_val*30/small*2,img_height2+stereo_width/small+vm.drawing_core_val*30/small*2);
+                            ctx.drawImage(dltImg,0,0,dltImg.naturalWidth,dltImg.naturalHeight,(c.width-img_width2-stereo_width/small)/2-vm.drawing_core_val*30/small+direction_val_xs/small,(c.height-img_height2-stereo_width/small)/2-vm.drawing_core_val*30/small+direction_val_ys/small,img_width2+stereo_width/small+vm.drawing_core_val*30/small*2-10,img_height2+stereo_width/small+vm.drawing_core_val*30/small*2-10);
                             ctx.shadowOffsetX = 0; // 阴影Y轴偏移
                             ctx.shadowOffsetY = 0; // 阴影X轴偏移
                             ctx.shadowBlur = 0; // 模糊尺寸
                             ctx.shadowColor = 'rgba(0, 0, 0, 0.5)'; // 颜色
                             //填充画芯留边
                             ctx.fillStyle='#fff';
-                            ctx.fillRect((c.width-img_width2)/2-vm.drawing_core_val*30/small+direction_val_xs/small,(c.height-img_height2)/2-vm.drawing_core_val*30/small+direction_val_ys/small,img_width2+vm.drawing_core_val*30/small*2,img_height2+vm.drawing_core_val*30/small*2);
+                            ctx.fillRect((c.width-img_width2)/2-vm.drawing_core_val*30/small+direction_val_xs/small,(c.height-img_height2)/2-vm.drawing_core_val*30/small+direction_val_ys/small,img_width2+vm.drawing_core_val*30/small*2-10,img_height2+vm.drawing_core_val*30/small*2-10);
                             //绘制图片
-                            ctx.drawImage(img,cut_box.x,cut_box.y,cut_box.width,cut_box.height,(c.width-img_width1/small)/2+direction_val_x/small+direction_val_xs/small,(c.height-img_height1/small)/2+direction_val_y/small+direction_val_ys/small,img_width1/small,img_height1/small)
+                            ctx.drawImage(img,cut_box.x,cut_box.y,cut_box.width,cut_box.height,(c.width-img_width1/small)/2+direction_val_x/small+direction_val_xs/small,(c.height-img_height1/small)/2+direction_val_y/small+direction_val_ys/small,img_width1/small-10,img_height1/small-10)
                         }
                         //纯画芯
                     }else if(vm.status == 6){
@@ -2684,24 +2921,31 @@
                 var c=document.getElementById("myCanvas");
                 if(box_img_width1/box_img_height1 > 1){
                     //设置面宽缩小比例
-                    var small = box_img_width1/500
-                    c.width = 500
+                    var small = box_img_width1/550
+                    c.width = 550
                     c.height = box_img_height1/small
                 }else if(box_img_width1/box_img_height1 < 1){
                     //设置面宽缩小比例
-                    var small = box_img_height1/500
-                    c.height = 500
+                    var small = box_img_height1/550
+                    c.height = 550
                     c.width = box_img_width1/small
                 }else if(box_img_width1/box_img_height1 == 1){
                     //设置面宽缩小比例
-                    var small = box_img_width1/500
-                    c.width = 500
-                    c.height = 500
+                    var small = box_img_width1/550
+                    c.width = 550
+                    c.height = 550
                 }
                 //缩小后的面宽
                 var small_face = parseFloat(this.face_width*30/small);
                 //获取画布
                 var ctx=c.getContext("2d")
+                //填充盒子底板卡纸颜色
+                ctx.shadowOffsetX = 5; // 阴影Y轴偏移
+                ctx.shadowOffsetY = 5; // 阴影X轴偏移
+                ctx.shadowBlur = 5; // 模糊尺寸
+                ctx.shadowColor = 'rgba(0, 0, 0, 0.3)'; // 颜色
+                ctx.fillStyle="#fff";
+                ctx.fillRect(0,0,c.width-10,c.height-10);
                 var direction_val_x = 0
                 var direction_val_y = 0
                 if(this.drawing_core_val != 0){
@@ -2734,13 +2978,13 @@
                 })
                 //绘制画芯
                 img.onload = function(){
-                    ctx.drawImage(img,0,0,img.naturalWidth,img.naturalHeight,(c.width-img_width1/small)/2+direction_val_x/small,(c.height-img_height1/small)/2+direction_val_y/small,img_width1/small,img_height1/small);
+                    ctx.drawImage(img,0,0,img.naturalWidth,img.naturalHeight,(c.width-img_width1/small)/2+direction_val_x/small-2,(c.height-img_height1/small)/2+direction_val_y/small-2,img_width1/small-10+4,img_height1/small-10+4);
                     bgImg.onload = function(){
                         ctx.shadowOffsetX = 3; // 阴影Y轴偏移
                         ctx.shadowOffsetY = 3; // 阴影X轴偏移
                         ctx.shadowBlur = 5; // 模糊尺寸
                         ctx.shadowColor = 'rgba(0, 0, 0, 0.5)'; // 颜色
-                        ctx.drawImage(bgImg,0,0,bgImg.naturalWidth,bgImg.naturalHeight,0,0,c.width,c.height);
+                        ctx.drawImage(bgImg,0,0,bgImg.naturalWidth,bgImg.naturalHeight,0,0,c.width-10,c.height-10);
                     }
                 }
             },
@@ -2773,20 +3017,27 @@
                     var ctx=c.getContext("2d")
                     if(box_img_width1/box_img_height1 > 1){
                         //设置面宽缩小比例
-                        var small = box_img_width1/500
-                        c.width = 500
+                        var small = box_img_width1/550
+                        c.width = 550
                         c.height = box_img_height1/small
                     }else if(box_img_width1/box_img_height1 < 1){
                         //设置面宽缩小比例
-                        var small = box_img_height1/500
-                        c.height = 500
+                        var small = box_img_height1/550
+                        c.height = 550
                         c.width = box_img_width1/small
                     }else if(box_img_width1/box_img_height1 == 1){
                         //设置面宽缩小比例
-                        var small = box_img_width1/500
-                        c.width = 500
-                        c.height = 500
+                        var small = box_img_width1/550
+                        c.width = 550
+                        c.height = 550
                     }
+                    ctx.shadowOffsetX = 5; // 阴影Y轴偏移
+                    ctx.shadowOffsetY = 5; // 阴影X轴偏移
+                    ctx.shadowBlur = 5; // 模糊尺寸
+                    ctx.shadowColor = 'rgba(0, 0, 0, 0.3)'; // 颜色
+                    // //填充盒子底板卡纸颜色
+                    ctx.fillStyle="#ff6700";
+                    ctx.fillRect(0,0,c.width-10,c.height-10);
                     //获取盒子卡纸颜色
                     var color_num = Number($("#color_tag_par2").attr('data_id'))
                     switch(color_num)
@@ -2809,7 +3060,7 @@
                     }
                     // //填充盒子底板卡纸颜色
                     ctx.fillStyle=color_val;
-                    ctx.fillRect(0,0,box_img_width1,box_img_height1);
+                    ctx.fillRect(0,0,c.width-10,c.height-10);
                     //缩小后的面宽
                     var small_face = parseFloat(vm.face_width*30/small);
                     var img_width2 = img_width1/small
@@ -2838,9 +3089,13 @@
                             direction_val_xs = num_values
                         }
                     }
+                    ctx.shadowOffsetX = 0; // 阴影Y轴偏移
+                    ctx.shadowOffsetY = 0; // 阴影X轴偏移
+                    ctx.shadowBlur = 0; // 模糊尺寸
+                    ctx.shadowColor = 'rgba(0, 0, 0, 0.3)'; // 颜色
                     //填充画芯留边颜色
                     ctx.fillStyle='#fff';
-                    ctx.fillRect((c.width-img_width2)/2-vm.drawing_core_val*30/small+direction_val_xs/small,(c.height-img_height2)/2-vm.drawing_core_val*30/small+direction_val_ys/small,img_width2+vm.drawing_core_val*30/small*2,img_height2+vm.drawing_core_val*30/small*2);
+                    ctx.fillRect((c.width-img_width2)/2-vm.drawing_core_val*30/small+direction_val_xs/small,(c.height-img_height2)/2-vm.drawing_core_val*30/small+direction_val_ys/small,img_width2+vm.drawing_core_val*30/small*2-10,img_height2+vm.drawing_core_val*30/small*2-10);
                     var direction_val_x = 0
                     var direction_val_y = 0
                     if(vm.drawing_core_val != 0){
@@ -2867,48 +3122,25 @@
                             }
                         }
                     }
-                    ctx.drawImage(img,0,0,img.naturalWidth,img.naturalHeight,(c.width-img_width2)/2+direction_val_x/small+direction_val_xs/small,(c.height-img_height2)/2+direction_val_y/small+direction_val_ys/small,img_width2,img_height2);
-
+                    ctx.drawImage(img,0,0,img.naturalWidth,img.naturalHeight,(c.width-img_width2)/2+direction_val_x/small+direction_val_xs/small,(c.height-img_height2)/2+direction_val_y/small+direction_val_ys/small,img_width2-10,img_height2-10);
                     // //绘制模拟阴影条(上)
-                    // // var grd=ctx.createLinearGradient((c.width-img_width1/small)/2-vm.drawing_core_val*30/small+direction_val_xs/small,(c.height-img_height1/small)/2-vm.drawing_core_val*30/small+direction_val_ys/small,(c.width-img_width1/small)/2-vm.drawing_core_val*30/small+direction_val_xs/small,(c.height-img_height1/small)/2-vm.drawing_core_val*30/small+5+direction_val_ys/small);
-                    // // grd.addColorStop(0,"rgba(150,150,150,0.6)");
-                    // // grd.addColorStop(1,"rgba(250,250,250,0.3)");
-                    // // ctx.fillStyle=grd;
                     ctx.fillStyle='#aaaaaa';
-                    ctx.fillRect((c.width-img_width1/small)/2-vm.drawing_core_val*30/small+direction_val_xs/small-1,(c.height-img_height1/small)/2-vm.drawing_core_val*30/small+direction_val_ys/small-1,(img_width1+vm.drawing_core_val*30*2)/small+2,3);
+                    ctx.fillRect((c.width-img_width1/small)/2-vm.drawing_core_val*30/small+direction_val_xs/small-1,(c.height-img_height1/small)/2-vm.drawing_core_val*30/small+direction_val_ys/small-1,(img_width1+vm.drawing_core_val*30*2)/small+2-10,3);
                     // //绘制模拟阴影条(左)
-                    // // var grd=ctx.createLinearGradient((c.width-img_width1/small)/2-vm.drawing_core_val*30/small+direction_val_xs/small,(c.width-img_width1/small)/2-vm.drawing_core_val*30/small+direction_val_ys/small,(c.width-img_width1/small)/2-vm.drawing_core_val*30/small+5+direction_val_xs/small,(c.width-img_width1/small)/2-vm.drawing_core_val*30/small+direction_val_ys/small);
-                    // // grd.addColorStop(0,"rgba(150,150,150,0.6)");
-                    // // grd.addColorStop(1,"rgba(250,250,250,0.3)");
-                    // // ctx.fillStyle=grd;
                     ctx.fillStyle='#aaaaaa';
-                    ctx.fillRect((c.width-img_width1/small)/2-vm.drawing_core_val*30/small+direction_val_xs/small-1,(c.height-img_height1/small)/2-vm.drawing_core_val*30/small+direction_val_ys/small-1,3,img_height1/small+vm.drawing_core_val*30/small*2+2);
-                    // //绘制模拟阴影条(右)
-                    // // var grd=ctx.createLinearGradient((c.width-img_width1/small)/2+img_width1/small+vm.drawing_core_val*30/small+direction_val_xs/small,(c.width-img_width1/small)/2+img_width1/small+vm.drawing_core_val*30/small+direction_val_ys/small,(c.width-img_width1/small)/2+img_width1/small+vm.drawing_core_val*30/small-3+direction_val_xs/small,(c.width-img_width1/small)/2+img_width1/small+vm.drawing_core_val*30/small+direction_val_ys/small);
-                    // // grd.addColorStop(0,"rgba(150,150,150,0.6)");
-                    // // grd.addColorStop(1,"rgba(250,250,250,0.3)");
-                    // // ctx.fillStyle=grd;
-                    // ctx.fillStyle='#ebebeb';
-                    // ctx.fillRect((c.width-img_width1/small)/2+img_width1/small-2+vm.drawing_core_val*30/small+direction_val_xs/small,(c.height-img_height1/small)/2-vm.drawing_core_val*30/small+direction_val_ys/small,2,(img_height1+vm.drawing_core_val*30*2)/small);
-                    // //绘制模拟阴影条(下)
-                    // // var grd=ctx.createLinearGradient((c.height-img_height1/small)/2+vm.drawing_core_val*30/small+img_height1/small+direction_val_xs/small,(c.height-img_height1/small)/2+vm.drawing_core_val*30/small+img_height1/small+direction_val_ys/small,(c.height-img_height1/small)/2+vm.drawing_core_val*30/small+img_height1/small+direction_val_xs/small,(c.height-img_height1/small)/2+vm.drawing_core_val*30/small+img_height1/small-3+direction_val_xs/small);
-                    // // grd.addColorStop(0,"rgba(150,150,150,0.6)");
-                    // // grd.addColorStop(1,"rgba(250,250,250,0.3)");
-                    // // ctx.fillStyle=grd;
-                    // ctx.fillStyle='#ebebeb';
-                    // ctx.fillRect((c.width-img_width1/small)/2-vm.drawing_core_val*30/small+direction_val_xs/small,(c.height-img_height1/small)/2+vm.drawing_core_val*30/small+img_height1/small-2+direction_val_ys/small,(img_width1+vm.drawing_core_val*30*2)/small,2);
-                    //绘制不规则四边形(下)
-                    //开始一个新的绘制路径
+                    ctx.fillRect((c.width-img_width1/small)/2-vm.drawing_core_val*30/small+direction_val_xs/small-1,(c.height-img_height1/small)/2-vm.drawing_core_val*30/small+direction_val_ys/small-1,3,img_height1/small+vm.drawing_core_val*30/small*2-10+2);
+                    //开始一个新的绘制路径(下)
                     ctx.beginPath();
                     //设置线条颜色
-                    ctx.strokeStyle ="#ebebeb";
+                    // ctx.strokeStyle ="#ebebeb";
+                    ctx.strokeStyle ="#ff6700";
                     ctx.lineWidth=0.1;
                     //设置路径起点坐标
-                    ctx.moveTo((c.width-img_width1/small)/2-vm.drawing_core_val*30/small+direction_val_xs/small-1,(c.height-img_height1/small)/2+vm.drawing_core_val*30/small+img_height1/small+direction_val_ys/small+1);
+                    ctx.moveTo((c.width-img_width1/small)/2-vm.drawing_core_val*30/small+direction_val_xs/small-1,(c.height-img_height1/small)/2+vm.drawing_core_val*30/small+img_height1/small+direction_val_ys/small+1-10);
                     //绘制直线线段到坐标点
-                    ctx.lineTo((c.width-img_width1/small)/2+img_width1/small+vm.drawing_core_val*30/small+direction_val_xs/small+2,(c.height-img_height1/small)/2+vm.drawing_core_val*30/small+img_height1/small+direction_val_ys/small+1);
-                    ctx.lineTo((c.width-img_width1/small)/2+img_width1/small+vm.drawing_core_val*30/small+direction_val_xs/small+2,(c.height-img_height1/small)/2+vm.drawing_core_val*30/small+img_height1/small+direction_val_ys/small-2);
-                    ctx.lineTo((c.width-img_width1/small)/2-vm.drawing_core_val*30/small+direction_val_xs/small+2,(c.height-img_height1/small)/2+vm.drawing_core_val*30/small+img_height1/small+direction_val_ys/small-2);
+                    ctx.lineTo((c.width-img_width1/small)/2+img_width1/small+vm.drawing_core_val*30/small+direction_val_xs/small+2-10,(c.height-img_height1/small)/2+vm.drawing_core_val*30/small+img_height1/small+direction_val_ys/small+1-10);
+                    ctx.lineTo((c.width-img_width1/small)/2+img_width1/small+vm.drawing_core_val*30/small+direction_val_xs/small+2-10,(c.height-img_height1/small)/2+vm.drawing_core_val*30/small+img_height1/small+direction_val_ys/small-2-10);
+                    ctx.lineTo((c.width-img_width1/small)/2-vm.drawing_core_val*30/small+direction_val_xs/small+2,(c.height-img_height1/small)/2+vm.drawing_core_val*30/small+img_height1/small+direction_val_ys/small-2-10);
                     ctx.fillStyle='#ebebeb';
                     ctx.fill();
                     //先关闭绘制路径。
@@ -2922,11 +3154,11 @@
                     ctx.strokeStyle ="#ebebeb";
                     ctx.lineWidth=0.1;
                     //设置路径起点坐标
-                    ctx.moveTo((c.width-img_width1/small)/2+img_width1/small+vm.drawing_core_val*30/small+direction_val_xs/small+2,(c.height-img_height1/small)/2-vm.drawing_core_val*30/small+direction_val_ys/small-1);
+                    ctx.moveTo((c.width-img_width1/small)/2+img_width1/small+vm.drawing_core_val*30/small+direction_val_xs/small+2-10,(c.height-img_height1/small)/2-vm.drawing_core_val*30/small+direction_val_ys/small-1);
                     //绘制直线线段到坐标点(20, 100)
-                    ctx.lineTo((c.width-img_width1/small)/2+img_width1/small+vm.drawing_core_val*30/small+direction_val_xs/small+2,(c.height-img_height1/small)/2+vm.drawing_core_val*30/small+img_height1/small+direction_val_ys/small+1);
-                    ctx.lineTo((c.width-img_width1/small)/2+img_width1/small+vm.drawing_core_val*30/small+direction_val_xs/small-1,(c.height-img_height1/small)/2+vm.drawing_core_val*30/small+img_height1/small+direction_val_ys/small);
-                    ctx.lineTo((c.width-img_width1/small)/2+img_width1/small+vm.drawing_core_val*30/small+direction_val_xs/small-1,(c.height-img_height1/small)/2-vm.drawing_core_val*30/small+direction_val_ys/small+2);
+                    ctx.lineTo((c.width-img_width1/small)/2+img_width1/small+vm.drawing_core_val*30/small+direction_val_xs/small+2-10,(c.height-img_height1/small)/2+vm.drawing_core_val*30/small+img_height1/small+direction_val_ys/small+1-10);
+                    ctx.lineTo((c.width-img_width1/small)/2+img_width1/small+vm.drawing_core_val*30/small+direction_val_xs/small-1-10,(c.height-img_height1/small)/2+vm.drawing_core_val*30/small+img_height1/small+direction_val_ys/small-10);
+                    ctx.lineTo((c.width-img_width1/small)/2+img_width1/small+vm.drawing_core_val*30/small+direction_val_xs/small-1-10,(c.height-img_height1/small)/2-vm.drawing_core_val*30/small+direction_val_ys/small+2);
                     ctx.fillStyle='#ebebeb';
                     ctx.fill();
                     //先关闭绘制路径。
@@ -2947,7 +3179,7 @@
                             bgImg.src = vm.img_url
                         })
                         bgImg.onload = function(){
-                            ctx.drawImage(bgImg,0,0,bgImg.naturalWidth,bgImg.naturalHeight,0,0,c.width,c.height);
+                            ctx.drawImage(bgImg,0,0,bgImg.naturalWidth,bgImg.naturalHeight,0,0,c.width-10,c.height-10);
                         }
                     }
                     //最后生效框宽
@@ -3004,20 +3236,27 @@
                     var ctx=c.getContext("2d")
                     if(box_img_width1/box_img_height1 > 1){
                         //设置面宽缩小比例
-                        var small = box_img_width1/500
-                        c.width = 500
+                        var small = box_img_width1/550
+                        c.width = 550
                         c.height = box_img_height1/small
                     }else if(box_img_width1/box_img_height1 < 1){
                         //设置面宽缩小比例
-                        var small = box_img_height1/500
-                        c.height = 500
+                        var small = box_img_height1/550
+                        c.height = 550
                         c.width = box_img_width1/small
                     }else if(box_img_width1/box_img_height1 == 1){
                         //设置面宽缩小比例
-                        var small = box_img_width1/500
-                        c.width = 500
-                        c.height = 500
+                        var small = box_img_width1/550
+                        c.width = 550
+                        c.height = 550
                     }
+                    ctx.shadowOffsetX = 5; // 阴影Y轴偏移
+                    ctx.shadowOffsetY = 5; // 阴影X轴偏移
+                    ctx.shadowBlur = 5; // 模糊尺寸
+                    ctx.shadowColor = 'rgba(0, 0, 0, 0.3)'; // 颜色
+                    // //填充盒子底板卡纸颜色
+                    ctx.fillStyle="#ff6700";
+                    ctx.fillRect(0,0,c.width-10,c.height-10);
                     //缩小后的面宽
                     var small_face = parseFloat(vm.face_width*30/small);
                     var img_width2 = img_width1/small
@@ -3050,13 +3289,18 @@
                     }
                     // //填充盒子底板卡纸颜色
                     ctx.fillStyle=color_val;
-                    ctx.fillRect(0,0,box_img_width1,box_img_height1);
+                    ctx.fillRect(0,0,c.width-10,c.height-10);
                     //获取是否悬浮,1为不悬浮,2为悬浮
                     var is_pause = $('#is_pause').attr('data_id')
                     if(is_pause == 2){
                         ctx.shadowOffsetX = 5; // 阴影Y轴偏移
                         ctx.shadowOffsetY = 5; // 阴影X轴偏移
                         ctx.shadowBlur = 5; // 模糊尺寸
+                        ctx.shadowColor = 'rgba(0, 0, 0, 0.5)'; // 颜色
+                    }else{
+                        ctx.shadowOffsetX = 0; // 阴影Y轴偏移
+                        ctx.shadowOffsetY = 0; // 阴影X轴偏移
+                        ctx.shadowBlur = 0; // 模糊尺寸
                         ctx.shadowColor = 'rgba(0, 0, 0, 0.5)'; // 颜色
                     }
                     //画芯偏移方向
@@ -3085,19 +3329,19 @@
                     }
                     // //填充画芯留边颜色
                     ctx.fillStyle='#fff';
-                    ctx.fillRect((c.width-img_width2)/2-vm.drawing_core_val*30/small+direction_val_xs/small,(c.height-img_height2)/2-vm.drawing_core_val*30/small+direction_val_ys/small,img_width2+vm.drawing_core_val*30/small*2,img_height2+vm.drawing_core_val*30/small*2);
+                    ctx.fillRect((c.width-img_width2)/2-vm.drawing_core_val*30/small+direction_val_xs/small,(c.height-img_height2)/2-vm.drawing_core_val*30/small+direction_val_ys/small,img_width2+vm.drawing_core_val*30/small*2-10,img_height2+vm.drawing_core_val*30/small*2-10);
                     ctx.shadowOffsetX = 0; // 阴影Y轴偏移
                     ctx.shadowOffsetY = 0; // 阴影X轴偏移
                     ctx.shadowBlur = 0; // 模糊尺寸
                     ctx.shadowColor = 'rgba(0, 0, 0, 0.5)'; // 颜色
                     //绘制图片
-                    ctx.drawImage(img,0,0,img.naturalWidth,img.naturalHeight,(c.width-img_width1/small)/2+direction_val_x/small+direction_val_xs/small,(c.height-img_height1/small)/2+direction_val_y/small+direction_val_ys/small,img_width1/small,img_height1/small)
+                    ctx.drawImage(img,0,0,img.naturalWidth,img.naturalHeight,(c.width-img_width1/small)/2+direction_val_x/small+direction_val_xs/small,(c.height-img_height1/small)/2+direction_val_y/small+direction_val_ys/small,img_width1/small-10,img_height1/small-10)
                     //如果宽高有变化则后台生成边框素材,没有变化则直接获取
                     if(vm.last_border == vm.border_status && vm.confirm_width == $("#box_img_width").val() && vm.confirm_height == $("#box_img_height").val()){
                         // $("#bgImg").attr("src",this.img_url);
                         bgImg.src = vm.img_url
                         bgImg.onload = function(){
-                            ctx.drawImage(bgImg,0,0,bgImg.naturalWidth,bgImg.naturalHeight,0,0,c.width,c.height);
+                            ctx.drawImage(bgImg,0,0,bgImg.naturalWidth,bgImg.naturalHeight,0,0,c.width-10,c.height-10);
                         }
                     }else{
                         vm.$http.get(vm.GLOBAL.baseurl + 'v1/goods/decoration',{params:{img_name:vm.border_status,box_img_width1:box_img_width1,box_img_height1:box_img_height1,img_width1:img_width1,img_height1:img_height1,face_width:vm.face_width,small_face:small_face,need_width:c.width,need_height:c.height}}).then((response)=>{
@@ -3106,7 +3350,7 @@
                             bgImg.src = vm.img_url
                         })
                         bgImg.onload = function(){
-                            ctx.drawImage(bgImg,0,0,bgImg.naturalWidth,bgImg.naturalHeight,0,0,c.width,c.height);
+                            ctx.drawImage(bgImg,0,0,bgImg.naturalWidth,bgImg.naturalHeight,0,0,c.width-10,c.height-10);
                         }
                     }
                     ctx.shadowOffsetX = 2; // 阴影Y轴偏移
@@ -3149,27 +3393,32 @@
                     var Frame_width = 0.7*30
                     if(box_img_width1/box_img_height1 > 1){
                         //设置面宽缩小比例
-                        var small = box_img_width1/500
-                        c.width = 500
+                        var small = box_img_width1/550
+                        c.width = 550
                         c.height = box_img_height1/small
                     }else if(box_img_width1/box_img_height1 < 1){
                         //设置面宽缩小比例
-                        var small = box_img_height1/500
-                        c.height = 500
+                        var small = box_img_height1/550
+                        c.height = 550
                         c.width = box_img_width1/small
                     }else if(box_img_width1/box_img_height1 == 1){
                         //设置面宽缩小比例
-                        var small = box_img_width1/500
-                        c.width = 500
-                        c.height = 500
+                        var small = box_img_width1/550
+                        c.width = 550
+                        c.height = 550
                     }
                     //缩小后的面宽
                     var small_face = vm.face_width*30/small;
                     //获取画布
                     var ctx=c.getContext("2d")
                     //填充盒子底板卡纸颜色
+                    ctx.shadowOffsetX = 5; // 阴影Y轴偏移
+                    ctx.shadowOffsetY = 5; // 阴影X轴偏移
+                    ctx.shadowBlur = 5; // 模糊尺寸
+                    ctx.shadowColor = 'rgba(0, 0, 0, 0.3)'; // 颜色
+                    //填充盒子底板卡纸颜色
                     ctx.fillStyle='#000';
-                    ctx.fillRect(0,0,c.width,c.height);
+                    ctx.fillRect(0,0,c.width-10,c.height-10);
                     var direction_val_x = 0
                     var direction_val_y = 0
                     if(vm.drawing_core_val != 0){
@@ -3198,16 +3447,16 @@
                     }
                     //填充画芯留边颜色
                     ctx.fillStyle='#fff';
-                    ctx.fillRect((c.width-img_width1/small)/2+Frame_width/small-vm.drawing_core_val*30/small,(c.height-img_height1/small)/2+Frame_width/small-vm.drawing_core_val*30/small,img_width1/small-Frame_width/small*2+vm.drawing_core_val*30/small*2,img_height1/small-Frame_width/small*2+vm.drawing_core_val*30/small*2);
+                    ctx.fillRect((c.width-img_width1/small)/2+Frame_width/small-vm.drawing_core_val*30/small,(c.height-img_height1/small)/2+Frame_width/small-vm.drawing_core_val*30/small,img_width1/small-Frame_width/small*2+vm.drawing_core_val*30/small*2-10,img_height1/small-Frame_width/small*2+vm.drawing_core_val*30/small*2-10);
                     //绘画芯
-                    ctx.drawImage(img,0,0,img.naturalWidth,img.naturalHeight,(c.width-img_width1/small)/2+Frame_width/small+direction_val_x/small,(c.height-img_height1/small)/2+Frame_width/small+direction_val_y/small,img_width1/small-Frame_width/small*2+1,img_height1/small-Frame_width/small*2+1);
+                    ctx.drawImage(img,0,0,img.naturalWidth,img.naturalHeight,(c.width-img_width1/small)/2+Frame_width/small+direction_val_x/small,(c.height-img_height1/small)/2+Frame_width/small+direction_val_y/small,img_width1/small-Frame_width/small*2+1-10,img_height1/small-Frame_width/small*2+1-10);
                     vm.$http.get(vm.GLOBAL.baseurl + 'v1/goods/decoration',{params:{img_name:vm.border_status,box_img_width1:box_img_width1,box_img_height1:box_img_height1,img_width1:img_width1,img_height1:img_height1,face_width:vm.face_width,small_face:small_face,need_width:c.width,need_height:c.height}}).then((response)=>{
                         vm.img_url = response.data
                         // $("#bgImg").attr("src",this.img_url);
                         bgImg.src = vm.img_url
                     })
                     bgImg.onload = function(){
-                        ctx.drawImage(bgImg,0,0,bgImg.naturalWidth,bgImg.naturalHeight,0,0,c.width,c.height);
+                        ctx.drawImage(bgImg,0,0,bgImg.naturalWidth,bgImg.naturalHeight,0,0,c.width-10,c.height-10);
                     }
                 }
             },
@@ -3242,20 +3491,27 @@
                     var ctx=c.getContext("2d")
                     if(box_img_width1/box_img_height1 > 1){
                         //设置面宽缩小比例
-                        var small = box_img_width1/500
-                        c.width = 500+stereo_width/small+30
+                        var small = box_img_width1/550
+                        c.width = 550+stereo_width/small+30
                         c.height = box_img_height1/small+30
                     }else if(box_img_width1/box_img_height1 < 1){
                         //设置面宽缩小比例
-                        var small = box_img_height1/500
-                        c.height = 500+stereo_width/small+30
+                        var small = box_img_height1/550
+                        c.height = 550+stereo_width/small+30
                         c.width = box_img_width1/small+30
                     }else if(box_img_width1/box_img_height1 == 1){
                         //设置面宽缩小比例
-                        var small = box_img_width1/500
-                        c.width = 500+stereo_width/small+30
-                        c.height = 500+stereo_width/small+30
+                        var small = box_img_width1/550
+                        c.width = 550+stereo_width/small+30
+                        c.height = 550+stereo_width/small+30
                     }
+                    ctx.shadowOffsetX = 5; // 阴影Y轴偏移
+                    ctx.shadowOffsetY = 5; // 阴影X轴偏移
+                    ctx.shadowBlur = 5; // 模糊尺寸
+                    ctx.shadowColor = 'rgba(0, 0, 0, 0.3)'; // 颜色
+                    // //填充盒子底板卡纸颜色
+                    ctx.fillStyle="#fff";
+                    ctx.fillRect(0,0,c.width-10,c.height-10);
                     //缩小后的面宽
                     var small_face = parseFloat(vm.face_width*30/small)+15/small;
                     var img_width2 = img_width1/small
@@ -3337,7 +3593,7 @@
                         ctx.shadowOffsetY = 3; // 阴影X轴偏移
                         ctx.shadowBlur = 5; // 模糊尺寸
                         ctx.shadowColor = 'rgba(0, 0, 0, 0.5)'; // 颜色
-                        ctx.drawImage(bgImg,0,0,bgImg.naturalWidth,bgImg.naturalHeight,0,0,c.width,c.height);
+                        ctx.drawImage(bgImg,0,0,bgImg.naturalWidth,bgImg.naturalHeight,0,0,c.width-10,c.height-10);
                     }
                     //绘制单立体
                     dltImg.onload = function() {
@@ -3345,16 +3601,16 @@
                         ctx.shadowOffsetY = 3; // 阴影X轴偏移
                         ctx.shadowBlur = 5; // 模糊尺寸
                         ctx.shadowColor = 'rgba(0, 0, 0, 0.5)'; // 颜色
-                        ctx.drawImage(dltImg,0,0,dltImg.naturalWidth,dltImg.naturalHeight,(c.width-img_width2-stereo_width/small)/2-vm.drawing_core_val*30/small+direction_val_xs/small,(c.height-img_height2-stereo_width/small)/2-vm.drawing_core_val*30/small+direction_val_ys/small,img_width2+stereo_width/small+vm.drawing_core_val*30/small*2,img_height2+stereo_width/small+vm.drawing_core_val*30/small*2);
+                        ctx.drawImage(dltImg,0,0,dltImg.naturalWidth,dltImg.naturalHeight,(c.width-img_width2-stereo_width/small)/2-vm.drawing_core_val*30/small+direction_val_xs/small,(c.height-img_height2-stereo_width/small)/2-vm.drawing_core_val*30/small+direction_val_ys/small,img_width2+stereo_width/small+vm.drawing_core_val*30/small*2-10,img_height2+stereo_width/small+vm.drawing_core_val*30/small*2-10);
                         ctx.shadowOffsetX = 0; // 阴影Y轴偏移
                         ctx.shadowOffsetY = 0; // 阴影X轴偏移
                         ctx.shadowBlur = 0; // 模糊尺寸
                         ctx.shadowColor = 'rgba(0, 0, 0, 0.5)'; // 颜色
                         //填充画芯留边
                         ctx.fillStyle='#fff';
-                        ctx.fillRect((c.width-img_width2)/2-vm.drawing_core_val*30/small+direction_val_xs/small,(c.height-img_height2)/2-vm.drawing_core_val*30/small+direction_val_ys/small,img_width2+vm.drawing_core_val*30/small*2,img_height2+vm.drawing_core_val*30/small*2);
+                        ctx.fillRect((c.width-img_width2)/2-vm.drawing_core_val*30/small+direction_val_xs/small,(c.height-img_height2)/2-vm.drawing_core_val*30/small+direction_val_ys/small,img_width2+vm.drawing_core_val*30/small*2-10,img_height2+vm.drawing_core_val*30/small*2-10);
                         //绘制图片
-                        ctx.drawImage(img,0,0,img.naturalWidth,img.naturalHeight,(c.width-img_width2)/2+direction_val_x/small+direction_val_xs/small,(c.height-img_height2)/2+direction_val_y/small+direction_val_ys/small,img_width2,img_height2);
+                        ctx.drawImage(img,0,0,img.naturalWidth,img.naturalHeight,(c.width-img_width2)/2+direction_val_x/small+direction_val_xs/small,(c.height-img_height2)/2+direction_val_y/small+direction_val_ys/small,img_width2-10,img_height2-10);
                     }
                     //最后生效框宽
                     vm.confirm_width = $("#box_img_width").val()
@@ -3382,19 +3638,19 @@
                 var c=document.getElementById("myCanvas");
                 if(box_img_width1/box_img_height1 > 1){
                     //设置面宽缩小比例
-                    var small = box_img_width1/500
-                    c.width = 500
+                    var small = box_img_width1/550
+                    c.width = 550
                     c.height = box_img_height1/small
                 }else if(box_img_width1/box_img_height1 < 1){
                     //设置面宽缩小比例
-                    var small = box_img_height1/500
-                    c.height = 500
+                    var small = box_img_height1/550
+                    c.height = 550
                     c.width = box_img_width1/small
                 }else if(box_img_width1/box_img_height1 == 1){
                     //设置面宽缩小比例
-                    var small = box_img_width1/500
-                    c.width = 500
-                    c.height = 500
+                    var small = box_img_width1/550
+                    c.width = 550
+                    c.height = 550
                 }
                 //缩小后的面宽
                 var small_face = parseFloat(this.face_width*30/small);
@@ -3422,19 +3678,19 @@
                 var c=document.getElementById("myCanvas");
                 if(box_img_width1/box_img_height1 > 1){
                     //设置面宽缩小比例
-                    var small = box_img_width1/500
-                    c.width = 500
+                    var small = box_img_width1/550
+                    c.width = 550
                     c.height = box_img_height1/small
                 }else if(box_img_width1/box_img_height1 < 1){
                     //设置面宽缩小比例
-                    var small = box_img_height1/500
-                    c.height = 500
+                    var small = box_img_height1/550
+                    c.height = 550
                     c.width = box_img_width1/small
                 }else if(box_img_width1/box_img_height1 == 1){
                     //设置面宽缩小比例
-                    var small = box_img_width1/500
-                    c.width = 500
-                    c.height = 500
+                    var small = box_img_width1/550
+                    c.width = 550
+                    c.height = 550
                 }
                 //缩小后的面宽
                 var small_face = parseFloat(this.face_width*30/small);
@@ -3499,33 +3755,45 @@
                     //放小比例
                     if(box_img_width1/box_img_height1 > 1){
                         //设置缩小比例
-                        var small = box_img_width1/500
-                        c.width = 500
+                        var small = box_img_width1/550
+                        c.width = 550
                         c.height = box_img_height1/small
                     }else if(box_img_width1/box_img_height1 < 1){
                         //设置面宽缩小比例
-                        var small = box_img_height1/500
-                        c.height = 500
+                        var small = box_img_height1/550
+                        c.height = 550
                         c.width = box_img_width1/small
                     }else if(box_img_width1/box_img_height1 == 1){
                         //设置面宽缩小比例
-                        var small = box_img_width1/500
-                        c.width = 500
-                        c.height = 500
+                        var small = box_img_width1/550
+                        c.width = 550
+                        c.height = 550
                     }
+                    ctx.shadowOffsetX = 5; // 阴影Y轴偏移
+                    ctx.shadowOffsetY = 5; // 阴影X轴偏移
+                    ctx.shadowBlur = 5; // 模糊尺寸
+                    ctx.shadowColor = 'rgba(0, 0, 0, 0.3)'; // 颜色
+                    // //填充盒子底板卡纸颜色
+                    ctx.fillStyle="#ff6700";
+                    ctx.fillRect(0,0,c.width-10,c.height-10);
                     //缩小后的面宽
                     var small_face = parseFloat(vm.face_width*30/small);
                     var img_width2 = img_width1/small
                     var img_height2 = img_width2/bili
                     // //填充盒子底板卡纸颜色
                     ctx.fillStyle=color_val;
-                    ctx.fillRect(0,0,box_img_width1,box_img_height1);
+                    ctx.fillRect(0,0,c.width-10,c.height-10);
                     //获取是否悬浮,1为不悬浮,2为悬浮
                     var is_pause = $('#is_pause').attr('data_id')
                     if(is_pause == 2){
                         ctx.shadowOffsetX = 5; // 阴影Y轴偏移
                         ctx.shadowOffsetY = 5; // 阴影X轴偏移
                         ctx.shadowBlur = 5; // 模糊尺寸
+                        ctx.shadowColor = 'rgba(0, 0, 0, 0.5)'; // 颜色
+                    }else{
+                        ctx.shadowOffsetX = 0; // 阴影Y轴偏移
+                        ctx.shadowOffsetY = 0; // 阴影X轴偏移
+                        ctx.shadowBlur = 0; // 模糊尺寸
                         ctx.shadowColor = 'rgba(0, 0, 0, 0.5)'; // 颜色
                     }
                     //画芯偏移方向
@@ -3554,7 +3822,7 @@
                     }
                     //填充画芯留边颜色
                     ctx.fillStyle='#fff';
-                    ctx.fillRect((c.width-img_width2)/2-vm.drawing_core_val*30/small+direction_val_xs/small,(c.height-img_height2)/2-vm.drawing_core_val*30/small+direction_val_ys/small,img_width2+vm.drawing_core_val*30/small*2,img_height2+vm.drawing_core_val*30/small*2);
+                    ctx.fillRect((c.width-img_width2)/2-vm.drawing_core_val*30/small+direction_val_xs/small,(c.height-img_height2)/2-vm.drawing_core_val*30/small+direction_val_ys/small,img_width2+vm.drawing_core_val*30/small*2-10,img_height2+vm.drawing_core_val*30/small*2-10);
                     ctx.shadowOffsetX = 0; // 阴影Y轴偏移
                     ctx.shadowOffsetY = 0; // 阴影X轴偏移
                     ctx.shadowBlur = 0; // 模糊尺寸
@@ -3587,7 +3855,7 @@
                     }
                     if(vm.is_cut ==1){
                         //绘制图片
-                        ctx.drawImage(img,0,0,img.naturalWidth,img.naturalHeight,(c.width-img_width2)/2+direction_val_x/small+direction_val_xs/small,(c.height-img_height2)/2+direction_val_y/small+direction_val_ys/small,img_width2,img_height2);
+                        ctx.drawImage(img,0,0,img.naturalWidth,img.naturalHeight,(c.width-img_width2)/2+direction_val_x/small+direction_val_xs/small,(c.height-img_height2)/2+direction_val_y/small+direction_val_ys/small,img_width2-10,img_height2-10);
                         //打开边框素材
                         // $("#bgImg").attr("src",this.img_url);
                         bgImg.src = vm.img_url
@@ -3596,7 +3864,7 @@
                             ctx.shadowOffsetY = 2; // 阴影X轴偏移
                             ctx.shadowBlur = 5; // 模糊尺寸
                             ctx.shadowColor = 'rgba(0, 0, 0, 0.5)'; // 颜色
-                            ctx.drawImage(bgImg,0,0,bgImg.naturalWidth,bgImg.naturalHeight,0,0,c.width,c.height);
+                            ctx.drawImage(bgImg,0,0,bgImg.naturalWidth,bgImg.naturalHeight,0,0,c.width-10,c.height-10);
                         }
                     }else{
                         //获取被裁切的图片数据
@@ -3604,7 +3872,7 @@
                         //获取裁切框的数据
                         var cut_box = $('#img').cropper('getData', true)
                         //绘制图片
-                        ctx.drawImage(img,cut_box.x,cut_box.y,cut_box.width,cut_box.height,(c.width-img_width1/small)/2+direction_val_x/small+direction_val_xs/small,(c.height-img_height1/small)/2+direction_val_y/small+direction_val_ys/small,img_width1/small,img_height1/small)
+                        ctx.drawImage(img,cut_box.x,cut_box.y,cut_box.width,cut_box.height,(c.width-img_width1/small)/2+direction_val_x/small+direction_val_xs/small,(c.height-img_height1/small)/2+direction_val_y/small+direction_val_ys/small,img_width1/small-10,img_height1/small-10)
                         // $("#bgImg").attr("src",this.img_url);
                         bgImg.src = vm.img_url
                         bgImg.onload = function(){
@@ -3612,7 +3880,7 @@
                             ctx.shadowOffsetY = 2; // 阴影X轴偏移
                             ctx.shadowBlur = 5; // 模糊尺寸
                             ctx.shadowColor = 'rgba(0, 0, 0, 0.5)'; // 颜色
-                            ctx.drawImage(bgImg,0,0,bgImg.naturalWidth,bgImg.naturalHeight,0,0,c.width,c.height);
+                            ctx.drawImage(bgImg,0,0,bgImg.naturalWidth,bgImg.naturalHeight,0,0,c.width-10,c.height-10);
                         }
                     }
                 }
@@ -3670,20 +3938,27 @@
                     //放小比例
                     if(box_img_width1/box_img_height1 > 1){
                         //设置缩小比例
-                        var small = box_img_width1/500
-                        c.width = 500
+                        var small = box_img_width1/550
+                        c.width = 550
                         c.height = box_img_height1/small
                     }else if(box_img_width1/box_img_height1 < 1){
                         //设置面宽缩小比例
-                        var small = box_img_height1/500
-                        c.height = 500
+                        var small = box_img_height1/550
+                        c.height = 550
                         c.width = box_img_width1/small
                     }else if(box_img_width1/box_img_height1 == 1){
                         //设置面宽缩小比例
-                        var small = box_img_width1/500
-                        c.width = 500
-                        c.height = 500
+                        var small = box_img_width1/550
+                        c.width = 550
+                        c.height = 550
                     }
+                    ctx.shadowOffsetX = 5; // 阴影Y轴偏移
+                    ctx.shadowOffsetY = 5; // 阴影X轴偏移
+                    ctx.shadowBlur = 5; // 模糊尺寸
+                    ctx.shadowColor = 'rgba(0, 0, 0, 0.3)'; // 颜色
+                    // //填充盒子底板卡纸颜色
+                    ctx.fillStyle="#ff6700";
+                    ctx.fillRect(0,0,c.width-10,c.height-10);
                     var direction_val_x = 0
                     var direction_val_y = 0
                     if(vm.drawing_core_val != 0){
@@ -3740,27 +4015,31 @@
                     var img_height2 = img_width2/bili
                     //填充盒子底板卡纸颜色
                     ctx.fillStyle=color_val;
-                    ctx.fillRect(0,0,c.width,c.height);
+                    ctx.fillRect(0,0,c.width-10,c.height-10);
+                    ctx.shadowOffsetX = 0; // 阴影Y轴偏移
+                    ctx.shadowOffsetY = 0; // 阴影X轴偏移
+                    ctx.shadowBlur = 0; // 模糊尺寸
+                    ctx.shadowColor = 'rgba(0, 0, 0, 0.3)'; // 颜色
                     //填充画芯留边颜色
                     ctx.fillStyle='#fff';
-                    ctx.fillRect((c.width-img_width2)/2-vm.drawing_core_val*30/small+direction_val_xs/small,(c.height-img_height2)/2-vm.drawing_core_val*30/small+direction_val_ys/small,img_width2+vm.drawing_core_val*30/small*2,img_height2+vm.drawing_core_val*30/small*2);
+                    ctx.fillRect((c.width-img_width2)/2-vm.drawing_core_val*30/small+direction_val_xs/small,(c.height-img_height2)/2-vm.drawing_core_val*30/small+direction_val_ys/small,img_width2+vm.drawing_core_val*30/small*2-10,img_height2+vm.drawing_core_val*30/small*2-10);
                     if(vm.is_cut ==1){
                         //绘制图片
-                        ctx.drawImage(img,0,0,img.naturalWidth,img.naturalHeight,(c.width-img_width2)/2+direction_val_x/small+direction_val_xs/small,(c.height-img_height2)/2+direction_val_y/small+direction_val_ys/small,img_width2,img_height2);
+                        ctx.drawImage(img,0,0,img.naturalWidth,img.naturalHeight,(c.width-img_width2)/2+direction_val_x/small+direction_val_xs/small,(c.height-img_height2)/2+direction_val_y/small+direction_val_ys/small,img_width2-10,img_height2-10);
                         //绘制模拟阴影条(上)
                         // var grd=ctx.createLinearGradient((c.width-img_width1/small)/2-vm.drawing_core_val*30/small+direction_val_xs/small,(c.height-img_height1/small)/2-vm.drawing_core_val*30/small+direction_val_ys/small,(c.width-img_width1/small)/2-vm.drawing_core_val*30/small+direction_val_xs/small,(c.height-img_height1/small)/2-vm.drawing_core_val*30/small+5+direction_val_ys/small);
                         // grd.addColorStop(0,"rgba(150,150,150,0.6)");
                         // grd.addColorStop(1,"rgba(200,200,200,0.3)");
                         // ctx.fillStyle=grd;
                         ctx.fillStyle='#aaaaaa';
-                        ctx.fillRect((c.width-img_width1/small)/2-vm.drawing_core_val*30/small+direction_val_xs/small-1,(c.height-img_height1/small)/2-vm.drawing_core_val*30/small+direction_val_ys/small-1,(img_width1+vm.drawing_core_val*30*2)/small+2,2+1);
+                        ctx.fillRect((c.width-img_width1/small)/2-vm.drawing_core_val*30/small+direction_val_xs/small-1,(c.height-img_height1/small)/2-vm.drawing_core_val*30/small+direction_val_ys/small-1,(img_width1+vm.drawing_core_val*30*2)/small+2-10,2+1);
                         //绘制模拟阴影条(左)
                         // var grd=ctx.createLinearGradient((c.width-img_width1/small)/2-vm.drawing_core_val*30/small+direction_val_xs/small,(c.width-img_width1/small)/2-vm.drawing_core_val*30/small+direction_val_ys/small,(c.width-img_width1/small)/2-vm.drawing_core_val*30/small+5+direction_val_xs/small,(c.width-img_width1/small)/2-vm.drawing_core_val*30/small+direction_val_ys/small);
                         // grd.addColorStop(0,"rgba(150,150,150,0.6)");
                         // grd.addColorStop(1,"rgba(200,200,200,0.3)");
                         // ctx.fillStyle=grd;
                         ctx.fillStyle='#aaaaaa';
-                        ctx.fillRect((c.width-img_width1/small)/2-vm.drawing_core_val*30/small+direction_val_xs/small-1,(c.height-img_height1/small)/2-vm.drawing_core_val*30/small+direction_val_ys/small-1,2+1,img_height1/small+vm.drawing_core_val*30/small*2+2);
+                        ctx.fillRect((c.width-img_width1/small)/2-vm.drawing_core_val*30/small+direction_val_xs/small-1,(c.height-img_height1/small)/2-vm.drawing_core_val*30/small+direction_val_ys/small-1,2+1,img_height1/small+vm.drawing_core_val*30/small*2+2-10);
                         //绘制模拟阴影条(右)
                         // var grd=ctx.createLinearGradient((c.width-img_width1/small)/2+img_width1/small+vm.drawing_core_val*30/small+direction_val_xs/small,(c.width-img_width1/small)/2+img_width1/small+vm.drawing_core_val*30/small+direction_val_ys/small,(c.width-img_width1/small)/2+img_width1/small+vm.drawing_core_val*30/small-3+direction_val_xs/small,(c.width-img_width1/small)/2+img_width1/small+vm.drawing_core_val*30/small+direction_val_ys/small);
                         // grd.addColorStop(0,"rgba(150,150,150,0.6)");
@@ -3782,11 +4061,11 @@
                         ctx.strokeStyle ="#ebebeb";
                         ctx.lineWidth=0.1;
                         //设置路径起点坐标
-                        ctx.moveTo((c.width-img_width1/small)/2-vm.drawing_core_val*30/small+direction_val_xs/small-1,(c.height-img_height1/small)/2+vm.drawing_core_val*30/small+img_height1/small+direction_val_ys/small+1);
+                        ctx.moveTo((c.width-img_width1/small)/2-vm.drawing_core_val*30/small+direction_val_xs/small-1,(c.height-img_height1/small)/2+vm.drawing_core_val*30/small+img_height1/small+direction_val_ys/small+1-10);
                         //绘制直线线段到坐标点
-                        ctx.lineTo((c.width-img_width1/small)/2+img_width1/small+vm.drawing_core_val*30/small+direction_val_xs/small+2,(c.height-img_height1/small)/2+vm.drawing_core_val*30/small+img_height1/small+direction_val_ys/small+1);
-                        ctx.lineTo((c.width-img_width1/small)/2+img_width1/small+vm.drawing_core_val*30/small+direction_val_xs/small+2,(c.height-img_height1/small)/2+vm.drawing_core_val*30/small+img_height1/small+direction_val_ys/small-2);
-                        ctx.lineTo((c.width-img_width1/small)/2-vm.drawing_core_val*30/small+direction_val_xs/small+2,(c.height-img_height1/small)/2+vm.drawing_core_val*30/small+img_height1/small+direction_val_ys/small-2);
+                        ctx.lineTo((c.width-img_width1/small)/2+img_width1/small+vm.drawing_core_val*30/small+direction_val_xs/small+2-10,(c.height-img_height1/small)/2+vm.drawing_core_val*30/small+img_height1/small+direction_val_ys/small+1-10);
+                        ctx.lineTo((c.width-img_width1/small)/2+img_width1/small+vm.drawing_core_val*30/small+direction_val_xs/small+2-10,(c.height-img_height1/small)/2+vm.drawing_core_val*30/small+img_height1/small+direction_val_ys/small-2-10);
+                        ctx.lineTo((c.width-img_width1/small)/2-vm.drawing_core_val*30/small+direction_val_xs/small+2,(c.height-img_height1/small)/2+vm.drawing_core_val*30/small+img_height1/small+direction_val_ys/small-2-10);
                         ctx.fillStyle='#ebebeb';
                         ctx.fill();
                         //先关闭绘制路径。
@@ -3800,11 +4079,11 @@
                         ctx.strokeStyle ="#ebebeb";
                         ctx.lineWidth=0.1;
                         //设置路径起点坐标
-                        ctx.moveTo((c.width-img_width1/small)/2+img_width1/small+vm.drawing_core_val*30/small+direction_val_xs/small+2,(c.height-img_height1/small)/2-vm.drawing_core_val*30/small+direction_val_ys/small-1);
+                        ctx.moveTo((c.width-img_width1/small)/2+img_width1/small+vm.drawing_core_val*30/small+direction_val_xs/small+2-10,(c.height-img_height1/small)/2-vm.drawing_core_val*30/small+direction_val_ys/small-1);
                         //绘制直线线段到坐标点(20, 100)
-                        ctx.lineTo((c.width-img_width1/small)/2+img_width1/small+vm.drawing_core_val*30/small+direction_val_xs/small+2,(c.height-img_height1/small)/2+vm.drawing_core_val*30/small+img_height1/small+direction_val_ys/small+1);
-                        ctx.lineTo((c.width-img_width1/small)/2+img_width1/small+vm.drawing_core_val*30/small+direction_val_xs/small-1,(c.height-img_height1/small)/2+vm.drawing_core_val*30/small+img_height1/small+direction_val_ys/small);
-                        ctx.lineTo((c.width-img_width1/small)/2+img_width1/small+vm.drawing_core_val*30/small+direction_val_xs/small-1,(c.height-img_height1/small)/2-vm.drawing_core_val*30/small+direction_val_ys/small+2);
+                        ctx.lineTo((c.width-img_width1/small)/2+img_width1/small+vm.drawing_core_val*30/small+direction_val_xs/small+2-10,(c.height-img_height1/small)/2+vm.drawing_core_val*30/small+img_height1/small+direction_val_ys/small+1-10);
+                        ctx.lineTo((c.width-img_width1/small)/2+img_width1/small+vm.drawing_core_val*30/small+direction_val_xs/small-1-10,(c.height-img_height1/small)/2+vm.drawing_core_val*30/small+img_height1/small+direction_val_ys/small-10);
+                        ctx.lineTo((c.width-img_width1/small)/2+img_width1/small+vm.drawing_core_val*30/small+direction_val_xs/small-1-10,(c.height-img_height1/small)/2-vm.drawing_core_val*30/small+direction_val_ys/small+2);
                         ctx.fillStyle='#ebebeb';
                         ctx.fill();
                         //先关闭绘制路径。
@@ -3815,27 +4094,27 @@
                         // $("#bgImg").attr("src",this.img_url);
                         bgImg.src = vm.img_url
                         bgImg.onload = function(){
-                            ctx.drawImage(bgImg,0,0,bgImg.naturalWidth,bgImg.naturalHeight,0,0,c.width,c.height);
+                            ctx.drawImage(bgImg,0,0,bgImg.naturalWidth,bgImg.naturalHeight,0,0,c.width-10,c.height-10);
                         }
                     }else{
                         //获取裁切框的数据
                         var cut_box = $('#img').cropper('getData', true)
                         //绘制图片
-                        ctx.drawImage(img,cut_box.x,cut_box.y,cut_box.width,cut_box.height,(c.width-img_width1/small)/2+direction_val_x/small+direction_val_xs/small,(c.height-img_height1/small)/2+direction_val_y/small+direction_val_ys/small,img_width1/small,img_height1/small)
+                        ctx.drawImage(img,cut_box.x,cut_box.y,cut_box.width,cut_box.height,(c.width-img_width1/small)/2+direction_val_x/small+direction_val_xs/small,(c.height-img_height1/small)/2+direction_val_y/small+direction_val_ys/small,img_width1/small-10,img_height1/small-10)
                         //绘制模拟阴影条(上)
                         // var grd=ctx.createLinearGradient((c.width-img_width1/small)/2-vm.drawing_core_val*30/small+direction_val_xs/small,(c.height-img_height1/small)/2-vm.drawing_core_val*30/small+direction_val_ys/small,(c.width-img_width1/small)/2-vm.drawing_core_val*30/small+direction_val_xs/small,(c.height-img_height1/small)/2-vm.drawing_core_val*30/small+5+direction_val_ys/small);
                         // grd.addColorStop(0,"rgba(150,150,150,0.6)");
                         // grd.addColorStop(1,"rgba(200,200,200,0.3)");
                         // ctx.fillStyle=grd;
                         ctx.fillStyle='#aaaaaa';
-                        ctx.fillRect((c.width-img_width1/small)/2-vm.drawing_core_val*30/small+direction_val_xs/small-1,(c.height-img_height1/small)/2-vm.drawing_core_val*30/small+direction_val_ys/small-1,(img_width1+vm.drawing_core_val*30*2)/small+2,3);
+                        ctx.fillRect((c.width-img_width1/small)/2-vm.drawing_core_val*30/small+direction_val_xs/small-1,(c.height-img_height1/small)/2-vm.drawing_core_val*30/small+direction_val_ys/small-1,(img_width1+vm.drawing_core_val*30*2)/small+2-10,3);
                         //绘制模拟阴影条(左)
                         // var grd=ctx.createLinearGradient((c.width-img_width1/small)/2-vm.drawing_core_val*30/small+direction_val_xs/small,(c.width-img_width1/small)/2-vm.drawing_core_val*30/small+direction_val_ys/small,(c.width-img_width1/small)/2-vm.drawing_core_val*30/small+5+direction_val_xs/small,(c.width-img_width1/small)/2-vm.drawing_core_val*30/small+direction_val_ys/small);
                         // grd.addColorStop(0,"rgba(150,150,150,0.6)");
                         // grd.addColorStop(1,"rgba(200,200,200,0.3)");
                         // ctx.fillStyle=grd;
                         ctx.fillStyle='#aaaaaa';
-                        ctx.fillRect((c.width-img_width1/small)/2-vm.drawing_core_val*30/small+direction_val_xs/small-1,(c.height-img_height1/small)/2-vm.drawing_core_val*30/small+direction_val_ys/small-1,3,img_height1/small+vm.drawing_core_val*30/small*2+2);
+                        ctx.fillRect((c.width-img_width1/small)/2-vm.drawing_core_val*30/small+direction_val_xs/small-1,(c.height-img_height1/small)/2-vm.drawing_core_val*30/small+direction_val_ys/small-1,3,img_height1/small+vm.drawing_core_val*30/small*2+2-10);
                         //绘制模拟阴影条(右)
                         // var grd=ctx.createLinearGradient((c.width-img_width1/small)/2+img_width1/small+vm.drawing_core_val*30/small+direction_val_xs/small,(c.width-img_width1/small)/2+img_width1/small+vm.drawing_core_val*30/small+direction_val_ys/small,(c.width-img_width1/small)/2+img_width1/small+vm.drawing_core_val*30/small-3+direction_val_xs/small,(c.width-img_width1/small)/2+img_width1/small+vm.drawing_core_val*30/small+direction_val_ys/small);
                         // grd.addColorStop(0,"rgba(150,150,150,0.6)");
@@ -3857,11 +4136,11 @@
                         ctx.strokeStyle ="#ebebeb";
                         ctx.lineWidth=0.1;
                         //设置路径起点坐标
-                        ctx.moveTo((c.width-img_width1/small)/2-vm.drawing_core_val*30/small+direction_val_xs/small-1,(c.height-img_height1/small)/2+vm.drawing_core_val*30/small+img_height1/small+direction_val_ys/small+1);
+                        ctx.moveTo((c.width-img_width1/small)/2-vm.drawing_core_val*30/small+direction_val_xs/small-1,(c.height-img_height1/small)/2+vm.drawing_core_val*30/small+img_height1/small+direction_val_ys/small+1-10);
                         //绘制直线线段到坐标点
-                        ctx.lineTo((c.width-img_width1/small)/2+img_width1/small+vm.drawing_core_val*30/small+direction_val_xs/small+2,(c.height-img_height1/small)/2+vm.drawing_core_val*30/small+img_height1/small+direction_val_ys/small+1);
-                        ctx.lineTo((c.width-img_width1/small)/2+img_width1/small+vm.drawing_core_val*30/small+direction_val_xs/small+2,(c.height-img_height1/small)/2+vm.drawing_core_val*30/small+img_height1/small+direction_val_ys/small-2);
-                        ctx.lineTo((c.width-img_width1/small)/2-vm.drawing_core_val*30/small+direction_val_xs/small+2,(c.height-img_height1/small)/2+vm.drawing_core_val*30/small+img_height1/small+direction_val_ys/small-2);
+                        ctx.lineTo((c.width-img_width1/small)/2+img_width1/small+vm.drawing_core_val*30/small+direction_val_xs/small+2-10,(c.height-img_height1/small)/2+vm.drawing_core_val*30/small+img_height1/small+direction_val_ys/small+1-10);
+                        ctx.lineTo((c.width-img_width1/small)/2+img_width1/small+vm.drawing_core_val*30/small+direction_val_xs/small+2-10,(c.height-img_height1/small)/2+vm.drawing_core_val*30/small+img_height1/small+direction_val_ys/small-2-10);
+                        ctx.lineTo((c.width-img_width1/small)/2-vm.drawing_core_val*30/small+direction_val_xs/small+2,(c.height-img_height1/small)/2+vm.drawing_core_val*30/small+img_height1/small+direction_val_ys/small-2-10);
                         ctx.fillStyle='#ebebeb';
                         ctx.fill();
                         //先关闭绘制路径。
@@ -3875,11 +4154,11 @@
                         ctx.strokeStyle ="#ebebeb";
                         ctx.lineWidth=0.1;
                         //设置路径起点坐标
-                        ctx.moveTo((c.width-img_width1/small)/2+img_width1/small+vm.drawing_core_val*30/small+direction_val_xs/small+2,(c.height-img_height1/small)/2-vm.drawing_core_val*30/small+direction_val_ys/small-1);
+                        ctx.moveTo((c.width-img_width1/small)/2+img_width1/small+vm.drawing_core_val*30/small+direction_val_xs/small+2-10,(c.height-img_height1/small)/2-vm.drawing_core_val*30/small+direction_val_ys/small-1);
                         //绘制直线线段到坐标点(20, 100)
-                        ctx.lineTo((c.width-img_width1/small)/2+img_width1/small+vm.drawing_core_val*30/small+direction_val_xs/small+2,(c.height-img_height1/small)/2+vm.drawing_core_val*30/small+img_height1/small+direction_val_ys/small+1);
-                        ctx.lineTo((c.width-img_width1/small)/2+img_width1/small+vm.drawing_core_val*30/small+direction_val_xs/small-1,(c.height-img_height1/small)/2+vm.drawing_core_val*30/small+img_height1/small+direction_val_ys/small);
-                        ctx.lineTo((c.width-img_width1/small)/2+img_width1/small+vm.drawing_core_val*30/small+direction_val_xs/small-1,(c.height-img_height1/small)/2-vm.drawing_core_val*30/small+direction_val_ys/small+2);
+                        ctx.lineTo((c.width-img_width1/small)/2+img_width1/small+vm.drawing_core_val*30/small+direction_val_xs/small+2-10,(c.height-img_height1/small)/2+vm.drawing_core_val*30/small+img_height1/small+direction_val_ys/small+1-10);
+                        ctx.lineTo((c.width-img_width1/small)/2+img_width1/small+vm.drawing_core_val*30/small+direction_val_xs/small-1-10,(c.height-img_height1/small)/2+vm.drawing_core_val*30/small+img_height1/small+direction_val_ys/small-10);
+                        ctx.lineTo((c.width-img_width1/small)/2+img_width1/small+vm.drawing_core_val*30/small+direction_val_xs/small-1-10,(c.height-img_height1/small)/2-vm.drawing_core_val*30/small+direction_val_ys/small+2);
                         ctx.fillStyle='#ebebeb';
                         ctx.fill();
                         //先关闭绘制路径。
@@ -3889,7 +4168,7 @@
                         // $("#bgImg").attr("src",this.img_url);
                         bgImg.src = vm.img_url
                         bgImg.onload = function(){
-                            ctx.drawImage(bgImg,0,0,bgImg.naturalWidth,bgImg.naturalHeight,0,0,c.width,c.height);
+                            ctx.drawImage(bgImg,0,0,bgImg.naturalWidth,bgImg.naturalHeight,0,0,c.width-10,c.height-10);
                         }
                     }
                 }
@@ -3943,20 +4222,27 @@
                     var ctx=c.getContext("2d")
                     if(box_img_width1/box_img_height1 > 1){
                         //设置缩小比例
-                        var small = box_img_width1/500
-                        c.width = 500
+                        var small = box_img_width1/550
+                        c.width = 550
                         c.height = box_img_height1/small
                     }else if(box_img_width1/box_img_height1 < 1){
                         //设置面宽缩小比例
-                        var small = box_img_height1/500
-                        c.height = 500
+                        var small = box_img_height1/550
+                        c.height = 550
                         c.width = box_img_width1/small
                     }else if(box_img_width1/box_img_height1 == 1){
                         //设置面宽缩小比例
-                        var small = box_img_width1/500
-                        c.width = 500
-                        c.height = 500
+                        var small = box_img_width1/550
+                        c.width = 550
+                        c.height = 550
                     }
+                    ctx.shadowOffsetX = 5; // 阴影Y轴偏移
+                    ctx.shadowOffsetY = 5; // 阴影X轴偏移
+                    ctx.shadowBlur = 5; // 模糊尺寸
+                    ctx.shadowColor = 'rgba(0, 0, 0, 0.3)'; // 颜色
+                    // //填充盒子底板卡纸颜色
+                    ctx.fillStyle="#fff";
+                    ctx.fillRect(0,0,c.width-10,c.height-10);
                     //缩小后的面宽
                     var small_face = parseFloat(vm.face_width*30/small);
                     var img_width2 = img_width1/small
@@ -4017,21 +4303,21 @@
                         $(e.target).css('border','solid 1px')
                         // //填充盒子底板卡纸颜色
                         ctx.fillStyle=color_val;
-                        ctx.fillRect(0,0,box_img_width1,box_img_height1);
+                        ctx.fillRect(0,0,c.width-10,c.height-10);
                         ctx.shadowOffsetX = 5; // 阴影Y轴偏移
                         ctx.shadowOffsetY = 5; // 阴影X轴偏移
                         ctx.shadowBlur = 5; // 模糊尺寸
                         ctx.shadowColor = 'rgba(0, 0, 0, 0.5)'; // 颜色
                         // //填充画芯留边颜色
                         ctx.fillStyle='#fff';
-                        ctx.fillRect((c.width-img_width2)/2-vm.drawing_core_val*30/small+direction_val_xs/small,(c.height-img_height2)/2-vm.drawing_core_val*30/small+direction_val_ys/small,img_width2+vm.drawing_core_val*30/small*2,img_height2+vm.drawing_core_val*30/small*2);
+                        ctx.fillRect((c.width-img_width2)/2-vm.drawing_core_val*30/small+direction_val_xs/small,(c.height-img_height2)/2-vm.drawing_core_val*30/small+direction_val_ys/small,img_width2+vm.drawing_core_val*30/small*2-10,img_height2+vm.drawing_core_val*30/small*2-10);
                         if(vm.is_cut ==1){
-                            ctx.shadowOffsetX = 0; // 阴影Y轴偏移
-                            ctx.shadowOffsetY = 0; // 阴影X轴偏移
-                            ctx.shadowBlur = 0; // 模糊尺寸
+                            ctx.shadowOffsetX = 2; // 阴影Y轴偏移
+                            ctx.shadowOffsetY = 2; // 阴影X轴偏移
+                            ctx.shadowBlur = 5; // 模糊尺寸
                             ctx.shadowColor = 'rgba(0, 0, 0, 0.5)'; // 颜色
                             //绘制图片
-                            ctx.drawImage(img,0,0,img.naturalWidth,img.naturalHeight,(c.width-img_width2)/2+direction_val_x/small+direction_val_xs/small,(c.height-img_height2)/2+direction_val_y/small+direction_val_ys/small,img_width2,img_height2);
+                            ctx.drawImage(img,0,0,img.naturalWidth,img.naturalHeight,(c.width-img_width2)/2+direction_val_x/small+direction_val_xs/small,(c.height-img_height2)/2+direction_val_y/small+direction_val_ys/small,img_width2-10,img_height2-10);
                             // $("#bgImg").attr("src",this.img_url);
                             bgImg.src = vm.img_url
                             bgImg.onload = function(){
@@ -4039,7 +4325,7 @@
                                 ctx.shadowOffsetY = 2; // 阴影X轴偏移
                                 ctx.shadowBlur = 5; // 模糊尺寸
                                 ctx.shadowColor = 'rgba(0, 0, 0, 0.5)'; // 颜色
-                                ctx.drawImage(bgImg,0,0,bgImg.naturalWidth,bgImg.naturalHeight,0,0,c.width,c.height);
+                                ctx.drawImage(bgImg,0,0,bgImg.naturalWidth,bgImg.naturalHeight,0,0,c.width-10,c.height-10);
                             }
                         }else{
                             ctx.shadowOffsetX = 2; // 阴影Y轴偏移
@@ -4051,11 +4337,11 @@
                             //获取裁切框的数据
                             var cut_box = $('#img').cropper('getData', true)
                             //绘制图片
-                            ctx.drawImage(img,cut_box.x,cut_box.y,cut_box.width,cut_box.height,(c.width-img_width1/small)/2+direction_val_x/small+direction_val_xs/small,(c.height-img_height1/small)/2+direction_val_y/small+direction_val_ys/small,img_width1/small,img_height1/small)
+                            ctx.drawImage(img,cut_box.x,cut_box.y,cut_box.width,cut_box.height,(c.width-img_width1/small)/2+direction_val_x/small+direction_val_xs/small,(c.height-img_height1/small)/2+direction_val_y/small+direction_val_ys/small,img_width1/small-10,img_height1/small-10)
                             // $("#bgImg").attr("src",this.img_url);
                             bgImg.src = vm.img_url
                             bgImg.onload = function(){
-                                ctx.drawImage(bgImg,0,0,bgImg.naturalWidth,bgImg.naturalHeight,0,0,c.width,c.height);
+                                ctx.drawImage(bgImg,0,0,bgImg.naturalWidth,bgImg.naturalHeight,0,0,c.width-10,c.height-10);
                             }
                         }
                     }else{
@@ -4063,13 +4349,21 @@
                         $(e.target).css('border','')
                         //填充盒子底板卡纸颜色
                         ctx.fillStyle=color_val;
-                        ctx.fillRect(0,0,box_img_width1,box_img_height1);
+                        ctx.fillRect(0,0,c.width-10,c.height-10);
+                        ctx.shadowOffsetX = 0; // 阴影Y轴偏移
+                        ctx.shadowOffsetY = 0; // 阴影X轴偏移
+                        ctx.shadowBlur = 0; // 模糊尺寸
+                        ctx.shadowColor = 'rgba(0, 0, 0, 0.5)'; // 颜色
                         // //填充画芯留边颜色
                         ctx.fillStyle='#fff';
-                        ctx.fillRect((c.width-img_width2)/2-vm.drawing_core_val*30/small+direction_val_xs/small,(c.height-img_height2)/2-vm.drawing_core_val*30/small+direction_val_ys/small,img_width2+vm.drawing_core_val*30/small*2,img_height2+vm.drawing_core_val*30/small*2);
+                        ctx.fillRect((c.width-img_width2)/2-vm.drawing_core_val*30/small+direction_val_xs/small,(c.height-img_height2)/2-vm.drawing_core_val*30/small+direction_val_ys/small,img_width2+vm.drawing_core_val*30/small*2-10,img_height2+vm.drawing_core_val*30/small*2-10);
                         if(vm.is_cut ==1){
+                            ctx.shadowOffsetX = 0; // 阴影Y轴偏移
+                            ctx.shadowOffsetY = 0; // 阴影X轴偏移
+                            ctx.shadowBlur = 0; // 模糊尺寸
+                            ctx.shadowColor = 'rgba(0, 0, 0, 0.5)'; // 颜色
                             //绘制图片
-                            ctx.drawImage(img,0,0,img.naturalWidth,img.naturalHeight,(c.width-img_width2)/2+direction_val_x/small+direction_val_xs/small,(c.height-img_height2)/2+direction_val_y/small+direction_val_ys/small,img_width2,img_height2);
+                            ctx.drawImage(img,0,0,img.naturalWidth,img.naturalHeight,(c.width-img_width2)/2+direction_val_x/small+direction_val_xs/small,(c.height-img_height2)/2+direction_val_y/small+direction_val_ys/small,img_width2-10,img_height2-10);
                             // $("#bgImg").attr("src",this.img_url);
                             bgImg.src = vm.img_url
                             bgImg.onload = function(){
@@ -4077,15 +4371,19 @@
                                 ctx.shadowOffsetY = 2; // 阴影X轴偏移
                                 ctx.shadowBlur = 5; // 模糊尺寸
                                 ctx.shadowColor = 'rgba(0, 0, 0, 0.5)'; // 颜色
-                                ctx.drawImage(bgImg,0,0,bgImg.naturalWidth,bgImg.naturalHeight,0,0,c.width,c.height);
+                                ctx.drawImage(bgImg,0,0,bgImg.naturalWidth,bgImg.naturalHeight,0,0,c.width-10,c.height-10);
                             }
                         }else{
+                            ctx.shadowOffsetX = 0; // 阴影Y轴偏移
+                            ctx.shadowOffsetY = 0; // 阴影X轴偏移
+                            ctx.shadowBlur = 0; // 模糊尺寸
+                            ctx.shadowColor = 'rgba(0, 0, 0, 0.5)'; // 颜色
                             //获取被裁切的图片数据
                             var being_cut = $('#img').cropper('getImageData', )
                             //获取裁切框的数据
                             var cut_box = $('#img').cropper('getData', true)
                             //绘制图片
-                            ctx.drawImage(img,cut_box.x,cut_box.y,cut_box.width,cut_box.height,(c.width-img_width1/small)/2+direction_val_x/small+direction_val_xs/small,(c.height-img_height1/small)/2+direction_val_y/small+direction_val_ys/small,img_width1/small,img_height1/small)
+                            ctx.drawImage(img,cut_box.x,cut_box.y,cut_box.width,cut_box.height,(c.width-img_width1/small)/2+direction_val_x/small+direction_val_xs/small,(c.height-img_height1/small)/2+direction_val_y/small+direction_val_ys/small,img_width1/small-10,img_height1/small-10)
                             // $("#bgImg").attr("src",this.img_url);
                             bgImg.src = vm.img_url
                             bgImg.onload = function(){
@@ -4093,7 +4391,7 @@
                                 ctx.shadowOffsetY = 2; // 阴影X轴偏移
                                 ctx.shadowBlur = 5; // 模糊尺寸
                                 ctx.shadowColor = 'rgba(0, 0, 0, 0.5)'; // 颜色
-                                ctx.drawImage(bgImg,0,0,bgImg.naturalWidth,bgImg.naturalHeight,0,0,c.width,c.height);
+                                ctx.drawImage(bgImg,0,0,bgImg.naturalWidth,bgImg.naturalHeight,0,0,c.width-10,c.height-10);
                             }
                         }
                     }

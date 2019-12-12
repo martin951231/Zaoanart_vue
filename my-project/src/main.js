@@ -3,17 +3,17 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
-import iView from 'iview'
-import  VueResource  from 'vue-resource'
+// import iView from 'iview'
+// import  VueResource  from 'vue-resource'
 import Axios from 'axios'
-import VueAxios from 'vue-axios'
+// import VueAxios from 'vue-axios'
 import VueLazyLoad from 'vue-lazyload'
-import $ from 'jquery'
-import popper from 'popper'
+// import $ from 'jquery'
+// import popper from 'popper'
 import toastr from 'toastr'
 import global from './global'
-import bootstrap from 'bootstrap'
-import VuePaginate from 'vue-paginate'
+// import bootstrap from 'bootstrap'
+// import VuePaginate from 'vue-paginate'
 Vue.prototype.$ajax = Axios
 Vue.prototype.GLOBAL = global
 Vue.config.productionTip = false
@@ -49,7 +49,7 @@ Vue.prototype.getCookie=function(c_name) {
     return ""
 };
 toastr.options = {
-    closeButton: true,
+    preventDuplicates: true,
     debug: false,
     positionClass: "toast-top-center",
     onclick: null,

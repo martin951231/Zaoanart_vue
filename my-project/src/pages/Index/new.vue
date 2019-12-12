@@ -4,7 +4,9 @@
             <div class="new">
                 <div class="title">
                     <div class="xian1"></div>
-                    <span class="tuijian">最新  New</span>
+                    <a href="/#/erjiye?cate_id=0&theme_id=0&color_id=0&search=&pageSize=50&currentPage=1">
+                        <span class="tuijian">最新  New</span>
+                    </a>
                     <div class="xian2">
                     </div>
                 </div>

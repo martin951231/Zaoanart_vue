@@ -1,21 +1,28 @@
 <template>
     <div style="height:100%">
+        <input type="hidden" value="艺术,早安,早安艺术,article,早安art,ZaoanArt">
+        <h1 style="display: none;position: absolute;">艺术,早安,早安艺术,article,早安art,ZaoanArt</h1>
         <HeadPage></HeadPage>
         <div class="lanmu clearfix">
-            <div style="display: inline-block;float: left;">
-                <h1 style="text-align: left;">{{user_name.username}}</h1>
-                <a style="color:#000" :href="'/#/keep/userattentionkeep?id='+user_name.uid">
-                    <div style="display:inline-block;text-align: left;">
-                        <div style="font-size: 30px;">{{user_name.my_attention}}</div>
-                        <p style="display:inline-block;font-size: 13px;">TA关注的收藏夹</p>
-                    </div>
-                </a>
-                <a style="color:#000" :href="'/#/keep/userattentionuser?id='+user_name.uid">
-                    <div style="display:inline-block;text-align: left;">
-                        <div style="font-size: 30px;">{{user_name.attention_user_num}}</div>
-                        <p style="display:inline-block;font-size: 13px;">TA关注的人</p>
-                    </div>
-                </a>
+            <div style="text-align: left;display: inline-block;float: left;">
+                <div class="name_span" style="width: 500px;">
+                    <span style="text-align: left;font-size: 40px;">{{user_name.username}}</span>
+                </div>
+                <div>
+                    <a style="color:#000" target="_blank" :href="'/#/keep/userattentionkeep?id='+user_name.uid">
+                        <div style="display:inline-block;text-align: left;">
+                            <div style="font-size: 30px;">{{user_name.my_attention}}</div>
+                            <p style="display:inline-block;font-size: 13px;">TA关注的收藏夹</p>
+                        </div>
+                    </a>
+                    <a style="color:#000" target="_blank" :href="'/#/keep/userattentionuser?id='+user_name.uid">
+                        <div style="display:inline-block;text-align: left;">
+                            <div style="font-size: 30px;">{{user_name.attention_user_num}}</div>
+                            <p style="display:inline-block;font-size: 13px;">TA关注的人</p>
+                        </div>
+                    </a>
+                </div>
+
             </div>
             <div style="display: inline-block;float: right;">
                 <div v-if="(user_name.is_attention_user==1)" style="margin-top: 80px;float:left;" @click="del_attention_user(user_name.uid)" class="attention_btn">已关注</div>
@@ -26,7 +33,7 @@
             </div>
         </div>
         <div style="text-align: left;width:1200px;margin: 10px auto;font-size: 25px;">TA的收藏夹</div>
-        <div style="text-align: left;width:1200px;margin: 0px auto;min-height: -webkit-fill-available;" class="clearfix">
+        <div v-if="(keepinfo)" style="text-align: left;width:1200px;margin: 0px auto;min-height: -webkit-fill-available;" class="clearfix">
             <div :id="'keep'+keep[0].id" class="keeps" v-for="keep in keepinfo" >
                 <template v-if="(keep[0].img_ratio == 1)">
                     <div>
@@ -41,7 +48,7 @@
                             </div>
                         </a>
                         <span class="keeps_name">{{keep[0].keep_name}}</span>
-                            <div style="color: #ccc;display: flex;align-items: center;">
+                            <div style="justify-content: space-between;color: #ccc;display: flex;align-items: center;">
                                 {{keep[0].attention_num}}个收藏
                                 <div v-if="(keep[0].is_attention==2)" @click="del_attention(keep[0].keep_id)" class="attention_btn">已关注</div>
                                 <div v-if="(keep[0].is_attention==1)" @click="add_attention(keep[0].keep_id)" style="cursor: pointer;color:#000;border:1px solid #000;margin:2px 10px;float:right;font-size: 13px;padding: 2px 10px;background-color: #fff;">+关注</div>
@@ -60,7 +67,7 @@
                         </div>
                     </a>
                     <span class="keeps_name">{{keep[0].keep_name}}</span>
-                        <div style="color: #ccc;display: flex;align-items: center;">
+                        <div style="justify-content: space-between;color: #ccc;display: flex;align-items: center;">
                             {{keep[0].attention_num}}个收藏
                             <div v-if="(keep[0].is_attention==2)" @click="del_attention(keep[0].keep_id)" class="attention_btn">已关注</div>
                             <div v-if="(keep[0].is_attention==1)" @click="add_attention(keep[0].keep_id)" style="cursor: pointer;color:#000;border:1px solid #000;margin:2px 10px;float:right;font-size: 13px;padding: 2px 10px;background-color: #fff;">+关注</div>
@@ -78,7 +85,7 @@
                         </div>
                     </a>
                     <span class="keeps_name">{{keep[0].keep_name}}</span>
-                        <div style="color: #ccc;display: flex;align-items: center;">
+                        <div style="justify-content: space-between;color: #ccc;display: flex;align-items: center;">
                             {{keep[0].attention_num}}个收藏
                             <div v-if="(keep[0].is_attention==2)" @click="del_attention(keep[0].keep_id)" class="attention_btn">已关注</div>
                             <div v-if="(keep[0].is_attention==1)" @click="add_attention(keep[0].keep_id)" style="cursor: pointer;color:#000;border:1px solid #000;margin:2px 10px;float:right;font-size: 13px;padding: 2px 10px;background-color: #fff;">+关注</div>
@@ -86,6 +93,13 @@
                 </template>
             </div>
         </div>
+        <div v-if="(!keepinfo)" style="display: flex;flex-direction: column;justify-content: center;align-items: center;width:1200px;margin: 0px auto;height: 100%;">
+            <div style="height: 50%;">
+                <img src="../../assets/images/null.png" alt="" width="200px" height="200px">
+                <h4>暂无收藏</h4>
+            </div>
+        </div>
+        <LabelLeft></LabelLeft>
         <Foot style="margin-top:30px;clear: both;"></Foot>
     </div>
 
@@ -93,6 +107,7 @@
 <script>
     import axios from 'axios'
     import HeadPage from "../../components/HeadPage"
+    import LabelLeft from "../../components/LabelLeft"
     import Foot from "../../components/Foot"
     export default {
         name: 'Userkeep',
@@ -108,7 +123,7 @@
             }
         },
         components: {
-            HeadPage,Foot
+            HeadPage,LabelLeft,Foot
         },
         watch: {
             '$route' () {
@@ -126,6 +141,8 @@
         },
         methods:{
             initData(){
+                document.body.scrollTop = 0
+                document.documentElement.scrollTop = 0
                 var url=location.href;
                 var i=url.indexOf('?');
                 if(i==0)return;
@@ -223,6 +240,14 @@
     a:hover {
         color: #000;
         text-decoration: none;
+    }
+    .name_span{
+        display: block;
+        text-decoration:none;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        -o-text-overflow: ellipsis;
+        white-space:nowrap;
     }
     .lanmu{
         width:700px;

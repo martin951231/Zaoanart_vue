@@ -1,19 +1,23 @@
 <template>
-    <div style="height:100%">
+    <div style="height:100%;">
+        <input type="hidden" value="艺术,早安,早安艺术,article,早安art,ZaoanArt">
+        <h1 style="display: none;position: absolute;">艺术,早安,早安艺术,article,早安art,ZaoanArt</h1>
         <HeadPage></HeadPage>
         <div class="lanmu clearfix">
-            <div style="display: inline-block;float: left;">
-                <h1 style="text-align: left;">{{user_name.username}}</h1>
+            <div style="text-align: left;display: inline-block;float: left;">
+                <div class="name_span" style="width: 500px;">
+                    <span style="text-align: left;font-size: 40px;">{{user_name.username}}</span>
+                </div>
                 <div style="display:inline-block;text-align: left;">
                     <div style="font-size: 30px;">{{user_name.my_attention}}</div>
                     <p style="display:inline-block;font-size: 13px;">我关注的收藏夹</p>
                 </div>
-                <a :href="'/#/keep/attentionuser?id='+user_name.uid">
-                    <div style="display:inline-block;text-align: left;color:#000">
-                        <div style="font-size: 30px;">{{user_name.attention_user_num}}</div>
-                        <p style="display:inline-block;font-size: 13px;">我关注的人</p>
-                    </div>
-                </a>
+                <!--<a :href="'/#/keep/attentionuser?id='+user_name.uid">-->
+                    <!--<div style="display:inline-block;text-align: left;color:#000">-->
+                        <!--<div style="font-size: 30px;">{{user_name.attention_user_num}}</div>-->
+                        <!--<p style="display:inline-block;font-size: 13px;">我关注的人</p>-->
+                    <!--</div>-->
+                <!--</a>-->
             </div>
             <div style="display: inline-block;float: right;">
                 <div style="width:100px;height:100px;overflow: hidden;border-radius: 50%;border: 1px solid #ccc;">
@@ -22,7 +26,7 @@
             </div>
         </div>
         <div style="text-align: left;width:1200px;margin: 10px auto;font-size: 25px;">我关注的收藏夹</div>
-        <div style="text-align: left;width:1200px;margin: 0px auto;min-height: -webkit-fill-available;" class="clearfix">
+        <div v-if="(keepinfo)" style="text-align: left;width:1200px;margin: 0px auto;min-height: -webkit-fill-available;" class="clearfix">
             <div :id="'keep'+keep[0].id" class="keeps" v-for="keep in keepinfo">
                 <template v-if="(keep[0].img_ratio == 1)">
                     <div>
@@ -35,7 +39,7 @@
                                     <img v-if="(keep[3])" :src="keep[3].image+'?imageView2/1/w/500/h/500'" style="margin: 2px;float: left;width:96px;height:96px;">
                                 </div>
                             </div>
-                            <span class="keeps_name" style="color:black;font-size: 20px;">{{keep[0].keep_name}}</span>
+                            <span class="keeps_name name_span" style="color:black;font-size: 20px;width:80%">{{keep[0].keep_name}}</span>
                         </a>
                         <div style="color: #ccc;display: flex;align-items: center;">
                                 {{keep[0].attention_count}}个收藏
@@ -48,12 +52,12 @@
                         <div class="keep gallery1" :id="keep[0].id">
                             <div id="gallery_id">
                                 <img v-if="(keep[0])" :src="keep[0].image+'?imageView2/1/w/400/h/250'" style="margin: 2px;float: left;width:200px;height:130px;">
-                                <img v-if="(keep[1])" :src="keep[1].image+'?imageView2/1/w/500/h/500'" style="margin: 2px;float: left;width:63px;height:65x;">
+                                <img v-if="(keep[1])" :src="keep[1].image+'?imageView2/1/w/500/h/500'" style="margin: 2px;float: left;width:63px;height:65px;">
                                 <img v-if="(keep[2])" :src="keep[2].image+'?imageView2/1/w/500/h/500'" style="margin: 2px;float: left;width:63px;height:65px;">
                                 <img v-if="(keep[3])" :src="keep[3].image+'?imageView2/1/w/500/h/500'" style="margin: 2px;float: left;width:63px;height:65px;">
                             </div>
                         </div>
-                        <span class="keeps_name" style="color:black;font-size: 20px;">{{keep[0].keep_name}}</span>
+                        <span class="keeps_name name_span" style="color:black;font-size: 20px;width:80%">{{keep[0].keep_name}}</span>
                     </a>
                     <div style="color: #ccc;display: flex;align-items: center;">
                             {{keep[0].attention_count}}个收藏
@@ -70,7 +74,7 @@
                                 <img v-if="(keep[3])" :src="keep[3].image+'?imageView2/1/w/500/h/500'" style="margin: 2px;float: left;width:121px;height:100px;">
                             </div>
                         </div>
-                        <span class="keeps_name" style="color:black;font-size: 20px;">{{keep[0].keep_name}}</span>
+                        <span class="keeps_name name_span" style="color:black;font-size: 20px;width:80%">{{keep[0].keep_name}}</span>
                     </a>
                     <div style="color: #ccc;display: flex;align-items: center;">
                             {{keep[0].attention_count}}个收藏
@@ -79,6 +83,13 @@
                 </template>
             </div>
         </div>
+        <div v-if="(!keepinfo)" style="display: flex;flex-direction: column;justify-content: center;align-items: center;width:1200px;margin: 0px auto;height: 100%;">
+            <div style="height: 50%;">
+                <img src="../../assets/images/null.png" alt="" width="200px" height="200px">
+                <h4>暂无关注</h4>
+            </div>
+        </div>
+        <LabelLeft></LabelLeft>
         <Foot style="margin-top:30px;clear: both;"></Foot>
     </div>
 
@@ -86,6 +97,7 @@
 <script>
     import axios from 'axios'
     import HeadPage from "../../components/HeadPage"
+    import LabelLeft from "../../components/LabelLeft"
     import Foot from "../../components/Foot"
     export default {
         name: 'Attentionkeep',
@@ -101,7 +113,7 @@
             }
         },
         components: {
-            HeadPage,Foot
+            HeadPage,LabelLeft,Foot
         },
         watch: {
             '$route' () {
@@ -119,6 +131,8 @@
         },
         methods:{
             initData(){
+                document.body.scrollTop = 0
+                document.documentElement.scrollTop = 0
                 var url=location.href;
                 var i=url.indexOf('?');
                 if(i==0)return;
@@ -167,7 +181,14 @@
         color: #000;
         text-decoration: none;
     }
-    span{text-decoration:none}
+    .name_span{
+        width: 80%;
+        display: block;
+        text-decoration:none;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space:nowrap;
+    }
     .lanmu{
         width:700px;
         margin:10px auto;

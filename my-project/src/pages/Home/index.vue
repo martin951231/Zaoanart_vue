@@ -1,14 +1,39 @@
 <template>
-    <div id="home">
+    <div id="home" style="height: 100%;">
+        <input type="hidden" value="艺术,早安,早安艺术,article,早安art,ZaoanArt,专业软装装饰画方案解决，海量图库供您挑选,更有强大的自助装裱功能,找图,装裱快来早安艺术吧">
+        <h1 style="display: none;position: absolute;">艺术,早安,早安艺术,article,早安art,ZaoanArt,专业软装装饰画方案解决，海量图库供您挑选,更有强大的自助装裱功能,找图,装裱快来早安艺术吧</h1>
         <HeadPage></HeadPage>
-        <div id="home_info" style="min-height: -webkit-fill-available;padding: 0 100px;">
+        <div id="home_info" style="min-height: 100%;padding: 0 100px;">
             <div style="text-align: left;padding-left: 300px;">
-                <ul>
-                    <li>用户名&nbsp:&nbsp<input id="username_input" class="input" type="text" v-model="username" :placeholder=user_info.username><a href=""></a><img src="../../assets/images/update.png" alt="" height="30px" class="update" data-toggle="modal" data-target="#up_username_modal"></li>
-                    <li>微  &nbsp&nbsp&nbsp信&nbsp:&nbsp<input id="wechat_input" class="input" type="text" v-model="wechat" :placeholder=user_info.weixin><img src="../../assets/images/update.png" alt="" height="30px" class="update"  data-toggle="modal" data-target="#up_wechat_modal"></li>
-                    <li>地  &nbsp&nbsp&nbsp址&nbsp:&nbsp<input id="address_input" class="input" type="text" v-model="address" :placeholder=user_info.position><img src="../../assets/images/update.png" alt="" height="30px" class="update"  data-toggle="modal" data-target="#up_address_modal"></li>
-                    <li>生  &nbsp&nbsp&nbsp日&nbsp:&nbsp<input id="birthday_input" class="input laydate-icon" type="text" v-model="birthday" :placeholder=user_info.birthday @focus="calendar()"><img src="../../assets/images/update.png" alt="" height="30px" class="update"  data-toggle="modal" data-target="#up_birthday_modal"></li>
-                    <li>密  &nbsp&nbsp&nbsp码&nbsp:&nbsp<button style="background-color: #000;color:#fff;border: 1px solid #000;" class="button" data-toggle="modal" data-target="#up_password_modal">修改密码</button></li>
+                <ul style="display: inline-block;">
+                    <li style="height: 200px;line-height: 200px;margin-top: 25px;">
+                        <span style="position: absolute;">用户头像:&nbsp</span>
+                        <div class="keep gallery1" style="overflow: hidden; border-radius: 50%;">
+                            <input type="file" accept="image/*" @change="handleFile" class="hiddenInput"/>
+                            <img :src="icon" @click.stop="uploadHeadImg" alt="" width="200px" height="auto" style="max-width: 200px;max-height: 200px;border-radius:50%;">
+                        </div>
+                    </li>
+                    <li style="height: 50px;line-height: 50px;margin-top: 25px;">
+                        账  &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp号:&nbsp
+                        <span>{{user_info.phone}}</span>
+                    </li>
+                    <li>昵  &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp称:&nbsp<input id="username_input" class="input" type="text" v-model="username"><a href=""></a><img src="../../assets/images/update.png" alt="" height="30px" class="update" data-toggle="modal" data-target="#up_username_modal"></li>
+                    <!--<li>微  &nbsp&nbsp&nbsp信&nbsp:&nbsp<input id="wechat_input" class="input" type="text" v-model="wechat" :placeholder=user_info.weixin><img src="../../assets/images/update.png" alt="" height="30px" class="update"  data-toggle="modal" data-target="#up_wechat_modal"></li>-->
+                    <li style="height: 50px;line-height: 50px;margin-top: 25px;">
+                        性  &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp别:&nbsp
+                        <input type="radio" id="man" value="1" v-model="sex">
+                        <label for="man">男</label>
+                        <input type="radio" id="woman" value="2" v-model="sex">
+                        <label for="woman">女</label>
+                    </li>
+                    <li>地  &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp址:&nbsp<input id="address_input" class="input" type="text" v-model="address"><img src="../../assets/images/update.png" alt="" height="30px" class="update"  data-toggle="modal" data-target="#up_address_modal"></li>
+                    <!--<li>生  &nbsp&nbsp&nbsp日&nbsp:&nbsp<input id="birthday_input" class="input laydate-icon" type="text" v-model="birthday" :placeholder=user_info.birthday @focus="calendar()"><img src="../../assets/images/update.png" alt="" height="30px" class="update"  data-toggle="modal" data-target="#up_birthday_modal"></li>-->
+                    <li style="height: 50px;line-height: 50px;margin-top: 25px;">
+                        出生日期:&nbsp<DateSelect style="display: inline-block;"  />
+                    </li>
+                    <li>密  &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp码:&nbsp<button style="background-color: #000;color:#fff;border: 1px solid #000;" class="button" data-toggle="modal" data-target="#up_password_modal">修改密码</button></li>
+                    <hr style="border:1px dashed #ccc;margin-top: 40px;">
+                    <button style="width: 150px;background-color: #000;color:#fff;border: 1px solid #000;" class="button" data-toggle="modal" data-target="#up_all_modal">保存</button>
                     <!--<li>类  &nbsp&nbsp&nbsp型&nbsp:&nbsp<button style="background-color: #000;color:#fff;" class="button">修改为企业用户</button></li>-->
                 </ul>
             </div>
@@ -61,18 +86,18 @@
                 </div><!-- /.modal-content -->
             </div><!-- /.modal-dialog -->
         </div><!-- /.modal -->
-        <div class="modal fade" tabindex="-1" role="dialog" id="up_birthday_modal">
+        <div class="modal fade" tabindex="-1" role="dialog" id="up_all_modal">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                     </div>
                     <div class="modal-body">
-                        <p>您确定要修改生日吗</p>
+                        <p>您确定要修改信息吗?</p>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                        <button type="button" style="background-color: #000;color:#fff;border: 1px solid #000;" class="btn btn-primary" data-dismiss="modal" @click="up_birthday">确认修改</button>
+                        <button type="button" style="background-color: #000;color:#fff;border: 1px solid #000;" class="btn btn-primary" data-dismiss="modal" @click="up_allinfo">确认修改</button>
                     </div>
                 </div><!-- /.modal-content -->
             </div><!-- /.modal-dialog -->
@@ -103,13 +128,17 @@
                 </div><!-- /.modal-content -->
             </div><!-- /.modal-dialog -->
         </div><!-- /.modal -->
+        <LabelLeft></LabelLeft>
         <Foot style="margin-top:30px;clear: both;"></Foot>
     </div>
 </template>
 <script>
     import HeadPage from "../../components/HeadPage";
+    import LabelLeft from "../../components/LabelLeft"
     import Foot from "../../components/Foot";
     import axios from 'axios';
+    import DateSelect from './Dateselect'
+    import qs from 'qs';
     export default {
         name: 'Home',
         data(){
@@ -124,14 +153,24 @@
                 telphone_model:'',
                 code:'',
                 user_info:[],
+                sex:'1',
+                date:'',
+                userinfo:null,
+                icon:''
+
             }
         },
         components: {
-            HeadPage,Foot
+            HeadPage,LabelLeft,Foot,DateSelect
         },
         watch: {
             '$route' () {
+                document.body.scrollTop = 0
+                document.documentElement.scrollTop = 0
                 this.initData();
+            },
+            'sex'(e){
+                this.sex = e
             }
         },
         mounted(){
@@ -148,11 +187,39 @@
         },
         methods:{
             initData(){
+                document.body.scrollTop = 0
+                document.documentElement.scrollTop = 0
+                // var myDate = new Date;
+                // var year = myDate.getFullYear();//获取当前年
+                // var month = myDate.getMonth()+1;//获取当前月
+                // var day = myDate.getDate();//获取当前日
+                // this.date = year+'-'+month+'-'+day
                 this.$http.get(this.GLOBAL.baseurl + 'v1/site/up_pv_count11').then((response)=>{
                 })
                 if(this.login_phone){
                     this.$http.post(this.GLOBAL.baseurl + 'v1/home/homeinfo',{username:this.login_phone},{emulateJSON: true}).then((response)=>{
+                        var info = response.data.birthday.split(' ')
+                        var brithday_arr = info[0].split('-')
+                        if(brithday_arr){
+                            $("#years").val(Number(brithday_arr[0]))
+                            $("#months").val(Number(brithday_arr[1]))
+                            $("#days").val(Number(brithday_arr[2]))
+                            this.date = year+'-'+month+'-'+day
+                        }else{
+                            var myDate = new Date;
+                            var year = myDate.getFullYear();//获取当前年
+                            var month = myDate.getMonth()+1;//获取当前月
+                            var day = myDate.getDate();//获取当前日
+                            $("#years").val(year)
+                            $("#months").val(month)
+                            $("#days").val(day)
+                            this.date = year+'-'+month+'-'+day
+                        }
                         this.user_info = response.data
+                        this.icon = 'http://118.178.89.229/resource/userIcon/'+response.data.icon+'?'+Math.random()*1000
+                        this.username = response.data.username
+                        this.address = response.data.position
+                        this.sex = response.data.sex
                     })
                 }else{
                     alert('请登录')
@@ -257,6 +324,56 @@
                     })
                 }
             },
+            //修改用户信息
+            up_allinfo(){
+                this.$http.post(this.GLOBAL.baseurl + 'v1/home/up_allinfo',{tel:this.login_phone,username: this.username,address:this.address,sex:this.sex,date:this.date},{emulateJSON: true}).then((response)=>{
+                    if(response.data){
+                        toastr.info('修改成功')
+                    }else{
+                        toastr.warning('修改失败')
+                    }
+                })
+            },
+            //获取日期
+            dateChange(obj){
+                this.date = obj.year+'-'+obj.month+'-'+obj.day
+                console.log(this.date);
+            },
+            // 打开图片上传
+            uploadHeadImg: function () {
+                this.$el.querySelector('.hiddenInput').click()
+            },
+            // 上传头像
+            handleFile: function (e) {
+                // let $target = e.target || e.srcElement
+                // let file = $target.files[0]
+                // let url = this.getObjectURL(file)
+                let formData = new FormData();
+                formData.append('file', e.target.files[0]);
+                formData.append('tel', this.login_phone);
+                let url = this.GLOBAL.baseurl + 'v1/home/upicon'
+                let config = {
+                    headers:{'Content-Type':'multipart/form-data'}
+                };
+                this.$http.post(url,formData,config).then(function (response) {
+                    if(response.data == 1){
+                        toastr.info('上传头像成功')
+                        window.location.reload()
+                    }else if(response.data == 3){
+                        toastr.warning('图片过大')
+                    }else if(response.data == 2){
+                        toastr.warning('上传头像失败')
+                    }
+                    console.log(response.data)
+                })
+                // this.$http.post(this.GLOBAL.baseurl + 'v1/home/upicon',{tel:this.login_phone,up_tmp_path: url,file:file},{emulateJSON: true}).then((response)=>{
+                //     if(response.data){
+                //         toastr.info('修改成功')
+                //     }else{
+                //         toastr.warning('修改失败')
+                //     }
+                // })
+            },
         }
     }
 </script>
@@ -275,6 +392,17 @@
         margin:50px auto;
         min-height: -webkit-fill-available;
         overflow-y: scroll;
+    }
+    .keep{
+        margin-left: 100px;
+        display: inline-block;
+        /*background-color:#77696917;*/
+        width: 200px;
+        height: 200px;
+        /*float: left;*/
+        margin-bottom: 5px;
+        overflow: hidden;
+        cursor: pointer;
     }
     .home_ul{
         /*border:1px solid #ccc;*/
@@ -412,6 +540,9 @@
     }
     .info_td{
         cursor: inherit;
+    }
+    .hiddenInput{
+        display: none;
     }
 
 </style>

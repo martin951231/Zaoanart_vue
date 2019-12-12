@@ -1,5 +1,7 @@
 <template>
-    <div>
+    <div style="">
+        <input type="hidden" value="早安艺术,article,早安art,ZaoanArt,专业软装装饰画方案解决，海量图库供您挑选,更有强大的自助装裱功能,找图,装裱快来早安艺术吧">
+        <h1 style="display: none;position: absolute;">早安艺术,article,早安art,ZaoanArt,专业软装装饰画方案解决，海量图库供您挑选,更有强大的自助装裱功能,找图,装裱快来早安艺术吧</h1>
         <HeadPage style="margin-bottom:15px;" ref="headPage"></HeadPage>
         <div id="Mask_layer">
             <div class="addkeep_Mask_layer">
@@ -8,10 +10,10 @@
                 <button class="button" style="background:#000;" @click="add_keep()">确认</button>
             </div>
         </div>
-        <div class="lanmu clearfix">
-            <span style="height: 30px;line-height: 30px;float: left;"><a href="/#/erjiye?cate_id=0&theme_id=0&color_id=0&pageSize=50&currentPage=1">全部商品</a> > {{lanmu}}</span>
+        <div class="lanmu clearfix" style="display: flex;justify-content: center;position: relative;">
+            <span style="position: absolute;left: 0;height: 30px;line-height: 30px;"><a href="/#/erjiye?cate_id=0&theme_id=0&color_id=0&search=&pageSize=50&currentPage=1">全部商品</a> > {{lanmu}}</span>
             <!--<span v-if="is_prompt !=0" style="height: 30px;line-height: 30px;float: left;"><a href="/#/erjiye?cate_id=0&theme_id=0&color_id=0&pageSize=50&currentPage=1">全部商品</a> > {{prompts}}</span>-->
-            <div style="height: 30px;line-height: 30px;display: flex;align-items: center;justify-content: center;">
+            <div style="position: absolute;width: 100%;height: 30px;line-height: 30px;display: flex;align-items: center;justify-content: center;">
                 <div class="contrast_div" style="display: inline-block;border:2px solid #ccc;padding: 2px;width:36px;height:22px;margin-right:20px">
                     <div class="contrast_a" @click="contrast_tab($event,-1)" data_id="0" style="width: 28px;height: 14px;background-color: #ccc;"></div>
                 </div>
@@ -24,8 +26,8 @@
 
             </div>
         </div>
-        <div v-if="status">
-            <div class="list" style="min-height: -webkit-fill-available;">
+        <div v-if="status" style="width: 100%;position:absolute;top:150px;bottom:120px">
+            <div class="list" style="min-height:100%;">
                 <template v-if="count">
                     <section class = "gallery">
                         <div id="gallery_id" v-for="dataImageList in dataImageList" :key="dataImageList.id" @mouseenter="shows($event)" @mouseleave="hiddens($event)">
@@ -38,9 +40,9 @@
                                 <button type="button" class="btn btn-warning" style="background-color:#000;border:1px solid #000;color:#fff;float: right;width: 40%;border-radius:0px" @click="addto_keep($event,dataImageList.id)">收藏</button>
                             </div>
                             <!--收藏夹遮罩层-->
-                            <div id="icon" @click="to_sanji(dataImageList.id)"  style="position: absolute;height:0px;width:100%;text-align:left;padding: 0px 0px 0px 5px;background-color: #0000007d;overflow: hidden;">
+                            <div id="icon" @click="to_sanji(dataImageList.id)"  style="z-index:999;position: absolute;height:0px;width:100%;text-align:left;padding: 0px 0px 0px 5px;background-color: #0000007d;overflow: hidden;">
                             </div>
-                            <img id="img" v-lazy="dataImageList.image" height="200px" alt="...">
+                            <img id="img" v-lazy="dataImageList.image" height="200px" alt="早安艺术,article,早安art,ZaoanArt,专业软装装饰画方案解决，海量图库供您挑选,更有强大的自助装裱功能,找图,装裱快来早安艺术吧">
                         </div>
                     </section>
                     <!--<MoPaging-->
@@ -88,12 +90,10 @@
                     <span>{{prompt}}</span>
                 </template>
             </div>
-            <Foot style="margin-top:30px;clear: both;"></Foot>
+            <Foot style="clear: both;"></Foot>
         </div>
-        <div v-if="status==0">请等待</div>
-        <br/>
+        <div v-if="status==0" style="position:absolute;top:150px;bottom:120px">请等待</div>
         <div id="goTopBtn"><span class="icon_top"></span></div>
-
     </div>
 
 </template>
@@ -149,6 +149,8 @@
         },
         watch: {
             '$route' () {
+                document.body.scrollTop = 0
+                document.documentElement.scrollTop = 0
                 this.initData();
                 // this.findcategory();
                 // this.findtheme();
@@ -208,6 +210,8 @@
         },
         methods:{
             initData(){
+                document.body.scrollTop = 0
+                document.documentElement.scrollTop = 0
                 this.$http.get(this.GLOBAL.baseurl + 'v1/site/up_pv_count2').then((response)=>{
                 })
                 var url=location.href;
@@ -512,7 +516,7 @@
             },
             shows(e){
                 $(e.target).children("#icon").css({height:'100%'})
-                $(e.target).children("#icon").prev("#example-5").css({height:'50px','z-index':'999'})
+                $(e.target).children("#icon").prev("#example-5").css({height:'50px','z-index':'9999'})
             },
             hiddens(e){
                 $(e.target).children("#icon").css({height:'0px'})
@@ -561,7 +565,7 @@
                 })
             },
             findcategory1(){
-                this.$http.get(baseurl + 'v1/category/findcategory1').then(function(res){
+                this.$http.get(this.GLOBAL.baseurl + 'v1/category/findcategory1').then(function(res){
                     this.category2 = res.data
                     for(var k=0;k<this.category2.length;k++){
                         if(this.category2[k].id == this.info.cate_id){
@@ -571,7 +575,7 @@
                 })
             },
             findtheme(){
-                this.$http.get(baseurl + 'v1/theme/findtheme').then(function(res){
+                this.$http.get(this.GLOBAL.baseurl + 'v1/theme/findtheme').then(function(res){
                     this.theme = res.data
                     for(var k=0;k<this.theme.length;k++){
                         if(this.theme[k].id == this.info.theme_id){
@@ -733,7 +737,7 @@
             //     }
             // },
             category_show(){
-                this.$http.get(baseurl + 'v1/category/findcategory1').then((response)=>{
+                this.$http.get(this.GLOBAL.baseurl + 'v1/category/findcategory1').then((response)=>{
                     this.category2 = response.data
                     for(var v=0;v<this.category2.length;v++){
                         if(this.info.cate_id == 0){
@@ -755,7 +759,7 @@
                 })
             },
             theme_show(){
-                this.$http.get(baseurl + 'v1/theme/findtheme').then(function(res){
+                this.$http.get(this.GLOBAL.baseurl + 'v1/theme/findtheme').then(function(res){
                     this.theme2 = res.data
                     for(var t=0;t<this.theme2.length;t++){
                         if(this.info.theme_id == 0){
@@ -803,7 +807,7 @@
                 if(!this.keep_name){
                     toastr.warning("请填写收藏夹名")
                 }
-                this.$http.get(baseurl + 'v1/home/addkeep',{params:{tel: this.telphone,keep_name:this.keep_name}}).then((response)=>{
+                this.$http.get(this.GLOBAL.baseurl + 'v1/home/addkeep',{params:{tel: this.telphone,keep_name:this.keep_name}}).then((response)=>{
                     if(response.data == 1){
                         toastr.info("该文件夹名已经存在")
                     }else{
@@ -835,6 +839,11 @@
 
 </script>
 <style scoped>
+    html,body {
+        height: 100%;
+        margin: 0px;
+        padding: 0px;
+    }
     .wenzi{font-size:12px;background:#000;position:absolute;display:none;bottom:0;}
     #yema a{color:#888;}
     .paging-item{background:#fff;}

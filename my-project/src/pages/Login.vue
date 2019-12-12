@@ -1,7 +1,9 @@
 <template>
     <div>
+        <input type="hidden" value="艺术,早安,早安艺术,article,早安art,ZaoanArt,专业软装装饰画方案解决，海量图库供您挑选,更有强大的自助装裱功能,找图,装裱快来早安艺术吧">
+        <h1 style="display: none;position: absolute;">艺术,早安,早安艺术,article,早安art,ZaoanArt,专业软装装饰画方案解决，海量图库供您挑选,更有强大的自助装裱功能,找图,装裱快来早安艺术吧</h1>
         <div class="back-img">
-            <img  style="" :src="img_info" alt="">
+            <img  style="" :src="img_info" alt="艺术,早安,早安艺术,article,早安art,ZaoanArt,专业软装装饰画方案解决，海量图库供您挑选,更有强大的自助装裱功能,找图,装裱快来早安艺术吧">
         </div>
         <div class="page-container">
             <a href="/"><img src="../assets/images/logo.png" alt="" width="146px"></a>
@@ -43,7 +45,8 @@
                 password : '',
                 code : '',
                 telephone : '',
-                img_info:[]
+                img_info:[],
+                login_status:1
             }
         },
         watch: {
@@ -52,13 +55,23 @@
             }
         },
         mounted(){
+            var vm = this
+            $(document).keydown(function(event){
+                if(event.keyCode == 13){
+                    if(vm.login_status == 1){
+                        vm.tel_logins()
+                    }else{
+                        vm.user_logins()
+                    }
+                }
+            });
             this.$http.get(this.GLOBAL.baseurl + 'v1/goods/getloginimg').then((response)=>{
                 response.data.img_name = 'http://qiniu.zaoanart.com/'+response.data.img_name
                 // for(var i=0;i<response.data.length;i++){
                 //     response.data[i].login_img = 'http://qiniu.zaoanart.com/'+response.data[i].login_img
                 // }
-                var width = response.data.width
-                var height = response.data.height
+                // var width = response.data.width
+                // var height = response.data.height
                 // if(width >= height){
                 //     $(".back-img img").css('min-height','100%')
                 // }else{
@@ -86,6 +99,7 @@
             },
             //点击验证码登录显示验证码
             tel_login(){
+                this.login_status = 1//验证码登录
                 $("#user_login").css({'display':'none'})
                 $("#tel_login").css({'display':'block'})
                 $(".user_login").css({'background':'rgba(255, 212, 212, 0.33)'})
@@ -93,6 +107,7 @@
             },
             //点击密码登录显示密码
             user_login(){
+                this.login_status = 2//密码登录
                 $("#tel_login").css({'display':'none'})
                 $("#user_login").css({'display':'block'})
                 $(".tel_login").css({'background':'rgba(255, 212, 212, 0.33)'})
@@ -101,6 +116,7 @@
             //验证码登录
             tel_logins(){
                 if(this.telephone && this.code){
+                    toastr.success('正在登录,请稍后...')
                     this.$http.get(this.GLOBAL.baseurl + 'v1/register/login',{params:{username: this.telephone,code:this.code}}).then((response)=>{
                         if(response.data == 1){
                             toastr.warning('该用户不存在')
@@ -118,6 +134,7 @@
             //密码登录
             user_logins(){
                 if(this.username && this.password){
+                    toastr.success('正在登录,请稍后...')
                     this.$http.post(this.GLOBAL.baseurl + 'v1/register/loginuser',{username: this.username,password:this.password,checked:this.checked},{emulateJSON: true}).then((response)=>{
                         if(response.data == 1){
                             toastr.warning('该用户不存在')

@@ -1,6 +1,7 @@
 <template>
   <div style="min-height: -webkit-fill-available;">
     <HeadPage></HeadPage>
+    <LabelLeft></LabelLeft>
     <Lunbotu  style="margin-bottom: -100px;"></Lunbotu>
     <leimu style="margin-bottom: 100px;"></leimu>
     <Tuijian></Tuijian>
@@ -31,6 +32,8 @@
         methods:{
             //记录网站访问
             initData(){
+                document.body.scrollTop = 0
+                document.documentElement.scrollTop = 0
                 this.$http.get(this.GLOBAL.baseurl + 'v1/site/record_access').then((response)=>{
                 })
             }
